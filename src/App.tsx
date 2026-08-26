@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomeV1 from './pages/HomeV1';
 import HomeV2 from './pages/HomeV2';
