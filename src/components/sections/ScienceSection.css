@@ -1,0 +1,195 @@
+.science-section {
+  background-color: #000000; /* Deep Black for scientific contrast */
+  color: white;
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.science-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.science-header h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: white;
+}
+
+.science-header p {
+  font-size: 1.25rem;
+  color: #C1C5C8; /* Cool Grey */
+}
+
+.science-interactive-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.science-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.science-tab-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #C1C5C8;
+  padding: 20px;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.science-tab-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #00AEEF;
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  transform-origin: bottom;
+}
+
+.science-tab-btn:hover {
+  border-color: rgba(255,255,255,0.5);
+  color: white;
+}
+
+.science-tab-btn.active {
+  background: rgba(0, 174, 239, 0.1);
+  border-color: #00AEEF;
+  color: white;
+}
+
+.science-tab-btn.active::before {
+  transform: scaleY(1);
+}
+
+.science-card {
+  background: #111111;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.science-diagram {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Base Diagram Styles */
+.diagram-core {
+  width: 40px;
+  height: 40px;
+  background: #00AEEF;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #00AEEF;
+}
+
+.diagram-orbit {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border: 1px dashed rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: spin 10s linear infinite;
+}
+
+/* Specific Animations per tab */
+.molecular-ring .diagram-orbit {
+  border: 2px solid rgba(0, 174, 239, 0.4);
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: morph 8s ease-in-out infinite alternate;
+}
+
+.uv-shield .diagram-orbit {
+  border: 2px solid transparent;
+  border-top-color: #FF914D; /* Saffron Accent */
+  border-bottom-color: #FF914D;
+  animation: spin-pulse 4s linear infinite;
+}
+
+.water-wave .diagram-orbit {
+  border: none;
+  background: radial-gradient(circle, transparent 40%, rgba(0, 174, 239, 0.2) 100%);
+  animation: pulse-wave 3s ease-out infinite;
+}
+
+.water-wave .diagram-core {
+  background: #BDE3FF;
+  box-shadow: 0 0 30px #BDE3FF;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-pulse {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes morph {
+  0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 50% 40% 50%; }
+}
+
+@keyframes pulse-wave {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.science-text h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #00AEEF;
+}
+
+.science-text h4 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.science-text p {
+  font-size: 1.1rem;
+  color: #C1C5C8;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .science-interactive-grid {
+    grid-template-columns: 1fr;
+  }
+  .science-card {
+    padding: 30px;
+  }
+}

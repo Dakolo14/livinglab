@@ -1,0 +1,33 @@
+.marquee-banner {
+  background-color: #00AEEF; /* LRP Blue */
+  color: #ffffff;
+  padding: 24px 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.marquee-banner-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.marquee-banner-text span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-right: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,124 @@
+.science-v3-section {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #E5E7EB;
+  background: white;
+}
+
+.sv3-col {
+  padding: 80px 60px;
+  border-right: 1px solid #E5E7EB;
+}
+
+.sv3-col:last-child {
+  border-right: none;
+}
+
+.sv3-main {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.sv3-data {
+  flex: 1;
+  background: #F9FAFB;
+}
+
+.sv3-eyebrow {
+  color: #00AEEF;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.sv3-title {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  color: #111827;
+  margin: 0 0 24px 0;
+}
+
+.sv3-desc {
+  color: #6B7280;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.mt-4 {
+  margin-top: 32px;
+}
+
+.sv3-data-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sv3-data-header {
+  margin-bottom: 40px;
+}
+
+.sv3-data-id {
+  font-family: monospace;
+  font-weight: 700;
+  color: #9CA3AF;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.sv3-data-header h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.sv3-metric {
+  margin-bottom: 24px;
+}
+
+.sv3-num {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #111827;
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.sv3-sym {
+  font-size: 2rem;
+  color: #00AEEF;
+  vertical-align: top;
+}
+
+.sv3-label {
+  display: block;
+  font-family: monospace;
+  font-weight: 700;
+  color: #6B7280;
+  letter-spacing: 2px;
+  margin-top: 8px;
+}
+
+.sv3-data-card p {
+  color: #6B7280;
+  line-height: 1.6;
+  margin-top: auto;
+}
+
+@media (max-width: 1024px) {
+  .science-v3-section {
+    flex-direction: column;
+  }
+  .sv3-col {
+    border-right: none;
+    border-bottom: 1px solid #E5E7EB;
+  }
+}

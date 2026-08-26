@@ -1,0 +1,127 @@
+.hero {
+  position: relative;
+  height: 100vh; /* 100% viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-color: #E5E7EB;
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Behind content */
+  overflow: hidden;
+}
+
+/* Add a dark scrim so the white text is always readable over the video */
+.hero-video-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* 40% black overlay */
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2; /* Above the video */
+  color: white; /* Make text white if video is dark */
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Add text shadow for legibility over video */
+.hero h1, .hero p {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero h1 {
+  font-size: 4rem; /* Increased size */
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.hero p {
+  font-size: 1.25rem; /* Increased size */
+  max-width: 800px; /* Increased max width */
+  margin: 0 auto 40px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.scroll-indicator span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.mouse {
+  width: 24px;
+  height: 36px;
+  border: 2px solid white;
+  border-radius: 12px;
+  position: relative;
+}
+
+.wheel {
+  width: 2px;
+  height: 6px;
+  background-color: white;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-wheel 1.5s infinite;
+}
+
+@keyframes scroll-wheel {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 15px); opacity: 0; }
+}
+
+/* Using global btn-primary from index.css */
+
+.btn-secondary {
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  border: 1px solid white;
+  padding: 14px 28px;
+  border-radius: 0;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255,255,255,0.1);
+}

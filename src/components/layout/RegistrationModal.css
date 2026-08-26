@@ -1,0 +1,126 @@
+.reg-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.reg-modal-content {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 60px;
+  border-radius: 8px; /* Slightly rounded for the modal or square if brutalist. Let's keep it 0px for brand consistency */
+  border-radius: 0;
+  position: relative;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.2);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reg-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.reg-modal-close:hover {
+  color: #111827;
+}
+
+.reg-modal-form-view h2, .reg-modal-success-view h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.reg-modal-form-view p, .reg-modal-success-view p {
+  color: #6B7280;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.reg-eyebrow {
+  color: #00AEEF;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.reg-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #4B5563;
+}
+
+.input-group input {
+  padding: 16px;
+  border: 1px solid #D1D5DB;
+  font-size: 1rem;
+  outline: none;
+  background: #F9FAFB;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #00AEEF;
+  background: white;
+}
+
+.reg-modal-success-view {
+  text-align: center;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #00AEEF;
+  color: white;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px auto;
+}
+
+@media (max-width: 600px) {
+  .reg-modal-content {
+    padding: 40px 24px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

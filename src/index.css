@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'Locator Regular';
+  src: url('/fonts/locator-regular.woff2') format('woff2'),
+       url('/fonts/locator-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --lrp-blue: #00AEEF;
+  --neutral-bg: #FFFFFF;
+  --neutral-light: #F3F4F6;
+  --neutral-dark: #1F2937;
+  --text-dark: #000000;
+  --text-light: #FFFFFF;
+  --placeholder-grey: #D1D5DB;
+  --placeholder-dark: #9CA3AF;
+  
+  --font-main: 'Locator Regular', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--neutral-bg);
+  color: var(--text-dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.container {
+  width: 100%;
+  padding: 0 4vw;
+}
+
+/* Wireframe specific utilities */
+.placeholder-box {
+  background-color: var(--placeholder-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Global Button Styles based on Official Brand Guidelines */
+.btn-primary {
+  background-color: #00AEEF;
+  color: #ffffff;
+  border: 2px solid #00AEEF;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0;
+}
+
+.btn-primary:hover {
+  background-color: #ffffff;
+  color: #00AEEF;
+}

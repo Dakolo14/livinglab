@@ -1,0 +1,146 @@
+.lab-journey {
+  background-color: var(--bg-light, #ffffff);
+  color: var(--text-dark, #000000);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.journey-header h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.journey-header p {
+  font-size: 1.25rem;
+  color: #6B7280;
+}
+
+.journey-timeline {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  position: relative;
+}
+
+/* The vertical connecting line */
+.journey-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 60px;
+  width: 2px;
+  background: #E5E7EB;
+  z-index: 1;
+}
+
+.journey-step {
+  display: flex;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.step-number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #00AEEF; /* LRP Blue */
+  background: var(--bg-light, #ffffff);
+  padding-bottom: 20px;
+  width: 120px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.step-content {
+  flex-grow: 1;
+  padding-top: 10px;
+}
+
+.step-content h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.step-content p {
+  font-size: 1.1rem;
+  color: #4B5563;
+  margin-bottom: 30px;
+}
+
+.step-visual-placeholder {
+  width: 100%;
+  height: 300px;
+  background-color: #F3F4F6;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #E5E7EB;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-text {
+  color: #9CA3AF;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+.step-visual-placeholder:hover {
+  transform: scale(1.02);
+}
+
+/* Laboratory scan line micro-interaction */
+.visual-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #00AEEF;
+  box-shadow: 0 0 15px #00AEEF;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 3;
+}
+
+.step-visual-placeholder:hover .visual-scan-line {
+  opacity: 1;
+  animation: scan 2s infinite linear;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+@media (max-width: 768px) {
+  .journey-timeline::before {
+    left: 30px;
+  }
+  .journey-step {
+    gap: 30px;
+  }
+  .step-number {
+    font-size: 2.5rem;
+    width: 60px;
+  }
+}

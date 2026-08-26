@@ -1,0 +1,207 @@
+.programme-section {
+  background-color: var(--bg-light, #ffffff);
+  color: var(--text-dark, #000000);
+  padding: 120px 0;
+}
+
+.programme-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.programme-header h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.programme-header p {
+  font-size: 1.25rem;
+  color: #6B7280;
+}
+
+.programme-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.prog-tab-btn {
+  background: transparent;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px;
+}
+
+.prog-tab-btn:hover {
+  border-color: #00AEEF;
+  background-color: rgba(0, 174, 239, 0.05);
+}
+
+.prog-tab-btn.active {
+  background-color: #00AEEF;
+  border-color: #00AEEF;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 174, 239, 0.25);
+}
+
+.tab-date {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #9CA3AF;
+}
+
+.prog-tab-btn.active .tab-date {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tab-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+.tab-subtitle {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #4B5563;
+}
+
+.prog-tab-btn.active .tab-subtitle {
+  color: white;
+}
+
+/* Schedule List */
+.programme-content {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #E5E7EB;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  margin-bottom: 50px;
+}
+
+.schedule-list-header {
+  display: flex;
+  padding: 20px 30px;
+  background-color: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #9CA3AF;
+  letter-spacing: 1px;
+}
+
+.schedule-row {
+  display: flex;
+  padding: 30px;
+  border-bottom: 1px solid #F3F4F6;
+  align-items: center;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.schedule-row:last-child {
+  border-bottom: none;
+}
+
+.schedule-row:hover {
+  background-color: #F9FAFB;
+}
+
+/* Blue accent on hover */
+.schedule-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #00AEEF;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.schedule-row:hover::before {
+  transform: scaleY(1);
+}
+
+.col-time {
+  flex: 0 0 200px;
+  font-weight: 600;
+  color: #4B5563;
+  font-size: 1.1rem;
+}
+
+.col-exp {
+  flex: 1;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.col-who {
+  flex: 0 0 250px;
+}
+
+.col-loc {
+  flex: 0 0 200px;
+  color: #6B7280;
+  font-weight: 500;
+  text-align: right;
+}
+
+.pill-audience {
+  background-color: #F3F4F6;
+  color: #4B5563;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.programme-footer {
+  text-align: center;
+}
+
+/* Button sizing now controlled globally by index.css */
+
+@media (max-width: 900px) {
+  .schedule-list-header {
+    display: none;
+  }
+  
+  .schedule-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 24px;
+  }
+  
+  .col-time, .col-exp, .col-who, .col-loc {
+    flex: auto;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .col-time {
+    font-size: 1rem;
+    color: #00AEEF;
+  }
+  
+  .col-exp {
+    font-size: 1.4rem;
+  }
+}
