@@ -3,6 +3,7 @@ import HomeV1 from './pages/HomeV1';
 import HomeV2 from './pages/HomeV2';
 import HomeV3 from './pages/HomeV3';
 import Experts from './pages/Experts';
+import LabRoutes from './pages/LabRoutes';
 import RegistrationModal from './components/layout/RegistrationModal';
 import ScrollToTop from './components/layout/ScrollToTop';
 import './App.css';
@@ -17,6 +18,7 @@ function App() {
         <Route path="/v2" element={<HomeV2 />} />
         <Route path="/v3" element={<HomeV3 />} />
         <Route path="/experts" element={<Experts />} />
+        <Route path="/lab-routes" element={<LabRoutes />} />
       </Routes>
       <RegistrationModal />
     </Router>

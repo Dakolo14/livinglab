@@ -99,18 +99,20 @@ const Experts: React.FC = () => {
               <div key={expert.id} className="expert-card">
                 <div className="expert-image-container">
                   <img src={expert.imageUrl} alt={expert.name} className="expert-image" />
-                  <div className="expert-specialty-badge">{expert.specialty}</div>
                 </div>
                 <div className="expert-info">
-                  <h3 className="expert-name">
-                    {expert.name} <span className="expert-credentials">{expert.credentials}</span>
-                  </h3>
+                  <h3 className="expert-name">{expert.name}</h3>
                   <p className="expert-title">{expert.title}</p>
-                  <p className="expert-bio">{expert.bio}</p>
                 </div>
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="experts-cta" style={{ textAlign: 'center', padding: '80px 20px', backgroundColor: '#ffffff', borderTop: '1px solid #E5E7EB' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>JOIN THE EXPERTS</h2>
+          <p style={{ color: '#6B7280', marginBottom: '40px', fontSize: '1.2rem' }}>Register now to secure your spot in these exclusive clinical sessions.</p>
+          <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>Claim Slot</button>
         </section>
       </main>
 
