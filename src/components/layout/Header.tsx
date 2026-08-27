@@ -10,16 +10,22 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Track the most recently visited homepage version
+  useEffect(() => {
+    if (['/', '/v1', '/v2', '/v3'].includes(location.pathname)) {
+      const homePath = location.pathname === '/' ? '/v1' : location.pathname;
+      localStorage.setItem('activeHomeVersion', homePath);
+    }
+  }, [location.pathname]);
+
+  const activeHome = localStorage.getItem('activeHomeVersion') || '/v1';
 
   const isV3 = location.pathname === '/v3';
   const isExperts = location.pathname === '/experts';
@@ -34,7 +40,7 @@ const Header: React.FC = () => {
     <header className={`site-header ${isSolidBg ? 'scrolled' : ''} ${isDarkText ? 'dark-text' : ''}`}>
       <div className="header-container">
         <div className="header-logo">
-          <Link to="/v1">
+          <Link to={activeHome}>
             <img src="/BLUE LOGO.png" alt="La Roche-Posay" />
           </Link>
         </div>
@@ -73,6 +79,7 @@ const Header: React.FC = () => {
                   <Link to="/v3" className="dropdown-item" onClick={() => { setIsMobileMenuOpen(false); setIsDropdownOpen(false); }}>Home V3</Link>
                 </div>
               )}
+            </div>
             <Link to="/lab-routes" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Lab Routes</Link>
             <Link to="/science" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</Link>
             <Link to="/programme" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</Link>
