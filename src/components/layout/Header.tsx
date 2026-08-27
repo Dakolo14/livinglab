@@ -24,13 +24,11 @@ const Header: React.FC = () => {
   const isV3 = location.pathname === '/v3';
   const isExperts = location.pathname === '/experts';
   const isLabRoutes = location.pathname === '/lab-routes';
-  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3 || isExperts || isLabRoutes || isMobileMenuOpen;
-  const isSolidBg = isScrolled || isV3 || isExperts || isLabRoutes || isMobileMenuOpen;
-  const isHomepage = location.pathname === '/' || location.pathname === '/v1' || location.pathname === '/v2' || location.pathname === '/v3';
-
-  const getAnchor = (hash: string) => {
-    return isHomepage ? hash : `/v1${hash}`;
-  };
+  const isScience = location.pathname === '/science';
+  const isProgramme = location.pathname === '/programme';
+  
+  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3 || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
+  const isSolidBg = isScrolled || isV3 || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
 
   return (
     <header className={`site-header ${isSolidBg ? 'scrolled' : ''} ${isDarkText ? 'dark-text' : ''}`}>
@@ -78,8 +76,8 @@ const Header: React.FC = () => {
             </div>
             <Link to="/experts" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Experts</Link>
             <Link to="/lab-routes" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Lab Routes</Link>
-            <a href={getAnchor('#science')} className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</a>
-            <a href={getAnchor('#programme')} className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</a>
+            <Link to="/science" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</Link>
+            <Link to="/programme" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</Link>
           </nav>
 
           <div className="header-cta">

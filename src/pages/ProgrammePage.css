@@ -1,0 +1,94 @@
+.programme-page {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+.programme-hero {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.programme-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.programme-eyebrow {
+  color: #00AEEF;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.programme-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.programme-subtitle {
+  font-size: 1.25rem;
+  color: #6B7280;
+  line-height: 1.6;
+}
+
+.schedule-section {
+  padding: 80px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.schedule-row {
+  display: flex;
+  padding: 40px 0;
+  border-bottom: 1px solid #E5E7EB;
+  gap: 40px;
+}
+
+.schedule-row:last-child {
+  border-bottom: none;
+}
+
+.schedule-time {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00AEEF;
+  min-width: 140px;
+}
+
+.schedule-details h3 {
+  font-size: 1.8rem;
+  color: #111827;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.schedule-details p {
+  font-size: 1.1rem;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .programme-title {
+    font-size: 3rem;
+  }
+  .schedule-row {
+    flex-direction: column;
+    gap: 16px;
+    padding: 30px 0;
+  }
+  .schedule-time {
+    font-size: 1.25rem;
+  }
+  .schedule-details h3 {
+    font-size: 1.4rem;
+  }
+}

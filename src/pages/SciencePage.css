@@ -1,0 +1,158 @@
+.science-page {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+.science-hero {
+  padding: 80px 20px 40px;
+  text-align: center;
+  background-color: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.science-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.science-eyebrow {
+  color: #00AEEF;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.science-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.science-subtitle {
+  font-size: 1.25rem;
+  color: #6B7280;
+  line-height: 1.6;
+}
+
+.science-features-section {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.science-feature-row {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.science-feature-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.science-feature-image {
+  flex: 1;
+  height: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.science-feature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.science-feature-content {
+  flex: 1;
+  position: relative;
+}
+
+.science-feature-num {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #F3F4F6;
+  position: absolute;
+  top: -40px;
+  left: -20px;
+  z-index: -1;
+  line-height: 1;
+}
+
+.science-feature-content h2 {
+  font-size: 2.5rem;
+  color: #111827;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.science-feature-content h4 {
+  font-size: 1.2rem;
+  color: #00AEEF;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.science-feature-content p {
+  font-size: 1.1rem;
+  color: #6B7280;
+  line-height: 1.6;
+}
+
+.page-cta {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #111827;
+  color: white;
+}
+
+.page-cta h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.page-cta p {
+  font-size: 1.25rem;
+  color: #9CA3AF;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1024px) {
+  .science-feature-row, .science-feature-row.reverse {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .science-feature-image {
+    width: 100%;
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .science-title {
+    font-size: 3rem;
+  }
+  .science-feature-content h2 {
+    font-size: 2rem;
+  }
+  .science-feature-row {
+    margin-bottom: 60px;
+  }
+  .page-cta {
+    padding: 60px 20px;
+  }
+  .page-cta h2 {
+    font-size: 2.2rem;
+  }
+}
