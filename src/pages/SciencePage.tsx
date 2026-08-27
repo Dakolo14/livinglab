@@ -46,8 +46,8 @@ const SciencePage: React.FC = () => {
         <section className="science-features-section">
           {SCIENCE_FEATURES.map((feature, index) => (
             <div key={feature.id} className={`science-feature-row ${index % 2 !== 0 ? 'reverse' : ''}`}>
-              <div className="science-feature-image">
-                <img src={feature.imageUrl} alt={feature.title} />
+              <div className="science-feature-image" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E5E7EB', color: '#9CA3AF', fontWeight: 'bold', letterSpacing: '2px', fontSize: '1.5rem' }}>
+                [ CLINICAL VISUAL ]
               </div>
               <div className="science-feature-content">
                 <div className="science-feature-num">{feature.id}</div>

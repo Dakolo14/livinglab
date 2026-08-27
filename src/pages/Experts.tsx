@@ -97,8 +97,8 @@ const Experts: React.FC = () => {
           <div className="experts-grid-container">
             {EXPERTS.map((expert) => (
               <div key={expert.id} className="expert-card">
-                <div className="expert-image-container">
-                  <img src={expert.imageUrl} alt={expert.name} className="expert-image" />
+                <div className="expert-image-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E5E7EB', color: '#9CA3AF', fontWeight: 'bold', letterSpacing: '1px' }}>
+                  [ EXPERT PHOTO ]
                 </div>
                 <div className="expert-info">
                   <h3 className="expert-name">{expert.name}</h3>
