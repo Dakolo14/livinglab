@@ -59,10 +59,13 @@ const SciencePage: React.FC = () => {
           ))}
         </section>
 
-        <section className="page-cta">
-          <h2>HEAR FROM THE SCIENTISTS</h2>
-          <p>Join our leading researchers and dermatologists as they unpack these breakthroughs live at the Living Lab Lagos 2026.</p>
-          <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>Claim Your Slot</button>
+        <section className="page-cta" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1576091160550-2173eca9e5f9?auto=format&fit=crop&w=2000&q=80")' }}>
+          <div className="cta-overlay"></div>
+          <div className="cta-content">
+            <h2>HEAR FROM THE SCIENTISTS</h2>
+            <p>Join our leading researchers and dermatologists as they unpack these breakthroughs live at the Living Lab Lagos 2026.</p>
+            <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>Claim Your Slot</button>
+          </div>
         </section>
       </main>
 
