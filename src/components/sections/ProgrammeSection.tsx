@@ -33,16 +33,23 @@ const tabs = [
   { id: 4, title: 'DAY 04', subtitle: 'B2C CLOSING', date: 'NOV 6' },
 ];
 
-const ProgrammeSection: React.FC = () => {
+interface ProgrammeSectionProps {
+  hideHeader?: boolean;
+  hideCTA?: boolean;
+}
+
+const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false, hideCTA = false }) => {
   const [activeDay, setActiveDay] = useState(1);
 
   return (
-    <section className="programme-section" id="programme">
+    <section className="programme-section" id="programme" style={hideHeader ? { paddingTop: '40px' } : {}}>
       <div className="container">
-        <div className="programme-header">
-          <h2>THE PROGRAMME</h2>
-          <p>Four Days. Five Worlds. One Living Lab.</p>
-        </div>
+        {!hideHeader && (
+          <div className="programme-header">
+            <h2>THE PROGRAMME</h2>
+            <p>Four Days. Five Worlds. One Living Lab.</p>
+          </div>
+        )}
 
         <div className="programme-tabs">
           {tabs.map((tab) => (
@@ -91,9 +98,11 @@ const ProgrammeSection: React.FC = () => {
           </AnimatePresence>
         </div>
 
-        <div className="programme-footer">
-          <button className="btn-primary">CLAIM YOUR LAB SLOT</button>
-        </div>
+        {!hideCTA && (
+          <div className="programme-footer">
+            <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>CLAIM YOUR LAB SLOT</button>
+          </div>
+        )}
       </div>
     </section>
   );

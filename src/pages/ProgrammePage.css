@@ -1,0 +1,95 @@
+.programme-page {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+.programme-hero {
+  padding: 80px 20px 40px;
+  text-align: center;
+  background-color: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.programme-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.programme-eyebrow {
+  color: #00AEEF;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.programme-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.programme-subtitle {
+  font-size: 1.25rem;
+  color: #6B7280;
+  line-height: 1.6;
+}
+
+.page-cta {
+  text-align: center;
+  padding: 140px 20px;
+  background-color: #111827;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  position: relative;
+}
+
+.cta-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(17, 24, 39, 0.7);
+  z-index: 0;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-content h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.cta-content p {
+  font-size: 1.25rem;
+  color: #D1D5DB;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .programme-title {
+    font-size: 3rem;
+  }
+  .page-cta {
+    padding: 100px 20px;
+  }
+  .cta-content h2 {
+    font-size: 2.5rem;
+  }
+}
