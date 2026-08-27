@@ -239,9 +239,9 @@
   }
   
   .prog-tab-btn.active {
-    background-color: #111827;
+    background-color: #00AEEF;
     color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 174, 239, 0.25);
   }
 
   .prog-tab-btn:hover:not(.active) {
