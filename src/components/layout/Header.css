@@ -181,6 +181,9 @@
   }
   
   .header-nav {
+    position: relative;
+    left: auto;
+    transform: none;
     flex-direction: column;
     gap: 24px;
     align-items: center;
