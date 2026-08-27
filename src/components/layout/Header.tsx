@@ -22,8 +22,9 @@ const Header: React.FC = () => {
   }, []);
 
   const isV3 = location.pathname === '/v3';
-  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3 || isMobileMenuOpen;
-  const isSolidBg = isScrolled || isV3 || isMobileMenuOpen;
+  const isExperts = location.pathname === '/experts';
+  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3 || isExperts || isMobileMenuOpen;
+  const isSolidBg = isScrolled || isV3 || isExperts || isMobileMenuOpen;
 
   return (
     <header className={`site-header ${isSolidBg ? 'scrolled' : ''} ${isDarkText ? 'dark-text' : ''}`}>
@@ -67,6 +68,7 @@ const Header: React.FC = () => {
                 </div>
               )}
             </div>
+            <Link to="/experts" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Experts</Link>
             <a href="#lab-journey" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Lab Routes</a>
             <a href="#science" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</a>
             <a href="#programme" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</a>

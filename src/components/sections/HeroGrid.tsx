@@ -14,7 +14,7 @@ const HeroGrid: React.FC = () => {
         {/* Top Right: Video Snippet */}
         <div className="grid-item grid-video">
           <video 
-            src="/video.mp4" 
+            src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
             autoPlay 
             loop 
             muted 

@@ -81,7 +81,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                   >
                     {reel.id === 3 ? (
                       <video 
-                        src="/video.mp4" 
+                        src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
                         autoPlay 
                         loop 
                         muted 
@@ -103,7 +103,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                   <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                     {reel.id === 3 ? (
                        <video 
-                         src="/video.mp4" 
+                         src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
                          muted 
                          playsInline
                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -157,7 +157,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
               <div className="video-frame" style={{ position: 'relative' }}>
                 {expandedReel === 3 ? (
                   <video 
-                    src="/video.mp4" 
+                    src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
                     autoPlay 
                     controls
                     style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: 'black' }}

@@ -40,7 +40,7 @@ const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
           {activeReelId === 3 ? (
             <video 
               ref={videoRef}
-              src="/video.mp4" 
+              src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
               autoPlay 
               loop 
               muted 
