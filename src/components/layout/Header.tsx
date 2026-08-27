@@ -73,11 +73,10 @@ const Header: React.FC = () => {
                   <Link to="/v3" className="dropdown-item" onClick={() => { setIsMobileMenuOpen(false); setIsDropdownOpen(false); }}>Home V3</Link>
                 </div>
               )}
-            </div>
-            <Link to="/experts" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Experts</Link>
             <Link to="/lab-routes" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Lab Routes</Link>
             <Link to="/science" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</Link>
             <Link to="/programme" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</Link>
+            <Link to="/experts" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Experts</Link>
           </nav>
 
           <div className="header-cta">

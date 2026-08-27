@@ -9,7 +9,7 @@ const ProgrammePage: React.FC = () => {
     <>
       <Header />
       
-      <main className="programme-page" style={{ paddingTop: '80px', minHeight: '100vh', backgroundColor: '#ffffff' }}>
+      <main className="programme-page" style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
         <ProgrammeSection />
       </main>
 
