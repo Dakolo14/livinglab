@@ -207,8 +207,9 @@
 }
 
 @media (max-width: 768px) {
-  .programme-section { padding: 60px 20px; }
-  .programme-header h2 { font-size: 2.5rem; }
+  .programme-section { padding: 40px 20px; }
+  .programme-header h2 { font-size: 2rem; margin-bottom: 8px; }
+  .programme-header p { font-size: 1.1rem; }
   
   .programme-tabs { 
     flex-wrap: nowrap; 
@@ -216,11 +217,12 @@
     overflow-x: auto; 
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* Firefox */
-    padding-bottom: 16px; /* Space for shadow */
+    padding-bottom: 8px; 
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
     padding-right: 20px;
+    gap: 8px;
   }
   
   .programme-tabs::-webkit-scrollbar {
@@ -229,9 +231,9 @@
   
   .prog-tab-btn { 
     flex: 0 0 auto; 
-    min-width: 160px; 
-    padding: 16px 12px; 
-    border-radius: 12px;
+    min-width: 110px; 
+    padding: 10px 8px; 
+    border-radius: 8px;
     border: none;
     background-color: #F3F4F6;
   }
@@ -239,13 +241,17 @@
   .prog-tab-btn.active {
     background-color: #111827;
     color: white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
   .prog-tab-btn:hover:not(.active) {
     background-color: #E5E7EB;
     border: none;
   }
+  
+  .tab-date { font-size: 0.75rem; }
+  .tab-title { font-size: 1rem; margin: 2px 0; }
+  .tab-subtitle { font-size: 0.7rem; }
   
   .prog-tab-btn .tab-subtitle {
     color: #6B7280;
@@ -255,7 +261,27 @@
     color: #9CA3AF;
   }
   
-  .tab-title { font-size: 1.2rem; }
-  .schedule-row { padding: 24px 20px; border: 1px solid #E5E7EB; border-radius: 12px; margin-bottom: 16px; }
+  .programme-content {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    margin-bottom: 30px;
+  }
+  
+  .schedule-row { 
+    padding: 20px 0; 
+    border-bottom: 1px solid #E5E7EB; 
+    border-radius: 0; 
+    margin-bottom: 0; 
+    gap: 8px;
+  }
+  .schedule-row:last-child {
+    border-bottom: none;
+  }
+  
   .schedule-row::before { display: none; } /* Remove hover bar on mobile */
+  
+  .col-time { font-size: 0.95rem; }
+  .col-exp { font-size: 1.2rem; }
+  .pill-audience { padding: 4px 10px; font-size: 0.75rem; }
 }
