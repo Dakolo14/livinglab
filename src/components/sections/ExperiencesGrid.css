@@ -187,12 +187,52 @@
 
 
 /* Mobile Responsiveness Auto-Appended */
+/* Mobile Responsiveness Auto-Appended */
 @media (max-width: 768px) {
+  .experiences-grid-section { padding: 60px 20px; }
+  .experiences-grid-header h2 { font-size: 2.5rem; }
+  
+  .experiences-grid-container { 
+    grid-template-columns: 1fr; 
+    gap: 16px; 
+    background-color: transparent;
+    border: none;
+  }
+  
+  .exp-grid-item {
+    border-radius: 12px;
+    grid-auto-rows: 320px;
+    padding: 30px 20px;
+  }
 
-  .experiences-grid-section { padding: 60px 0; }
-  .exp-grid-header h2 { font-size: 2.5rem; }
-  .exp-grid-container { grid-template-columns: 1fr; gap: 24px; padding: 0 20px; }
-  .exp-grid-item:nth-child(3) { grid-column: 1; }
-  .exp-item-content h3 { font-size: 1.5rem; }
+  .exp-grid-item:nth-child(1),
+  .exp-grid-item:nth-child(2),
+  .exp-grid-item:nth-child(3),
+  .exp-grid-item:nth-child(4),
+  .exp-grid-item:nth-child(5) {
+    grid-column: 1;
+  }
 
+  /* Force content to be visible on mobile since hover doesn't exist naturally */
+  .exp-grid-overlay {
+    opacity: 0.7; /* Always slightly dark so text is readable */
+  }
+  
+  .exp-grid-content p,
+  .btn-outline-white {
+    opacity: 1;
+    transform: translateY(0);
+    max-width: 100%;
+  }
+
+  .exp-grid-content h3,
+  .large-item .exp-grid-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  
+  .exp-grid-content p {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
 }

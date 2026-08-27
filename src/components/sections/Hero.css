@@ -127,12 +127,9 @@
 }
 
 
-/* Mobile Responsiveness Auto-Appended */
 @media (max-width: 768px) {
-
-  .hero-content h1 { font-size: 3.5rem; }
-  .hero-content p { font-size: 1rem; width: 100%; padding: 0 20px; }
-  .hero-actions { flex-direction: column; gap: 16px; width: 100%; padding: 0 20px; }
-  .hero-actions button { width: 100%; }
-
+  .hero-content h1 { font-size: 2.5rem; padding: 0 16px; }
+  .hero-content p { font-size: 1.1rem; width: 100%; padding: 0 20px; }
+  .hero-actions { flex-direction: column; gap: 16px; width: 100%; padding: 0 40px; }
+  .hero-actions button, .hero-actions .btn-secondary { width: 100%; }
 }

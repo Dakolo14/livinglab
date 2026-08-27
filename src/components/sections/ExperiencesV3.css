@@ -166,35 +166,59 @@
   transform: translateX(10px);
 }
 
+.v3-mobile-visual {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .experiences-v3-section {
     flex-direction: column;
   }
-  .v3-exp-sticky {
-    position: relative;
-    top: 0;
-    height: 400px;
-    padding: 20px;
+  .v3-exp-left {
+    display: none; /* Hide desktop sticky visual */
   }
   .v3-exp-right {
-    padding: 60px 0;
+    padding: 40px 0;
   }
-  .v3-exp-header, .v3-exp-row {
-    padding-left: 20px;
-    padding-right: 20px;
+  .v3-exp-header {
+    padding: 0 20px;
+    margin-bottom: 40px;
+  }
+  .v3-exp-row {
+    padding: 24px 20px;
+  }
+  
+  .v3-mobile-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    background-color: #E5E7EB;
+    margin-top: 16px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .v3-exp-row.active .v3-exp-desc-wrapper {
+    max-height: 400px; /* Expand to show description AND image */
   }
 }
 
-
-/* Mobile Responsiveness Auto-Appended */
 @media (max-width: 768px) {
-
-  .exp-v3-section { padding: 60px 0; }
-  .exp-v3-layout { flex-direction: column-reverse; gap: 40px; }
-  .exp-v3-sidebar { width: 100%; position: relative; top: 0; padding-right: 0; }
-  .exp-v3-main { width: 100%; }
-  .lab-item-v3 { padding: 20px 0; }
-  .lab-item-v3 h3 { font-size: 2rem; }
-  .exp-v3-visual { height: 300px; }
-
+  .v3-exp-header h2 { font-size: 2.5rem; }
+  .v3-exp-content h3 { font-size: 1.5rem; }
+  .v3-exp-num { width: 40px; font-size: 1rem; }
+  .v3-visual-placeholder { font-size: 1rem; padding: 0 20px; text-align: center; }
+  .v3-visual-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.85rem;
+    background: rgba(255,255,255,0.8);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: 700;
+  }
 }

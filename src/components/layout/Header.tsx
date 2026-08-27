@@ -5,6 +5,7 @@ import './Header.css';
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -21,8 +22,8 @@ const Header: React.FC = () => {
   }, []);
 
   const isV3 = location.pathname === '/v3';
-  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3;
-  const isSolidBg = isScrolled || isV3;
+  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3 || isMobileMenuOpen;
+  const isSolidBg = isScrolled || isV3 || isMobileMenuOpen;
 
   return (
     <header className={`site-header ${isSolidBg ? 'scrolled' : ''} ${isDarkText ? 'dark-text' : ''}`}>
@@ -31,33 +32,57 @@ const Header: React.FC = () => {
           <img src="/BLUE LOGO.png" alt="La Roche-Posay" />
         </div>
         
-        <nav className="header-nav">
-          <div 
-            className="nav-dropdown"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
-          >
-            <span className="nav-link">Home ▾</span>
-            {isDropdownOpen && (
-              <div className="dropdown-menu">
-                <Link to="/v1" className="dropdown-item">Home V1 (Minimalist)</Link>
-                <Link to="/v2" className="dropdown-item">Home V2 (Cinematic)</Link>
-                <Link to="/v3" className="dropdown-item">Home V3 (Registration)</Link>
-              </div>
-            )}
-          </div>
-          <a href="#lab-journey" className="nav-link">Lab Routes</a>
-          <a href="#science" className="nav-link">Science</a>
-          <a href="#programme" className="nav-link">Programme</a>
-        </nav>
+        <button 
+          className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-        <div className="header-cta">
-          <button 
-            className="btn-primary" 
-            onClick={() => window.dispatchEvent(new Event('open-registration'))}
-          >
-            Claim Slot
-          </button>
+        <div className={`header-menu-wrapper ${isMobileMenuOpen ? 'open' : ''}`}>
+          <nav className="header-nav">
+            <div 
+              className="nav-dropdown"
+              onMouseEnter={() => window.innerWidth > 768 && setIsDropdownOpen(true)}
+              onMouseLeave={() => window.innerWidth > 768 && setIsDropdownOpen(false)}
+            >
+              <span 
+                className="nav-link" 
+                onClick={() => window.innerWidth <= 768 && setIsDropdownOpen(!isDropdownOpen)}
+                style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+              >
+                Home 
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`}>
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+              {isDropdownOpen && (
+                <div className="dropdown-menu">
+                  <Link to="/v1" className="dropdown-item" onClick={() => { setIsMobileMenuOpen(false); setIsDropdownOpen(false); }}>Home V1</Link>
+                  <Link to="/v2" className="dropdown-item" onClick={() => { setIsMobileMenuOpen(false); setIsDropdownOpen(false); }}>Home V2</Link>
+                  <Link to="/v3" className="dropdown-item" onClick={() => { setIsMobileMenuOpen(false); setIsDropdownOpen(false); }}>Home V3</Link>
+                </div>
+              )}
+            </div>
+            <a href="#lab-journey" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Lab Routes</a>
+            <a href="#science" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</a>
+            <a href="#programme" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</a>
+          </nav>
+
+          <div className="header-cta">
+            <button 
+              className="btn-primary" 
+              onClick={() => {
+                window.dispatchEvent(new Event('open-registration'));
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Claim Slot
+            </button>
+          </div>
         </div>
       </div>
     </header>

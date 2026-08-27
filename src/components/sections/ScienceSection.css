@@ -186,10 +186,18 @@
 }
 
 @media (max-width: 768px) {
+  .science-section { padding: 60px 20px; }
+  .science-header { margin-bottom: 40px; }
+  .science-header h2 { font-size: 2.5rem; }
+  .science-header p { font-size: 1rem; }
   .science-interactive-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
+  .science-tab-btn { padding: 16px; font-size: 1rem; }
   .science-card {
-    padding: 30px;
+    padding: 30px 20px;
   }
+  .science-diagram { width: 150px; height: 150px; margin-bottom: 24px; }
+  .science-text h3 { font-size: 2rem; }
 }

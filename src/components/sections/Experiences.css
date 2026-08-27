@@ -160,3 +160,10 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+@media (max-width: 768px) {
+  .experiences { padding: 40px 0 0 0; }
+  .section-subtitle { font-size: 1.25rem; padding: 0 20px; margin-bottom: 40px; }
+  .experience-cards { min-height: 450px; height: 60vh; }
+  .banner { font-size: 1.2rem; padding: 20px 0; }
+}

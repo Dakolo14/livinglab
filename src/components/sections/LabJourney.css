@@ -133,25 +133,22 @@
 }
 
 @media (max-width: 768px) {
-  .journey-timeline::before {
-    left: 30px;
-  }
-  .journey-step {
-    gap: 30px;
-  }
-  .step-number {
-    font-size: 2.5rem;
-    width: 60px;
-  }
-}
-
-
-/* Mobile Responsiveness Auto-Appended */
-@media (max-width: 768px) {
-
   .lab-journey { padding: 60px 20px; }
   .journey-header h2 { font-size: 2.5rem; }
-  .journey-timeline { grid-template-columns: 1fr; gap: 40px; }
+  .journey-header p { padding: 0 20px; }
+  .journey-timeline { gap: 40px; }
+  .journey-timeline::before {
+    left: 20px;
+  }
+  .journey-step {
+    gap: 20px;
+  }
+  .step-number {
+    font-size: 2rem;
+    width: 40px;
+    padding-bottom: 10px;
+  }
   .step-content h3 { font-size: 1.5rem; }
-
+  .step-content p { font-size: 1rem; }
+  .step-visual-placeholder { height: 200px; }
 }

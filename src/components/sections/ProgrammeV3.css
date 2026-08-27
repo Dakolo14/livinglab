@@ -149,6 +149,14 @@
 }
 
 @media (max-width: 768px) {
+  .prog-v3-section { padding: 60px 0; }
+  .prog-v3-container { padding: 0 20px; }
+  .prog-v3-header { margin-bottom: 40px; }
+  .prog-v3-title { font-size: 2.5rem; margin-bottom: 24px; }
+  
+  .prog-v3-filters { flex-wrap: wrap; width: 100%; justify-content: center; }
+  .prog-v3-filter { flex: 1; min-width: 45%; padding: 12px; font-size: 0.85rem; text-align: center; }
+
   .prog-v3-row {
     flex-direction: column;
     align-items: flex-start;
@@ -160,6 +168,9 @@
   }
   .p-action {
     text-align: left;
+    width: 100%;
+  }
+  .p-action .btn-outline-small {
     width: 100%;
   }
 }

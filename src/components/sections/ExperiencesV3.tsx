@@ -46,6 +46,14 @@ const ExperiencesV3: React.FC = () => {
                 <h3>{lab.title}</h3>
                 <div className="v3-exp-desc-wrapper">
                    <p>{lab.desc}</p>
+                   <div className="v3-mobile-visual">
+                     <div className="v3-visual-inner">
+                       <span className="v3-visual-label">MODULE {lab.id}</span>
+                       <div className="v3-visual-placeholder">
+                         [ VISUAL RENDER FOR {lab.title} ]
+                       </div>
+                     </div>
+                   </div>
                 </div>
               </div>
               <div className="v3-exp-arrow">→</div>

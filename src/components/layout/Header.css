@@ -63,6 +63,14 @@
   padding: 10px 0;
 }
 
+.dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-icon.open {
+  transform: rotate(180deg);
+}
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -92,15 +100,106 @@
   color: #00AEEF;
 }
 
-/* Remove btn-primary overrides so global styles from index.css apply */
+.hamburger-menu {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 101;
+  flex-direction: column;
+  gap: 6px;
+}
 
+.hamburger-menu span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
 
-/* Mobile Responsiveness Auto-Appended */
+.site-header.dark-text .hamburger-menu span {
+  background-color: #111827;
+}
+
+.hamburger-menu.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  background-color: #111827;
+}
+.hamburger-menu.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-menu.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  background-color: #111827;
+}
+
+.header-menu-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.header-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
-
-  .header-nav { display: none; } /* Hide nav on mobile for now, or could use a hamburger menu */
-  .header-cta { display: none; }
-  .header-logo span { font-size: 1.2rem; }
-  header { padding: 16px 20px; }
-
+  .site-header { padding: 16px 20px; }
+  .site-header.scrolled { padding: 16px 20px; }
+  .header-logo img { height: 60px; }
+  
+  .hamburger-menu { display: flex; }
+  
+  .header-menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: all 0.4s ease;
+  }
+  
+  .header-menu-wrapper.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  
+  .header-nav {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  
+  .nav-link {
+    color: #111827 !important; /* Force dark text when menu is open on mobile */
+    font-size: 1.5rem;
+  }
+  
+  .dropdown-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    box-shadow: none;
+    background: transparent;
+    padding-top: 16px;
+    border-top: 1px solid #E5E7EB;
+    margin-top: 16px;
+  }
 }

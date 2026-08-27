@@ -165,6 +165,11 @@
 }
 
 @media (max-width: 768px) {
+  .programme-grid-section { padding: 60px 20px; }
+  .prog-header-left h2 { font-size: 2.5rem; }
+  .prog-filters { flex-wrap: wrap; width: 100%; border: none; }
+  .filter-btn { flex: 1; min-width: 50%; padding: 12px; font-size: 0.8rem; text-align: center; border: 1px solid #E5E7EB; margin: -1px 0 0 -1px; }
+  
   .th-row { display: none; }
   .prog-grid-row {
     flex-direction: column;
@@ -172,12 +177,13 @@
   }
   .prog-cell {
     border-right: none;
-    padding: 10px 30px;
+    padding: 10px 20px;
   }
   .time-cell, .event-cell, .type-cell, .loc-cell {
     flex: auto;
   }
   .event-text {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
+  .time-text { font-size: 1rem; }
 }

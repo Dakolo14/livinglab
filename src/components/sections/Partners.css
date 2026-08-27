@@ -37,21 +37,16 @@
 }
 
 @media (max-width: 768px) {
+  .partners-section {
+    padding: 40px 20px;
+  }
   .partners-grid {
-    gap: 20px;
+    gap: 16px;
   }
   .partner-logo {
     width: 45%;
+    height: 80px; /* slightly taller on mobile */
+    font-size: 0.75rem; /* scale down font to fit box */
+    text-align: center;
   }
-}
-
-
-/* Mobile Responsiveness Auto-Appended */
-@media (max-width: 768px) {
-
-  .partners { padding: 60px 20px; }
-  .partners h2 { font-size: 1.5rem; }
-  .partner-logos { flex-direction: column; gap: 40px; align-items: center; }
-  .partner-logo { font-size: 1.5rem; }
-
 }
