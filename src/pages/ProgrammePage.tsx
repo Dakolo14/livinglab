@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import ProgrammeSection from '../components/sections/ProgrammeSection';
-import './ProgrammePage.css';
 
 const ProgrammePage: React.FC = () => {
   return (
