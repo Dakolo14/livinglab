@@ -6,7 +6,11 @@ const HeroV3Split: React.FC = () => {
     <section className="hero-split-section">
       <div className="split-left">
         <div className="split-media-bg">
-          <video src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" autoPlay loop muted playsInline className="split-video" />
+          <video 
+            src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
+            poster="https://res.cloudinary.com/wjmfwcrd/image/upload/v1787843488/thumbnail.png"
+            autoPlay loop muted playsInline className="split-video" 
+          />
         </div>
         <div className="split-content-left">
           <h1 className="split-title">LIVING<br/>LAB<br/><span style={{ fontStyle: 'italic', color: '#00AEEF' }}>LAGOS</span> 2026</h1>
