@@ -23,14 +23,22 @@ const Header: React.FC = () => {
 
   const isV3 = location.pathname === '/v3';
   const isExperts = location.pathname === '/experts';
-  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3 || isExperts || isMobileMenuOpen;
-  const isSolidBg = isScrolled || isV3 || isExperts || isMobileMenuOpen;
+  const isLabRoutes = location.pathname === '/lab-routes';
+  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/' || isV3 || isExperts || isLabRoutes || isMobileMenuOpen;
+  const isSolidBg = isScrolled || isV3 || isExperts || isLabRoutes || isMobileMenuOpen;
+  const isHomepage = location.pathname === '/' || location.pathname === '/v1' || location.pathname === '/v2' || location.pathname === '/v3';
+
+  const getAnchor = (hash: string) => {
+    return isHomepage ? hash : `/v1${hash}`;
+  };
 
   return (
     <header className={`site-header ${isSolidBg ? 'scrolled' : ''} ${isDarkText ? 'dark-text' : ''}`}>
       <div className="header-container">
         <div className="header-logo">
-          <img src="/BLUE LOGO.png" alt="La Roche-Posay" />
+          <Link to="/v1">
+            <img src="/BLUE LOGO.png" alt="La Roche-Posay" />
+          </Link>
         </div>
         
         <button 
@@ -53,7 +61,7 @@ const Header: React.FC = () => {
               <span 
                 className="nav-link" 
                 onClick={() => window.innerWidth <= 768 && setIsDropdownOpen(!isDropdownOpen)}
-                style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}
               >
                 Home 
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`}>
@@ -70,8 +78,8 @@ const Header: React.FC = () => {
             </div>
             <Link to="/experts" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Experts</Link>
             <Link to="/lab-routes" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Lab Routes</Link>
-            <a href="/v1#science" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</a>
-            <a href="/v1#programme" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</a>
+            <a href={getAnchor('#science')} className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Science</a>
+            <a href={getAnchor('#programme')} className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</a>
           </nav>
 
           <div className="header-cta">
