@@ -113,28 +113,6 @@
   line-height: 1.6;
 }
 
-.lab-cta-section {
-  text-align: center;
-  padding: 120px 20px;
-  background-color: #111827;
-  color: white;
-}
-
-.lab-cta-section h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.lab-cta-section p {
-  font-size: 1.25rem;
-  color: #D1D5DB;
-  margin-bottom: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 @media (max-width: 1024px) {
   .module-row, .module-row:nth-child(even) {
     flex-direction: column;
@@ -156,11 +134,5 @@
   }
   .module-content h2 {
     font-size: 2rem;
-  }
-  .lab-cta-section {
-    padding: 80px 20px;
-  }
-  .lab-cta-section h2 {
-    font-size: 2.5rem;
   }
 }

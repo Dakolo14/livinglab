@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import PageCTA from '../components/sections/PageCTA';
 import './LabRoutes.css';
 
 const LAB_MODULES = [
@@ -47,11 +48,10 @@ const LabRoutes: React.FC = () => {
           </div>
         </section>
 
-        <section className="lab-cta-section">
-          <h2>EXPERIENCE THE SCIENCE</h2>
-          <p>Don't just read about it. Register now to experience these modules live at the Living Lab Lagos 2026.</p>
-          <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>Claim Your Slot</button>
-        </section>
+        <PageCTA 
+          title="EXPERIENCE THE SCIENCE"
+          description="Don't just read about it. Register now to experience these modules live at the Living Lab Lagos 2026."
+        />
       </main>
 
       <Footer />

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import PageCTA from '../components/sections/PageCTA';
 import './Experts.css';
 
 const EXPERTS = [
@@ -109,11 +110,10 @@ const Experts: React.FC = () => {
           </div>
         </section>
 
-        <section className="experts-cta" style={{ textAlign: 'center', padding: '80px 20px', backgroundColor: '#ffffff', borderTop: '1px solid #E5E7EB' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>JOIN THE EXPERTS</h2>
-          <p style={{ color: '#6B7280', marginBottom: '40px', fontSize: '1.2rem' }}>Register now to secure your spot in these exclusive clinical sessions.</p>
-          <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>Claim Slot</button>
-        </section>
+        <PageCTA 
+          title="JOIN THE EXPERTS"
+          description="Register now to secure your spot in these exclusive clinical sessions."
+        />
       </main>
 
       <Footer />
