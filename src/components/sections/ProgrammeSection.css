@@ -258,7 +258,7 @@
   }
   
   .prog-tab-btn.active .tab-subtitle {
-    color: #9CA3AF;
+    color: rgba(255, 255, 255, 0.9);
   }
   
   .programme-content {
