@@ -125,3 +125,14 @@
 .btn-secondary:hover {
   background-color: rgba(255,255,255,0.1);
 }
+
+
+/* Mobile Responsiveness Auto-Appended */
+@media (max-width: 768px) {
+
+  .hero-content h1 { font-size: 3.5rem; }
+  .hero-content p { font-size: 1rem; width: 100%; padding: 0 20px; }
+  .hero-actions { flex-direction: column; gap: 16px; width: 100%; padding: 0 20px; }
+  .hero-actions button { width: 100%; }
+
+}

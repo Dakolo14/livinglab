@@ -59,3 +59,15 @@
     gap: 20px;
   }
 }
+
+
+/* Mobile Responsiveness Auto-Appended */
+@media (max-width: 768px) {
+
+  .countdown { padding: 60px 20px; }
+  .countdown h2 { font-size: 2rem; }
+  .timer { flex-wrap: wrap; gap: 20px; }
+  .time-unit span { font-size: 2.5rem; }
+  .time-unit label { font-size: 0.75rem; }
+
+}

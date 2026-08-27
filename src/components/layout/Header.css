@@ -93,3 +93,14 @@
 }
 
 /* Remove btn-primary overrides so global styles from index.css apply */
+
+
+/* Mobile Responsiveness Auto-Appended */
+@media (max-width: 768px) {
+
+  .header-nav { display: none; } /* Hide nav on mobile for now, or could use a hamburger menu */
+  .header-cta { display: none; }
+  .header-logo span { font-size: 1.2rem; }
+  header { padding: 16px 20px; }
+
+}

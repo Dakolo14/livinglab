@@ -110,3 +110,16 @@
     min-height: 500px;
   }
 }
+
+
+/* Mobile Responsiveness Auto-Appended */
+@media (max-width: 768px) {
+
+  .science-grid-section { padding: 60px 20px; }
+  .science-grid-header h2 { font-size: 2.5rem; }
+  .science-grid-content { grid-template-columns: 1fr; gap: 40px; }
+  .sg-left { padding-right: 0; }
+  .sg-left h3 { font-size: 2rem; }
+  .sg-right { grid-template-columns: 1fr; gap: 24px; }
+
+}

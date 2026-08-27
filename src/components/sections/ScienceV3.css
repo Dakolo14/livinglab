@@ -122,3 +122,15 @@
     border-bottom: 1px solid #E5E7EB;
   }
 }
+
+
+/* Mobile Responsiveness Auto-Appended */
+@media (max-width: 768px) {
+
+  .sci-v3-section { padding: 60px 20px; }
+  .sci-v3-container { flex-direction: column; gap: 40px; }
+  .sci-v3-header { padding-right: 0; }
+  .sci-v3-header h2 { font-size: 3rem; }
+  .sci-v3-grid { grid-template-columns: 1fr; gap: 20px; }
+
+}

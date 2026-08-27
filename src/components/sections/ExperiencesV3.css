@@ -184,3 +184,17 @@
     padding-right: 20px;
   }
 }
+
+
+/* Mobile Responsiveness Auto-Appended */
+@media (max-width: 768px) {
+
+  .exp-v3-section { padding: 60px 0; }
+  .exp-v3-layout { flex-direction: column-reverse; gap: 40px; }
+  .exp-v3-sidebar { width: 100%; position: relative; top: 0; padding-right: 0; }
+  .exp-v3-main { width: 100%; }
+  .lab-item-v3 { padding: 20px 0; }
+  .lab-item-v3 h3 { font-size: 2rem; }
+  .exp-v3-visual { height: 300px; }
+
+}

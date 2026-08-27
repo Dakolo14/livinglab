@@ -144,3 +144,14 @@
     width: 60px;
   }
 }
+
+
+/* Mobile Responsiveness Auto-Appended */
+@media (max-width: 768px) {
+
+  .lab-journey { padding: 60px 20px; }
+  .journey-header h2 { font-size: 2.5rem; }
+  .journey-timeline { grid-template-columns: 1fr; gap: 40px; }
+  .step-content h3 { font-size: 1.5rem; }
+
+}
