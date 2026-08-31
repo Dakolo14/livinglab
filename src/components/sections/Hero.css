@@ -130,8 +130,9 @@
 }
 
 .btn-secondary:hover {
-  background-color: transparent;
+  background-color: #00AEEF;
   color: #ffffff;
+  border-color: #00AEEF;
 }
 
 
