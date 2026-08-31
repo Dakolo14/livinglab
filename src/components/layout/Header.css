@@ -12,7 +12,7 @@
 
 /* Solid Background State */
 .site-header.solid-bg {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 /* Shrunk State (On Scroll) */
