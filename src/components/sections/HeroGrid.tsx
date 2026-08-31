@@ -8,7 +8,7 @@ const HeroGrid: React.FC = () => {
         
         {/* Top Left: Massive Headline */}
         <div className="grid-item grid-headline">
-          <h1>LIVING<br/>LAB<br/><span className="text-lagos">LAGOS</span><br/>2026</h1>
+          <h1>LIVING<br/>LAB<br/><span className="text-nigeria">NIGERIA</span><br/>2026</h1>
         </div>
 
         {/* Top Right: Video Snippet */}

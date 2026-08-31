@@ -18,7 +18,7 @@ const LabJourney: React.FC = () => {
     <section className="lab-journey" id="lab-journey" ref={containerRef}>
       <div className="container">
         <div className="journey-header">
-          <h2>THE DIGITAL LAB JOURNEY</h2>
+          <h2>WHAT TO EXPECT IN THE LAB</h2>
           <p>Step inside. Six stages of dermatological discovery.</p>
         </div>
         

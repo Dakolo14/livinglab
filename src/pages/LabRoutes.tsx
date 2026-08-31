@@ -50,7 +50,7 @@ const LabRoutes: React.FC = () => {
 
         <PageCTA 
           title="EXPERIENCE THE SCIENCE"
-          description="Don't just read about it. Register now to experience these modules live at the Living Lab Lagos 2026."
+          description="Don't just read about it. Register now to experience these modules live at the Living Lab Nigeria 2026."
         />
       </main>
 

@@ -30,7 +30,7 @@
 }
 
 .header-logo img {
-  height: 90px;
+  height: 120px;
   width: auto;
 }
 
@@ -154,7 +154,7 @@
 @media (max-width: 768px) {
   .site-header { padding: 16px 20px; }
   .site-header.scrolled { padding: 16px 20px; }
-  .header-logo img { height: 60px; }
+  .header-logo img { height: 80px; }
   
   .hamburger-menu { display: flex; }
   

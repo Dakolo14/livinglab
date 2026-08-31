@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           <div className="footer-logo">
             <img src="/BLUE LOGO.png" alt="La Roche-Posay" />
           </div>
-          <p>Living Lab Lagos 2026. The definitive dermatological experience.</p>
+          <p>Living Lab Nigeria 2026. The definitive dermatological experience.</p>
         </div>
         <div className="footer-col">
           <h4>Explore</h4>
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
         </div>
         <div className="footer-col">
           <h4>Join Us</h4>
-          <button className="btn-primary" style={{ padding: '10px 20px', fontSize: '14px' }}>Claim Slot</button>
+          <button className="btn-primary" style={{ padding: '10px 20px', fontSize: '14px' }}>Register Now</button>
         </div>
       </div>
       <div className="footer-bottom">

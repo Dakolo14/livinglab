@@ -20,7 +20,7 @@ const RegistrationModal: React.FC = () => {
         
         {!isSubmitted ? (
           <div className="reg-modal-form-view">
-            <h4 className="reg-eyebrow">LIVING LAB LAGOS 2026</h4>
+            <h4 className="reg-eyebrow">LIVING LAB NIGERIA 2026</h4>
             <h2>CLAIM YOUR SLOT</h2>
             <p>Please enter your professional details to verify eligibility for the event.</p>
             

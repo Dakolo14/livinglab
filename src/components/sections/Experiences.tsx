@@ -39,10 +39,13 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
     <section className="experiences" id="about">
       <div className="container">
         <h2 className="section-subtitle">
-          Four days inside a working dermatological laboratory built in Lagos.<br/>
+          Four days inside a working dermatological laboratory built in Nigeria.<br/>
           Five worlds. Experts, thermal spring water, real dermatologists and<br/>
           your own skin story to take home.
         </h2>
+        <h3 style={{ textAlign: 'center', fontSize: '2rem', fontWeight: 700, margin: '60px 0 30px', color: '#111827' }}>
+          EXPLORE SKIN PATHOLOGIES
+        </h3>
       </div>
         
       <div className="experience-cards">

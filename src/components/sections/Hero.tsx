@@ -59,7 +59,10 @@ const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
       {/* Original Hero Content Restored */}
       {!isVideoMoved && (
         <div className="container hero-content">
-          <h1>Living Lab Lagos 2026</h1>
+          <h1>Living Lab Nigeria 2026</h1>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '16px', color: '#E5E7EB' }}>
+            Lagos, Nigeria | 3rd November - 5th November
+          </h3>
           <p>Join our team of professionals showing you how our products work in real time.</p>
           <div className="hero-actions">
             <button 

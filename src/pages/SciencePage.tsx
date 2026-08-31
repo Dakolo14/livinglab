@@ -61,7 +61,7 @@ const SciencePage: React.FC = () => {
 
         <PageCTA 
           title="HEAR FROM THE SCIENTISTS"
-          description="Join our leading researchers and dermatologists as they unpack these breakthroughs live at the Living Lab Lagos 2026."
+          description="Join our leading researchers and dermatologists as they unpack these breakthroughs live at the Living Lab Nigeria 2026."
         />
       </main>
 

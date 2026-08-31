@@ -25,7 +25,7 @@ const ProgrammePage: React.FC = () => {
 
         <PageCTA 
           title="SECURE YOUR ITINERARY"
-          description="Spaces for the Living Lab Lagos 2026 are highly limited. Register now to confirm your attendance."
+          description="Spaces for the Living Lab Nigeria 2026 are highly limited. Register now to confirm your attendance."
         />
       </main>
 

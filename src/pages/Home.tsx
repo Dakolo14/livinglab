@@ -7,10 +7,12 @@ import Experiences from '../components/sections/Experiences';
 import LabJourney from '../components/sections/LabJourney';
 import ScienceSection from '../components/sections/ScienceSection';
 import ProgrammeSection from '../components/sections/ProgrammeSection';
+import SpeakersPreview from '../components/sections/SpeakersPreview';
+import FAQ from '../components/sections/FAQ';
 import Footer from '../components/layout/Footer';
 import BackToTop from '../components/layout/BackToTop';
 
-const HomeV2: React.FC = () => {
+const Home: React.FC = () => {
   const [activeReelId, setActiveReelId] = useState(3);
   const [isVideoMoved, setIsVideoMoved] = useState(false);
 
@@ -33,11 +35,12 @@ const HomeV2: React.FC = () => {
       <main>
         <Hero activeReelId={activeReelId} isVideoMoved={isVideoMoved} />
         <Countdown />
-        <Partners />
         <Experiences activeReelId={activeReelId} setActiveReelId={setActiveReelId} isVideoMoved={isVideoMoved} />
         <LabJourney />
-        <ScienceSection />
+        <SpeakersPreview />
         <ProgrammeSection />
+        <FAQ />
+        <Partners />
         <Footer />
       </main>
       <BackToTop />
@@ -45,4 +48,4 @@ const HomeV2: React.FC = () => {
   );
 };
 
-export default HomeV2;
+export default Home;
