@@ -32,6 +32,11 @@
 .header-logo img {
   height: 120px;
   width: auto;
+  transition: height 0.3s ease;
+}
+
+.site-header.scrolled .header-logo img {
+  height: 60px;
 }
 
 .header-nav {
