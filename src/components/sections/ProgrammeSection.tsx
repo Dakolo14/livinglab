@@ -100,7 +100,7 @@ const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false,
 
         {!hideCTA && (
           <div className="programme-footer">
-            <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>CLAIM YOUR LAB SLOT</button>
+            <button className="btn-primary" onClick={() => window.dispatchEvent(new Event('open-registration'))}>REGISTER NOW</button>
           </div>
         )}
       </div>

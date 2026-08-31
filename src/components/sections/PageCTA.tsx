@@ -11,7 +11,7 @@ interface PageCTAProps {
 const PageCTA: React.FC<PageCTAProps> = ({ 
   title, 
   description, 
-  buttonText = "Claim Your Slot",
+  buttonText = "Register Now",
   backgroundImageUrl = "https://images.unsplash.com/photo-1576091160550-2173eca9e5f9?auto=format&fit=crop&w=2000&q=80"
 }) => {
   return (

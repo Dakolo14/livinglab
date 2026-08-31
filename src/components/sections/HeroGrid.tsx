@@ -36,7 +36,7 @@ const HeroGrid: React.FC = () => {
               className="btn-primary"
               onClick={() => window.dispatchEvent(new Event('open-registration'))}
             >
-              CLAIM YOUR SLOT
+              REGISTER NOW
             </button>
             <a href="#explore" className="link-explore">EXPLORE THE LAB →</a>
           </div>
