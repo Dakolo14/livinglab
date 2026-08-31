@@ -113,7 +113,7 @@
 
 .btn-secondary {
   background-color: #ffffff;
-  color: #111827;
+  color: #00AEEF; /* LRP Blue */
   border: 2px solid #ffffff;
   padding: 14px 28px;
   border-radius: 0;
@@ -123,6 +123,10 @@
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .btn-secondary:hover {
