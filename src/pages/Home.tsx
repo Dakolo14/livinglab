@@ -5,7 +5,6 @@ import Countdown from '../components/sections/Countdown';
 import Partners from '../components/sections/Partners';
 import Experiences from '../components/sections/Experiences';
 import LabJourney from '../components/sections/LabJourney';
-import ScienceSection from '../components/sections/ScienceSection';
 import ProgrammeSection from '../components/sections/ProgrammeSection';
 import SpeakersPreview from '../components/sections/SpeakersPreview';
 import FAQ from '../components/sections/FAQ';
