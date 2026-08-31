@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   const isScience = location.pathname === '/science';
   const isProgramme = location.pathname === '/programme';
   
-  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/test' || location.pathname === '/' || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
+  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/test' || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
   const isSolidBg = isScrolled || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
 
   return (
