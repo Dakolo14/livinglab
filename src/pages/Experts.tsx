@@ -38,8 +38,7 @@ const Experts: React.FC = () => {
       <main className="experts-page">
         <section className="experts-hero">
           <div className="experts-hero-content">
-            <h4 className="experts-eyebrow">WORLD-CLASS EXPERTISE</h4>
-            <h1 className="experts-title">MEET THE<br />CLINICAL EXPERTS</h1>
+            <h1 className="experts-title">MEET THE<br />SPEAKERS</h1>
             <p className="experts-subtitle">
               Pioneers in dermatology. Get exclusive access to the minds shaping the future of clinical skin science, UV protection, and barrier repair.
             </p>

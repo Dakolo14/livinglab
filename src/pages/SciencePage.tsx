@@ -35,8 +35,7 @@ const SciencePage: React.FC = () => {
       <main className="science-page">
         <section className="science-hero">
           <div className="science-hero-content">
-            <h4 className="science-eyebrow">DERMATOLOGICAL EXCELLENCE</h4>
-            <h1 className="science-title">THE SCIENCE OF<br />LA ROCHE-POSAY</h1>
+            <h1 className="science-title">THE SCIENCE<br />BEHIND LRP</h1>
             <p className="science-subtitle">
               Decades of research. Countless clinical trials. Discover the patented molecules and breakthrough formulations that make our products the #1 dermatologist-recommended skincare brand worldwide.
             </p>

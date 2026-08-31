@@ -20,8 +20,7 @@ const LabRoutes: React.FC = () => {
       <main className="lab-routes-page">
         <section className="lab-hero">
           <div className="lab-hero-content">
-            <h4 className="lab-eyebrow">IMMERSIVE CLINICAL JOURNEY</h4>
-            <h1 className="lab-title">EXPLORE THE<br />LAB ROUTES</h1>
+            <h1 className="lab-title">WHAT TO EXPECT<br />IN THE LAB</h1>
             <p className="lab-subtitle">
               Dive deep into the five specialized modules of the Living Lab. Each route is a hands-on exploration of the science that powers La Roche-Posay.
             </p>
