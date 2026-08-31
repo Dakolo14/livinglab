@@ -10,9 +10,13 @@
   pointer-events: none; /* Let clicks pass through the header background */
 }
 
-/* Scrolled State */
-.site-header.scrolled {
+/* Solid Background State */
+.site-header.solid-bg {
   background-color: #ffffff;
+}
+
+/* Shrunk State (On Scroll) */
+.site-header.shrunk {
   padding: 16px 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
@@ -35,7 +39,7 @@
   transition: height 0.3s ease;
 }
 
-.site-header.scrolled .header-logo img {
+.site-header.shrunk .header-logo img {
   height: 60px;
 }
 
@@ -158,7 +162,7 @@
 
 @media (max-width: 768px) {
   .site-header { padding: 16px 20px; }
-  .site-header.scrolled { padding: 16px 20px; }
+  .site-header.shrunk { padding: 16px 20px; }
   .header-logo img { height: 80px; }
   
   .hamburger-menu { display: flex; }

@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   const isSolidBg = isScrolled || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
 
   return (
-    <header className={`site-header ${isSolidBg ? 'scrolled' : ''} ${isDarkText ? 'dark-text' : ''}`}>
+    <header className={`site-header ${isSolidBg ? 'solid-bg' : ''} ${isScrolled ? 'shrunk' : ''} ${isDarkText ? 'dark-text' : ''}`}>
       <div className="header-container">
         <div className="header-logo">
           <Link to="/">
