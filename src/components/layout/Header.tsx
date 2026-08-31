@@ -21,11 +21,13 @@ const Header: React.FC = () => {
   const isScience = location.pathname === '/science';
   const isProgramme = location.pathname === '/programme';
   
-  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/test' || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
-  const isSolidBg = isScrolled || isMobileMenuOpen;
+  const isSubpage = isExperts || isLabRoutes || isScience || isProgramme;
+  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/test' || isSubpage || isMobileMenuOpen;
+  const isSolidBg = isScrolled || isSubpage || isMobileMenuOpen;
+  const isShrunk = isScrolled || isSubpage;
 
   return (
-    <header className={`site-header ${isSolidBg ? 'solid-bg' : ''} ${isScrolled ? 'shrunk' : ''} ${isDarkText ? 'dark-text' : ''}`}>
+    <header className={`site-header ${isSolidBg ? 'solid-bg' : ''} ${isShrunk ? 'shrunk' : ''} ${isDarkText ? 'dark-text' : ''}`}>
       <div className="header-container">
         <div className="header-logo">
           <Link to="/">
