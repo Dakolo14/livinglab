@@ -112,18 +112,22 @@
 /* Using global btn-primary from index.css */
 
 .btn-secondary {
-  background-color: rgba(0,0,0,0.4);
-  color: white;
-  border: 1px solid white;
+  background-color: #ffffff;
+  color: #111827;
+  border: 2px solid #ffffff;
   padding: 14px 28px;
   border-radius: 0;
-  font-weight: 500;
-  font-size: 16px;
-  transition: background 0.2s;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255,255,255,0.1);
+  background-color: transparent;
+  color: #ffffff;
 }
 
 
