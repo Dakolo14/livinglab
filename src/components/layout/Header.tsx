@@ -22,7 +22,7 @@ const Header: React.FC = () => {
   const isProgramme = location.pathname === '/programme';
   
   const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/test' || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
-  const isSolidBg = isScrolled || isExperts || isLabRoutes || isScience || isProgramme || isMobileMenuOpen;
+  const isSolidBg = isScrolled || isMobileMenuOpen;
 
   return (
     <header className={`site-header ${isSolidBg ? 'solid-bg' : ''} ${isScrolled ? 'shrunk' : ''} ${isDarkText ? 'dark-text' : ''}`}>
