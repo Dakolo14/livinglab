@@ -37,6 +37,47 @@ const AboutLRP: React.FC = () => {
               </div>
             </div>
           </div>
+          {/* Effaclar Card */}
+          <div className="franchise-card effaclar">
+            <div className="franchise-content">
+              <h3>EFFACLAR</h3>
+              <p className="franchise-subtitle">ACNE-PRONE SKIN</p>
+              
+              <div className="franchise-details">
+                <h4>WHO IS IT FOR?</h4>
+                <p>EFFACLAR is formulated for patients suffering from acne or oily skin with imperfections. As a monotherapy for mild or moderate acne or an adjunctive treatment (in combination with drugs) for moderate to severe acne.</p>
+                <p className="franchise-target">Teenagers - Adults</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Lipikar Card */}
+          <div className="franchise-card lipikar">
+            <div className="franchise-content">
+              <h3>LIPIKAR</h3>
+              <p className="franchise-subtitle">DRY TO VERY DRY, IRRITATED OR ATOPIC ECZEMA-PRONE SKIN</p>
+              
+              <div className="franchise-details">
+                <h4>WHO IS IT FOR?</h4>
+                <p>LIPIKAR is formulated for patients suffering from eczema, skin irritation and excessive dryness. It restores and strengthens the skin's protective barrier thanks to key ingredients.</p>
+                <p className="franchise-target">Newborns - Children - Adults</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Cicaplast Card */}
+          <div className="franchise-card cicaplast">
+            <div className="franchise-content">
+              <h3>CICAPLAST</h3>
+              <p className="franchise-subtitle">IRRITATED SKIN</p>
+              
+              <div className="franchise-details">
+                <h4>WHO IS IT FOR?</h4>
+                <p>CICAPLAST treats skin irritation, patches, cracks, rough areas, rashes in children, irritation, and superficial burns.</p>
+                <p className="franchise-target">Babies - Children - Adults</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

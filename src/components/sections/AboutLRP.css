@@ -91,6 +91,42 @@
   color: #5C2D91;
 }
 
+/* Effaclar Specific Styles */
+.franchise-card.effaclar {
+  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+  border-left: 8px solid #0284C7; /* LRP Blue */
+}
+
+.franchise-card.effaclar h3,
+.franchise-card.effaclar .franchise-subtitle,
+.franchise-card.effaclar .franchise-details h4 {
+  color: #0284C7;
+}
+
+/* Lipikar Specific Styles */
+.franchise-card.lipikar {
+  background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+  border-left: 8px solid #0369A1; /* Darker Teal Blue */
+}
+
+.franchise-card.lipikar h3,
+.franchise-card.lipikar .franchise-subtitle,
+.franchise-card.lipikar .franchise-details h4 {
+  color: #0369A1;
+}
+
+/* Cicaplast Specific Styles */
+.franchise-card.cicaplast {
+  background: linear-gradient(135deg, #ffffff 0%, #cffafe 100%);
+  border-left: 8px solid #0891B2; /* Cyan/Teal */
+}
+
+.franchise-card.cicaplast h3,
+.franchise-card.cicaplast .franchise-subtitle,
+.franchise-card.cicaplast .franchise-details h4 {
+  color: #0891B2;
+}
+
 @media (max-width: 768px) {
   .about-lrp {
     padding: 60px 0;
