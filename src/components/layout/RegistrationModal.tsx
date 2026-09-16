@@ -14,6 +14,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [isSuccess, setIsSuccess] = useState(false);
   const [isRetrievalMode, setIsRetrievalMode] = useState(false);
   const [retrievalError, setRetrievalError] = useState('');
+  const [registrationError, setRegistrationError] = useState('');
   const [ticketId, setTicketId] = useState('');
   const [docId, setDocId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,6 +40,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       setIsSuccess(false);
       setIsRetrievalMode(false);
       setRetrievalError('');
+      setRegistrationError('');
       setFormData({ name: '', email: '', medicalId: '' });
     }, 300);
   };
@@ -48,8 +50,22 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setRegistrationError('');
     
     try {
+      // Check if email already exists
+      const q = query(
+        collection(db, 'registrations'), 
+        where('email', '==', formData.email.toLowerCase().trim())
+      );
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        setRegistrationError('An application with this email already exists.');
+        setIsSubmitting(false);
+        return;
+      }
+
       const docRef = await addDoc(collection(db, 'registrations'), {
         ...formData,
         email: formData.email.toLowerCase().trim(),
@@ -175,7 +191,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
               </button>
 
               <div style={{textAlign: 'center', marginTop: '16px'}}>
-                <button type="button" onClick={() => { setIsRetrievalMode(false); setRetrievalError(''); }} style={{background: 'none', border: 'none', color: '#00AEEF', cursor: 'pointer', textDecoration: 'underline', padding: 0}}>
+                <button type="button" onClick={() => { setIsRetrievalMode(false); setRetrievalError(''); setRegistrationError(''); }} style={{background: 'none', border: 'none', color: '#00AEEF', cursor: 'pointer', textDecoration: 'underline', padding: 0}}>
                   Back to Application
                 </button>
               </div>
@@ -213,7 +229,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 <input 
                   type="text" 
                   required 
-                  placeholder="Practice Name" 
+                  placeholder="e.g., MD12345 / Oakwood Clinic" 
                   value={formData.medicalId}
                   onChange={(e) => setFormData({ ...formData, medicalId: e.target.value })}
                 />
@@ -230,13 +246,19 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 </label>
               </div>
 
+              {registrationError && (
+                <div style={{color: '#B91C1C', backgroundColor: '#FEF2F2', padding: '12px', borderRadius: '4px', fontSize: '0.9rem', border: '1px solid #FECACA', marginBottom: '16px'}}>
+                  {registrationError}
+                </div>
+              )}
+
               <button type="submit" className="btn-primary w-100" disabled={isSubmitting}>
                 {isSubmitting ? 'SUBMITTING...' : 'SUBMIT APPLICATION'}
               </button>
 
               <div style={{textAlign: 'center', marginTop: '16px'}}>
                 <span style={{fontSize: '0.9rem', color: '#4B5563'}}>Already received an invite? </span>
-                <button type="button" onClick={() => setIsRetrievalMode(true)} style={{background: 'none', border: 'none', color: '#00AEEF', cursor: 'pointer', textDecoration: 'underline', padding: 0}}>
+                <button type="button" onClick={() => { setIsRetrievalMode(true); setRegistrationError(''); }} style={{background: 'none', border: 'none', color: '#00AEEF', cursor: 'pointer', textDecoration: 'underline', padding: 0}}>
                   RSVP Here
                 </button>
               </div>
