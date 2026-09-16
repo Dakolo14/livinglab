@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import SEO from '../../components/layout/SEO';
+import AdminLayout from '../../components/layout/AdminLayout';
 import './Admin.css';
 
 // Mock Data
@@ -10,33 +9,15 @@ const MOCK_ATTENDEES = [
   { id: 'TKT-003', name: 'Dr. Fatima Hassan', email: 'fhassan@dermcenter.com', medicalId: 'MD-33019', status: 'registered' },
 ];
 
-const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const location = useLocation();
-
-  return (
-    <div className="admin-wrapper">
-      <SEO title="Admin Dashboard" description="Event Management Portal" />
-      <nav className="admin-nav">
-        <Link to="/admin/dashboard" className="admin-nav-brand">LIVING LAB ADMIN</Link>
-        <div className="admin-nav-links">
-          <Link to="/admin/dashboard" className={location.pathname === '/admin/dashboard' ? 'active' : ''}>Dashboard</Link>
-          <Link to="/admin/scanner" className={location.pathname === '/admin/scanner' ? 'active' : ''}>QR Scanner</Link>
-          <Link to="/">Exit to Site</Link>
-        </div>
-      </nav>
-      <main className="admin-main">
-        {children}
-      </main>
-    </div>
-  );
-};
-
 export const AdminDashboard: React.FC = () => {
   return (
     <AdminLayout>
       <div className="admin-header-row">
-        <h2>Overview</h2>
-        <button className="btn-secondary">Export to CSV</button>
+        <div>
+          <h2>Welcome back, Admin</h2>
+          <p className="admin-subtitle">Here is the latest data for Living Lab Nigeria 2026.</p>
+        </div>
+        <button className="btn-primary" style={{padding: '10px 20px'}}>Export CSV</button>
       </div>
       
       <div className="admin-stats-grid">
@@ -55,6 +36,9 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       <div className="table-container">
+        <div className="table-header">
+          <h3>Recent Registrations</h3>
+        </div>
         <table className="admin-table">
           <thead>
             <tr>
@@ -69,10 +53,10 @@ export const AdminDashboard: React.FC = () => {
           <tbody>
             {MOCK_ATTENDEES.map(attendee => (
               <tr key={attendee.id}>
-                <td style={{fontFamily: 'monospace'}}>{attendee.id}</td>
-                <td style={{fontWeight: 500}}>{attendee.name}</td>
-                <td>{attendee.email}</td>
-                <td>{attendee.medicalId}</td>
+                <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.id}</td>
+                <td style={{fontWeight: 600, color: '#0f172a'}}>{attendee.name}</td>
+                <td style={{color: '#475569'}}>{attendee.email}</td>
+                <td style={{color: '#475569'}}>{attendee.medicalId}</td>
                 <td>
                   <span className={`status-badge ${attendee.status}`}>
                     {attendee.status.toUpperCase()}
@@ -80,9 +64,7 @@ export const AdminDashboard: React.FC = () => {
                 </td>
                 <td>
                   {attendee.status === 'registered' && (
-                    <button style={{fontSize: '0.8rem', padding: '6px 12px', cursor: 'pointer', background: '#F3F4F6', border: '1px solid #D1D5DB', borderRadius: '4px'}}>
-                      Manual Check-In
-                    </button>
+                    <button className="btn-table-action">Check-In</button>
                   )}
                 </td>
               </tr>

@@ -1,30 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import { AdminDashboard } from './AdminDashboard'; // Import layout from dashboard to reuse, actually wait, let's extract layout.
-import { Link, useLocation } from 'react-router-dom';
-import SEO from '../../components/layout/SEO';
+import AdminLayout from '../../components/layout/AdminLayout';
 import './Admin.css';
-
-// Duplicate layout here briefly for simplicity of this dummy phase
-const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const location = useLocation();
-  return (
-    <div className="admin-wrapper">
-      <SEO title="QR Scanner" description="Scan Attendee Tickets" />
-      <nav className="admin-nav">
-        <Link to="/admin/dashboard" className="admin-nav-brand">LIVING LAB ADMIN</Link>
-        <div className="admin-nav-links">
-          <Link to="/admin/dashboard" className={location.pathname === '/admin/dashboard' ? 'active' : ''}>Dashboard</Link>
-          <Link to="/admin/scanner" className={location.pathname === '/admin/scanner' ? 'active' : ''}>QR Scanner</Link>
-          <Link to="/">Exit to Site</Link>
-        </div>
-      </nav>
-      <main className="admin-main">
-        {children}
-      </main>
-    </div>
-  );
-};
 
 export const AdminScanner: React.FC = () => {
   const [scanResult, setScanResult] = useState<string | null>(null);
