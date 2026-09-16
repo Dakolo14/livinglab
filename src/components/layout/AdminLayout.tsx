@@ -34,7 +34,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSear
       <aside className={`admin-sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="admin-brand">
           <img src="/BLUE LOGO.png" alt="LRP Logo" className="admin-sidebar-logo" />
-          <span className="admin-sidebar-title">ADMIN</span>
+          <span className="admin-sidebar-title">admin</span>
           <button className="admin-mobile-close" onClick={closeMobileMenu}>
             <X size={24} />
           </button>

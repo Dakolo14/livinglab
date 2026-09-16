@@ -27,13 +27,13 @@
 }
 
 .admin-sidebar-logo {
-  height: 48px;
+  height: 64px;
   width: auto;
 }
 
 .admin-sidebar-title {
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 500;
+  font-size: 1rem;
   color: #0F172A;
   letter-spacing: 0.5px;
 }
@@ -345,13 +345,14 @@
 }
 
 .table-header {
-  padding: 24px 24px 16px 24px;
+  margin-bottom: 12px;
 }
 
 .table-header h3 {
   font-size: 1.1rem;
-  font-weight: 400;
+  font-weight: 500;
   color: #0F172A;
+  margin: 0;
 }
 
 .table-container {
