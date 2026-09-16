@@ -14,9 +14,8 @@
 .reg-modal-content {
   background: white;
   width: 100%;
-  max-width: 500px;
-  padding: 60px;
-  border-radius: 8px; /* Slightly rounded for the modal or square if brutalist. Let's keep it 0px for brand consistency */
+  max-width: 420px;
+  padding: 40px;
   border-radius: 0;
   position: relative;
   box-shadow: 0 40px 100px rgba(0,0,0,0.2);
@@ -45,18 +44,18 @@
 }
 
 .reg-modal-form-view h2, .reg-modal-success-view h2 {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #111827;
   margin: 0 0 16px 0;
   line-height: 1.1;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 .reg-modal-form-view p, .reg-modal-success-view p {
   color: #6B7280;
-  font-size: 1.1rem;
-  margin-bottom: 40px;
+  font-size: 1rem;
+  margin-bottom: 24px;
 }
 
 .reg-eyebrow {
@@ -103,16 +102,16 @@
 }
 
 .success-icon {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: #00AEEF;
   color: white;
-  font-size: 3rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 32px auto;
+  margin: 0 auto 24px auto;
 }
 
 .compliance-group {

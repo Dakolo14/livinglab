@@ -124,8 +124,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
               TICKET ID: {ticketId}
             </div>
             <p>Your details have been submitted. In a live environment, an email with your QR Code would be sent instantly.</p>
-            <div style={{marginTop: '20px', display: 'flex', justifyContent: 'center'}}>
-              <QRCodeSVG value={docId} size={150} level="H" includeMargin={true} />
+            <div style={{marginTop: '16px', display: 'flex', justifyContent: 'center'}}>
+              <QRCodeSVG value={docId} size={130} level="H" includeMargin={true} />
             </div>
             <p style={{fontSize: '0.8rem', color: '#64748b', marginTop: '10px'}}>Scan to test admin verify</p>
             <button className="btn-primary" onClick={() => { setIsSuccess(false); onClose(); }} style={{marginTop: '20px'}}>CLOSE</button>

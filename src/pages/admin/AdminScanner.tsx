@@ -93,21 +93,21 @@ export const AdminScanner: React.FC = () => {
             {isScanning && <p style={{marginTop: '16px', color: '#00AEEF', fontWeight: 500}}>Scanning...</p>}
           </>
         ) : errorMsg ? (
-          <div className="scan-result" style={{backgroundColor: '#FEF2F2', borderColor: '#FECACA', color: '#B91C1C'}}>
-            <h3 style={{fontSize: '1.25rem', marginBottom: '8px'}}>⚠ Scan Error</h3>
-            <p>{errorMsg}</p>
-            <button className="btn-primary" style={{marginTop: '24px'}} onClick={resetScanner}>
+          <div className="scan-result error">
+            <h3 style={{fontSize: '1.1rem', marginBottom: '8px', fontWeight: 600}}>⚠ Scan Error</h3>
+            <p style={{fontSize: '0.95rem'}}>{errorMsg}</p>
+            <button className="btn-primary" style={{marginTop: '24px', width: '100%'}} onClick={resetScanner}>
               TRY AGAIN
             </button>
           </div>
         ) : (
-          <div className="scan-result">
-            <h3 style={{fontSize: '1.5rem', marginBottom: '8px'}}>✓ Attendee Verified</h3>
-            <p><strong>Name:</strong> {scanResult?.name}</p>
-            <p><strong>Ticket ID:</strong> {scanResult?.ticketId}</p>
-            <p style={{marginTop: '8px', color: '#059669', fontWeight: 600}}>Status updated to ATTENDED.</p>
-            <button className="btn-primary" style={{marginTop: '24px'}} onClick={resetScanner}>
-              SCAN NEXT ATTENDEE
+          <div className="scan-result success">
+            <div style={{color: '#059669', fontSize: '2rem', marginBottom: '8px'}}>✓</div>
+            <h3 style={{fontSize: '1.25rem', marginBottom: '4px', color: '#111827', fontWeight: 600}}>Verified</h3>
+            <p style={{fontSize: '0.95rem', color: '#4B5563', margin: '0'}}>{scanResult?.name} • {scanResult?.ticketId}</p>
+            <p style={{marginTop: '12px', fontSize: '0.85rem', color: '#059669', fontWeight: 500}}>Checked in successfully.</p>
+            <button className="btn-primary" style={{marginTop: '24px', width: '100%'}} onClick={resetScanner}>
+              SCAN NEXT
             </button>
           </div>
         )}
