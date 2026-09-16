@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import { collection, addDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, getDocs, query, where, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import './RegistrationModal.css';
 
@@ -50,22 +50,19 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     setIsSubmitting(true);
     
     try {
-      const generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
-      
       const docRef = await addDoc(collection(db, 'registrations'), {
         ...formData,
         email: formData.email.toLowerCase().trim(),
-        ticketId: generatedTicketId,
-        status: 'registered',
+        ticketId: '', // Ticket ID will be generated upon RSVP
+        status: 'applied',
         timestamp: serverTimestamp(),
       });
 
-      setTicketId(generatedTicketId);
       setDocId(docRef.id);
       setIsSuccess(true);
     } catch (error) {
       console.error("Error adding document: ", error);
-      alert("There was an error submitting your registration. Please try again.");
+      alert("There was an error submitting your application. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -87,11 +84,29 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
         const docSnap = querySnapshot.docs[0];
         const data = docSnap.data();
         
-        setTicketId(data.ticketId);
-        setDocId(docSnap.id);
-        setIsSuccess(true);
+        if (data.status === 'applied') {
+          setRetrievalError('Your application is still under review. We will email you once approved.');
+        } else if (data.status === 'rejected') {
+          setRetrievalError('Unfortunately, your application could not be approved at this time.');
+        } else if (data.status === 'invited') {
+          // Generate ticket and mark as rsvped
+          const generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
+          await updateDoc(doc(db, 'registrations', docSnap.id), {
+            status: 'rsvped',
+            ticketId: generatedTicketId
+          });
+          
+          setTicketId(generatedTicketId);
+          setDocId(docSnap.id);
+          setIsSuccess(true);
+        } else if (data.status === 'rsvped' || data.status === 'attended' || data.status === 'registered') {
+          // Already have a ticket
+          setTicketId(data.ticketId);
+          setDocId(docSnap.id);
+          setIsSuccess(true);
+        }
       } else {
-        setRetrievalError('No registration found with this email. Please check the spelling or register for a new ticket.');
+        setRetrievalError('No application found with this email. Please check the spelling or apply for a slot.');
       }
     } catch (error) {
       console.error("Error retrieving ticket: ", error);
@@ -109,26 +124,33 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
         {isSuccess ? (
           <div className="reg-modal-success-view">
             <div className="success-icon">✓</div>
-            <h2>{isRetrievalMode ? 'TICKET FOUND' : 'REGISTRATION RECEIVED'}</h2>
-            <div style={{background: '#F3F4F6', padding: '16px', borderRadius: '8px', margin: '24px 0', fontFamily: 'monospace', fontSize: '1.2rem', fontWeight: 600}}>
-              TICKET ID: {ticketId}
-            </div>
+            <h2>{isRetrievalMode ? 'TICKET CONFIRMED' : 'APPLICATION RECEIVED'}</h2>
+            
             {isRetrievalMode ? (
-              <p>Here is your digital ticket. Present this QR Code at the event entrance.</p>
+              <>
+                <div style={{background: '#F3F4F6', padding: '16px', borderRadius: '8px', margin: '24px 0', fontFamily: 'monospace', fontSize: '1.2rem', fontWeight: 600}}>
+                  TICKET ID: {ticketId}
+                </div>
+                <p>Thank you for RSVPing. Here is your digital ticket. Present this QR Code at the event entrance.</p>
+                <div style={{marginTop: '16px', display: 'flex', justifyContent: 'center'}}>
+                  <QRCodeSVG value={docId} size={200} level="H" includeMargin={true} />
+                </div>
+                <p style={{fontSize: '0.8rem', color: '#64748b', margin: '16px 0 0 0'}}>Scan at entrance</p>
+              </>
             ) : (
-              <p>Your details have been submitted. In a live environment, an email with your QR Code would be sent instantly.</p>
+              <>
+                <p style={{marginTop: '24px', fontSize: '1.05rem', color: '#4B5563'}}>Thank you for applying to Living Lab Nigeria 2026. Your details have been submitted successfully.</p>
+                <p style={{color: '#6B7280'}}>Our team is reviewing your application. If approved, you will receive an official invitation email to RSVP and claim your QR ticket.</p>
+              </>
             )}
-            <div style={{marginTop: '16px', display: 'flex', justifyContent: 'center'}}>
-              <QRCodeSVG value={docId} size={200} level="H" includeMargin={true} />
-            </div>
-            <p style={{fontSize: '0.8rem', color: '#64748b', margin: '16px 0 0 0'}}>Scan at entrance</p>
-            <button className="btn-primary" onClick={handleClose} style={{marginTop: '24px'}}>CLOSE</button>
+            
+            <button className="btn-primary" onClick={handleClose} style={{marginTop: '24px', width: '100%'}}>CLOSE</button>
           </div>
         ) : isRetrievalMode ? (
           <div className="reg-modal-form-view">
             <h4 className="reg-eyebrow">LIVING LAB NIGERIA 2026</h4>
-            <h2>FIND YOUR TICKET</h2>
-            <p>Enter the email address you used to register to retrieve your QR code.</p>
+            <h2>RSVP / CLAIM TICKET</h2>
+            <p>Did you receive an email invitation? Enter your email address to RSVP and get your QR code.</p>
             
             <form className="reg-modal-form" onSubmit={handleRetrieveTicket}>
               <div className="input-group">
@@ -143,18 +165,18 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
               </div>
               
               {retrievalError && (
-                <div style={{color: '#B91C1C', backgroundColor: '#FEF2F2', padding: '12px', borderRadius: '4px', fontSize: '0.9rem', border: '1px solid #FECACA'}}>
+                <div style={{color: '#B91C1C', backgroundColor: '#FEF2F2', padding: '12px', borderRadius: '4px', fontSize: '0.9rem', border: '1px solid #FECACA', marginBottom: '16px'}}>
                   {retrievalError}
                 </div>
               )}
 
               <button type="submit" className="btn-primary w-100" disabled={isSubmitting}>
-                {isSubmitting ? 'SEARCHING...' : 'FIND MY TICKET'}
+                {isSubmitting ? 'SEARCHING...' : 'CONFIRM RSVP'}
               </button>
 
-              <div style={{textAlign: 'center', marginTop: '8px'}}>
+              <div style={{textAlign: 'center', marginTop: '16px'}}>
                 <button type="button" onClick={() => { setIsRetrievalMode(false); setRetrievalError(''); }} style={{background: 'none', border: 'none', color: '#00AEEF', cursor: 'pointer', textDecoration: 'underline', padding: 0}}>
-                  Back to Registration
+                  Back to Application
                 </button>
               </div>
             </form>
@@ -162,8 +184,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
         ) : (
           <div className="reg-modal-form-view">
             <h4 className="reg-eyebrow">LIVING LAB NIGERIA 2026</h4>
-            <h2>CLAIM YOUR SLOT</h2>
-            <p>Please enter your professional details to verify eligibility for the event.</p>
+            <h2>APPLY FOR A SLOT</h2>
+            <p>Please enter your professional details to apply for an invitation to the event.</p>
             
             <form className="reg-modal-form" onSubmit={handleRegister}>
               <div className="input-group">
@@ -209,13 +231,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
               </div>
 
               <button type="submit" className="btn-primary w-100" disabled={isSubmitting}>
-                {isSubmitting ? 'SUBMITTING...' : 'SUBMIT REGISTRATION'}
+                {isSubmitting ? 'SUBMITTING...' : 'SUBMIT APPLICATION'}
               </button>
 
-              <div style={{textAlign: 'center', marginTop: '8px'}}>
-                <span style={{fontSize: '0.9rem', color: '#4B5563'}}>Already registered? </span>
+              <div style={{textAlign: 'center', marginTop: '16px'}}>
+                <span style={{fontSize: '0.9rem', color: '#4B5563'}}>Already received an invite? </span>
                 <button type="button" onClick={() => setIsRetrievalMode(true)} style={{background: 'none', border: 'none', color: '#00AEEF', cursor: 'pointer', textDecoration: 'underline', padding: 0}}>
-                  Find your ticket
+                  RSVP Here
                 </button>
               </div>
             </form>

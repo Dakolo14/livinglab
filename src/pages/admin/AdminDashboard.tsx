@@ -21,6 +21,8 @@ export const AdminDashboard: React.FC = () => {
   const [confirmCheckInId, setConfirmCheckInId] = useState<string | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [tourStep, setTourStep] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
 
   useEffect(() => {
     // Check if tour was already seen
@@ -65,11 +67,33 @@ export const AdminDashboard: React.FC = () => {
 
     try {
       await updateDoc(doc(db, 'registrations', docId), {
-        status: 'registered'
+        status: 'rsvped' // Revert to RSVPed so they still have a valid ticket
       });
     } catch (error) {
       console.error("Error updating status:", error);
       alert("Failed to undo check-in.");
+    }
+  };
+
+  const handleInvite = async (docId: string) => {
+    const isSure = window.confirm("Send an invitation to this applicant?");
+    if (!isSure) return;
+    try {
+      await updateDoc(doc(db, 'registrations', docId), { status: 'invited' });
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("Failed to invite applicant.");
+    }
+  };
+
+  const handleReject = async (docId: string) => {
+    const isSure = window.confirm("Reject this application?");
+    if (!isSure) return;
+    try {
+      await updateDoc(doc(db, 'registrations', docId), { status: 'rejected' });
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("Failed to reject applicant.");
     }
   };
 
@@ -123,6 +147,16 @@ export const AdminDashboard: React.FC = () => {
       (attendee.medicalId && attendee.medicalId.toLowerCase().includes(term))
     );
   });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredAttendees.length / rowsPerPage);
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const paginatedAttendees = filteredAttendees.slice(startIndex, startIndex + rowsPerPage);
+
+  // Reset page to 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterBy]);
 
   const totalRegistrations = attendees.length;
   const checkedIn = attendees.filter(a => a.status === 'attended').length;
@@ -182,10 +216,10 @@ export const AdminDashboard: React.FC = () => {
               <tr>
                 <td colSpan={6} style={{textAlign: 'center', padding: '20px', color: '#64748b'}}>Loading live data...</td>
               </tr>
-            ) : filteredAttendees.length > 0 ? (
-              filteredAttendees.map(attendee => (
+            ) : paginatedAttendees.length > 0 ? (
+              paginatedAttendees.map(attendee => (
                 <tr key={attendee.docId}>
-                  <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.ticketId}</td>
+                  <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.ticketId || '—'}</td>
                   <td style={{fontWeight: 400, color: '#0f172a'}}>{attendee.name}</td>
                   <td style={{color: '#475569'}}>{attendee.email}</td>
                   <td style={{color: '#475569'}}>{attendee.medicalId}</td>
@@ -195,9 +229,14 @@ export const AdminDashboard: React.FC = () => {
                     </span>
                   </td>
                   <td>
-                    {attendee.status === 'registered' ? (
+                    {attendee.status === 'applied' ? (
+                      <div style={{display: 'flex', gap: '8px'}}>
+                        <button className="btn-table-action" style={{backgroundColor: '#8B5CF6'}} onClick={() => handleInvite(attendee.docId)}>Invite</button>
+                        <button className="btn-table-action" style={{backgroundColor: '#EF4444'}} onClick={() => handleReject(attendee.docId)}>Reject</button>
+                      </div>
+                    ) : (attendee.status === 'registered' || attendee.status === 'rsvped') ? (
                       <button className="btn-table-action" onClick={() => setConfirmCheckInId(attendee.docId)}>Check-In</button>
-                    ) : (
+                    ) : attendee.status === 'attended' ? (
                       <button 
                         className="btn-table-action" 
                         style={{backgroundColor: '#94A3B8'}} 
@@ -205,6 +244,8 @@ export const AdminDashboard: React.FC = () => {
                       >
                         Undo
                       </button>
+                    ) : (
+                      <span style={{color: '#64748b', fontSize: '0.85rem'}}>—</span>
                     )}
                   </td>
                 </tr>
@@ -218,6 +259,41 @@ export const AdminDashboard: React.FC = () => {
             )}
           </tbody>
         </table>
+        
+        {/* Pagination & Scanner Controls */}
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderTop: '1px solid #E5E7EB'}}>
+          <button 
+            className="btn-secondary" 
+            style={{padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '8px', color: '#0F172A', border: '1px solid #CBD5E1', fontSize: '0.85rem'}}
+            onClick={() => window.location.href = '/admin/scanner'}
+          >
+            📷 Launch Scanner
+          </button>
+          
+          <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
+            <span style={{fontSize: '0.85rem', color: '#64748b'}}>
+              Page {currentPage} of {totalPages || 1}
+            </span>
+            <div style={{display: 'flex', gap: '8px'}}>
+              <button 
+                className="btn-secondary" 
+                style={{padding: '6px 12px', fontSize: '0.85rem'}}
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              >
+                Previous
+              </button>
+              <button 
+                className="btn-secondary" 
+                style={{padding: '6px 12px', fontSize: '0.85rem'}}
+                disabled={currentPage === totalPages || totalPages === 0}
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Confirmation Modal */}
