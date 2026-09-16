@@ -20,10 +20,11 @@ const AdminLogin: React.FC = () => {
   return (
     <div className="admin-login-container">
       <form className="admin-login-card" onSubmit={handleLogin}>
-        <h1>Admin Portal</h1>
+        <img src="/BLUE LOGO.png" alt="La Roche-Posay" className="admin-login-logo" />
+        <h1>Authorized Personnel Only</h1>
         <input 
           type="email" 
-          placeholder="Admin Email" 
+          placeholder="Corporate Email" 
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required 
@@ -35,9 +36,9 @@ const AdminLogin: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           required 
         />
-        <button type="submit" className="btn-primary">LOG IN</button>
-        <p style={{marginTop: '16px', fontSize: '0.8rem', color: '#6B7280', textAlign: 'center'}}>
-          Demo Credentials: admin@laroche-posay.ng / admin123
+        <button type="submit">Access Portal</button>
+        <p style={{marginTop: '24px', fontSize: '0.8rem', color: '#64748B', textAlign: 'center'}}>
+          Demo: admin@laroche-posay.ng / admin123
         </p>
       </form>
     </div>
