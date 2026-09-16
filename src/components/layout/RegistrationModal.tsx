@@ -56,7 +56,10 @@ const RegistrationModal: React.FC = () => {
           <div className="reg-modal-success-view">
             <div className="success-icon">✓</div>
             <h2>REGISTRATION RECEIVED</h2>
-            <p>Your details have been submitted for verification. You will receive a confirmation email with your expert pass shortly.</p>
+            <div style={{background: '#F3F4F6', padding: '16px', borderRadius: '8px', margin: '24px 0', fontFamily: 'monospace', fontSize: '1.2rem', fontWeight: 600}}>
+              TICKET ID: TKT-{Math.floor(1000 + Math.random() * 9000)}
+            </div>
+            <p>Your details have been submitted. In a live environment, an email with your QR Code would be sent instantly.</p>
             <button className="btn-primary" onClick={() => setIsOpen(false)}>CLOSE</button>
           </div>
         )}

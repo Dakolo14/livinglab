@@ -8,6 +8,9 @@ import SciencePage from './pages/SciencePage';
 import ProgrammePage from './pages/ProgrammePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import AdminLogin from './pages/admin/AdminLogin';
+import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminScanner } from './pages/admin/AdminScanner';
 import NotFound from './pages/NotFound';
 import RegistrationModal from './components/layout/RegistrationModal';
 import CookieBanner from './components/layout/CookieBanner';
@@ -37,6 +40,12 @@ function App() {
           <Route path="/programme" element={<ProgrammePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/scanner" element={<AdminScanner />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
         <RegistrationModal />
