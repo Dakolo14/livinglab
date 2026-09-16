@@ -17,8 +17,17 @@ export const AdminDashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [loading, setLoading] = useState(true);
+  const [confirmCheckInId, setConfirmCheckInId] = useState<string | null>(null);
+  const [showTour, setShowTour] = useState(false);
+  const [tourStep, setTourStep] = useState(1);
 
   useEffect(() => {
+    // Check if tour was already seen
+    const tourSeen = localStorage.getItem('livinglab_admin_tour_seen');
+    if (!tourSeen) {
+      setShowTour(true);
+    }
+
     const q = query(collection(db, 'registrations'), orderBy('timestamp', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map(doc => ({
@@ -35,15 +44,23 @@ export const AdminDashboard: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleCheckIn = async (docId: string) => {
+  const confirmCheckIn = async () => {
+    if (!confirmCheckInId) return;
     try {
-      await updateDoc(doc(db, 'registrations', docId), {
+      await updateDoc(doc(db, 'registrations', confirmCheckInId), {
         status: 'attended'
       });
+      setConfirmCheckInId(null);
     } catch (error) {
       console.error("Error updating status:", error);
       alert("Failed to check-in attendee.");
+      setConfirmCheckInId(null);
     }
+  };
+
+  const finishTour = () => {
+    localStorage.setItem('livinglab_admin_tour_seen', 'true');
+    setShowTour(false);
   };
 
   const filteredAttendees = attendees.filter(attendee => 
@@ -64,7 +81,7 @@ export const AdminDashboard: React.FC = () => {
           <h2>Welcome back, Admin</h2>
           <p className="admin-subtitle">Here is the latest data for Living Lab Nigeria 2026.</p>
         </div>
-        <button className="btn-primary" style={{padding: '10px 20px'}}>Export CSV</button>
+        <button className="btn-primary" style={{padding: '10px 20px'}} onClick={() => setShowTour(true)}>Help & Tour</button>
       </div>
       
       <div className="admin-stats-grid">
@@ -116,7 +133,7 @@ export const AdminDashboard: React.FC = () => {
                   </td>
                   <td>
                     {attendee.status === 'registered' && (
-                      <button className="btn-table-action" onClick={() => handleCheckIn(attendee.docId)}>Check-In</button>
+                      <button className="btn-table-action" onClick={() => setConfirmCheckInId(attendee.docId)}>Check-In</button>
                     )}
                   </td>
                 </tr>
@@ -131,6 +148,69 @@ export const AdminDashboard: React.FC = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Confirmation Modal */}
+      {confirmCheckInId && (
+        <div className="admin-modal-overlay">
+          <div className="admin-modal">
+            <h3>Confirm Check-In</h3>
+            <p>Are you sure you want to manually check-in this attendee? This action will mark their ticket as ATTENDED.</p>
+            <div className="admin-modal-actions">
+              <button className="btn-secondary" onClick={() => setConfirmCheckInId(null)}>Cancel</button>
+              <button className="btn-primary" onClick={confirmCheckIn}>Confirm Check-In</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Onboarding Tour Modal */}
+      {showTour && (
+        <div className="admin-modal-overlay">
+          <div className="admin-modal tour-modal">
+            {tourStep === 1 && (
+              <>
+                <div className="tour-icon">📊</div>
+                <h3>Welcome to the Dashboard</h3>
+                <p>This is your live command center. Every time an attendee registers on the main website, they will instantly appear in the table below and the stats will update automatically.</p>
+              </>
+            )}
+            {tourStep === 2 && (
+              <>
+                <div className="tour-icon">✓</div>
+                <h3>Manual Check-In</h3>
+                <p>If an attendee forgets their QR Code, you can manually check them in by searching for their name in the top bar and clicking the "Check-In" button next to their name.</p>
+              </>
+            )}
+            {tourStep === 3 && (
+              <>
+                <div className="tour-icon">📱</div>
+                <h3>QR Ticket Scanner</h3>
+                <p>For the fastest check-in experience, click the <strong>Scanner</strong> icon in the left sidebar. You can use your phone, tablet, or laptop camera to instantly scan and verify attendee tickets!</p>
+              </>
+            )}
+            
+            <div className="tour-dots">
+              <span className={`dot ${tourStep === 1 ? 'active' : ''}`}></span>
+              <span className={`dot ${tourStep === 2 ? 'active' : ''}`}></span>
+              <span className={`dot ${tourStep === 3 ? 'active' : ''}`}></span>
+            </div>
+
+            <div className="admin-modal-actions">
+              {tourStep > 1 ? (
+                <button className="btn-secondary" onClick={() => setTourStep(tourStep - 1)}>Back</button>
+              ) : (
+                <button className="btn-secondary" onClick={finishTour}>Skip</button>
+              )}
+              
+              {tourStep < 3 ? (
+                <button className="btn-primary" onClick={() => setTourStep(tourStep + 1)}>Next</button>
+              ) : (
+                <button className="btn-primary" onClick={finishTour}>Get Started</button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 };

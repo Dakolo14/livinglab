@@ -449,3 +449,80 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Modals */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+.admin-modal {
+  background: white;
+  border-radius: 8px;
+  padding: 32px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.admin-modal h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #0F172A;
+  margin-bottom: 12px;
+}
+
+.admin-modal p {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.admin-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-modal-actions button {
+  flex: 1;
+}
+
+/* Onboarding Tour Modal */
+.tour-modal {
+  max-width: 500px;
+}
+
+.tour-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.tour-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tour-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #E2E8F0;
+  transition: background-color 0.3s;
+}
+
+.tour-dots .dot.active {
+  background-color: #00AEEF;
+}
+
