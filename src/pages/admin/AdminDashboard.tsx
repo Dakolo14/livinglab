@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AdminLayout from '../../components/layout/AdminLayout';
 import './Admin.css';
 
 // Mock Data
 const MOCK_ATTENDEES = [
-  { id: 'TKT-001', name: 'Dr. Jane Doe', email: 'jane@clinic.com', medicalId: 'MD-10294', status: 'attended' },
-  { id: 'TKT-002', name: 'Dr. Samuel Ojo', email: 'samuel.o@hospital.ng', medicalId: 'MD-99212', status: 'registered' },
-  { id: 'TKT-003', name: 'Dr. Fatima Hassan', email: 'fhassan@dermcenter.com', medicalId: 'MD-33019', status: 'registered' },
+  { id: 'TKT-8291', name: 'Dr. Jane Doe', email: 'jane@clinic.com', medicalId: 'Dermacare Clinic', status: 'attended' },
+  { id: 'TKT-1048', name: 'Dr. Samuel Ojo', email: 'samuel.o@hospital.ng', medicalId: 'Lagos General Hospital', status: 'registered' },
+  { id: 'TKT-5519', name: 'Dr. Fatima Hassan', email: 'fhassan@dermcenter.com', medicalId: 'Hassan Dermatology Center', status: 'registered' },
 ];
 
 export const AdminDashboard: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredAttendees = MOCK_ATTENDEES.filter(attendee => 
+    attendee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    attendee.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    attendee.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    attendee.medicalId.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <AdminLayout>
+    <AdminLayout searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
       <div className="admin-header-row">
         <div>
           <h2>Welcome back, Admin</h2>
@@ -45,30 +54,36 @@ export const AdminDashboard: React.FC = () => {
               <th>Ticket ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Medical ID</th>
+              <th>Medical Practitioner</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {MOCK_ATTENDEES.map(attendee => (
-              <tr key={attendee.id}>
-                <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.id}</td>
-                <td style={{fontWeight: 600, color: '#0f172a'}}>{attendee.name}</td>
-                <td style={{color: '#475569'}}>{attendee.email}</td>
-                <td style={{color: '#475569'}}>{attendee.medicalId}</td>
-                <td>
-                  <span className={`status-badge ${attendee.status}`}>
-                    {attendee.status.toUpperCase()}
-                  </span>
-                </td>
-                <td>
-                  {attendee.status === 'registered' && (
-                    <button className="btn-table-action">Check-In</button>
-                  )}
-                </td>
+            {filteredAttendees.length > 0 ? (
+              filteredAttendees.map(attendee => (
+                <tr key={attendee.id}>
+                  <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.id}</td>
+                  <td style={{fontWeight: 600, color: '#0f172a'}}>{attendee.name}</td>
+                  <td style={{color: '#475569'}}>{attendee.email}</td>
+                  <td style={{color: '#475569'}}>{attendee.medicalId}</td>
+                  <td>
+                    <span className={`status-badge ${attendee.status}`}>
+                      {attendee.status.toUpperCase()}
+                    </span>
+                  </td>
+                  <td>
+                    {attendee.status === 'registered' && (
+                      <button className="btn-table-action">Check-In</button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={6} style={{textAlign: 'center', color: '#64748b'}}>No attendees found matching "{searchTerm}"</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

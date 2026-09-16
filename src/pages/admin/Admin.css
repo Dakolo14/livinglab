@@ -27,7 +27,7 @@
 }
 
 .admin-sidebar-logo {
-  height: 32px;
+  height: 48px;
   width: auto;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .admin-nav-item .nav-icon {
-  font-size: 1.2rem;
+  color: inherit;
 }
 
 .logout-btn {
@@ -120,36 +120,35 @@
   align-items: center;
   gap: 8px;
   background-color: #F8FAFC;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 9999px;
   border: 1px solid #E2E8F0;
-  width: 300px;
+  width: 400px;
+  color: #64748B;
 }
 
 .admin-search-mock input {
   border: none;
   background: transparent;
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   outline: none;
+  color: #0F172A;
 }
 
 .admin-profile {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  padding: 6px 16px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 9999px;
+  cursor: pointer;
 }
 
-.admin-avatar {
-  background-color: #0284C7;
-  color: white;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
+.admin-avatar-icon {
+  color: #0284C7;
 }
 
 .admin-name {
@@ -292,11 +291,12 @@
 }
 
 .admin-table th {
-  background-color: #F9FAFB;
+  background-color: #0F172A;
   font-weight: 600;
-  color: #4B5563;
+  color: #ffffff;
   font-size: 0.85rem;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .status-badge {

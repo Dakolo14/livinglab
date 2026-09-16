@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, ScanLine, Globe, LogOut, Search, UserCircle } from 'lucide-react';
 import SEO from './SEO';
 import '../../pages/admin/Admin.css';
 
-const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface AdminLayoutProps {
+  children: React.ReactNode;
+  searchTerm?: string;
+  setSearchTerm?: (term: string) => void;
+}
+
+const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSearchTerm }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -29,13 +36,13 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               to="/admin/dashboard" 
               className={`admin-nav-item ${location.pathname === '/admin/dashboard' ? 'active' : ''}`}
             >
-              <span className="nav-icon">📊</span> Dashboard
+              <LayoutDashboard className="nav-icon" size={20} /> Dashboard
             </Link>
             <Link 
               to="/admin/scanner" 
               className={`admin-nav-item ${location.pathname === '/admin/scanner' ? 'active' : ''}`}
             >
-              <span className="nav-icon">📷</span> QR Scanner
+              <ScanLine className="nav-icon" size={20} /> QR Scanner
             </Link>
           </nav>
         </div>
@@ -44,10 +51,10 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <p className="admin-menu-label">OTHER</p>
           <nav className="admin-nav-menu">
             <a href="/" target="_blank" className="admin-nav-item">
-              <span className="nav-icon">🌐</span> View Live Site
+              <Globe className="nav-icon" size={20} /> View Live Site
             </a>
             <button onClick={handleLogout} className="admin-nav-item logout-btn">
-              <span className="nav-icon">🚪</span> Logout
+              <LogOut className="nav-icon" size={20} /> Logout
             </button>
           </nav>
         </div>
@@ -57,12 +64,18 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <main className="admin-main-content">
         <header className="admin-topbar">
           <div className="admin-search-mock">
-            <span className="search-icon">🔍</span>
-            <input type="text" placeholder="Search attendees..." disabled />
+            <Search className="search-icon" size={18} />
+            <input 
+              type="text" 
+              placeholder="Search attendees..." 
+              value={searchTerm || ''}
+              onChange={(e) => setSearchTerm && setSearchTerm(e.target.value)}
+              disabled={setSearchTerm === undefined}
+            />
           </div>
           <div className="admin-profile">
-            <span className="admin-avatar">A</span>
-            <span className="admin-name">LRP Admin</span>
+            <UserCircle size={28} className="admin-avatar-icon" />
+            <span className="admin-name">Profile</span>
           </div>
         </header>
         
