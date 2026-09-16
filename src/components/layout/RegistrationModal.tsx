@@ -119,10 +119,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
               <p>Your details have been submitted. In a live environment, an email with your QR Code would be sent instantly.</p>
             )}
             <div style={{marginTop: '16px', display: 'flex', justifyContent: 'center'}}>
-              <QRCodeSVG value={docId} size={130} level="H" includeMargin={true} />
+              <QRCodeSVG value={docId} size={200} level="H" includeMargin={true} />
             </div>
-            <p style={{fontSize: '0.8rem', color: '#64748b', marginTop: '10px'}}>Scan at entrance</p>
-            <button className="btn-primary" onClick={handleClose} style={{marginTop: '20px'}}>CLOSE</button>
+            <p style={{fontSize: '0.8rem', color: '#64748b', margin: '16px 0 0 0'}}>Scan at entrance</p>
+            <button className="btn-primary" onClick={handleClose} style={{marginTop: '24px'}}>CLOSE</button>
           </div>
         ) : isRetrievalMode ? (
           <div className="reg-modal-form-view">
