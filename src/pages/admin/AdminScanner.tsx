@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Html5QrcodeScanner } from 'html5-qrcode';
+import React, { useEffect, useState, useRef } from 'react';
+import { Html5Qrcode } from 'html5-qrcode';
 import AdminLayout from '../../components/layout/AdminLayout';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
@@ -14,17 +14,22 @@ interface TicketData {
 export const AdminScanner: React.FC = () => {
   const [scanResult, setScanResult] = useState<TicketData | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [isScanning, setIsScanning] = useState(true);
+  const scannerRef = useRef<Html5Qrcode | null>(null);
 
   useEffect(() => {
-    const scanner = new Html5QrcodeScanner(
-      "reader",
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      false
-    );
+    if (!isScanning) return;
+
+    const html5QrCode = new Html5Qrcode("reader");
+    scannerRef.current = html5QrCode;
 
     const handleScan = async (decodedText: string) => {
-      scanner.pause(true);
+      if (html5QrCode.isScanning) {
+        await html5QrCode.stop();
+      }
+      setIsScanning(false);
       setErrorMsg(null);
+      
       try {
         const docRef = doc(db, 'registrations', decodedText);
         const docSnap = await getDoc(docRef);
@@ -47,19 +52,31 @@ export const AdminScanner: React.FC = () => {
       }
     };
 
-    scanner.render(handleScan, () => {});
+    html5QrCode.start(
+      { facingMode: "environment" },
+      {
+        fps: 10,
+        qrbox: { width: 250, height: 250 }
+      },
+      handleScan,
+      () => {} // ignore scan errors (they happen every frame a QR code isn't found)
+    ).catch(err => {
+      console.error("Error starting scanner", err);
+      setErrorMsg("Could not start camera. Please ensure camera permissions are granted.");
+      setIsScanning(false);
+    });
 
     return () => {
-      scanner.clear().catch(console.error);
+      if (html5QrCode.isScanning) {
+        html5QrCode.stop().catch(console.error);
+      }
     };
-  }, []);
+  }, [isScanning]);
 
   const resetScanner = () => {
     setScanResult(null);
     setErrorMsg(null);
-    // Note: The HTML5QrcodeScanner automatically resumes when you un-pause it,
-    // but the library is a bit finicky. We rely on the unmount/mount or user refresh in worst case.
-    window.location.reload(); 
+    setIsScanning(true);
   };
 
   return (
@@ -72,7 +89,8 @@ export const AdminScanner: React.FC = () => {
         {!scanResult && !errorMsg ? (
           <>
             <p style={{marginBottom: '16px', color: '#4B5563'}}>Point camera at attendee's digital ticket.</p>
-            <div id="reader"></div>
+            <div id="reader" style={{ width: '100%', maxWidth: '400px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}></div>
+            {isScanning && <p style={{marginTop: '16px', color: '#00AEEF', fontWeight: 500}}>Scanning...</p>}
           </>
         ) : errorMsg ? (
           <div className="scan-result" style={{backgroundColor: '#FEF2F2', borderColor: '#FECACA', color: '#B91C1C'}}>
