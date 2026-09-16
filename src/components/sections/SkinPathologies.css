@@ -1,0 +1,119 @@
+.skin-pathologies {
+  padding: 80px 0;
+  background-color: #0f172a;
+  color: #f8f9fa;
+}
+
+.pathologies-intro {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.pathologies-intro p {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.pathologies-interactive {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  color: #00AEEF;
+  text-transform: uppercase;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.play-icon {
+  font-size: 0.85rem;
+  color: #00AEEF;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .play-icon {
+  transform: rotate(90deg);
+}
+
+.accordion-hint {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 200px; /* arbitrary height for animation */
+}
+
+.accordion-content-inner {
+  padding: 0 0 24px 28px;
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .skin-pathologies {
+    padding: 60px 0;
+  }
+  
+  .pathologies-intro p {
+    font-size: 1.25rem;
+  }
+  
+  .accordion-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .accordion-hint {
+    padding-left: 28px;
+  }
+}
