@@ -1,11 +1,13 @@
 import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import SEO from '../components/layout/SEO';
 import './Policy.css';
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <>
+      <SEO title="Privacy Policy" description="Living Lab Nigeria 2026 Privacy Policy" canonicalUrl="/privacy-policy" />
       <Header />
       <main className="policy-page">
         <div className="policy-container">

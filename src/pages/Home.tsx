@@ -10,6 +10,7 @@ import SpeakersPreview from '../components/sections/SpeakersPreview';
 import FAQ from '../components/sections/FAQ';
 import Footer from '../components/layout/Footer';
 import BackToTop from '../components/layout/BackToTop';
+import SEO from '../components/layout/SEO';
 
 const Home: React.FC = () => {
   const [activeReelId, setActiveReelId] = useState(3);

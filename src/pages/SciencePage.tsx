@@ -1,6 +1,7 @@
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import PageCTA from '../components/sections/PageCTA';
+import SEO from '../components/layout/SEO';
 import './SciencePage.css';
 
 const SCIENCE_FEATURES = [
@@ -30,6 +31,11 @@ const SCIENCE_FEATURES = [
 const SciencePage: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="The Science" 
+        description="Discover the patented molecules and breakthrough formulations of La Roche-Posay." 
+        canonicalUrl="/science"
+      />
       <Header />
       
       <main className="science-page">

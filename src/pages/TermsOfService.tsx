@@ -1,11 +1,13 @@
 import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import SEO from '../components/layout/SEO';
 import './Policy.css';
 
 const TermsOfService: React.FC = () => {
   return (
     <>
+      <SEO title="Terms of Service" description="Living Lab Nigeria 2026 Terms of Service" canonicalUrl="/terms-of-service" />
       <Header />
       <main className="policy-page">
         <div className="policy-container">

@@ -3,11 +3,17 @@ import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import ProgrammeSection from '../components/sections/ProgrammeSection';
 import PageCTA from '../components/sections/PageCTA';
+import SEO from '../components/layout/SEO';
 import './ProgrammePage.css';
 
 const ProgrammePage: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="Programme" 
+        description="View the official agenda and itinerary for Living Lab Nigeria 2026." 
+        canonicalUrl="/programme"
+      />
       <Header />
       
       <main className="programme-page">

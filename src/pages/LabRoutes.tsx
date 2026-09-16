@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import PageCTA from '../components/sections/PageCTA';
+import SEO from '../components/layout/SEO';
 import './LabRoutes.css';
 
 const LAB_MODULES = [
@@ -15,6 +16,11 @@ const LAB_MODULES = [
 const LabRoutes: React.FC = () => {
   return (
     <>
+      <SEO 
+        title="What To Expect" 
+        description="Dive deep into the five specialized modules of the Living Lab Nigeria." 
+        canonicalUrl="/lab-routes"
+      />
       <Header />
       
       <main className="lab-routes-page">

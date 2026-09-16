@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import PageCTA from '../components/sections/PageCTA';
+import SEO from '../components/layout/SEO';
 import './Experts.css';
 
 const EXPERTS = [
