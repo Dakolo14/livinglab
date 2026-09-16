@@ -48,6 +48,7 @@ const Header: React.FC = () => {
         <div className={`header-menu-wrapper ${isMobileMenuOpen ? 'open' : ''}`}>
           <nav className="header-nav">
             <Link to="/" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+            <Link to="/#consultation-reasons" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Main Consultation Reasons</Link>
             <Link to="/lab-routes" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>What To Expect</Link>
             <Link to="/programme" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Programme</Link>
             <Link to="/experts" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>Speakers</Link>

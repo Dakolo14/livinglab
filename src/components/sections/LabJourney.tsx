@@ -8,7 +8,6 @@ const journeySteps = [
   { id: '03', title: 'EXPERIENCE', description: 'Immerse yourself in our sensory thermal spring water room.' },
   { id: '04', title: 'LEARN', description: 'Uncover breakthrough ingredients like Melasyl and Mexoryl.' },
   { id: '05', title: 'CONSULT', description: '1-on-1 time with top dermatologists to discuss your skin concerns.' },
-  { id: '06', title: 'LEAVE WITH YOUR SKIN STORY', description: 'Collect your personalized regimen and digital passport rewards.' },
 ];
 
 const LabJourney: React.FC = () => {

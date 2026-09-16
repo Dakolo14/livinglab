@@ -1,0 +1,110 @@
+.about-lrp {
+  padding: 80px 0;
+  background-color: #ffffff;
+}
+
+.about-lrp .section-title {
+  text-align: center;
+  margin-bottom: 48px;
+  font-size: 2.5rem;
+  color: #0f172a;
+}
+
+.franchises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.franchise-card {
+  border-radius: 8px;
+  overflow: hidden;
+  color: #0f172a;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.franchise-card:hover {
+  transform: translateY(-5px);
+}
+
+.franchise-content {
+  padding: 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.franchise-card h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.franchise-subtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 4px;
+  margin-bottom: 32px;
+}
+
+.franchise-details h4 {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.franchise-details p {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.franchise-target {
+  margin-top: 24px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Anthelios Specific Styles */
+.franchise-card.anthelios {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+  border-left: 8px solid #E06B27;
+}
+
+.franchise-card.anthelios h3,
+.franchise-card.anthelios .franchise-subtitle,
+.franchise-card.anthelios .franchise-details h4 {
+  color: #E06B27;
+}
+
+/* Mela B3 Specific Styles */
+.franchise-card.melab3 {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
+  border-left: 8px solid #5C2D91;
+}
+
+.franchise-card.melab3 h3,
+.franchise-card.melab3 .franchise-subtitle,
+.franchise-card.melab3 .franchise-details h4 {
+  color: #5C2D91;
+}
+
+@media (max-width: 768px) {
+  .about-lrp {
+    padding: 60px 0;
+  }
+  
+  .about-lrp .section-title {
+    font-size: 2rem;
+  }
+  
+  .franchise-content {
+    padding: 32px 24px;
+  }
+  
+  .franchise-card h3 {
+    font-size: 2rem;
+  }
+}

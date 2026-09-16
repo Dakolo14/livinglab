@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/layout/Header';
 import Hero from '../components/sections/Hero';
 import Countdown from '../components/sections/Countdown';
+import AboutLRP from '../components/sections/AboutLRP';
+import ConsultationReasons from '../components/sections/ConsultationReasons';
 import Partners from '../components/sections/Partners';
 import Experiences from '../components/sections/Experiences';
 import LabJourney from '../components/sections/LabJourney';
@@ -50,6 +52,8 @@ const Home: React.FC = () => {
       <main>
         <Hero activeReelId={activeReelId} isVideoMoved={isVideoMoved} />
         <Countdown />
+        <AboutLRP />
+        <ConsultationReasons />
         <Experiences activeReelId={activeReelId} setActiveReelId={setActiveReelId} isVideoMoved={isVideoMoved} />
         <LabJourney />
         <SpeakersPreview />

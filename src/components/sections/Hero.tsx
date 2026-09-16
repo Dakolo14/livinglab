@@ -71,7 +71,6 @@ const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
             >
               Register Now
             </button>
-            <button className="btn-secondary">Discover more</button>
           </div>
         </div>
       )}
