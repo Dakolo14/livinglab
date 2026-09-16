@@ -261,23 +261,27 @@ export const AdminDashboard: React.FC = () => {
         </table>
         
         {/* Pagination & Scanner Controls */}
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderTop: '1px solid #E5E7EB'}}>
+        <div className="admin-table-footer">
           <button 
-            className="btn-secondary" 
-            style={{padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '8px', color: '#0F172A', border: '1px solid #CBD5E1', fontSize: '0.85rem'}}
+            className="btn-secondary scan-btn"
             onClick={() => window.location.href = '/admin/scanner'}
           >
-            📷 Launch Scanner
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+              <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+            </svg>
+            Launch Scanner
           </button>
           
-          <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-            <span style={{fontSize: '0.85rem', color: '#64748b'}}>
+          <div className="admin-table-pagination">
+            <span>
               Page {currentPage} of {totalPages || 1}
             </span>
-            <div style={{display: 'flex', gap: '8px'}}>
+            <div className="pagination-buttons">
               <button 
                 className="btn-secondary" 
-                style={{padding: '6px 12px', fontSize: '0.85rem'}}
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               >
@@ -285,7 +289,6 @@ export const AdminDashboard: React.FC = () => {
               </button>
               <button 
                 className="btn-secondary" 
-                style={{padding: '6px 12px', fontSize: '0.85rem'}}
                 disabled={currentPage === totalPages || totalPages === 0}
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
               >
