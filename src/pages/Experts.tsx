@@ -34,6 +34,11 @@ const Experts: React.FC = () => {
 
   return (
     <>
+      <SEO 
+        title="Speakers & Experts" 
+        description="Meet the world-class clinical experts and pioneers speaking at Living Lab Nigeria 2026." 
+        canonicalUrl="/experts"
+      />
       <Header />
       
       <main className="experts-page">

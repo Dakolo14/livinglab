@@ -31,6 +31,21 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <SEO 
+        title="Living Lab Nigeria 2026" 
+        description="Experience the future of dermatology at Living Lab Nigeria 2026. Join top experts for a fully immersive journey into clinical skincare science."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": "Living Lab Nigeria 2026",
+          "startDate": "2026-11-03T09:00",
+          "endDate": "2026-11-05T18:00",
+          "location": {
+            "@type": "Place",
+            "name": "Lagos, Nigeria"
+          }
+        }}
+      />
       <Header />
       <main>
         <Hero activeReelId={activeReelId} isVideoMoved={isVideoMoved} />
