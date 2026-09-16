@@ -58,6 +58,20 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
+  const handleUndoCheckIn = async (docId: string) => {
+    const isSure = window.confirm("Are you sure you want to undo this check-in? Their ticket will become valid again.");
+    if (!isSure) return;
+
+    try {
+      await updateDoc(doc(db, 'registrations', docId), {
+        status: 'registered'
+      });
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("Failed to undo check-in.");
+    }
+  };
+
   const finishTour = () => {
     localStorage.setItem('livinglab_admin_tour_seen', 'true');
     setShowTour(false);
@@ -132,8 +146,16 @@ export const AdminDashboard: React.FC = () => {
                     </span>
                   </td>
                   <td>
-                    {attendee.status === 'registered' && (
+                    {attendee.status === 'registered' ? (
                       <button className="btn-table-action" onClick={() => setConfirmCheckInId(attendee.docId)}>Check-In</button>
+                    ) : (
+                      <button 
+                        className="btn-table-action" 
+                        style={{backgroundColor: '#94A3B8'}} 
+                        onClick={() => handleUndoCheckIn(attendee.docId)}
+                      >
+                        Undo
+                      </button>
                     )}
                   </td>
                 </tr>
