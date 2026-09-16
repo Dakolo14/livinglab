@@ -15,6 +15,7 @@ interface Attendee {
 
 export const AdminDashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterBy, setFilterBy] = useState('all');
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [loading, setLoading] = useState(true);
   const [confirmCheckInId, setConfirmCheckInId] = useState<string | null>(null);
@@ -77,25 +78,73 @@ export const AdminDashboard: React.FC = () => {
     setShowTour(false);
   };
 
-  const filteredAttendees = attendees.filter(attendee => 
-    (attendee.name && attendee.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (attendee.email && attendee.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (attendee.ticketId && attendee.ticketId.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (attendee.medicalId && attendee.medicalId.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const handleExportCSV = () => {
+    if (attendees.length === 0) return;
+    
+    const headers = ['Ticket ID', 'Name', 'Email', 'Medical Practitioner', 'Status'];
+    const csvRows = [headers.join(',')];
+    
+    attendees.forEach(a => {
+      const values = [
+        `"${a.ticketId}"`,
+        `"${a.name}"`,
+        `"${a.email}"`,
+        `"${a.medicalId}"`,
+        `"${a.status}"`
+      ];
+      csvRows.push(values.join(','));
+    });
+    
+    const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'livinglab_registrations.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  const filteredAttendees = attendees.filter(attendee => {
+    const term = searchTerm.toLowerCase();
+    if (!term) return true;
+
+    if (filterBy === 'name') return attendee.name && attendee.name.toLowerCase().includes(term);
+    if (filterBy === 'email') return attendee.email && attendee.email.toLowerCase().includes(term);
+    if (filterBy === 'ticketId') return attendee.ticketId && attendee.ticketId.toLowerCase().includes(term);
+    if (filterBy === 'medicalId') return attendee.medicalId && attendee.medicalId.toLowerCase().includes(term);
+    
+    // Default 'all'
+    return (
+      (attendee.name && attendee.name.toLowerCase().includes(term)) ||
+      (attendee.email && attendee.email.toLowerCase().includes(term)) ||
+      (attendee.ticketId && attendee.ticketId.toLowerCase().includes(term)) ||
+      (attendee.medicalId && attendee.medicalId.toLowerCase().includes(term))
+    );
+  });
 
   const totalRegistrations = attendees.length;
   const checkedIn = attendees.filter(a => a.status === 'attended').length;
   const pending = totalRegistrations - checkedIn;
 
   return (
-    <AdminLayout searchTerm={searchTerm} setSearchTerm={setSearchTerm}>
+    <AdminLayout 
+      searchTerm={searchTerm} 
+      setSearchTerm={setSearchTerm}
+      filterBy={filterBy}
+      setFilterBy={setFilterBy}
+      onHelpClick={() => setShowTour(true)}
+    >
       <div className="admin-header-row">
         <div>
           <h2>Welcome back, Admin</h2>
           <p className="admin-subtitle">Here is the latest data for Living Lab Nigeria 2026.</p>
         </div>
-        <button className="btn-primary" style={{padding: '10px 20px'}} onClick={() => setShowTour(true)}>Help & Tour</button>
+        <div style={{display: 'flex', gap: '12px'}}>
+          <button className="btn-secondary" style={{padding: '10px 20px', backgroundColor: '#F8FAFC', color: '#0F172A', border: '1px solid #CBD5E1'}} onClick={() => alert("Excel export requires a premium plugin or library like xlsx. Use CSV for now!")}>Export Excel</button>
+          <button className="btn-primary" style={{padding: '10px 20px'}} onClick={handleExportCSV}>Export CSV</button>
+        </div>
       </div>
       
       <div className="admin-stats-grid">
