@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, ScanLine, Globe, LogOut, Search, UserCircle } from 'lucide-react';
+import { LayoutDashboard, ScanLine, Globe, LogOut, Search, Menu, X } from 'lucide-react';
 import SEO from './SEO';
 import '../../pages/admin/Admin.css';
 
@@ -13,20 +13,31 @@ interface AdminLayoutProps {
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSearchTerm }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     navigate('/admin');
   };
 
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
   return (
     <div className="admin-layout-wrapper">
       <SEO title="Admin Portal" description="LRP Living Lab Admin" />
       
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div className="admin-mobile-overlay" onClick={closeMobileMenu}></div>
+      )}
+
       {/* Sidebar */}
-      <aside className="admin-sidebar">
+      <aside className={`admin-sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="admin-brand">
           <img src="/BLUE LOGO.png" alt="LRP Logo" className="admin-sidebar-logo" />
           <span className="admin-sidebar-title">ADMIN</span>
+          <button className="admin-mobile-close" onClick={closeMobileMenu}>
+            <X size={24} />
+          </button>
         </div>
         
         <div className="admin-menu-section">
@@ -35,12 +46,14 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSear
             <Link 
               to="/admin/dashboard" 
               className={`admin-nav-item ${location.pathname === '/admin/dashboard' ? 'active' : ''}`}
+              onClick={closeMobileMenu}
             >
               <LayoutDashboard className="nav-icon" size={20} /> Dashboard
             </Link>
             <Link 
               to="/admin/scanner" 
               className={`admin-nav-item ${location.pathname === '/admin/scanner' ? 'active' : ''}`}
+              onClick={closeMobileMenu}
             >
               <ScanLine className="nav-icon" size={20} /> QR Scanner
             </Link>
@@ -50,7 +63,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSear
         <div className="admin-menu-section" style={{ marginTop: 'auto' }}>
           <p className="admin-menu-label">OTHER</p>
           <nav className="admin-nav-menu">
-            <a href="/" target="_blank" className="admin-nav-item">
+            <a href="/" target="_blank" className="admin-nav-item" onClick={closeMobileMenu}>
               <Globe className="nav-icon" size={20} /> View Live Site
             </a>
             <button onClick={handleLogout} className="admin-nav-item logout-btn">
@@ -63,6 +76,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSear
       {/* Main Content Area */}
       <main className="admin-main-content">
         <header className="admin-topbar">
+          <button className="admin-mobile-toggle" onClick={() => setIsMobileMenuOpen(true)}>
+            <Menu size={24} color="#0F172A" />
+          </button>
           <div className="admin-search-mock">
             <Search className="search-icon" size={18} />
             <input 
@@ -72,10 +88,6 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSear
               onChange={(e) => setSearchTerm && setSearchTerm(e.target.value)}
               disabled={setSearchTerm === undefined}
             />
-          </div>
-          <div className="admin-profile">
-            <UserCircle size={28} className="admin-avatar-icon" />
-            <span className="admin-name">Profile</span>
           </div>
         </header>
         
