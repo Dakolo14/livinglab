@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+
 import './LabJourney.css';
 
 const journeySteps = [
@@ -23,7 +23,7 @@ const LabJourney: React.FC = () => {
         </div>
         
         <div className="journey-timeline">
-          {journeySteps.map((step, index) => (
+          {journeySteps.map((step) => (
             <div 
               key={step.id} 
               className="journey-step"

@@ -37,6 +37,18 @@ const RegistrationModal: React.FC = () => {
                 <label>Medical ID / Practice Name</label>
                 <input type="text" required placeholder="Practice Name" />
               </div>
+              
+              <div className="compliance-group">
+                <label className="checkbox-label">
+                  <input type="checkbox" required />
+                  <span>I agree to the <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. *</span>
+                </label>
+                <label className="checkbox-label">
+                  <input type="checkbox" />
+                  <span>I consent to receive event updates, post-event materials, and marketing communications from La Roche-Posay.</span>
+                </label>
+              </div>
+
               <button type="submit" className="btn-primary w-100">SUBMIT REGISTRATION</button>
             </form>
           </div>
