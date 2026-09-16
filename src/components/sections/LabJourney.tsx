@@ -24,13 +24,9 @@ const LabJourney: React.FC = () => {
         
         <div className="journey-timeline">
           {journeySteps.map((step, index) => (
-            <motion.div 
+            <div 
               key={step.id} 
               className="journey-step"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <div className="step-number">{step.id}</div>
               <div className="step-content">
@@ -41,7 +37,7 @@ const LabJourney: React.FC = () => {
                   <span className="placeholder-text">Experience {step.id} Visual Hook</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
