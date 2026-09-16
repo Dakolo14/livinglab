@@ -13,13 +13,20 @@ import RegistrationModal from './components/layout/RegistrationModal';
 import CookieBanner from './components/layout/CookieBanner';
 import OfflineNotification from './components/layout/OfflineNotification';
 import ScrollToTop from './components/layout/ScrollToTop';
+import usePageTracking from './hooks/usePageTracking';
 import './App.css';
+
+const PageTracker = () => {
+  usePageTracking();
+  return null;
+};
 
 function App() {
   return (
     <HelmetProvider>
       <Router>
         <ScrollToTop />
+        <PageTracker />
         <OfflineNotification />
         <Routes>
           <Route path="/" element={<Home />} />
