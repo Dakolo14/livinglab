@@ -64,7 +64,7 @@ export const AdminDashboard: React.FC = () => {
               filteredAttendees.map(attendee => (
                 <tr key={attendee.id}>
                   <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.id}</td>
-                  <td style={{fontWeight: 600, color: '#0f172a'}}>{attendee.name}</td>
+                  <td style={{fontWeight: 500, color: '#0f172a'}}>{attendee.name}</td>
                   <td style={{color: '#475569'}}>{attendee.email}</td>
                   <td style={{color: '#475569'}}>{attendee.medicalId}</td>
                   <td>

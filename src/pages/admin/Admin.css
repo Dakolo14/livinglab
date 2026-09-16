@@ -32,7 +32,7 @@
 }
 
 .admin-sidebar-title {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.1rem;
   color: #0F172A;
   letter-spacing: 0.5px;
@@ -44,7 +44,7 @@
 
 .admin-menu-label {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #94A3B8;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -66,7 +66,7 @@
   border-radius: 8px;
   color: #475569;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.95rem;
   transition: all 0.2s;
   background: transparent;
@@ -84,7 +84,7 @@
 .admin-nav-item.active {
   background-color: #E0F2FE;
   color: #0284C7;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .admin-nav-item .nav-icon {
@@ -266,7 +266,7 @@
   margin-bottom: 32px;
   color: #0F172A;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -294,7 +294,7 @@
   background-color: #00AEEF;
   color: white;
   border: none;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
@@ -339,7 +339,7 @@
 
 .stat-card .stat-value {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #111827;
 }
 
@@ -363,7 +363,7 @@
 
 .admin-table th {
   background-color: #0F172A;
-  font-weight: 600;
+  font-weight: 400;
   color: #ffffff;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -374,7 +374,7 @@
   padding: 4px 12px;
   border-radius: 9999px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .status-badge.registered {
@@ -394,7 +394,7 @@
   padding: 8px 16px;
   border-radius: 4px;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
