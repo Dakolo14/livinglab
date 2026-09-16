@@ -228,7 +228,7 @@ export const AdminDashboard: React.FC = () => {
             <p>Are you sure you want to manually check-in this attendee? This action will mark their ticket as ATTENDED.</p>
             <div className="admin-modal-actions">
               <button className="btn-secondary" onClick={() => setConfirmCheckInId(null)}>Cancel</button>
-              <button className="btn-primary" onClick={confirmCheckIn}>Confirm Check-In</button>
+              <button className="btn-primary" onClick={confirmCheckIn}>Confirm</button>
             </div>
           </div>
         </div>
