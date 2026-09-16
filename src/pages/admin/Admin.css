@@ -316,6 +316,24 @@
   color: #059669;
 }
 
+.btn-table-action {
+  background-color: #00AEEF;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-table-action:hover {
+  background-color: #0284C7;
+}
+
 /* Scanner */
 .scanner-container {
   max-width: 600px;
