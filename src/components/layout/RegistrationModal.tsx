@@ -170,7 +170,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
             
             <form className="reg-modal-form" onSubmit={handleRetrieveTicket}>
               <div className="input-group">
-                <label>Professional Email</label>
+                <label>Professional Email <span style={{color: '#EF4444'}}>*</span></label>
                 <input 
                   type="email" 
                   required 
@@ -205,7 +205,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
             
             <form className="reg-modal-form" onSubmit={handleRegister}>
               <div className="input-group">
-                <label>Full Name</label>
+                <label>Full Name <span style={{color: '#EF4444'}}>*</span></label>
                 <input 
                   type="text" 
                   required 
@@ -215,7 +215,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 />
               </div>
               <div className="input-group">
-                <label>Professional Email</label>
+                <label>Professional Email <span style={{color: '#EF4444'}}>*</span></label>
                 <input 
                   type="email" 
                   required 
@@ -225,7 +225,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 />
               </div>
               <div className="input-group">
-                <label>Medical ID / Practice Name</label>
+                <label>Medical ID / Practice Name <span style={{color: '#EF4444'}}>*</span></label>
                 <input 
                   type="text" 
                   required 
