@@ -77,7 +77,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       setIsRetrievalMode(false);
       setRetrievalError('');
       setRegistrationError('');
-      setFormData({ name: '', email: '', dayTime: [] });
+      setFormData({ name: '', email: '', phone: '', dayTime: [] });
       setExistingSessions([]);
     }, 300);
   };
