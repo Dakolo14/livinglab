@@ -45,8 +45,17 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
           where('email', '==', formData.email.toLowerCase().trim())
         );
         const snap = await getDocs(q);
-        const sessions = snap.docs.map(doc => doc.data().session);
-        setExistingSessions(sessions);
+        if (!snap.empty) {
+          const sessions = snap.docs.map(doc => doc.data().session);
+          setExistingSessions(sessions);
+          // Auto-fill name if available
+          const existingName = snap.docs[0].data().name;
+          if (existingName && !formData.name) {
+            setFormData(prev => ({ ...prev, name: existingName }));
+          }
+        } else {
+          setExistingSessions([]);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -236,6 +245,16 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
             
             <form className="reg-modal-form" onSubmit={handleRegister}>
               <div className="input-group">
+                <label>Professional Email <span style={{color: '#EF4444'}}>*</span></label>
+                <input 
+                  type="email" 
+                  required 
+                  placeholder="name@clinic.com" 
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
+              <div className="input-group">
                 <label>Full Name <span style={{color: '#EF4444'}}>*</span></label>
                 <input 
                   type="text" 
@@ -243,16 +262,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                   placeholder="Dr. Jane Doe" 
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                />
-              </div>
-              <div className="input-group">
-                <label>Professional Email <span style={{color: '#EF4444'}}>*</span></label>
-                <input 
-                  type="email" 
-                  required 
-                  placeholder="jane@clinic.com" 
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
               <div className="input-group">

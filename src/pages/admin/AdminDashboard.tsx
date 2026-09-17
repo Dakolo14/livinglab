@@ -13,12 +13,20 @@ interface Attendee {
   status: string;
 }
 
+interface GroupedAttendee {
+  email: string;
+  name: string;
+  ticketIds: string[];
+  sessions: Attendee[];
+}
+
 export const AdminDashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBy, setFilterBy] = useState('all');
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [loading, setLoading] = useState(true);
   const [confirmCheckInId, setConfirmCheckInId] = useState<string | null>(null);
+  const [manageModalUser, setManageModalUser] = useState<GroupedAttendee | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [tourStep, setTourStep] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -130,21 +138,77 @@ export const AdminDashboard: React.FC = () => {
     document.body.removeChild(a);
   };
 
-  const filteredAttendees = attendees.filter(attendee => {
+  const generateEmail = (group: GroupedAttendee) => {
+    const approved = group.sessions.filter(s => s.status === 'invited' || s.status === 'rsvped' || s.status === 'registered' || s.status === 'attended');
+    const rejected = group.sessions.filter(s => s.status === 'rejected');
+    
+    let subject = "";
+    let body = "";
+    
+    if (approved.length > 0) {
+      subject = "You're Invited! Living Lab Nigeria 2026";
+      body = `Congratulations ${group.name}!\n\nWe are thrilled to invite you to the exclusive La Roche-Posay Living Lab Nigeria 2026. Your application has been approved for the following session(s):\n`;
+      approved.forEach(s => {
+        body += `- ${s.session}\n`;
+      });
+      body += `\nPlease return to the website and enter your email to claim your digital ticket.\n\n`;
+      
+      if (rejected.length > 0) {
+        body += `Please note that your application for the following session(s) could not be accommodated, as those specific timings are reserved for a different professional group (B2B/B2C):\n`;
+        rejected.forEach(s => {
+          body += `- ${s.session}\n`;
+        });
+        body += `\nHowever, you can still catch all the highlights from those sessions via our live stream!\n\n`;
+      }
+      body += `Warm regards,\nThe Living Lab Nigeria Team`;
+    } else {
+      subject = "Update on your Living Lab Nigeria Application";
+      body = `Dear ${group.name},\n\nThank you for applying to attend Living Lab Nigeria 2026. Unfortunately, due to capacity and audience constraints for the sessions you selected, we are unable to approve your application at this time.\n\nYou can still catch all the highlights via our live stream on the day of the event.\n\nWarm regards,\nThe Living Lab Nigeria Team`;
+    }
+    
+    const mailtoLink = `mailto:${group.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
+
+  const groupedAttendees = React.useMemo(() => {
+    const map = new Map<string, GroupedAttendee>();
+    attendees.forEach(a => {
+      const key = a.email.toLowerCase();
+      if (!map.has(key)) {
+        map.set(key, { email: a.email, name: a.name, ticketIds: [], sessions: [] });
+      }
+      const group = map.get(key)!;
+      group.sessions.push(a);
+      if (a.ticketId && !group.ticketIds.includes(a.ticketId)) {
+        group.ticketIds.push(a.ticketId);
+      }
+    });
+    return Array.from(map.values());
+  }, [attendees]);
+
+  // Update manageModalUser if data changes underneath
+  useEffect(() => {
+    if (manageModalUser) {
+      const updated = groupedAttendees.find(g => g.email === manageModalUser.email);
+      if (updated) setManageModalUser(updated);
+    }
+  }, [groupedAttendees]);
+
+  const filteredAttendees = groupedAttendees.filter(attendee => {
     const term = searchTerm.toLowerCase();
     if (!term) return true;
 
     if (filterBy === 'name') return attendee.name && attendee.name.toLowerCase().includes(term);
     if (filterBy === 'email') return attendee.email && attendee.email.toLowerCase().includes(term);
-    if (filterBy === 'ticketId') return attendee.ticketId && attendee.ticketId.toLowerCase().includes(term);
-    if (filterBy === 'session') return attendee.session && attendee.session.toLowerCase().includes(term);
+    if (filterBy === 'ticketId') return attendee.ticketIds.some(id => id.toLowerCase().includes(term));
+    if (filterBy === 'session') return attendee.sessions.some(s => s.session.toLowerCase().includes(term));
     
     // Default 'all'
     return (
       (attendee.name && attendee.name.toLowerCase().includes(term)) ||
       (attendee.email && attendee.email.toLowerCase().includes(term)) ||
-      (attendee.ticketId && attendee.ticketId.toLowerCase().includes(term)) ||
-      (attendee.session && attendee.session.toLowerCase().includes(term))
+      (attendee.ticketIds.some(id => id.toLowerCase().includes(term))) ||
+      (attendee.sessions.some(s => s.session.toLowerCase().includes(term)))
     );
   });
 
@@ -217,36 +281,26 @@ export const AdminDashboard: React.FC = () => {
                 <td colSpan={6} style={{textAlign: 'center', padding: '20px', color: '#64748b'}}>Loading live data...</td>
               </tr>
             ) : paginatedAttendees.length > 0 ? (
-              paginatedAttendees.map(attendee => (
-                <tr key={attendee.docId}>
-                  <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.ticketId || '—'}</td>
-                  <td style={{fontWeight: 400, color: '#0f172a'}}>{attendee.name}</td>
-                  <td style={{color: '#475569'}}>{attendee.email}</td>
-                  <td style={{color: '#475569'}}>{attendee.session}</td>
+              paginatedAttendees.map(group => (
+                <tr key={group.email}>
+                  <td style={{fontFamily: 'monospace', color: '#64748b'}}>{group.ticketIds.length > 0 ? group.ticketIds.join(', ') : '—'}</td>
+                  <td style={{fontWeight: 400, color: '#0f172a'}}>{group.name}</td>
+                  <td style={{color: '#475569'}}>{group.email}</td>
+                  <td style={{color: '#475569'}}>{group.sessions.length} Session(s)</td>
                   <td>
-                    <span className={`status-badge ${attendee.status}`}>
-                      {attendee.status.toUpperCase()}
-                    </span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      {group.sessions.slice(0, 2).map((s, idx) => (
+                        <span key={idx} className={`status-badge ${s.status}`} style={{ fontSize: '0.65rem', padding: '2px 6px' }}>
+                          {s.status.toUpperCase()}
+                        </span>
+                      ))}
+                      {group.sessions.length > 2 && <span style={{fontSize: '0.7rem', color: '#64748b'}}>+{group.sessions.length - 2} more</span>}
+                    </div>
                   </td>
                   <td>
-                    {attendee.status === 'applied' ? (
-                      <div style={{display: 'flex', gap: '8px'}}>
-                        <button className="btn-table-action" style={{backgroundColor: '#8B5CF6'}} onClick={() => handleInvite(attendee.docId)}>Invite</button>
-                        <button className="btn-table-action" style={{backgroundColor: '#EF4444'}} onClick={() => handleReject(attendee.docId)}>Reject</button>
-                      </div>
-                    ) : (attendee.status === 'registered' || attendee.status === 'rsvped') ? (
-                      <button className="btn-table-action" onClick={() => setConfirmCheckInId(attendee.docId)}>Check-In</button>
-                    ) : attendee.status === 'attended' ? (
-                      <button 
-                        className="btn-table-action" 
-                        style={{backgroundColor: '#94A3B8'}} 
-                        onClick={() => handleUndoCheckIn(attendee.docId)}
-                      >
-                        Undo
-                      </button>
-                    ) : (
-                      <span style={{color: '#64748b', fontSize: '0.85rem'}}>—</span>
-                    )}
+                    <button className="btn-table-action" onClick={() => setManageModalUser(group)}>
+                      Manage
+                    </button>
                   </td>
                 </tr>
               ))
@@ -308,6 +362,52 @@ export const AdminDashboard: React.FC = () => {
             <div className="admin-modal-actions">
               <button className="btn-secondary" onClick={() => setConfirmCheckInId(null)}>Cancel</button>
               <button className="btn-primary" onClick={confirmCheckIn}>Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {manageModalUser && (
+        <div className="admin-modal-overlay">
+          <div className="admin-modal" style={{ maxWidth: '600px', width: '90%' }}>
+            <h3>Manage Applicant</h3>
+            <p style={{ marginBottom: '24px' }}><strong>{manageModalUser.name}</strong> ({manageModalUser.email})</p>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '400px', overflowY: 'auto' }}>
+              {manageModalUser.sessions.map(session => (
+                <div key={session.docId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '6px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <strong style={{ fontSize: '0.95rem', color: '#1E293B' }}>{session.session}</strong>
+                    <div>
+                      <span className={`status-badge ${session.status}`} style={{ fontSize: '0.7rem' }}>{session.status.toUpperCase()}</span>
+                      {session.ticketId && <span style={{ marginLeft: '8px', fontSize: '0.8rem', color: '#64748b', fontFamily: 'monospace' }}>{session.ticketId}</span>}
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    {session.status === 'applied' && (
+                      <>
+                        <button className="btn-table-action" style={{backgroundColor: '#8B5CF6'}} onClick={() => handleInvite(session.docId)}>Invite</button>
+                        <button className="btn-table-action" style={{backgroundColor: '#EF4444'}} onClick={() => handleReject(session.docId)}>Reject</button>
+                      </>
+                    )}
+                    {(session.status === 'registered' || session.status === 'rsvped') && (
+                      <button className="btn-table-action" onClick={() => {
+                        setConfirmCheckInId(session.docId);
+                      }}>Check-In</button>
+                    )}
+                    {session.status === 'attended' && (
+                      <button className="btn-table-action" style={{backgroundColor: '#94A3B8'}} onClick={() => handleUndoCheckIn(session.docId)}>Undo</button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="admin-modal-actions" style={{ marginTop: '24px', display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #E2E8F0', paddingTop: '16px' }}>
+              <button className="btn-secondary" onClick={() => setManageModalUser(null)}>Close</button>
+              <button className="btn-primary" onClick={() => generateEmail(manageModalUser)}>
+                Generate Email
+              </button>
             </div>
           </div>
         </div>
