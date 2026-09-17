@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+import { CheckCircle } from 'lucide-react';
 import { collection, addDoc, serverTimestamp, getDocs, query, where, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import './RegistrationModal.css';
@@ -246,13 +247,28 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
             <form className="reg-modal-form" onSubmit={handleRegister}>
               <div className="input-group">
                 <label>Professional Email <span style={{color: '#EF4444'}}>*</span></label>
-                <input 
-                  type="email" 
-                  required 
-                  placeholder="name@clinic.com" 
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input 
+                    type="email" 
+                    required 
+                    placeholder="name@clinic.com" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    style={formData.email.includes('@') ? { paddingRight: '40px' } : undefined}
+                  />
+                  {formData.email && formData.email.includes('@') && (
+                    <div style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center' }}>
+                      <CheckCircle color="#10B981" size={20} />
+                    </div>
+                  )}
+                </div>
+                {formData.email && formData.email.includes('@') && existingSessions.length > 0 && (
+                  <div style={{ fontSize: '0.8rem', color: existingSessions.length >= 6 ? '#EF4444' : '#10B981', marginTop: '6px' }}>
+                    {existingSessions.length >= 6 
+                      ? "You've selected all possible sessions." 
+                      : "You can still pick another date/time."}
+                  </div>
+                )}
               </div>
               <div className="input-group">
                 <label>Full Name <span style={{color: '#EF4444'}}>*</span></label>
