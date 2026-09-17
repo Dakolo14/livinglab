@@ -5,126 +5,53 @@
 
 .about-lrp .section-title {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 60px;
   font-size: 2.5rem;
   color: #0f172a;
 }
 
-.franchises-grid {
+.lrp-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 60px 40px;
 }
 
-.franchise-card {
-  border-radius: 8px;
-  overflow: hidden;
-  color: #0f172a;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+.lrp-card {
+  padding: 0;
 }
 
-.franchise-card:hover {
-  transform: translateY(-5px);
-}
-
-.franchise-content {
-  padding: 40px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.franchise-card h3 {
+.lrp-name {
   font-size: 2.5rem;
-  font-weight: 800;
-  margin: 0;
-  letter-spacing: -1px;
-}
-
-.franchise-subtitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 4px;
-  margin-bottom: 32px;
-}
-
-.franchise-details h4 {
-  font-size: 1.25rem;
   font-weight: 300;
-  margin-bottom: 16px;
+  letter-spacing: -1px;
+  margin: 0;
+  color: #111827;
 }
 
-.franchise-details p {
-  font-size: 1rem;
+.lrp-subtitle {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin: 8px 0 24px 0;
+}
+
+.lrp-details h4 {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.lrp-details p {
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.6;
   margin-bottom: 8px;
-  opacity: 0.9;
 }
 
-.franchise-target {
-  margin-top: 24px;
+.lrp-target {
+  margin-top: 16px;
   font-style: italic;
-  font-weight: 500;
-}
-
-/* Anthelios Specific Styles */
-.franchise-card.anthelios {
-  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
-  border-left: 8px solid #E06B27;
-}
-
-.franchise-card.anthelios h3,
-.franchise-card.anthelios .franchise-subtitle,
-.franchise-card.anthelios .franchise-details h4 {
-  color: #E06B27;
-}
-
-/* Mela B3 Specific Styles */
-.franchise-card.melab3 {
-  background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
-  border-left: 8px solid #5C2D91;
-}
-
-.franchise-card.melab3 h3,
-.franchise-card.melab3 .franchise-subtitle,
-.franchise-card.melab3 .franchise-details h4 {
-  color: #5C2D91;
-}
-
-/* Effaclar Specific Styles */
-.franchise-card.effaclar {
-  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
-  border-left: 8px solid #0284C7; /* LRP Blue */
-}
-
-.franchise-card.effaclar h3,
-.franchise-card.effaclar .franchise-subtitle,
-.franchise-card.effaclar .franchise-details h4 {
-  color: #0284C7;
-}
-
-/* Lipikar Specific Styles */
-.franchise-card.lipikar {
-  background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
-  border-left: 8px solid #0369A1; /* Darker Teal Blue */
-}
-
-.franchise-card.lipikar h3,
-.franchise-card.lipikar .franchise-subtitle,
-.franchise-card.lipikar .franchise-details h4 {
-  color: #0369A1;
-}
-
-/* Cicaplast Specific Styles */
-.franchise-card.cicaplast {
-  background: linear-gradient(135deg, #ffffff 0%, #cffafe 100%);
-  border-left: 8px solid #0891B2; /* Cyan/Teal */
-}
-
-.franchise-card.cicaplast h3,
-.franchise-card.cicaplast .franchise-subtitle,
-.franchise-card.cicaplast .franchise-details h4 {
-  color: #0891B2;
+  color: #9ca3af;
 }
 
 @media (max-width: 768px) {
@@ -134,13 +61,10 @@
   
   .about-lrp .section-title {
     font-size: 2rem;
+    margin-bottom: 40px;
   }
   
-  .franchise-content {
-    padding: 32px 24px;
-  }
-  
-  .franchise-card h3 {
+  .lrp-name {
     font-size: 2rem;
   }
 }
