@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ConsultationReasons.css';
 
 const reasons = [
@@ -11,34 +11,17 @@ const reasons = [
 ];
 
 const ConsultationReasons: React.FC = () => {
-  const [activeId, setActiveId] = useState<string | null>(null);
-
-  const toggleCard = (id: string) => {
-    setActiveId(activeId === id ? null : id);
-  };
-
   return (
     <section className="consultation-reasons" id="consultation-reasons">
       <div className="container">
         <h2 className="section-title">MAIN CONSULTATION REASONS</h2>
-        <p className="section-subtitle">Click on a reason to explore our targeted dermatological solutions.</p>
-        <div className="reasons-grid">
-          {reasons.map((reason) => (
-            <div 
-              key={reason.id} 
-              className={`reason-card ${activeId === reason.id ? 'active' : ''}`}
-              onClick={() => toggleCard(reason.id)}
-            >
-              <div className="reason-card-inner">
-                <div className="reason-card-front">
-                  <h3>{reason.title}</h3>
-                  <span className="reveal-hint">+ Click to reveal</span>
-                </div>
-                <div className="reason-card-back">
-                  <h3>{reason.title}</h3>
-                  <p>{reason.description}</p>
-                </div>
-              </div>
+        <p className="section-subtitle">Explore our targeted dermatological solutions.</p>
+        <div className="cr-grid">
+          {reasons.map((r) => (
+            <div key={r.id} className="cr-card">
+              <h3>{r.title}</h3>
+              <div className="cr-divider"></div>
+              <p>{r.description}</p>
             </div>
           ))}
         </div>
