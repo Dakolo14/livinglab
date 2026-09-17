@@ -105,6 +105,17 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
+  const handleReset = async (docId: string) => {
+    const isSure = window.confirm("Reset this application back to 'applied'?");
+    if (!isSure) return;
+    try {
+      await updateDoc(doc(db, 'registrations', docId), { status: 'applied', ticketId: '' });
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("Failed to reset application.");
+    }
+  };
+
   const finishTour = () => {
     localStorage.setItem('livinglab_admin_tour_seen', 'true');
     setShowTour(false);
@@ -378,17 +389,20 @@ export const AdminDashboard: React.FC = () => {
                 <div key={session.docId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '6px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <strong style={{ fontSize: '0.95rem', color: '#1E293B' }}>{session.session}</strong>
-                    <div>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                       <span className={`status-badge ${session.status}`} style={{ fontSize: '0.7rem' }}>{session.status.toUpperCase()}</span>
                       {session.ticketId && <span style={{ marginLeft: '8px', fontSize: '0.8rem', color: '#64748b', fontFamily: 'monospace' }}>{session.ticketId}</span>}
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'nowrap' }}>
                     {session.status === 'applied' && (
                       <>
                         <button className="btn-table-action" style={{backgroundColor: '#8B5CF6'}} onClick={() => handleInvite(session.docId)}>Invite</button>
                         <button className="btn-table-action" style={{backgroundColor: '#EF4444'}} onClick={() => handleReject(session.docId)}>Reject</button>
                       </>
+                    )}
+                    {(session.status === 'invited' || session.status === 'rejected') && (
+                      <button className="btn-table-action" style={{backgroundColor: '#64748B'}} onClick={() => handleReset(session.docId)}>Undo</button>
                     )}
                     {(session.status === 'registered' || session.status === 'rsvped') && (
                       <button className="btn-table-action" onClick={() => {

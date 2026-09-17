@@ -97,6 +97,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSear
                     outline: 'none',
                     cursor: 'pointer'
                   }}
+                  className="mobile-filter-select"
                 >
                   <option value="all">All Fields</option>
                   <option value="name">Name</option>
