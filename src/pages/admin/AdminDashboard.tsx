@@ -9,6 +9,7 @@ interface Attendee {
   ticketId: string;
   name: string;
   email: string;
+  phone?: string;
   session: string;
   status: string;
 }
@@ -16,6 +17,7 @@ interface Attendee {
 interface GroupedAttendee {
   email: string;
   name: string;
+  phone?: string;
   ticketIds: string[];
   sessions: Attendee[];
 }
@@ -124,7 +126,7 @@ export const AdminDashboard: React.FC = () => {
   const handleExportCSV = () => {
     if (attendees.length === 0) return;
     
-    const headers = ['Ticket ID', 'Name', 'Email', 'Session', 'Status'];
+    const headers = ['Ticket ID', 'Name', 'Email', 'Phone', 'Session', 'Status'];
     const csvRows = [headers.join(',')];
     
     attendees.forEach(a => {
@@ -132,6 +134,7 @@ export const AdminDashboard: React.FC = () => {
         `"${a.ticketId}"`,
         `"${a.name}"`,
         `"${a.email}"`,
+        `"${a.phone || ''}"`,
         `"${a.session}"`,
         `"${a.status}"`
       ];
@@ -186,7 +189,7 @@ export const AdminDashboard: React.FC = () => {
     attendees.forEach(a => {
       const key = a.email.toLowerCase();
       if (!map.has(key)) {
-        map.set(key, { email: a.email, name: a.name, ticketIds: [], sessions: [] });
+        map.set(key, { email: a.email, name: a.name, phone: a.phone || '', ticketIds: [], sessions: [] });
       }
       const group = map.get(key)!;
       group.sessions.push(a);
@@ -382,7 +385,8 @@ export const AdminDashboard: React.FC = () => {
         <div className="admin-modal-overlay">
           <div className="admin-modal" style={{ maxWidth: '600px', width: '90%' }}>
             <h3>Manage Applicant</h3>
-            <p style={{ marginBottom: '24px' }}><strong>{manageModalUser.name}</strong> ({manageModalUser.email})</p>
+            <p style={{ marginBottom: '8px' }}><strong>{manageModalUser.name}</strong> ({manageModalUser.email})</p>
+            {manageModalUser.phone && <p style={{ marginBottom: '24px', color: '#64748B', fontSize: '0.9rem' }}>Phone: {manageModalUser.phone}</p>}
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '400px', overflowY: 'auto' }}>
               {manageModalUser.sessions.map(session => (

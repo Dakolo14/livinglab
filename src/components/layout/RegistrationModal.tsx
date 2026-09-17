@@ -25,6 +25,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     dayTime: [] as string[],
   });
 
@@ -101,6 +102,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
         return addDoc(collection(db, 'registrations'), {
           name: formData.name,
           email: formData.email.toLowerCase().trim(),
+          phone: formData.phone,
           session: session,
           ticketId: '',
           status: 'applied',
@@ -278,6 +280,16 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                   placeholder="Dr. Jane Doe" 
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
+              <div className="input-group">
+                <label>Phone Number <span style={{color: '#EF4444'}}>*</span></label>
+                <input 
+                  type="tel" 
+                  required 
+                  placeholder="+234 800 000 0000" 
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 />
               </div>
               <div className="input-group">

@@ -52,9 +52,9 @@ const Home: React.FC = () => {
       <main>
         <Hero activeReelId={activeReelId} isVideoMoved={isVideoMoved} />
         <Countdown />
+        <Experiences activeReelId={activeReelId} setActiveReelId={setActiveReelId} isVideoMoved={isVideoMoved} />
         <AboutLRP />
         <ConsultationReasons />
-        <Experiences activeReelId={activeReelId} setActiveReelId={setActiveReelId} isVideoMoved={isVideoMoved} />
         <LabJourney />
         <SpeakersPreview />
         <ProgrammeSection />
