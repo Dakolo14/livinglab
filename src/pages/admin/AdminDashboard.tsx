@@ -9,7 +9,7 @@ interface Attendee {
   ticketId: string;
   name: string;
   email: string;
-  medicalId: string;
+  session: string;
   status: string;
 }
 
@@ -105,7 +105,7 @@ export const AdminDashboard: React.FC = () => {
   const handleExportCSV = () => {
     if (attendees.length === 0) return;
     
-    const headers = ['Ticket ID', 'Name', 'Email', 'Medical Practitioner', 'Status'];
+    const headers = ['Ticket ID', 'Name', 'Email', 'Session', 'Status'];
     const csvRows = [headers.join(',')];
     
     attendees.forEach(a => {
@@ -113,7 +113,7 @@ export const AdminDashboard: React.FC = () => {
         `"${a.ticketId}"`,
         `"${a.name}"`,
         `"${a.email}"`,
-        `"${a.medicalId}"`,
+        `"${a.session}"`,
         `"${a.status}"`
       ];
       csvRows.push(values.join(','));
@@ -137,14 +137,14 @@ export const AdminDashboard: React.FC = () => {
     if (filterBy === 'name') return attendee.name && attendee.name.toLowerCase().includes(term);
     if (filterBy === 'email') return attendee.email && attendee.email.toLowerCase().includes(term);
     if (filterBy === 'ticketId') return attendee.ticketId && attendee.ticketId.toLowerCase().includes(term);
-    if (filterBy === 'medicalId') return attendee.medicalId && attendee.medicalId.toLowerCase().includes(term);
+    if (filterBy === 'session') return attendee.session && attendee.session.toLowerCase().includes(term);
     
     // Default 'all'
     return (
       (attendee.name && attendee.name.toLowerCase().includes(term)) ||
       (attendee.email && attendee.email.toLowerCase().includes(term)) ||
       (attendee.ticketId && attendee.ticketId.toLowerCase().includes(term)) ||
-      (attendee.medicalId && attendee.medicalId.toLowerCase().includes(term))
+      (attendee.session && attendee.session.toLowerCase().includes(term))
     );
   });
 
@@ -206,7 +206,7 @@ export const AdminDashboard: React.FC = () => {
               <th>Ticket ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Medical Practitioner</th>
+              <th>Session</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -222,7 +222,7 @@ export const AdminDashboard: React.FC = () => {
                   <td style={{fontFamily: 'monospace', color: '#64748b'}}>{attendee.ticketId || '—'}</td>
                   <td style={{fontWeight: 400, color: '#0f172a'}}>{attendee.name}</td>
                   <td style={{color: '#475569'}}>{attendee.email}</td>
-                  <td style={{color: '#475569'}}>{attendee.medicalId}</td>
+                  <td style={{color: '#475569'}}>{attendee.session}</td>
                   <td>
                     <span className={`status-badge ${attendee.status}`}>
                       {attendee.status.toUpperCase()}

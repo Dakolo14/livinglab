@@ -16,8 +16,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [retrievalError, setRetrievalError] = useState('');
   const [registrationError, setRegistrationError] = useState('');
   const [ticketId, setTicketId] = useState('');
-  const [docId, setDocId] = useState('');
+  const [docId, setDocId] = useState(''); // We'll use email as docId for the QR code now
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [existingSessions, setExistingSessions] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,6 +30,28 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     window.addEventListener('open-registration', handleOpen);
     return () => window.removeEventListener('open-registration', handleOpen);
   }, []);
+
+  useEffect(() => {
+    const fetchExisting = async () => {
+      if (!formData.email || !formData.email.includes('@')) {
+        setExistingSessions([]);
+        return;
+      }
+      try {
+        const q = query(
+          collection(db, 'registrations'), 
+          where('email', '==', formData.email.toLowerCase().trim())
+        );
+        const snap = await getDocs(q);
+        const sessions = snap.docs.map(doc => doc.data().session);
+        setExistingSessions(sessions);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    const timeoutId = setTimeout(fetchExisting, 500);
+    return () => clearTimeout(timeoutId);
+  }, [formData.email]);
 
   const isOpen = propIsOpen !== undefined ? propIsOpen : internalIsOpen;
   
@@ -42,6 +65,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       setRetrievalError('');
       setRegistrationError('');
       setFormData({ name: '', email: '', dayTime: [] });
+      setExistingSessions([]);
     }, 300);
   };
 
@@ -49,32 +73,33 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.dayTime.length === 0) {
+      setRegistrationError('Please select at least one session.');
+      return;
+    }
+    
     setIsSubmitting(true);
     setRegistrationError('');
     
     try {
-      // Check if email already exists
-      const q = query(
-        collection(db, 'registrations'), 
-        where('email', '==', formData.email.toLowerCase().trim())
-      );
-      const querySnapshot = await getDocs(q);
-      
-      if (!querySnapshot.empty) {
-        setRegistrationError('An application with this email already exists.');
-        setIsSubmitting(false);
-        return;
-      }
-
-      const docRef = await addDoc(collection(db, 'registrations'), {
-        ...formData,
-        email: formData.email.toLowerCase().trim(),
-        ticketId: '', // Ticket ID will be generated upon RSVP
-        status: 'applied',
-        timestamp: serverTimestamp(),
+      // Create a document for each selected session
+      const promises = formData.dayTime.map(session => {
+        if (existingSessions.includes(session)) return Promise.resolve();
+        
+        return addDoc(collection(db, 'registrations'), {
+          name: formData.name,
+          email: formData.email.toLowerCase().trim(),
+          session: session,
+          ticketId: '',
+          status: 'applied',
+          timestamp: serverTimestamp(),
+        });
       });
+      
+      await Promise.all(promises);
 
-      setDocId(docRef.id);
+      // Force refresh existing sessions
+      setExistingSessions([...existingSessions, ...formData.dayTime]);
       setIsSuccess(true);
     } catch (error) {
       console.error("Error adding document: ", error);
@@ -96,30 +121,34 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       const querySnapshot = await getDocs(q);
       
       if (!querySnapshot.empty) {
-        // Assume first match is their latest ticket
-        const docSnap = querySnapshot.docs[0];
-        const data = docSnap.data();
+        let generatedTicketIds: string[] = [];
         
-        if (data.status === 'applied') {
-          setRetrievalError('Your application is still under review. We will email you once approved.');
-        } else if (data.status === 'rejected') {
-          setRetrievalError('Unfortunately, your application could not be approved at this time.');
-        } else if (data.status === 'invited') {
-          // Generate ticket and mark as rsvped
-          const generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
-          await updateDoc(doc(db, 'registrations', docSnap.id), {
-            status: 'rsvped',
-            ticketId: generatedTicketId
-          });
-          
-          setTicketId(generatedTicketId);
-          setDocId(docSnap.id);
+        for (const docSnap of querySnapshot.docs) {
+          const data = docSnap.data();
+          if (data.status === 'invited') {
+            const generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
+            await updateDoc(doc(db, 'registrations', docSnap.id), {
+              status: 'rsvped',
+              ticketId: generatedTicketId
+            });
+            generatedTicketIds.push(generatedTicketId);
+          } else if (data.status === 'rsvped' || data.status === 'attended' || data.status === 'registered') {
+            generatedTicketIds.push(data.ticketId);
+          }
+        }
+        
+        if (generatedTicketIds.length > 0) {
+          setTicketId(generatedTicketIds.join(', '));
+          // Use the email as the QR code value since they might have multiple sessions
+          setDocId(formData.email.toLowerCase().trim());
           setIsSuccess(true);
-        } else if (data.status === 'rsvped' || data.status === 'attended' || data.status === 'registered') {
-          // Already have a ticket
-          setTicketId(data.ticketId);
-          setDocId(docSnap.id);
-          setIsSuccess(true);
+        } else {
+           const statuses = querySnapshot.docs.map(d => d.data().status);
+           if (statuses.every(s => s === 'rejected')) {
+             setRetrievalError('Unfortunately, your application(s) could not be approved.');
+           } else {
+             setRetrievalError('Your application is still under review.');
+           }
         }
       } else {
         setRetrievalError('No application found with this email. Please check the spelling or apply for a slot.');
@@ -234,22 +263,26 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                     { value: "Friday Morning", label: "Friday 6 November (morning session 9am - 11:30am)" },
                     { value: "Friday Afternoon", label: "Friday 6 November (afternoon session 12:30 pm - 3:30 pm)" },
                     { value: "Friday Late", label: "Friday 6 November (late afternoon session 4pm - 7pm)" }
-                  ].map((session) => (
-                    <label key={session.value} className="checkbox-label" style={{ margin: 0 }}>
-                      <input 
-                        type="checkbox" 
-                        checked={formData.dayTime.includes(session.value)}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFormData({ ...formData, dayTime: [...formData.dayTime, session.value] });
-                          } else {
-                            setFormData({ ...formData, dayTime: formData.dayTime.filter(v => v !== session.value) });
-                          }
-                        }}
-                      />
-                      <span>{session.label}</span>
-                    </label>
-                  ))}
+                  ].map((session) => {
+                    const isDisabled = existingSessions.includes(session.value);
+                    return (
+                      <label key={session.value} className="checkbox-label" style={{ margin: 0, opacity: isDisabled ? 0.5 : 1 }}>
+                        <input 
+                          type="checkbox" 
+                          disabled={isDisabled}
+                          checked={formData.dayTime.includes(session.value) || isDisabled}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setFormData({ ...formData, dayTime: [...formData.dayTime, session.value] });
+                            } else {
+                              setFormData({ ...formData, dayTime: formData.dayTime.filter(v => v !== session.value) });
+                            }
+                          }}
+                        />
+                        <span>{session.label} {isDisabled && '(Already applied)'}</span>
+                      </label>
+                    );
+                  })}
                 </div>
               </div>
               

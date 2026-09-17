@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import AdminLayout from '../../components/layout/AdminLayout';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import './Admin.css';
 
@@ -31,17 +31,43 @@ export const AdminScanner: React.FC = () => {
       setErrorMsg(null);
       
       try {
-        const docRef = doc(db, 'registrations', decodedText);
-        const docSnap = await getDoc(docRef);
+        // The decodedText is now the email address
+        const q = query(
+          collection(db, 'registrations'),
+          where('email', '==', decodedText.toLowerCase().trim())
+        );
+        const querySnapshot = await getDocs(q);
         
-        if (docSnap.exists()) {
-          const data = docSnap.data() as TicketData;
+        if (!querySnapshot.empty) {
+          let checkedInCount = 0;
+          let alreadyCheckedInCount = 0;
+          let attendeeName = '';
+          let ticketIds: string[] = [];
           
-          if (data.status === 'attended') {
-            setErrorMsg(`Ticket ${data.ticketId} has already been checked in!`);
+          for (const docSnap of querySnapshot.docs) {
+            const data = docSnap.data() as TicketData;
+            attendeeName = data.name || attendeeName;
+            
+            if (data.status === 'rsvped') {
+              await updateDoc(doc(db, 'registrations', docSnap.id), { status: 'attended' });
+              checkedInCount++;
+              ticketIds.push(data.ticketId);
+            } else if (data.status === 'attended') {
+              alreadyCheckedInCount++;
+              ticketIds.push(data.ticketId);
+            }
+          }
+          
+          if (checkedInCount > 0) {
+            setScanResult({ 
+              name: attendeeName, 
+              ticketId: ticketIds.join(', '), 
+              status: 'attended' 
+            });
+          } else if (alreadyCheckedInCount > 0) {
+            setErrorMsg(`All tickets for ${decodedText} have already been checked in!`);
           } else {
-            await updateDoc(docRef, { status: 'attended' });
-            setScanResult(data);
+            setErrorMsg(`No valid RSVP found for ${decodedText}.`);
           }
         } else {
           setErrorMsg("Invalid QR Code. No such registration found.");
