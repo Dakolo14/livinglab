@@ -18,6 +18,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [ticketId, setTicketId] = useState('');
   const [docId, setDocId] = useState(''); // We'll use email as docId for the QR code now
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [existingSessions, setExistingSessions] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -254,35 +255,51 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 />
               </div>
               <div className="input-group">
-                <label>Preferred Sessions (Select all that apply) <span style={{color: '#EF4444'}}>*</span></label>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px', padding: '12px', background: '#F9FAFB', border: '1px solid #D1D5DB', borderRadius: '4px' }}>
-                  {[
-                    { value: "Thursday Morning", label: "Thursday 5 November (morning session 9am - 11:30am)" },
-                    { value: "Thursday Afternoon", label: "Thursday 5 November (afternoon session 12:30 pm - 3:30 pm)" },
-                    { value: "Thursday Late", label: "Thursday 5 November (late afternoon session 4pm - 7pm)" },
-                    { value: "Friday Morning", label: "Friday 6 November (morning session 9am - 11:30am)" },
-                    { value: "Friday Afternoon", label: "Friday 6 November (afternoon session 12:30 pm - 3:30 pm)" },
-                    { value: "Friday Late", label: "Friday 6 November (late afternoon session 4pm - 7pm)" }
-                  ].map((session) => {
-                    const isDisabled = existingSessions.includes(session.value);
-                    return (
-                      <label key={session.value} className="checkbox-label" style={{ margin: 0, opacity: isDisabled ? 0.5 : 1 }}>
-                        <input 
-                          type="checkbox" 
-                          disabled={isDisabled}
-                          checked={formData.dayTime.includes(session.value) || isDisabled}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setFormData({ ...formData, dayTime: [...formData.dayTime, session.value] });
-                            } else {
-                              setFormData({ ...formData, dayTime: formData.dayTime.filter(v => v !== session.value) });
-                            }
-                          }}
-                        />
-                        <span>{session.label} {isDisabled && '(Already applied)'}</span>
-                      </label>
-                    );
-                  })}
+                <label>Preferred Sessions <span style={{color: '#EF4444'}}>*</span></label>
+                <div style={{ position: 'relative' }}>
+                  <div 
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    style={{ padding: '16px', background: '#F9FAFB', border: '1px solid #D1D5DB', borderRadius: '4px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                  >
+                    <span style={{ color: formData.dayTime.length === 0 ? '#9CA3AF' : '#111827' }}>
+                      {formData.dayTime.length === 0 
+                        ? 'Select preferred sessions...' 
+                        : `${formData.dayTime.length} session(s) selected`}
+                    </span>
+                    <span style={{ fontSize: '0.8rem', color: '#6B7280', transform: isDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>▼</span>
+                  </div>
+                  
+                  {isDropdownOpen && (
+                    <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 10, marginTop: '4px', padding: '12px', background: '#ffffff', border: '1px solid #D1D5DB', borderRadius: '4px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', maxHeight: '220px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {[
+                        { value: "Thursday Morning", label: "Thursday 5 November (morning session 9am - 11:30am)" },
+                        { value: "Thursday Afternoon", label: "Thursday 5 November (afternoon session 12:30 pm - 3:30 pm)" },
+                        { value: "Thursday Late", label: "Thursday 5 November (late afternoon session 4pm - 7pm)" },
+                        { value: "Friday Morning", label: "Friday 6 November (morning session 9am - 11:30am)" },
+                        { value: "Friday Afternoon", label: "Friday 6 November (afternoon session 12:30 pm - 3:30 pm)" },
+                        { value: "Friday Late", label: "Friday 6 November (late afternoon session 4pm - 7pm)" }
+                      ].map((session) => {
+                        const isDisabled = existingSessions.includes(session.value);
+                        return (
+                          <label key={session.value} className="checkbox-label" style={{ margin: 0, opacity: isDisabled ? 0.5 : 1 }}>
+                            <input 
+                              type="checkbox" 
+                              disabled={isDisabled}
+                              checked={formData.dayTime.includes(session.value) || isDisabled}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setFormData({ ...formData, dayTime: [...formData.dayTime, session.value] });
+                                } else {
+                                  setFormData({ ...formData, dayTime: formData.dayTime.filter(v => v !== session.value) });
+                                }
+                              }}
+                            />
+                            <span>{session.label} {isDisabled && '(Already applied)'}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
               
