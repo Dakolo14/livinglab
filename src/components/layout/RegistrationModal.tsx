@@ -21,7 +21,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    dayTime: '',
+    dayTime: [] as string[],
   });
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       setIsRetrievalMode(false);
       setRetrievalError('');
       setRegistrationError('');
-      setFormData({ name: '', email: '', dayTime: '' });
+      setFormData({ name: '', email: '', dayTime: [] });
     }, 300);
   };
 
@@ -225,21 +225,32 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 />
               </div>
               <div className="input-group">
-                <label>Day/Time <span style={{color: '#EF4444'}}>*</span></label>
-                <select 
-                  required 
-                  value={formData.dayTime}
-                  onChange={(e) => setFormData({ ...formData, dayTime: e.target.value })}
-                  style={{ width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '4px', fontSize: '1rem' }}
-                >
-                  <option value="" disabled>Select a session</option>
-                  <option value="Thursday Morning">Thursday 5 November (morning session 9am - 11:30am)</option>
-                  <option value="Thursday Afternoon">Thursday 5 November (afternoon session 12:30 pm - 3:30 pm)</option>
-                  <option value="Thursday Late">Thursday 5 November (late afternoon session 4pm - 7pm)</option>
-                  <option value="Friday Morning">Friday 6 November (morning session 9am - 11:30am)</option>
-                  <option value="Friday Afternoon">Friday 6 November (afternoon session 12:30 pm - 3:30 pm)</option>
-                  <option value="Friday Late">Friday 6 November (late afternoon session 4pm - 7pm)</option>
-                </select>
+                <label>Preferred Sessions (Select all that apply) <span style={{color: '#EF4444'}}>*</span></label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px', padding: '12px', background: '#F9FAFB', border: '1px solid #D1D5DB', borderRadius: '4px' }}>
+                  {[
+                    { value: "Thursday Morning", label: "Thursday 5 November (morning session 9am - 11:30am)" },
+                    { value: "Thursday Afternoon", label: "Thursday 5 November (afternoon session 12:30 pm - 3:30 pm)" },
+                    { value: "Thursday Late", label: "Thursday 5 November (late afternoon session 4pm - 7pm)" },
+                    { value: "Friday Morning", label: "Friday 6 November (morning session 9am - 11:30am)" },
+                    { value: "Friday Afternoon", label: "Friday 6 November (afternoon session 12:30 pm - 3:30 pm)" },
+                    { value: "Friday Late", label: "Friday 6 November (late afternoon session 4pm - 7pm)" }
+                  ].map((session) => (
+                    <label key={session.value} className="checkbox-label" style={{ margin: 0 }}>
+                      <input 
+                        type="checkbox" 
+                        checked={formData.dayTime.includes(session.value)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setFormData({ ...formData, dayTime: [...formData.dayTime, session.value] });
+                          } else {
+                            setFormData({ ...formData, dayTime: formData.dayTime.filter(v => v !== session.value) });
+                          }
+                        }}
+                      />
+                      <span>{session.label}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
               
               <div className="compliance-group">
