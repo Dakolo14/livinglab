@@ -25,7 +25,13 @@ const Footer: React.FC = () => {
         </div>
         <div className="footer-col">
           <h4>Join Us</h4>
-          <button className="btn-primary" style={{ padding: '10px 20px', fontSize: '14px' }}>Register Now</button>
+          <button 
+            className="btn-primary" 
+            style={{ padding: '10px 20px', fontSize: '14px' }}
+            onClick={() => window.dispatchEvent(new Event('open-registration'))}
+          >
+            Register Now
+          </button>
         </div>
       </div>
       <div className="footer-bottom">
