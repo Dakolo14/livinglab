@@ -21,6 +21,7 @@ const ConsultationReasons: React.FC = () => {
     <section className="consultation-reasons" id="consultation-reasons">
       <div className="container">
         <h2 className="section-title">MAIN CONSULTATION REASONS</h2>
+        <p className="section-subtitle">Click on a reason to explore our targeted dermatological solutions.</p>
         <div className="reasons-grid">
           {reasons.map((reason) => (
             <div 
