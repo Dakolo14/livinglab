@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronUp } from 'lucide-react';
 import './BackToTop.css';
 
 const BackToTop: React.FC = () => {
@@ -37,7 +38,7 @@ const BackToTop: React.FC = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          ↑
+          <ChevronUp />
         </motion.button>
       )}
     </AnimatePresence>
