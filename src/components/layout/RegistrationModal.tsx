@@ -19,6 +19,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [docId, setDocId] = useState(''); // We'll use email as docId for the QR code now
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [policyModal, setPolicyModal] = useState<'terms' | 'privacy' | null>(null);
   const [existingSessions, setExistingSessions] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -306,7 +307,22 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
               <div className="compliance-group">
                 <label className="checkbox-label">
                   <input type="checkbox" required />
-                  <span>I agree to the <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. *</span>
+                  <span>
+                    I agree to the{' '}
+                    <a 
+                      href="#" 
+                      onClick={(e) => { e.preventDefault(); setPolicyModal('terms'); }}
+                    >
+                      Terms of Service
+                    </a>{' '}
+                    and{' '}
+                    <a 
+                      href="#" 
+                      onClick={(e) => { e.preventDefault(); setPolicyModal('privacy'); }}
+                    >
+                      Privacy Policy
+                    </a>. <span style={{color: '#EF4444'}}>*</span>
+                  </span>
                 </label>
                 <label className="checkbox-label">
                   <input type="checkbox" />
@@ -334,6 +350,45 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
           </div>
         )}
       </div>
+
+      {policyModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ background: 'white', padding: '24px', borderRadius: '8px', width: '90%', maxWidth: '500px', maxHeight: '80vh', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 'bold' }}>
+                {policyModal === 'terms' ? 'Terms of Service' : 'Privacy Policy'}
+              </h3>
+              <button onClick={() => setPolicyModal(null)} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', color: '#6B7280' }}>&times;</button>
+            </div>
+            <div style={{ overflowY: 'auto', flex: 1, paddingRight: '12px', fontSize: '0.9rem', color: '#4B5563', lineHeight: 1.6 }}>
+              {policyModal === 'terms' ? (
+                <>
+                  <p>Welcome to Living Lab Nigeria.</p>
+                  <p>By registering for this event, you agree to comply with and be bound by the following terms and conditions of use. The term 'Living Lab Nigeria' or 'us' or 'we' refers to the owner of the event. The term 'you' refers to the user or viewer of our website and event attendee.</p>
+                  <p><strong>1. Event Access</strong><br/>Access to the event is strictly limited to approved professionals. We reserve the right to revoke any ticket at our discretion.</p>
+                  <p><strong>2. Liability</strong><br/>We are not liable for any personal injury, loss, or damage to property that occurs during the event.</p>
+                  <p><strong>3. Media Release</strong><br/>By attending, you consent to being photographed or filmed for promotional purposes by La Roche-Posay and our partners.</p>
+                </>
+              ) : (
+                <>
+                  <p>Your privacy is important to us.</p>
+                  <p><strong>1. Information Collection</strong><br/>We collect personal and professional information such as your name, email, and medical credentials to verify your eligibility for the Living Lab Nigeria event.</p>
+                  <p><strong>2. Information Use</strong><br/>Your information will be used solely for event registration, check-in, and post-event follow-ups by La Roche-Posay and our partners.</p>
+                  <p><strong>3. Data Security</strong><br/>We implement security measures to maintain the safety of your personal information when you submit your application.</p>
+                  <p><strong>4. Third-Party Disclosure</strong><br/>We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties without your consent, except to trusted partners who assist us in operating our website or event.</p>
+                </>
+              )}
+            </div>
+            <button 
+              className="btn-primary" 
+              onClick={() => setPolicyModal(null)}
+              style={{ marginTop: '24px', width: '100%', padding: '12px' }}
+            >
+              I Understand
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
