@@ -21,7 +21,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    medicalId: '',
+    dayTime: '',
   });
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       setIsRetrievalMode(false);
       setRetrievalError('');
       setRegistrationError('');
-      setFormData({ name: '', email: '', medicalId: '' });
+      setFormData({ name: '', email: '', dayTime: '' });
     }, 300);
   };
 
@@ -200,8 +200,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
         ) : (
           <div className="reg-modal-form-view">
             <h4 className="reg-eyebrow">LIVING LAB NIGERIA 2026</h4>
-            <h2>APPLY FOR A SLOT</h2>
-            <p>Please enter your professional details to apply for an invitation to the event.</p>
+            <h2>LIMITED SLOTS FOR THE EXPERIENCE</h2>
+            <p>Please select your preferred session to apply for an invitation to the event.</p>
             
             <form className="reg-modal-form" onSubmit={handleRegister}>
               <div className="input-group">
@@ -225,14 +225,21 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 />
               </div>
               <div className="input-group">
-                <label>Medical ID / Practice Name <span style={{color: '#EF4444'}}>*</span></label>
-                <input 
-                  type="text" 
+                <label>Day/Time <span style={{color: '#EF4444'}}>*</span></label>
+                <select 
                   required 
-                  placeholder="e.g., MD12345 / Oakwood Clinic" 
-                  value={formData.medicalId}
-                  onChange={(e) => setFormData({ ...formData, medicalId: e.target.value })}
-                />
+                  value={formData.dayTime}
+                  onChange={(e) => setFormData({ ...formData, dayTime: e.target.value })}
+                  style={{ width: '100%', padding: '12px', border: '1px solid #d1d5db', borderRadius: '4px', fontSize: '1rem' }}
+                >
+                  <option value="" disabled>Select a session</option>
+                  <option value="Thursday Morning">Thursday 5 November (morning session 9am - 11:30am)</option>
+                  <option value="Thursday Afternoon">Thursday 5 November (afternoon session 12:30 pm - 3:30 pm)</option>
+                  <option value="Thursday Late">Thursday 5 November (late afternoon session 4pm - 7pm)</option>
+                  <option value="Friday Morning">Friday 6 November (morning session 9am - 11:30am)</option>
+                  <option value="Friday Afternoon">Friday 6 November (afternoon session 12:30 pm - 3:30 pm)</option>
+                  <option value="Friday Late">Friday 6 November (late afternoon session 4pm - 7pm)</option>
+                </select>
               </div>
               
               <div className="compliance-group">
