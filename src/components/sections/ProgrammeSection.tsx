@@ -10,27 +10,21 @@ const scheduleData: Record<number, Array<{time: string, experience: string, audi
     { time: '07:30 PM - LATE', experience: 'Living Lab Opening Gala', audience: 'All VIP & B2B Guests', location: 'Main Atrium' }
   ],
   2: [
-    { time: '10:00 AM - 12:00 PM', experience: 'Morning Lab Access', audience: 'Skincare Enthusiasts (Slot 1)', location: 'Full Lab Circuit' },
-    { time: '01:00 PM - 03:00 PM', experience: 'Sun Science Masterclass', audience: 'All Attendees', location: 'UV Camera Zone' },
-    { time: '03:30 PM - 06:30 PM', experience: 'Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 2)', location: 'Full Lab Circuit' }
+    { time: '09:00 AM - 11:30 AM', experience: 'Morning Lab Access', audience: 'Skincare Enthusiasts (Slot 1)', location: 'Full Lab Circuit' },
+    { time: '12:30 PM - 03:30 PM', experience: 'Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 2)', location: 'Full Lab Circuit' },
+    { time: '04:00 PM - 07:00 PM', experience: 'Late Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 3)', location: 'Full Lab Circuit' }
   ],
   3: [
-    { time: '10:00 AM - 12:00 PM', experience: 'Morning Lab Access', audience: 'Skincare Enthusiasts (Slot 1)', location: 'Full Lab Circuit' },
-    { time: '12:30 PM - 02:30 PM', experience: 'Acne Myth-Busting Panel', audience: 'All Attendees', location: 'The Acne Lab' },
-    { time: '03:30 PM - 06:30 PM', experience: 'Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 2)', location: 'Full Lab Circuit' }
-  ],
-  4: [
-    { time: '10:00 AM - 12:00 PM', experience: 'Morning Lab Access', audience: 'Skincare Enthusiasts (Slot 1)', location: 'Full Lab Circuit' },
-    { time: '01:00 PM - 02:00 PM', experience: 'The Future of Pigmentation', audience: 'All Attendees', location: 'Melasyl Hub' },
-    { time: '03:00 PM - 05:00 PM', experience: 'Closing Lab Access', audience: 'Skincare Enthusiasts (Slot 2)', location: 'Full Lab Circuit' }
+    { time: '09:00 AM - 11:30 AM', experience: 'Morning Lab Access', audience: 'Skincare Enthusiasts (Slot 1)', location: 'Full Lab Circuit' },
+    { time: '12:30 PM - 03:30 PM', experience: 'Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 2)', location: 'Full Lab Circuit' },
+    { time: '04:00 PM - 07:00 PM', experience: 'Closing Lab Access', audience: 'Skincare Enthusiasts (Slot 3)', location: 'Full Lab Circuit' }
   ]
 };
 
 const tabs = [
-  { id: 1, title: 'DAY 01', subtitle: 'B2B & VIP', date: 'NOV 3' },
-  { id: 2, title: 'DAY 02', subtitle: 'B2C OPEN', date: 'NOV 4' },
-  { id: 3, title: 'DAY 03', subtitle: 'B2C OPEN', date: 'NOV 5' },
-  { id: 4, title: 'DAY 04', subtitle: 'B2C CLOSING', date: 'NOV 6' },
+  { id: 1, title: 'DAY 01', subtitle: 'B2B & VIP', date: 'NOV 4' },
+  { id: 2, title: 'DAY 02', subtitle: 'B2C OPEN', date: 'NOV 5' },
+  { id: 3, title: 'DAY 03', subtitle: 'B2C CLOSING', date: 'NOV 6' },
 ];
 
 interface ProgrammeSectionProps {
@@ -47,7 +41,7 @@ const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false,
         {!hideHeader && (
           <div className="programme-header">
             <h2>THE PROGRAMME</h2>
-            <p>Four Days. Five Worlds. One Living Lab.</p>
+            <p>Three Days. Five Worlds. One Living Lab.</p>
           </div>
         )}
 
