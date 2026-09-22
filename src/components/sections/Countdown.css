@@ -14,7 +14,7 @@
 }
 
 .countdown-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 2px;
   margin: 0;
@@ -34,20 +34,20 @@
 }
 
 .time-value {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
 }
 
 .time-label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 2px;
   margin-top: 5px;
   opacity: 0.9;
 }
 
 .time-separator {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-top: -15px;
   opacity: 0.6;
@@ -60,14 +60,3 @@
   }
 }
 
-
-/* Mobile Responsiveness Auto-Appended */
-@media (max-width: 768px) {
-
-  .countdown { padding: 60px 20px; }
-  .countdown h2 { font-size: 2rem; }
-  .timer { flex-wrap: wrap; gap: 20px; }
-  .time-unit span { font-size: 2.5rem; }
-  .time-unit label { font-size: 0.75rem; }
-
-}
