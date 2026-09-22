@@ -90,7 +90,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
               transition={{ type: "tween", ease: "easeInOut", duration: 0.6 }}
               onClick={() => handleReelClick(reel.id)}
               whileHover={!isActive ? { opacity: 0.9 } : {}}
-              drag={isActive ? "x" : false}
+              drag={isMobile && isActive ? "x" : false}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.2}
               onDragEnd={(_, { offset }) => {
