@@ -75,13 +75,81 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.warn('TERMII_API_KEY is not set in environment variables');
     }
 
-    // TODO: Add Resend Email logic here once the key is provided
+    const resendApiKey = process.env.RESEND_API_KEY;
+    let emailSuccess = false;
+    let resendResponse = null;
+
+    if (resendApiKey && email) {
+      // Create a URL-friendly version of the email for the QR code API
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(email)}`;
+      
+      const emailHtml = `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+          <h2 style="color: #00AEEF;">LIVING LAB NIGERIA 2026</h2>
+          <p>Hi ${name.split(' ')[0]},</p>
+          <p>Your registration is confirmed! We are thrilled to host you.</p>
+          
+          <div style="background-color: #F3F4F6; padding: 20px; border-radius: 8px; text-align: center; margin: 24px 0;">
+            <p style="margin: 0; font-size: 0.9rem; color: #6B7280; text-transform: uppercase;">Your Ticket ID</p>
+            <p style="margin: 8px 0 0 0; font-size: 1.5rem; font-family: monospace; font-weight: bold; color: #111827;">
+              ${ticketId}
+            </p>
+          </div>
+
+          <div style="background-color: #00AEEF; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 24px;">
+            <h3 style="margin: 0 0 8px 0;">🎉 15% Exclusive Discount!</h3>
+            <p style="margin: 0;">Get 15% off on all purchases at the stand in the event!</p>
+            <p style="margin: 12px 0 0 0; font-size: 0.9rem;">Use Code: <span style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 4px; font-weight: bold;">LRP15</span></p>
+          </div>
+          
+          <div style="text-align: center; margin: 32px 0;">
+            <p style="margin-bottom: 16px; font-weight: bold;">Scan this QR code at the entrance:</p>
+            <img src="${qrCodeUrl}" alt="Your Ticket QR Code" style="width: 200px; height: 200px; border: 1px solid #E5E7EB; border-radius: 8px; padding: 12px;" />
+          </div>
+
+          <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;" />
+          <p style="font-size: 0.8rem; color: #9CA3AF; text-align: center;">
+            This email was sent automatically. Please do not reply.
+          </p>
+        </div>
+      `;
+
+      try {
+        const response = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': \`Bearer \${resendApiKey}\`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: "La Roche-Posay <lrp@livinglabnigeria.com>",
+            to: [email],
+            subject: "Your Ticket for Living Lab Nigeria 2026",
+            html: emailHtml,
+          }),
+        });
+        
+        const data = await response.json();
+        resendResponse = data;
+        
+        if (response.ok) {
+          emailSuccess = true;
+        } else {
+          console.error('Resend API Error:', data);
+        }
+      } catch (emailError) {
+        console.error('Resend Fetch Error:', emailError);
+      }
+    } else {
+      console.warn('RESEND_API_KEY is not set or email is missing');
+    }
     
     return res.status(200).json({ 
       success: true, 
       smsSent: smsSuccess,
       termiiResponse,
-      emailSent: false // Pending Resend integration
+      emailSent: emailSuccess,
+      resendResponse
     });
   } catch (error) {
     console.error('API Route Error:', error);
