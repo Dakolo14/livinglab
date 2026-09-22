@@ -47,15 +47,9 @@
 
 .journey-step {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
+  gap: 60px;
   position: relative;
   z-index: 2;
-}
-
-.step-top-row {
-  display: flex;
-  gap: 60px;
 }
 
 .step-number {
@@ -72,6 +66,7 @@
 
 .step-content {
   flex-grow: 1;
+  padding-top: 10px;
 }
 
 .step-content h3 {
@@ -147,7 +142,7 @@
   .journey-timeline::before {
     left: 20px;
   }
-  .step-top-row {
+  .journey-step {
     gap: 20px;
   }
   .step-number {
@@ -157,4 +152,8 @@
   }
   .step-content h3 { font-size: 1.5rem; }
   .step-content p { font-size: 1rem; }
+  .step-visual-placeholder { 
+    margin-left: -60px;
+    width: calc(100% + 60px);
+  }
 }
