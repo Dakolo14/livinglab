@@ -112,6 +112,21 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       setTicketId(generatedTicketId);
       setDocId(formData.email.toLowerCase().trim());
       setIsSuccess(true);
+      
+      // Trigger the backend API to send the SMS (and email later)
+      fetch('/api/send-ticket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone: formData.phone,
+          ticketId: generatedTicketId,
+          name: formData.name,
+          email: formData.email.toLowerCase().trim()
+        })
+      }).catch(err => console.error('Failed to trigger notifications:', err));
+      
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("There was an error submitting your registration. Please try again.");
