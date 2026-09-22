@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import SEO from '../components/layout/SEO';
+import BackToTop from '../components/layout/BackToTop';
 import './Policy.css';
 
 const PrivacyPolicy: React.FC = () => {
@@ -49,6 +50,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 };
