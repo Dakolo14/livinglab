@@ -93,7 +93,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
               drag={isActive ? "x" : false}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.2}
-              onDragEnd={(e, { offset }) => {
+              onDragEnd={(_, { offset }) => {
                 const swipe = offset.x;
                 if (swipe < -40) {
                   setActiveReelId(activeReelId === 5 ? 1 : activeReelId + 1);
