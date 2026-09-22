@@ -47,9 +47,15 @@
 
 .journey-step {
   display: flex;
-  gap: 60px;
+  flex-direction: column;
+  gap: 30px;
   position: relative;
   z-index: 2;
+}
+
+.step-top-row {
+  display: flex;
+  gap: 60px;
 }
 
 .step-number {
@@ -66,7 +72,6 @@
 
 .step-content {
   flex-grow: 1;
-  padding-top: 10px;
 }
 
 .step-content h3 {
@@ -142,7 +147,7 @@
   .journey-timeline::before {
     left: 20px;
   }
-  .journey-step {
+  .step-top-row {
     gap: 20px;
   }
   .step-number {

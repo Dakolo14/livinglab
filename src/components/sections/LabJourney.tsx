@@ -27,14 +27,16 @@ const LabJourney: React.FC = () => {
               key={step.id} 
               className="journey-step"
             >
-              <div className="step-number">{step.id}</div>
-              <div className="step-content">
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-                <div className="step-visual-placeholder">
-                  <div className="visual-scan-line"></div>
-                  <span className="placeholder-text">Experience {step.id} Visual Hook</span>
+              <div className="step-top-row">
+                <div className="step-number">{step.id}</div>
+                <div className="step-content">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
                 </div>
+              </div>
+              <div className="step-visual-placeholder">
+                <div className="visual-scan-line"></div>
+                <span className="placeholder-text">Experience {step.id} Visual Hook</span>
               </div>
             </div>
           ))}
