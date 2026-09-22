@@ -56,7 +56,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
           else if (indexDiff < -2) indexDiff += 5;
           
           let position = indexDiff;
-          let x = position === 0 ? 0 : position === -1 ? -110 : position === 1 ? 110 : position === -2 ? -200 : 200;
+          let x = position === 0 ? 0 : position === -1 ? -85 : position === 1 ? 85 : position === -2 ? -170 : 170;
           let scale = position === 0 ? 1 : position === 1 || position === -1 ? 0.8 : 0.6;
           let zIndex = position === 0 ? 5 : position === 1 || position === -1 ? 4 : 3;
           let isActive = position === 0;
@@ -74,6 +74,17 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
               transition={{ type: "tween", ease: "easeInOut", duration: 0.6 }}
               onClick={() => handleReelClick(reel.id)}
               whileHover={!isActive ? { opacity: 0.9 } : {}}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(e, { offset }) => {
+                const swipe = offset.x;
+                if (swipe < -40) {
+                  setActiveReelId(activeReelId === 5 ? 1 : activeReelId + 1);
+                } else if (swipe > 40) {
+                  setActiveReelId(activeReelId === 1 ? 5 : activeReelId - 1);
+                }
+              }}
             >
               <div className="video-frame">
                 {isActive && isVideoMoved ? (
