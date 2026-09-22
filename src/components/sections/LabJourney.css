@@ -163,8 +163,9 @@
   .step-content h3 { font-size: 1.5rem; }
   .step-content p { font-size: 1rem; }
   .step-visual-placeholder { 
-    margin-top: 10px;
-    box-shadow: 0 -20px 0 0 #ffffff, 0 20px 0 0 #ffffff; /* Masks the timeline line to create a gap */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 -40px 0 0 var(--bg-light, #ffffff), 0 40px 0 0 var(--bg-light, #ffffff), -20px 0 0 0 var(--bg-light, #ffffff);
     position: relative;
     z-index: 5;
   }
