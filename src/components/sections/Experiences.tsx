@@ -56,8 +56,8 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
           else if (indexDiff < -2) indexDiff += 5;
           
           let position = indexDiff;
-          let x = position === 0 ? 0 : position === -1 ? -85 : position === 1 ? 85 : position === -2 ? -170 : 170;
-          let scale = position === 0 ? 1 : position === 1 || position === -1 ? 0.8 : 0.6;
+          let x = position === 0 ? 0 : position === -1 ? -105 : position === 1 ? 105 : position === -2 ? -210 : 210;
+          let scale = position === 0 ? 1 : position === 1 || position === -1 ? 0.9 : 0.8;
           let zIndex = position === 0 ? 5 : position === 1 || position === -1 ? 4 : 3;
           let isActive = position === 0;
 
