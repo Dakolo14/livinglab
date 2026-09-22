@@ -87,6 +87,11 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       return;
     }
     
+    if (existingSessions.length > 0) {
+      setRegistrationError('This email has already been registered for a session. You can only register once.');
+      return;
+    }
+    
     setIsSubmitting(true);
     setRegistrationError('');
     
@@ -184,10 +189,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                   )}
                 </div>
                 {formData.email && formData.email.includes('@') && existingSessions.length > 0 && (
-                  <div style={{ fontSize: '0.8rem', color: existingSessions.length >= 6 ? '#EF4444' : '#10B981', marginTop: '6px' }}>
-                    {existingSessions.length >= 6 
-                      ? "You've registered for all possible sessions." 
-                      : "You've previously registered. You can select another session."}
+                  <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>
+                    This email is already registered. You can only register for one session.
                   </div>
                 )}
               </div>
@@ -236,7 +239,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                         { value: "Friday Afternoon", label: "Friday 6 November (afternoon session 12:30 pm - 3:30 pm)" },
                         { value: "Friday Late", label: "Friday 6 November (late afternoon session 4pm - 7pm)" }
                       ].map((session) => {
-                        const isDisabled = existingSessions.includes(session.value);
+                        const isDisabled = existingSessions.length > 0;
                         return (
                           <label key={session.value} className="checkbox-label" style={{ margin: 0, opacity: isDisabled ? 0.5 : 1 }}>
                             <input 
@@ -294,7 +297,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 </div>
               )}
 
-              <button type="submit" className="btn-primary w-100" disabled={isSubmitting}>
+              <button type="submit" className="btn-primary w-100" disabled={isSubmitting || existingSessions.length > 0}>
                 {isSubmitting ? 'SUBMITTING...' : 'REGISTER & GET TICKET'}
               </button>
             </form>
