@@ -72,7 +72,6 @@
 .step-content {
   grid-area: content;
   flex-grow: 1;
-  padding-top: 10px;
 }
 
 .step-content h3 {
