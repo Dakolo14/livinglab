@@ -131,39 +131,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     }
   };
 
-            await updateDoc(doc(db, 'registrations', docSnap.id), {
-              status: 'rsvped',
-              ticketId: generatedTicketId
-            });
-            generatedTicketIds.push(generatedTicketId);
-          } else if (data.status === 'rsvped' || data.status === 'attended' || data.status === 'registered') {
-            generatedTicketIds.push(data.ticketId);
-          }
-        }
-        
-        if (generatedTicketIds.length > 0) {
-          setTicketId(generatedTicketIds.join(', '));
-          // Use the email as the QR code value since they might have multiple sessions
-          setDocId(formData.email.toLowerCase().trim());
-          setIsSuccess(true);
-        } else {
-           const statuses = querySnapshot.docs.map(d => d.data().status);
-           if (statuses.every(s => s === 'rejected')) {
-             setRetrievalError('Unfortunately, your application(s) could not be approved.');
-           } else {
-             setRetrievalError('Your application is still under review.');
-           }
-        }
-      } else {
-        setRetrievalError('No application found with this email. Please check the spelling or apply for a slot.');
-      }
-    } catch (error) {
-      console.error("Error retrieving ticket: ", error);
-      setRetrievalError('Network error while retrieving ticket. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <div className="reg-modal-backdrop" onClick={handleClose}>
