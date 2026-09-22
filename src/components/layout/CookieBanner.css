@@ -57,19 +57,22 @@
 
 @media (max-width: 768px) {
   .cookie-banner {
-    flex-direction: column;
     padding: 12px 16px;
-    align-items: stretch;
-    text-align: center;
-    gap: 12px;
   }
 
-  .cookie-content h3 {
+  .cookie-banner-content {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .cookie-text h3 {
     font-size: 0.95rem;
     margin-bottom: 4px;
   }
 
-  .cookie-content p {
+  .cookie-text p {
     font-size: 0.75rem;
   }
 
@@ -79,9 +82,9 @@
     gap: 8px;
   }
 
-  .btn-cookie {
+  .cookie-actions button {
     width: 100%;
     padding: 10px 16px;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
   }
 }

@@ -168,7 +168,8 @@
     position: relative;
     z-index: 101;
   }
-  .header-logo img { height: 80px; }
+  .header-logo img { height: 100px; }
+  .site-header.shrunk .header-logo img { height: 60px; }
   
   .hamburger-menu { display: flex; }
   
