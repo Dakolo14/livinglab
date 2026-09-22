@@ -7,10 +7,7 @@ const Partners: React.FC = () => {
       <div className="container">
         <p className="partners-label">IN PARTNERSHIP WITH</p>
         <div className="partners-grid">
-          <div className="partner-logo">Konga</div>
-          <div className="partner-logo">Media Partner 1</div>
-          <div className="partner-logo">Media Partner 2</div>
-          <div className="partner-logo">Retail Partner</div>
+          <img src="/partner1.png" alt="Konga Health" className="partner-logo-img" />
         </div>
       </div>
     </section>
