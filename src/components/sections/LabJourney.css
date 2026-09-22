@@ -33,18 +33,7 @@
   position: relative;
 }
 
-/* The vertical connecting line */
-.journey-timeline::before {
-  content: '';
-  display: none; /* Removed on desktop */
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 60px;
-  width: 2px;
-  background: #E5E7EB;
-  z-index: 1;
-}
+/* The vertical connecting line has been removed as per user request */
 
 .journey-step {
   display: grid;
@@ -145,10 +134,6 @@
   .journey-header h2 { font-size: 2.5rem; }
   .journey-header p { padding: 0 20px; }
   .journey-timeline { gap: 40px; }
-  .journey-timeline::before {
-    display: block; /* Restore on mobile if needed, or remove completely? The user said "In desktop, just remove the line" */
-    left: 20px;
-  }
   .journey-step {
     grid-template-columns: 40px 1fr;
     grid-template-areas: 
@@ -167,7 +152,6 @@
     height: auto;
     aspect-ratio: 16/9;
     margin-bottom: 30px;
-    box-shadow: 0 -40px 0 0 var(--bg-light, #ffffff), 0 40px 0 0 var(--bg-light, #ffffff), -20px 0 0 0 var(--bg-light, #ffffff);
     position: relative;
     z-index: 5;
   }
