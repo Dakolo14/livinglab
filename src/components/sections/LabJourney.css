@@ -84,7 +84,8 @@
 
 .step-visual-placeholder {
   width: 100%;
-  height: 300px;
+  aspect-ratio: 16/9;
+  height: auto;
   background-color: #F3F4F6;
   border-radius: 12px;
   position: relative;
@@ -151,5 +152,4 @@
   }
   .step-content h3 { font-size: 1.5rem; }
   .step-content p { font-size: 1rem; }
-  .step-visual-placeholder { height: 320px; }
 }

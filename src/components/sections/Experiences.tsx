@@ -105,7 +105,6 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
               <div className="video-frame">
                 {isActive && isVideoMoved ? (
                   <motion.div
-                    layoutId="hero-video"
                     style={{ width: '100%', height: '100%', backgroundColor: '#4B5563', position: 'relative' }}
                     transition={{ type: "tween", ease: "easeInOut", duration: 0.8 }}
                   >
@@ -181,7 +180,6 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
             onClick={() => setExpandedReel(null)}
           >
             <motion.div 
-              layoutId="hero-video" // Match the layoutId of the active video
               className="reel-modal-content"
               onClick={(e) => e.stopPropagation()}
             >

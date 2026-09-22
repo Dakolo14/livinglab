@@ -29,7 +29,6 @@ const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
     <section className="hero" id="home">
       {!isVideoMoved && (
         <motion.div 
-          layoutId="hero-video" // Restored shared layout ID
           className="hero-video-bg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
