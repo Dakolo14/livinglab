@@ -42,17 +42,23 @@
   left: 60px;
   width: 2px;
   background: #E5E7EB;
-  z-index: 1;
+  z-index: 3; /* Draw over the image on mobile */
+  pointer-events: none;
 }
 
 .journey-step {
-  display: flex;
-  gap: 60px;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-template-areas: 
+    "number content"
+    ".      visual";
+  gap: 20px 60px;
   position: relative;
   z-index: 2;
 }
 
 .step-number {
+  grid-area: number;
   font-size: 4rem;
   font-weight: 700;
   color: #00AEEF; /* LRP Blue */
@@ -65,6 +71,7 @@
 }
 
 .step-content {
+  grid-area: content;
   flex-grow: 1;
   padding-top: 10px;
 }
@@ -83,6 +90,7 @@
 }
 
 .step-visual-placeholder {
+  grid-area: visual;
   width: 100%;
   aspect-ratio: 16/9;
   height: auto;
@@ -143,7 +151,11 @@
     left: 20px;
   }
   .journey-step {
-    gap: 20px;
+    grid-template-columns: 40px 1fr;
+    grid-template-areas: 
+      "number content"
+      "visual visual"; /* Spans both columns on mobile */
+    gap: 20px 20px;
   }
   .step-number {
     font-size: 2rem;
