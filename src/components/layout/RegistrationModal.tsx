@@ -13,8 +13,6 @@ interface RegistrationModalProps {
 export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: propIsOpen, onClose: propOnClose }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isRetrievalMode, setIsRetrievalMode] = useState(false);
-  const [retrievalError, setRetrievalError] = useState('');
   const [registrationError, setRegistrationError] = useState('');
   const [ticketId, setTicketId] = useState('');
   const [docId, setDocId] = useState(''); // We'll use email as docId for the QR code now
@@ -74,8 +72,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     if (propOnClose) propOnClose();
     setTimeout(() => {
       setIsSuccess(false);
-      setIsRetrievalMode(false);
-      setRetrievalError('');
       setRegistrationError('');
       setFormData({ name: '', email: '', phone: '', dayTime: '', marketingConsent: false });
       setExistingSessions([]);
@@ -135,24 +131,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     }
   };
 
-  const handleRetrieveTicket = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setRetrievalError('');
-    try {
-      const q = query(
-        collection(db, 'registrations'), 
-        where('email', '==', formData.email.toLowerCase().trim())
-      );
-      const querySnapshot = await getDocs(q);
-      
-      if (!querySnapshot.empty) {
-        let generatedTicketIds: string[] = [];
-        
-        for (const docSnap of querySnapshot.docs) {
-          const data = docSnap.data();
-          if (data.status === 'invited') {
-            const generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
             await updateDoc(doc(db, 'registrations', docSnap.id), {
               status: 'rsvped',
               ticketId: generatedTicketId
