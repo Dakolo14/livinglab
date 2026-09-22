@@ -42,8 +42,7 @@
   left: 60px;
   width: 2px;
   background: #E5E7EB;
-  z-index: 3; /* Draw over the image on mobile */
-  pointer-events: none;
+  z-index: 1;
 }
 
 .journey-step {
@@ -164,4 +163,10 @@
   }
   .step-content h3 { font-size: 1.5rem; }
   .step-content p { font-size: 1rem; }
+  .step-visual-placeholder { 
+    margin-top: 10px;
+    box-shadow: 0 -20px 0 0 #ffffff, 0 20px 0 0 #ffffff; /* Masks the timeline line to create a gap */
+    position: relative;
+    z-index: 5;
+  }
 }
