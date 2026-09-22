@@ -26,6 +26,10 @@
   padding: 0;
 }
 
+html {
+  background-color: var(--neutral-bg);
+}
+
 body {
   font-family: var(--font-main);
   background-color: var(--neutral-bg);
