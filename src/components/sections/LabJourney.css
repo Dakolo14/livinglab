@@ -36,6 +36,7 @@
 /* The vertical connecting line */
 .journey-timeline::before {
   content: '';
+  display: none; /* Removed on desktop */
   position: absolute;
   top: 0;
   bottom: 0;
@@ -145,6 +146,7 @@
   .journey-header p { padding: 0 20px; }
   .journey-timeline { gap: 40px; }
   .journey-timeline::before {
+    display: block; /* Restore on mobile if needed, or remove completely? The user said "In desktop, just remove the line" */
     left: 20px;
   }
   .journey-step {
