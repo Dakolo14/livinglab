@@ -80,6 +80,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
             <motion.div 
               key={reel.id}
               className={`exp-card ${isActive ? 'active' : 'inactive'}`}
+              style={{ touchAction: 'pan-y' }}
               animate={{ 
                 x: `${x}%`, 
                 scale: scale, 
