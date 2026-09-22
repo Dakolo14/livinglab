@@ -26,6 +26,14 @@ const reelColors: Record<number, string> = {
 
 const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId, isVideoMoved }) => {
   const [expandedReel, setExpandedReel] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize(); // initial check
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleReelClick = (id: number) => {
     if (activeReelId === id) {
@@ -56,8 +64,15 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
           else if (indexDiff < -2) indexDiff += 5;
           
           let position = indexDiff;
-          let x = position === 0 ? 0 : position === -1 ? -105 : position === 1 ? 105 : position === -2 ? -210 : 210;
-          let scale = position === 0 ? 1 : position === 1 || position === -1 ? 0.9 : 0.8;
+          let x = position === 0 ? 0 
+                : position === -1 ? (isMobile ? -105 : -110) 
+                : position === 1 ? (isMobile ? 105 : 110) 
+                : position === -2 ? (isMobile ? -210 : -200) 
+                : (isMobile ? 210 : 200);
+          
+          let scale = position === 0 ? 1 
+                    : position === 1 || position === -1 ? (isMobile ? 0.9 : 0.8) 
+                    : (isMobile ? 0.8 : 0.6);
           let zIndex = position === 0 ? 5 : position === 1 || position === -1 ? 4 : 3;
           let isActive = position === 0;
 
