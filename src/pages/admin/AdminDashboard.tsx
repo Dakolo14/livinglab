@@ -12,6 +12,7 @@ interface Attendee {
   phone?: string;
   session: string;
   status: string;
+  marketingConsent?: boolean;
 }
 
 interface GroupedAttendee {
@@ -77,7 +78,7 @@ export const AdminDashboard: React.FC = () => {
 
     try {
       await updateDoc(doc(db, 'registrations', docId), {
-        status: 'rsvped' // Revert to RSVPed so they still have a valid ticket
+        status: 'registered' // Revert to registered so they still have a valid ticket
       });
     } catch (error) {
       console.error("Error updating status:", error);
@@ -126,7 +127,7 @@ export const AdminDashboard: React.FC = () => {
   const handleExportCSV = () => {
     if (attendees.length === 0) return;
     
-    const headers = ['Ticket ID', 'Name', 'Email', 'Phone', 'Session', 'Status'];
+    const headers = ['Ticket ID', 'Name', 'Email', 'Phone', 'Session', 'Status', 'Marketing Consent'];
     const csvRows = [headers.join(',')];
     
     attendees.forEach(a => {
@@ -136,7 +137,8 @@ export const AdminDashboard: React.FC = () => {
         `"${a.email}"`,
         `"${a.phone || ''}"`,
         `"${a.session}"`,
-        `"${a.status}"`
+        `"${a.status}"`,
+        `"${a.marketingConsent ? 'Yes' : 'No'}"`
       ];
       csvRows.push(values.join(','));
     });
@@ -386,7 +388,10 @@ export const AdminDashboard: React.FC = () => {
           <div className="admin-modal" style={{ maxWidth: '600px', width: '90%' }}>
             <h3>Manage Applicant</h3>
             <p style={{ marginBottom: '8px' }}><strong>{manageModalUser.name}</strong> ({manageModalUser.email})</p>
-            {manageModalUser.phone && <p style={{ marginBottom: '24px', color: '#64748B', fontSize: '0.9rem' }}>Phone: {manageModalUser.phone}</p>}
+            {manageModalUser.phone && <p style={{ marginBottom: '4px', color: '#64748B', fontSize: '0.9rem' }}>Phone: {manageModalUser.phone}</p>}
+            <p style={{ marginBottom: '24px', color: manageModalUser.sessions.some(s => s.marketingConsent) ? '#10B981' : '#64748B', fontSize: '0.9rem' }}>
+              Marketing Consent: {manageModalUser.sessions.some(s => s.marketingConsent) ? '✅ Yes' : '❌ No'}
+            </p>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '400px', overflowY: 'auto' }}>
               {manageModalUser.sessions.map(session => (
