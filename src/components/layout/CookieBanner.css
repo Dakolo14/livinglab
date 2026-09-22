@@ -48,6 +48,8 @@
   background-color: transparent;
   color: #ffffff;
   border-color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
 .cookie-actions .btn-secondary:hover {
