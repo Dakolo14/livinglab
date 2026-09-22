@@ -134,6 +134,8 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                     {reel.id === 3 ? (
                        <video 
                          src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
+                         autoPlay
+                         loop
                          muted 
                          playsInline
                          style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
