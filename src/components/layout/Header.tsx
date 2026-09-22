@@ -27,13 +27,9 @@ const Header: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
-  const isExperts = location.pathname === '/experts';
-  const isLabRoutes = location.pathname === '/lab-routes';
-  const isScience = location.pathname === '/science';
-  const isProgramme = location.pathname === '/programme';
-  
-  const isSubpage = isExperts || isLabRoutes || isScience || isProgramme;
-  const isDarkText = isScrolled || location.pathname === '/v1' || location.pathname === '/test' || isSubpage || isMobileMenuOpen;
+  const isHome = location.pathname === '/' || location.pathname === '/v1';
+  const isSubpage = !isHome;
+  const isDarkText = isScrolled || location.pathname === '/test' || isSubpage || isMobileMenuOpen;
   const isSolidBg = isScrolled || isSubpage || isMobileMenuOpen;
   const isShrunk = isScrolled || isSubpage;
 
