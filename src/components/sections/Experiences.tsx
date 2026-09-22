@@ -115,7 +115,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                         loop 
                         muted 
                         playsInline
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
                       />
                     ) : (
                       <div style={{ width: '100%', height: '100%', backgroundColor: reelColors[reel.id] || '#4B5563' }} />
@@ -135,7 +135,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                          src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
                          muted 
                          playsInline
-                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                         style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
                        />
                     ) : (
                        <div style={{ width: '100%', height: '100%', backgroundColor: reelColors[reel.id] || '#4B5563' }} />
