@@ -23,7 +23,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    phone: '+234 ',
     dayTime: '',
     marketingConsent: false,
   });
@@ -212,7 +212,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                   required 
                   placeholder="+234 800 000 0000" 
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(e) => {
+                    let val = e.target.value;
+                    if (!val.startsWith('+234 ')) {
+                      val = '+234 ' + val.replace('+234', '').trim();
+                    }
+                    setFormData({ ...formData, phone: val })
+                  }}
                 />
               </div>
               <div className="input-group">
