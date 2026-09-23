@@ -3,6 +3,7 @@ import AdminLayout from '../../components/layout/AdminLayout';
 import { collection, onSnapshot, doc, updateDoc, query, orderBy } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import './Admin.css';
+import { BroadcastTab } from './BroadcastTab';
 
 interface Attendee {
   docId: string;
@@ -24,6 +25,7 @@ interface GroupedAttendee {
 }
 
 export const AdminDashboard: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'attendees' | 'broadcasts'>('attendees');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBy, setFilterBy] = useState('all');
   const [attendees, setAttendees] = useState<Attendee[]>([]);
@@ -154,37 +156,6 @@ export const AdminDashboard: React.FC = () => {
     document.body.removeChild(a);
   };
 
-  const generateEmail = (group: GroupedAttendee) => {
-    const approved = group.sessions.filter(s => s.status === 'invited' || s.status === 'rsvped' || s.status === 'registered' || s.status === 'attended');
-    const rejected = group.sessions.filter(s => s.status === 'rejected');
-    
-    let subject = "";
-    let body = "";
-    
-    if (approved.length > 0) {
-      subject = "You're Invited! Living Lab Nigeria 2026";
-      body = `Congratulations ${group.name}!\n\nWe are thrilled to invite you to the exclusive La Roche-Posay Living Lab Nigeria 2026. Your application has been approved for the following session(s):\n`;
-      approved.forEach(s => {
-        body += `- ${s.session}\n`;
-      });
-      body += `\nPlease return to the website and enter your email to claim your digital ticket.\n\n`;
-      
-      if (rejected.length > 0) {
-        body += `Please note that your application for the following session(s) could not be accommodated, as those specific timings are reserved for a different professional group (B2B/B2C):\n`;
-        rejected.forEach(s => {
-          body += `- ${s.session}\n`;
-        });
-        body += `\nHowever, you can still catch all the highlights from those sessions via our live stream!\n\n`;
-      }
-      body += `Warm regards,\nThe Living Lab Nigeria Team`;
-    } else {
-      subject = "Update on your Living Lab Nigeria Application";
-      body = `Dear ${group.name},\n\nThank you for applying to attend Living Lab Nigeria 2026. Unfortunately, due to capacity and audience constraints for the sessions you selected, we are unable to approve your application at this time.\n\nYou can still catch all the highlights via our live stream on the day of the event.\n\nWarm regards,\nThe Living Lab Nigeria Team`;
-    }
-    
-    const mailtoLink = `mailto:${group.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-  };
 
   const groupedAttendees = React.useMemo(() => {
     const map = new Map<string, GroupedAttendee>();
@@ -261,7 +232,34 @@ export const AdminDashboard: React.FC = () => {
         </div>
       </div>
       
-      <div className="admin-stats-grid">
+      <div style={{ borderBottom: '1px solid #E2E8F0', marginBottom: '24px', display: 'flex', gap: '32px' }}>
+        <button 
+          onClick={() => setActiveTab('attendees')}
+          style={{ 
+            background: 'none', border: 'none', padding: '12px 0', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer',
+            borderBottom: activeTab === 'attendees' ? '3px solid #00AEEF' : '3px solid transparent',
+            color: activeTab === 'attendees' ? '#000' : '#64748B'
+          }}
+        >
+          Attendees Overview
+        </button>
+        <button 
+          onClick={() => setActiveTab('broadcasts')}
+          style={{ 
+            background: 'none', border: 'none', padding: '12px 0', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer',
+            borderBottom: activeTab === 'broadcasts' ? '3px solid #00AEEF' : '3px solid transparent',
+            color: activeTab === 'broadcasts' ? '#000' : '#64748B'
+          }}
+        >
+          Communications
+        </button>
+      </div>
+
+      {activeTab === 'broadcasts' && <BroadcastTab />}
+      
+      {activeTab === 'attendees' && (
+        <>
+          <div className="admin-stats-grid">
         <div className="stat-card">
           <h3>Total Registrations</h3>
           <div className="stat-value">{loading ? '...' : totalRegistrations}</div>
@@ -368,6 +366,8 @@ export const AdminDashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      </>
+      )}
 
       {/* Confirmation Modal */}
       {confirmCheckInId && (
@@ -426,11 +426,8 @@ export const AdminDashboard: React.FC = () => {
               ))}
             </div>
             
-            <div className="admin-modal-actions" style={{ marginTop: '24px', display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #E2E8F0', paddingTop: '16px' }}>
+            <div className="admin-modal-actions" style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid #E2E8F0', paddingTop: '16px' }}>
               <button className="btn-secondary" onClick={() => setManageModalUser(null)}>Close</button>
-              <button className="btn-primary" onClick={() => generateEmail(manageModalUser)}>
-                Generate Email
-              </button>
             </div>
           </div>
         </div>

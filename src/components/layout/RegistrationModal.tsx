@@ -124,7 +124,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
           phone: formData.phone,
           ticketId: generatedTicketId,
           name: formData.name,
-          email: formData.email.toLowerCase().trim()
+          email: formData.email.toLowerCase().trim(),
+          session: formData.dayTime
         })
       }).catch(err => console.error('Failed to trigger notifications:', err));
       

@@ -20,7 +20,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { phone, ticketId, name, email } = req.body;
+    const { phone, ticketId, name, email, session } = req.body;
 
     if (!phone || !ticketId || !name) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -80,36 +80,70 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let resendResponse = null;
 
     if (resendApiKey && email) {
+      // Map the simple session string to a beautiful date/time format
+      const sessionMap: Record<string, string> = {
+        "Thursday Morning": "Thursday 5th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>9:00 AM - 11:30 AM</span>",
+        "Thursday Afternoon": "Thursday 5th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>12:30 PM - 3:30 PM</span>",
+        "Thursday Late": "Thursday 5th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>4:00 PM - 7:00 PM</span>",
+        "Friday Morning": "Friday 6th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>9:00 AM - 11:30 AM</span>",
+        "Friday Afternoon": "Friday 6th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>12:30 PM - 3:30 PM</span>",
+        "Friday Late": "Friday 6th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>4:00 PM - 7:00 PM</span>"
+      };
+      
+      const formattedSession = session && sessionMap[session] ? sessionMap[session] : session || "TBD";
+
       // Create a URL-friendly version of the email for the QR code API
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(email)}`;
       
       const emailHtml = `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-          <h2 style="color: #00AEEF;">LIVING LAB NIGERIA 2026</h2>
-          <p>Hi ${name.split(' ')[0]},</p>
-          <p>Your registration is confirmed! We are thrilled to host you.</p>
+        <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; line-height: 1.6;">
           
-          <div style="background-color: #F3F4F6; padding: 20px; border-radius: 8px; text-align: center; margin: 24px 0;">
-            <p style="margin: 0; font-size: 0.9rem; color: #6B7280; text-transform: uppercase;">Your Ticket ID</p>
-            <p style="margin: 8px 0 0 0; font-size: 1.5rem; font-family: monospace; font-weight: bold; color: #111827;">
-              ${ticketId}
+          <!-- Header -->
+          <div style="text-align: center; margin-bottom: 32px;">
+            <h1 style="color: #000; font-weight: 800; letter-spacing: 2px; margin: 0;">LIVING LAB</h1>
+            <p style="color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 0 0;">NIGERIA 2026</p>
+          </div>
+
+          <!-- Greeting -->
+          <p style="font-size: 1.1rem;">Dear Dr. ${name.split(' ')[0]},</p>
+          <p style="font-size: 1.1rem;">Your registration is confirmed. We are absolutely thrilled to welcome you to the exclusive Living Lab Nigeria 2026 experience by La Roche-Posay.</p>
+          
+          <!-- Event Details Box -->
+          <div style="background-color: #f8f9fa; border-left: 4px solid #000; padding: 20px; margin: 32px 0;">
+            <p style="margin: 0; font-size: 0.85rem; color: #666; text-transform: uppercase; font-weight: bold;">Your Reserved Session</p>
+            <p style="margin: 8px 0 0 0; font-size: 1.3rem; font-weight: bold; color: #000;">
+              ${formattedSession}
             </p>
           </div>
+          
+          <!-- Ticket & QR Code -->
+          <div style="background-color: #00AEEF; color: white; padding: 32px 20px; border-radius: 12px; text-align: center; margin: 32px 0;">
+            <p style="margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">Digital Ticket ID</p>
+            <p style="margin: 8px 0 24px 0; font-size: 2rem; font-family: monospace; font-weight: bold; letter-spacing: 2px;">
+              ${ticketId}
+            </p>
+            
+            <div style="background: white; padding: 16px; border-radius: 8px; display: inline-block;">
+              <img src="${qrCodeUrl}" alt="Your Ticket QR Code" style="width: 200px; height: 200px; display: block;" />
+            </div>
+            <p style="margin: 16px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Please present this QR code at the entrance for fast-track check-in.</p>
+          </div>
 
-          <div style="background-color: #00AEEF; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 24px;">
-            <h3 style="margin: 0 0 8px 0;">🎉 15% Exclusive Discount!</h3>
-            <p style="margin: 0;">Get 15% off on all purchases at the stand in the event!</p>
-            <p style="margin: 12px 0 0 0; font-size: 0.9rem;">Use Code: <span style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 4px; font-weight: bold;">LRP15</span></p>
+          <!-- Perks -->
+          <div style="border: 1px solid #E5E7EB; padding: 24px; border-radius: 12px; text-align: center; margin-bottom: 32px;">
+            <h3 style="margin: 0 0 12px 0; color: #000;">Exclusive Attendee Perk</h3>
+            <p style="margin: 0; color: #555;">Enjoy a <strong>15% discount</strong> on all purchases made at the La Roche-Posay stand during the event.</p>
+            <p style="margin: 16px 0 0 0; font-size: 1rem;">Discount Code: <span style="background: #f1f5f9; padding: 6px 12px; border-radius: 6px; font-weight: bold; color: #00AEEF; border: 1px dashed #cbd5e1;">LRP15</span></p>
           </div>
           
-          <div style="text-align: center; margin: 32px 0;">
-            <p style="margin-bottom: 16px; font-weight: bold;">Scan this QR code at the entrance:</p>
-            <img src="${qrCodeUrl}" alt="Your Ticket QR Code" style="width: 200px; height: 200px; border: 1px solid #E5E7EB; border-radius: 8px; padding: 12px;" />
-          </div>
+          <p style="font-size: 1.1rem;">We look forward to an inspiring session with you!</p>
+          <p style="font-size: 1.1rem; margin-top: 32px;">Warm regards,<br/><strong>The Living Lab Team</strong></p>
 
-          <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;" />
-          <p style="font-size: 0.8rem; color: #9CA3AF; text-align: center;">
-            This email was sent automatically. Please do not reply.
+          <!-- Footer -->
+          <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 40px 0 24px 0;" />
+          <p style="font-size: 0.75rem; color: #9CA3AF; text-align: center; line-height: 1.5;">
+            This email was sent to ${email}. If you need to make changes to your registration or can no longer attend, please contact us.<br/><br/>
+            &copy; 2026 La Roche-Posay. All rights reserved.
           </p>
         </div>
       `;
