@@ -152,7 +152,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const response = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            'Authorization': \`Bearer \${resendApiKey}\`,
+            'Authorization': `Bearer ${resendApiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
