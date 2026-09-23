@@ -9,20 +9,12 @@ interface ExperiencesProps {
 }
 
 const reels = [
-  { id: 1, title: 'Sun Science' },
-  { id: 2, title: 'Acne Lab' },
-  { id: 3, title: 'Baby Skin Lab' },
-  { id: 4, title: 'Scars of Life' },
-  { id: 5, title: 'Pigmentation Lab' }
+  { id: 1, title: 'Sun Science', videoSrc: '/reducedplaceholder/ANTHELIOS UV MUNE 400 REEL VIDEO.mov' },
+  { id: 2, title: 'Acne Lab', videoSrc: '/reducedplaceholder/EFFACLAR REEL VIDEO.mov' },
+  { id: 3, title: 'Baby Skin Lab', videoSrc: '/reducedplaceholder/LIPIKAR REEL VIDEO.mov' },
+  { id: 4, title: 'Scars of Life', videoSrc: '/reducedplaceholder/CICAPLAST REEL VIDEO.mp4' },
+  { id: 5, title: 'Pigmentation Lab', videoSrc: '/reducedplaceholder/MELA B3 REEL VIDEO.mp4' }
 ];
-
-const reelColors: Record<number, string> = {
-  1: '#F87171',
-  2: '#60A5FA',
-  3: '#4B5563',
-  4: '#34D399',
-  5: '#A78BFA',
-};
 
 const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId, isVideoMoved }) => {
   const [expandedReel, setExpandedReel] = useState<number | null>(null);
@@ -108,18 +100,14 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                     style={{ width: '100%', height: '100%', backgroundColor: '#4B5563', position: 'relative' }}
                     transition={{ type: "tween", ease: "easeInOut", duration: 0.8 }}
                   >
-                    {reel.id === 3 ? (
-                      <video 
-                        src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
-                        autoPlay 
-                        loop 
-                        muted 
-                        playsInline
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
-                      />
-                    ) : (
-                      <div style={{ width: '100%', height: '100%', backgroundColor: reelColors[reel.id] || '#4B5563' }} />
-                    )}
+                    <video 
+                      src={reel.videoSrc} 
+                      autoPlay 
+                      loop 
+                      muted 
+                      playsInline
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
+                    />
                     <div className="reel-overlay">
                       <span className="play-icon">▶</span>
                       <div className="reel-text">
@@ -130,18 +118,14 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                   </motion.div>
                 ) : (
                   <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                    {reel.id === 3 ? (
-                       <video 
-                         src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
-                         autoPlay
-                         loop
-                         muted 
-                         playsInline
-                         style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
-                       />
-                    ) : (
-                       <div style={{ width: '100%', height: '100%', backgroundColor: reelColors[reel.id] || '#4B5563' }} />
-                    )}
+                    <video 
+                      src={reel.videoSrc} 
+                      autoPlay
+                      loop
+                      muted 
+                      playsInline
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
+                    />
                     <div className="reel-overlay">
                       <span className="play-icon">▶</span>
                       <div className="reel-text">
@@ -185,22 +169,12 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
             >
               <button className="close-modal" onClick={() => setExpandedReel(null)}>✕</button>
               <div className="video-frame" style={{ position: 'relative' }}>
-                {expandedReel === 3 ? (
-                  <video 
-                    src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
-                    autoPlay 
-                    controls
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: 'black' }}
-                  />
-                ) : (
-                  <div style={{ width: '100%', height: '100%', backgroundColor: reelColors[expandedReel] || '#4B5563' }} />
-                )}
-                
-                {expandedReel !== 3 && (
-                  <div className="placeholder-box" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    Full Screen Placeholder {expandedReel}
-                  </div>
-                )}
+                <video 
+                  src={reels.find(r => r.id === expandedReel)?.videoSrc} 
+                  autoPlay 
+                  controls
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: 'black' }}
+                />
               </div>
             </motion.div>
           </motion.div>

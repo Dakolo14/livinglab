@@ -57,15 +57,17 @@
 }
 
 .module-visual {
-  flex: 1;
   position: relative;
-  height: 400px;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 9 / 16;
   background-color: #E5E7EB;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .module-number {
@@ -120,8 +122,8 @@
   }
   .module-visual {
     width: 100%;
-    aspect-ratio: 4 / 3;
     height: auto;
+    max-width: 340px;
   }
 }
 

@@ -14,11 +14,11 @@
 }
 
 .partners-grid {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   align-items: center;
-  gap: 60px;
-  flex-wrap: wrap;
+  justify-items: center;
+  gap: 40px;
 }
 
 .partner-logo-img {
@@ -28,11 +28,19 @@
   object-fit: contain;
 }
 
+@media (max-width: 1024px) {
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
 @media (max-width: 768px) {
   .partners-section {
     padding: 40px 20px;
   }
   .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
   .partner-logo-img {

@@ -4,27 +4,28 @@ import './ProgrammeSection.css';
 
 const scheduleData: Record<number, Array<{time: string, experience: string, audience: string, location: string}>> = {
   1: [
-    { time: '09:00 AM - 12:00 PM', experience: 'Dermatological Advancements Keynote', audience: 'HCPs & Dermatologists', location: 'The Science Theatre' },
-    { time: '01:00 PM - 03:00 PM', experience: 'Retail & Partner Strategy', audience: 'Konga & Retailers', location: 'Partner Lounge' },
-    { time: '04:00 PM - 06:00 PM', experience: 'Creator Content Session', audience: 'Media & Influencers', location: 'Content Studio' },
-    { time: '07:30 PM - LATE', experience: 'Living Lab Opening Gala', audience: 'All VIP & B2B Guests', location: 'Main Atrium' }
+    { time: '09:00 AM - 11:00 AM', experience: 'Plenary Session & Innovation Corners', audience: 'B2B, Media & Experts', location: 'Oasis by The Five Palm' },
+    { time: '12:00 PM - 02:00 PM', experience: 'Blue House & Consultation Corners', audience: 'B2B, Media & Experts', location: 'Oasis by The Five Palm' },
+    { time: '03:00 PM - 05:00 PM', experience: 'Scar of Life Cinema & PopUp Store', audience: 'B2B, Media & Experts', location: 'Oasis by The Five Palm' }
   ],
   2: [
-    { time: '09:00 AM - 11:30 AM', experience: 'Morning Lab Access', audience: 'Skincare Enthusiasts (Slot 1)', location: 'Full Lab Circuit' },
-    { time: '12:30 PM - 03:30 PM', experience: 'Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 2)', location: 'Full Lab Circuit' },
-    { time: '04:00 PM - 07:00 PM', experience: 'Late Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 3)', location: 'Full Lab Circuit' }
+    { time: '09:00 AM - 11:00 AM', experience: 'Plenary Session & PopUp Store', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' },
+    { time: '12:00 PM - 02:00 PM', experience: 'Innovation Corners & Blue House', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' },
+    { time: '03:00 PM - 05:00 PM', experience: 'Scar of Life Cinema & Consultation', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' },
+    { time: '06:00 PM - 08:00 PM', experience: 'All Zones Open (Evening Access)', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' }
   ],
   3: [
-    { time: '09:00 AM - 11:30 AM', experience: 'Morning Lab Access', audience: 'Skincare Enthusiasts (Slot 1)', location: 'Full Lab Circuit' },
-    { time: '12:30 PM - 03:30 PM', experience: 'Afternoon Lab Access', audience: 'Skincare Enthusiasts (Slot 2)', location: 'Full Lab Circuit' },
-    { time: '04:00 PM - 07:00 PM', experience: 'Closing Lab Access', audience: 'Skincare Enthusiasts (Slot 3)', location: 'Full Lab Circuit' }
+    { time: '09:00 AM - 11:00 AM', experience: 'Blue House & Scar of Life Cinema', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' },
+    { time: '12:00 PM - 02:00 PM', experience: 'Innovation Corners & PopUp Store', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' },
+    { time: '03:00 PM - 05:00 PM', experience: 'Consultation Corners & Plenary', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' },
+    { time: '06:00 PM - 08:00 PM', experience: 'Final Showcase & All Zones Open', audience: 'Public & Influencers', location: 'Oasis by The Five Palm' }
   ]
 };
 
 const tabs = [
-  { id: 1, title: 'DAY 01', subtitle: 'B2B & VIP', date: 'NOV 4' },
-  { id: 2, title: 'DAY 02', subtitle: 'B2C OPEN', date: 'NOV 5' },
-  { id: 3, title: 'DAY 03', subtitle: 'B2C CLOSING', date: 'NOV 6' },
+  { id: 1, title: 'DAY 01' },
+  { id: 2, title: 'DAY 02' },
+  { id: 3, title: 'DAY 03' },
 ];
 
 interface ProgrammeSectionProps {
@@ -52,9 +53,7 @@ const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false,
               className={`prog-tab-btn ${activeDay === tab.id ? 'active' : ''}`}
               onClick={() => setActiveDay(tab.id)}
             >
-              <span className="tab-date">{tab.date}</span>
-              <span className="tab-title">{tab.title}</span>
-              <span className="tab-subtitle">{tab.subtitle}</span>
+              <span className="tab-title" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{tab.title}</span>
             </button>
           ))}
         </div>

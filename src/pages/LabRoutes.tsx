@@ -6,11 +6,11 @@ import SEO from '../components/layout/SEO';
 import './LabRoutes.css';
 
 const LAB_MODULES = [
-  { id: '01', title: 'THE SUN SCIENCE', desc: 'Pioneering UV filtration and environmental protection protocols.', fullDesc: 'Discover the cellular impact of UV rays and explore our breakthrough Netlock® technology that secures filters in an invisible, ultra-resistant film.' },
-  { id: '02', title: 'BARRIER REPAIR LAB', desc: 'Cellular recovery, healing, and ceramide integration at scale.', fullDesc: 'Step into the microbiome of healing. We analyze how restoring the skin barrier with Vitamin B5 and Madecassoside dramatically accelerates epidermal recovery.' },
-  { id: '03', title: 'MICROBIOME RESEARCH', desc: 'Balancing the skin flora for optimal dermatological health.', fullDesc: 'The skin is an ecosystem. Learn how Aqua Posae Filiformis helps rebalance the microbiome to combat severe dryness and prevent flare-ups.' },
-  { id: '04', title: 'MELASYL REVOLUTION', desc: 'The new clinical standard in hyperpigmentation treatment.', fullDesc: 'A multi-patented molecule born from 18 years of research. See how Melasyl intercepts excess melanin before it leaves a mark on the skin.' },
-  { id: '05', title: 'FUTURE DERMATOLOGY', desc: 'AI-driven diagnostics and pediatric skin safety protocols.', fullDesc: 'Explore our AI-powered skin analysis algorithms and the strict pediatric formulation charters that define the future of safe skincare.' }
+  { id: '01', title: 'DISCOVER', desc: 'Enter the world of La Roche-Posay.', fullDesc: 'Understand the science behind the brand. Dive deep into the dermatological innovations that have made us the #1 brand recommended by dermatologists worldwide.' },
+  { id: '02', title: 'TEST', desc: 'Interactive stations to test your skin’s resilience.', fullDesc: 'Get hands-on with our advanced skin diagnostic tools. Understand your skin type, its unique needs, and how environmental factors impact your skin barrier daily.' },
+  { id: '03', title: 'EXPERIENCE', desc: 'Immerse yourself in our sensory thermal spring water room.', fullDesc: 'A unique sensory journey highlighting the healing and soothing properties of La Roche-Posay Thermal Spring Water, the core of all our formulations.' },
+  { id: '04', title: 'LEARN', desc: 'Uncover breakthrough ingredients like Melasyl and Mexoryl.', fullDesc: 'Explore the cutting-edge research behind our patented ingredients. Learn how we are revolutionizing sun protection and hyperpigmentation treatments.' },
+  { id: '05', title: 'CONSULT', desc: '1-on-1 time with top dermatologists.', fullDesc: 'Discuss your specific skin concerns directly with leading dermatologists. Receive personalized advice and a tailored skincare routine.' }
 ];
 
 const LabRoutes: React.FC = () => {

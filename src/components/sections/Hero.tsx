@@ -16,14 +16,13 @@ const reelColors: Record<number, string> = {
 };
 
 const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
-  const bgColor = reelColors[activeReelId] || '#4B5563';
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current && activeReelId === 3 && !isVideoMoved) {
+    if (videoRef.current && !isVideoMoved) {
       videoRef.current.play().catch((err) => console.log('Autoplay blocked:', err));
     }
-  }, [activeReelId, isVideoMoved]);
+  }, [isVideoMoved]);
 
   return (
     <section className="hero" id="home">
@@ -34,24 +33,18 @@ const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ type: "tween", ease: "easeInOut", duration: 0.8 }}
-          style={{ backgroundColor: bgColor }}
+          style={{ backgroundColor: '#4B5563' }}
         >
-          {activeReelId === 3 ? (
-            <video 
-              ref={videoRef}
-              src="https://res.cloudinary.com/wjmfwcrd/video/upload/v1787830613/video.mp4" 
-              poster="https://res.cloudinary.com/wjmfwcrd/image/upload/v1787843488/thumbnail.png"
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <div className="placeholder-box" style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}>
-               Hero Background Linked to Reel {activeReelId}
-            </div>
-          )}
+          <video 
+            ref={videoRef}
+            src="/reducedplaceholder/HOMEPAGE PLACEHOLDER.mp4" 
+            poster="https://res.cloudinary.com/wjmfwcrd/image/upload/v1787843488/thumbnail.png"
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
         </motion.div>
       )}
       
@@ -59,7 +52,7 @@ const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
       {!isVideoMoved && (
         <div className="container hero-content">
           <h1>Living Lab <span style={{ fontStyle: 'italic' }}>Nigeria</span> 2026</h1>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '16px', color: '#E5E7EB' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 400, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '16px', color: '#E5E7EB' }}>
             Lagos, Nigeria | 3rd November - 5th November
           </h3>
           <p>Join our team of professionals showing you how our products work in real time.</p>
