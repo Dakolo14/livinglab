@@ -19,7 +19,7 @@ const ProgrammePage: React.FC = () => {
       <main className="programme-page">
         <section className="programme-hero">
           <div className="programme-hero-content">
-            <h1 className="programme-title">EVENT<br />PROGRAMME</h1>
+            <h1 className="programme-title">EVENT AGENDA</h1>
             <p className="programme-subtitle">
               An immersive full-day schedule designed exclusively for dermatologists, medical professionals, and skincare experts. 
             </p>

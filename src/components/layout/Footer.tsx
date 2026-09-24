@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           <h4>Explore</h4>
           <a href="#lab-journey">The Lab</a>
           <a href="#science">Science</a>
-          <a href="#programme">Programme</a>
+          <a href="#programme">Agenda</a>
         </div>
         <div className="footer-col">
           <h4>Legal</h4>

@@ -23,9 +23,9 @@ const scheduleData: Record<number, Array<{time: string, experience: string}>> = 
 };
 
 const tabs = [
-  { id: 1, title: 'DAY 1', date: '29 OCT' },
-  { id: 2, title: 'DAY 2', date: '30 OCT' },
-  { id: 3, title: 'DAY 3', date: '31 OCT' },
+  { id: 1, title: 'DAY 1' },
+  { id: 2, title: 'DAY 2' },
+  { id: 3, title: 'DAY 3' },
 ];
 
 interface ProgrammeSectionProps {
@@ -53,7 +53,6 @@ const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false,
               onClick={() => setActiveDay(tab.id)}
             >
               <span className="tab-title">{tab.title}</span>
-              <span className="tab-date">{tab.date}</span>
             </button>
           ))}
         </div>
