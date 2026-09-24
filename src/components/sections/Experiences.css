@@ -20,6 +20,7 @@
   height: 70vh; /* Taller on desktop for 9:16 reels */
   min-height: 550px;
   width: 100%;
+  padding: 40px 0; /* Provides bleed area for scaled active reels */
   overflow: hidden; /* Hide anything that goes too far */
 }
 
