@@ -170,12 +170,12 @@ const About: React.FC = () => {
 
       <div className="container" style={{ padding: '60px 20px', minHeight: '60vh' }}>
         <div className="about-boilerplate" style={{ 
-          fontSize: '1.1rem', 
+          fontSize: '1.25rem', 
           color: '#4B5563', 
-          lineHeight: '1.8',
-          maxWidth: '800px',
+          lineHeight: '1.7',
+          maxWidth: '900px',
           margin: '0 auto',
-          textAlign: 'left'
+          textAlign: 'center'
         }}>
           <p style={{ marginBottom: '24px' }}>
             Created by a pharmacist in 1975, La Roche-Posay is present in over 50 countries and is recommended by over 100,000 dermatologists worldwide. It provides a unique range of daily skincare developed for every skin type, from newborns to cancer patients, from UV protection to repairing severely fragilized skin. La Roche-Posay’s formulas are developed with exclusive Selenium-rich thermal spring water, due to its antioxidant and soothing properties.
