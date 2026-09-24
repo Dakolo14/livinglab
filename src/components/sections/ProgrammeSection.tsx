@@ -1,14 +1,31 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './ProgrammeSection.css';
 
-const journeyItems = [
-  "Blue House",
-  "Plenary discussions",
-  "Product Innovation Corners",
-  "Scar of Life cinema",
-  "Consultation Corners",
-  "PopUp store"
+const scheduleData: Record<number, Array<{time: string, experience: string}>> = {
+  1: [
+    { time: '9am - 11am', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '12pm - 2pm', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '3pm - 5pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+  ],
+  2: [
+    { time: '9am - 11am', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '12pm - 2pm', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '3pm - 5pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '6pm - 8pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+  ],
+  3: [
+    { time: '9am - 11am', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '12pm - 2pm', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '3pm - 5pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: '6pm - 8pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+  ]
+};
+
+const tabs = [
+  { id: 1, title: 'DAY 1' },
+  { id: 2, title: 'DAY 2' },
+  { id: 3, title: 'DAY 3' },
 ];
 
 interface ProgrammeSectionProps {
@@ -17,55 +34,55 @@ interface ProgrammeSectionProps {
 }
 
 const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false, hideCTA = false }) => {
+  const [activeDay, setActiveDay] = useState(1);
+
   return (
     <section className="programme-section" id="programme" style={hideHeader ? { paddingTop: '40px' } : {}}>
       <div className="container">
         {!hideHeader && (
           <div className="programme-header">
-            <h2>AGENDA/PROGRAM</h2>
+            <h2>AGENDA</h2>
             <p>The Consumer Journey</p>
           </div>
         )}
 
+        <div className="programme-tabs">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`prog-tab-btn ${activeDay === tab.id ? 'active' : ''}`}
+              onClick={() => setActiveDay(tab.id)}
+            >
+              <span className="tab-title">{tab.title}</span>
+            </button>
+          ))}
+        </div>
+
         <div className="programme-content">
-          <div className="consumer-journey-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', padding: '40px 0' }}>
-            {journeyItems.map((item, index) => (
-              <motion.div 
-                key={index} 
-                className="journey-item" 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                style={{ 
-                  background: 'white', 
-                  padding: '32px 24px', 
-                  borderLeft: '4px solid #00AEEF', 
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-                  borderRadius: '0 8px 8px 0',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}
-              >
-                <div style={{
-                  width: '32px', 
-                  height: '32px', 
-                  borderRadius: '50%', 
-                  background: '#00AEEF15', 
-                  color: '#00AEEF', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  fontWeight: 'bold',
-                  marginRight: '16px',
-                  flexShrink: 0
-                }}>
-                  {index + 1}
-                </div>
-                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#1a1a1a', fontWeight: '600' }}>{item}</h3>
-              </motion.div>
-            ))}
+          <div className="schedule-list-header hidden-mobile" style={{ gridTemplateColumns: '1fr 3fr' }}>
+            <div className="col-time">TIME</div>
+            <div className="col-exp">EXPERIENCE</div>
           </div>
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeDay}
+              className="schedule-list"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              {scheduleData[activeDay].map((item, index) => (
+                <div className="schedule-row" key={index} style={{ gridTemplateColumns: '1fr 3fr' }}>
+                  <div className="col-time">{item.time}</div>
+                  <div className="col-exp">
+                    <strong>{item.experience}</strong>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {!hideCTA && (
