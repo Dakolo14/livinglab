@@ -3,30 +3,30 @@ import './ProgrammeGrid.css';
 
 const schedules = {
   1: [
-    { time: '09:00', event: 'DOORS OPEN & ACCREDITATION', type: 'Welcome', loc: 'Main Hall' },
-    { time: '10:00', event: 'THE FUTURE OF UV FILTERS', type: 'Masterclass', loc: 'Lab A' },
-    { time: '11:30', event: 'MICROBIOME DISCOVERIES', type: 'Keynote', loc: 'Auditorium' },
-    { time: '13:00', event: 'LUNCH & NETWORKING', type: 'Break', loc: 'Terrace' },
-    { time: '14:30', event: 'ACNE & PIGMENTATION CLINIC', type: 'Workshop', loc: 'Lab B' },
-    { time: '16:00', event: 'MEET THE EXPERTS PANEL', type: 'Panel', loc: 'Auditorium' },
+    { time: 'Morning', event: 'DOORS OPEN & ACCREDITATION', type: 'Welcome', loc: 'Main Hall' },
+    { time: 'Morning', event: 'THE FUTURE OF UV FILTERS', type: 'Masterclass', loc: 'Lab A' },
+    { time: 'Morning', event: 'MICROBIOME DISCOVERIES', type: 'Keynote', loc: 'Auditorium' },
+    { time: 'Early afternoon', event: 'LUNCH & NETWORKING', type: 'Break', loc: 'Terrace' },
+    { time: 'Early afternoon', event: 'ACNE & PIGMENTATION CLINIC', type: 'Workshop', loc: 'Lab B' },
+    { time: 'Late afternoon', event: 'MEET THE EXPERTS PANEL', type: 'Panel', loc: 'Auditorium' },
   ],
   2: [
-    { time: '09:30', event: 'MORNING COFFEE & LAB TOURS', type: 'Welcome', loc: 'Main Hall' },
-    { time: '10:30', event: 'BARRIER REPAIR INNOVATIONS', type: 'Masterclass', loc: 'Lab C' },
-    { time: '12:00', event: 'PEDIATRIC DERMATOLOGY', type: 'Keynote', loc: 'Auditorium' },
-    { time: '13:30', event: 'LUNCH & NETWORKING', type: 'Break', loc: 'Terrace' },
-    { time: '15:00', event: 'SCAR HEALING TECHNIQUES', type: 'Workshop', loc: 'Lab A' },
+    { time: 'Morning', event: 'MORNING COFFEE & LAB TOURS', type: 'Welcome', loc: 'Main Hall' },
+    { time: 'Morning', event: 'BARRIER REPAIR INNOVATIONS', type: 'Masterclass', loc: 'Lab C' },
+    { time: 'Morning', event: 'PEDIATRIC DERMATOLOGY', type: 'Keynote', loc: 'Auditorium' },
+    { time: 'Early afternoon', event: 'LUNCH & NETWORKING', type: 'Break', loc: 'Terrace' },
+    { time: 'Late afternoon', event: 'SCAR HEALING TECHNIQUES', type: 'Workshop', loc: 'Lab A' },
   ],
   3: [
-    { time: '10:00', event: 'MELASYL REVOLUTION DEEP DIVE', type: 'Masterclass', loc: 'Lab B' },
-    { time: '11:30', event: 'ONCOLOGY & SKINCARE', type: 'Keynote', loc: 'Auditorium' },
-    { time: '13:00', event: 'LUNCH & NETWORKING', type: 'Break', loc: 'Terrace' },
-    { time: '14:30', event: 'SUN PROTECTION SYMPOSIUM', type: 'Panel', loc: 'Main Hall' },
+    { time: 'Morning', event: 'MELASYL REVOLUTION DEEP DIVE', type: 'Masterclass', loc: 'Lab B' },
+    { time: 'Morning', event: 'ONCOLOGY & SKINCARE', type: 'Keynote', loc: 'Auditorium' },
+    { time: 'Early afternoon', event: 'LUNCH & NETWORKING', type: 'Break', loc: 'Terrace' },
+    { time: 'Late afternoon', event: 'SUN PROTECTION SYMPOSIUM', type: 'Panel', loc: 'Main Hall' },
   ],
   4: [
-    { time: '10:00', event: 'THE FUTURE OF DERMATOLOGY', type: 'Keynote', loc: 'Auditorium' },
-    { time: '12:00', event: 'CLOSING CEREMONY & AWARDS', type: 'Welcome', loc: 'Main Hall' },
-    { time: '13:30', event: 'FAREWELL BRUNCH', type: 'Break', loc: 'Terrace' },
+    { time: 'Morning', event: 'THE FUTURE OF DERMATOLOGY', type: 'Keynote', loc: 'Auditorium' },
+    { time: 'Early afternoon', event: 'CLOSING CEREMONY & AWARDS', type: 'Welcome', loc: 'Main Hall' },
+    { time: 'Late afternoon', event: 'FAREWELL BRUNCH', type: 'Break', loc: 'Terrace' },
   ]
 };
 
