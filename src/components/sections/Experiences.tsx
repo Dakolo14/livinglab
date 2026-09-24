@@ -20,7 +20,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
   const [isMobile, setIsMobile] = useState(false);
 
   React.useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
     handleResize(); // initial check
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -47,22 +47,61 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
         </h3>
       </div>
         
-      <div className="experience-cards" style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', position: 'relative', justifyContent: 'center' }}>
+      <div className="experience-cards" style={!isMobile ? { display: 'flex', gap: '24px', flexWrap: 'wrap', position: 'relative', justifyContent: 'center' } : {}}>
         {reels.map((reel) => {
           let isActive = reel.id === activeReelId;
+          
+          // Desktop Flex Layout Variables
+          let desktopProps = {
+            x: 0,
+            scale: isActive ? 1.05 : 0.95,
+            zIndex: isActive ? 5 : 1,
+            opacity: isActive ? 1 : 0.6
+          };
+
+          // Mobile Cover Flow Variables
+          let indexDiff = reel.id - activeReelId;
+          if (indexDiff > 2) indexDiff -= 4;
+          else if (indexDiff < -2) indexDiff += 4;
+          
+          let position = indexDiff;
+          let mobileX = position === 0 ? 0 
+                : position === -1 ? -105 
+                : position === 1 ? 105 
+                : position === -2 ? -210 
+                : 210;
+          
+          let mobileScale = position === 0 ? 1 : position === 1 || position === -1 ? 0.9 : 0.8;
+          let mobileZIndex = position === 0 ? 5 : position === 1 || position === -1 ? 4 : 3;
+
+          let animateProps = isMobile ? {
+            x: `${mobileX}%`,
+            scale: mobileScale,
+            zIndex: mobileZIndex,
+            opacity: position === 0 ? 1 : 0.7
+          } : desktopProps;
 
           return (
             <motion.div 
               key={reel.id}
               className={`exp-card ${isActive ? 'active' : 'inactive'}`}
-              style={{ position: 'relative', width: '22%', minWidth: '220px', touchAction: 'pan-y', zIndex: isActive ? 5 : 1 }}
-              animate={{ 
-                scale: isActive ? 1.05 : 0.95,
-                opacity: isActive ? 1 : 0.6
+              style={{ position: isMobile ? 'absolute' : 'relative', width: isMobile ? 'auto' : '22%', minWidth: isMobile ? 'auto' : '220px', touchAction: 'pan-y', zIndex: animateProps.zIndex }}
+              animate={animateProps}
+              transition={{ type: "tween", ease: "easeInOut", duration: isMobile ? 0.6 : 0.4 }}
+              onClick={() => handleReelClick(reel.id)}
+              whileHover={!isActive && !isMobile ? { opacity: 0.8 } : {}}
+              drag={isMobile && isActive ? "x" : false}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, { offset }) => {
+                if (!isMobile) return;
+                const swipe = offset.x;
+                if (swipe < -40) {
+                  setActiveReelId(activeReelId === 4 ? 1 : activeReelId + 1);
+                } else if (swipe > 40) {
+                  setActiveReelId(activeReelId === 1 ? 4 : activeReelId - 1);
+                }
               }}
-              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-              onClick={() => setActiveReelId(reel.id)}
-              whileHover={!isActive ? { opacity: 0.8 } : {}}
             >
               <div className="video-frame">
                 {isActive && isVideoMoved ? (
