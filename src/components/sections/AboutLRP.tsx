@@ -158,9 +158,22 @@ const AboutLRP: React.FC = () => {
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#111827', letterSpacing: '-1px' }}>
             About La Roche-Posay
           </h2>
-          <p style={{ fontSize: '1.1rem', color: '#6B7280', marginTop: '8px' }}>
-            Explore our targeted dermatological solutions
-          </p>
+          <div className="about-boilerplate" style={{ 
+            fontSize: '1rem', 
+            color: '#4B5563', 
+            marginTop: '24px', 
+            lineHeight: '1.6',
+            maxWidth: '800px',
+            margin: '24px auto 0',
+            textAlign: 'left'
+          }}>
+            <p style={{ marginBottom: '16px' }}>
+              Created by a pharmacist in 1975, La Roche-Posay is present in over 50 countries and is recommended by over 100,000 dermatologists worldwide. It provides a unique range of daily skincare developed for every skin type, from newborns to cancer patients, from UV protection to repairing severely fragilized skin. La Roche-Posay’s formulas are developed with exclusive Selenium-rich thermal spring water, due to its antioxidant and soothing properties.
+            </p>
+            <p>
+              Developed using a strict formulation charter with a minimal number of ingredients at optimal concentrations, La Roche-Posay products undergo stringent clinical testing for efficacy and safety, even on sensitive skin. La Roche-Posay understands that skin health has a profound impact on overall wellbeing and works alongside the medical community to advance dermatology and pioneer new approaches to care. Committed to the skin we live in and the planet we live on. Since 2023, all products are manufactured in factories using 100% renewable energy.
+            </p>
+          </div>
         </div>
 
         {/* Horizontal Accordion Layout */}
