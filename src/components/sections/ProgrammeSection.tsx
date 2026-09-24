@@ -40,9 +40,8 @@ const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false,
     <section className="programme-section" id="programme" style={hideHeader ? { paddingTop: '40px' } : {}}>
       <div className="container">
         {!hideHeader && (
-          <div className="programme-header">
-            <h2>AGENDA</h2>
-            <p>The Consumer Journey</p>
+          <div className="programme-header" style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 300, color: '#111827', letterSpacing: '-0.5px', textTransform: 'uppercase', margin: 0 }}>AGENDA</h2>
           </div>
         )}
 

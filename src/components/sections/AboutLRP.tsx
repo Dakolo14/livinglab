@@ -154,8 +154,8 @@ const AboutLRP: React.FC = () => {
     <section className="about-lrp" id="about-lrp">
       <div className="container">
         
-        <div className="section-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#111827', letterSpacing: '-1px', textTransform: 'uppercase' }}>
+        <div className="section-header" style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 300, color: '#111827', letterSpacing: '-0.5px', textTransform: 'uppercase', margin: 0 }}>
             ABOUT LA ROCHE-POSAY
           </h2>
           <div className="about-boilerplate" style={{ 

@@ -159,14 +159,6 @@ const About: React.FC = () => {
       <main className="about-page">
 
 
-      <div className="about-hero">
-        <div className="container">
-          <div className="about-hero-content">
-            <h1>PIONEERING DERMATOLOGY</h1>
-            <p>Explore our targeted solutions for every skin concern.</p>
-          </div>
-        </div>
-      </div>
 
       <div className="container" style={{ padding: '60px 20px', minHeight: '60vh' }}>
         <div className="about-boilerplate" style={{ 
