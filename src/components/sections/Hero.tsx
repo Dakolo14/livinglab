@@ -28,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({ isVideoMoved }) => {
         >
           <video 
             ref={videoRef}
-            src="/reducedplaceholder/hero.mp4" 
+            src="https://res.cloudinary.com/wjmfwcrd/video/upload/q_auto,f_auto/v1790271234/hero.mp4" 
             poster="https://res.cloudinary.com/wjmfwcrd/image/upload/v1787843488/thumbnail.png"
             autoPlay 
             loop 
