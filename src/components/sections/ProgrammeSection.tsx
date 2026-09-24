@@ -41,7 +41,7 @@ const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false,
       <div className="container">
         {!hideHeader && (
           <div className="programme-header" style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 400, color: '#111827', letterSpacing: '-0.5px', textTransform: 'uppercase', margin: 0 }}>AGENDA</h2>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.5px', textTransform: 'uppercase', margin: 0 }}>AGENDA</h2>
           </div>
         )}
 

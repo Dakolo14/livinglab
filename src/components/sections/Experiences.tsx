@@ -42,7 +42,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
           Five worlds. Experts, thermal spring water, real dermatologists and<br/>
           your own skin story to take home.
         </h2>
-        <h3 style={{ textAlign: 'center', fontSize: '2rem', fontWeight: 700, margin: '60px 0 60px', color: '#111827' }}>
+        <h3 style={{ textAlign: 'center', fontSize: '2.5rem', fontWeight: 700, margin: '60px 0 60px', color: '#111827', letterSpacing: '-0.5px' }}>
           EXPLORE SKIN PATHOLOGIES
         </h3>
       </div>

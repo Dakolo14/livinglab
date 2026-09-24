@@ -17,7 +17,7 @@ const LabJourney: React.FC = () => {
     <section className="lab-journey" id="lab-journey" ref={containerRef}>
       <div className="container">
         <div className="journey-header" style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 400, color: '#111827', letterSpacing: '-0.5px', textTransform: 'uppercase', margin: 0 }}>WHAT TO EXPECT IN THE LAB</h2>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 700, color: '#111827', letterSpacing: '-0.5px', textTransform: 'uppercase', margin: 0 }}>WHAT TO EXPECT IN THE LAB</h2>
         </div>
         
         <div className="journey-timeline">
