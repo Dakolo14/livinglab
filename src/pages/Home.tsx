@@ -8,7 +8,6 @@ import Partners from '../components/sections/Partners';
 import Experiences from '../components/sections/Experiences';
 import LabJourney from '../components/sections/LabJourney';
 import ProgrammeSection from '../components/sections/ProgrammeSection';
-import SpeakersPreview from '../components/sections/SpeakersPreview';
 import FAQ from '../components/sections/FAQ';
 import Footer from '../components/layout/Footer';
 import BackToTop from '../components/layout/BackToTop';
@@ -55,7 +54,6 @@ const Home: React.FC = () => {
         <Experiences activeReelId={activeReelId} setActiveReelId={setActiveReelId} isVideoMoved={isVideoMoved} />
         <AboutLRP />
         <LabJourney />
-        <SpeakersPreview />
         <ProgrammeSection />
         <FAQ />
         <Partners />

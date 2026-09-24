@@ -11,9 +11,8 @@ interface ExperiencesProps {
 const reels = [
   { id: 1, title: 'Sun Science', videoSrc: 'https://res.cloudinary.com/wjmfwcrd/video/upload/q_auto,f_auto/v1790271237/anthelios.mov' },
   { id: 2, title: 'Acne Lab', videoSrc: 'https://res.cloudinary.com/wjmfwcrd/video/upload/q_auto,f_auto/v1790271237/effaclar.mov' },
-  { id: 3, title: 'Baby Skin Lab', videoSrc: '/reducedplaceholder/lipikar.mov' },
-  { id: 4, title: 'Scars of Life', videoSrc: 'https://res.cloudinary.com/wjmfwcrd/video/upload/q_auto,f_auto/v1790271220/cicaplast.mp4' },
-  { id: 5, title: 'Pigmentation Lab', videoSrc: 'https://res.cloudinary.com/wjmfwcrd/video/upload/q_auto,f_auto/v1790271218/melab3.mp4' }
+  { id: 3, title: 'Scars of Life', videoSrc: 'https://res.cloudinary.com/wjmfwcrd/video/upload/q_auto,f_auto/v1790271220/cicaplast.mp4' },
+  { id: 4, title: 'Pigmentation Lab', videoSrc: 'https://res.cloudinary.com/wjmfwcrd/video/upload/q_auto,f_auto/v1790271218/melab3.mp4' }
 ];
 
 const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId, isVideoMoved }) => {

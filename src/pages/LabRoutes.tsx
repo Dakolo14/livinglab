@@ -1,66 +1,273 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import PageCTA from '../components/sections/PageCTA';
-import SEO from '../components/layout/SEO';
-import './LabRoutes.css';
+import './About.css';
 
-const LAB_MODULES = [
-  { id: '01', title: 'DISCOVER', desc: 'Enter the world of La Roche-Posay.', fullDesc: 'Understand the science behind the brand. Dive deep into the dermatological innovations that have made us the #1 brand recommended by dermatologists worldwide.' },
-  { id: '02', title: 'TEST', desc: 'Interactive stations to test your skin’s resilience.', fullDesc: 'Get hands-on with our advanced skin diagnostic tools. Understand your skin type, its unique needs, and how environmental factors impact your skin barrier daily.' },
-  { id: '03', title: 'EXPERIENCE', desc: 'Immerse yourself in our sensory thermal spring water room.', fullDesc: 'A unique sensory journey highlighting the healing and soothing properties of La Roche-Posay Thermal Spring Water, the core of all our formulations.' },
-  { id: '04', title: 'LEARN', desc: 'Uncover breakthrough ingredients like Melasyl and Mexoryl.', fullDesc: 'Explore the cutting-edge research behind our patented ingredients. Learn how we are revolutionizing sun protection and hyperpigmentation treatments.' },
-  { id: '05', title: 'CONSULT', desc: '1-on-1 time with top dermatologists.', fullDesc: 'Discuss your specific skin concerns directly with leading dermatologists. Receive personalized advice and a tailored skincare routine.' }
+const productDetails = [
+  {
+    id: 'anthelios',
+    issue: 'PHOTOPROTECTION',
+    shortName: 'ANTHELIOS',
+    name: 'ANTHELIOS UVMUNE 400',
+    subtitle: 'INVISIBLE FLUID SPF50+',
+    innovation: {
+      title: 'SCIENTIFIC INNOVATION',
+      subtitle: 'NEW UV FILTER: MEXORYL 400',
+      bullets: [
+        'EXCLUSIVE & PATENTED',
+        '10+ YEARS OF RESEARCH',
+        '25 PATENTS',
+        '6 PUBLICATIONS'
+      ]
+    },
+    indication: [
+      'For people looking for effective daily UV protection',
+      'For all sensitive skin types'
+    ],
+    action: [
+      'Protects from deep cellular damage',
+      'Ultra-high protection: UVB, UVA and ultra-long UVA, the most insidious kind',
+      'Does not sting eyes'
+    ],
+    usage: [
+      'Apply generously before exposure',
+      'Reapply frequently to maintain the level of protection'
+    ],
+    color: '#E06B27',
+    image: '/product-pack/Ant PP.png'
+  },
+  {
+    id: 'melab3',
+    issue: 'HYPERPIGMENTATION',
+    shortName: 'MELA B3',
+    name: 'MELA B3 SERUM',
+    subtitle: 'INTENSIVE ANTI-DARK SPOTS SERUM',
+    innovation: {
+      title: 'ANTI-RELAPSE EFFICACY',
+      subtitle: 'CLINICALLY PROVEN',
+      bullets: [
+        '90% PERSISTENT DARK SPOT CASES CORRECTED (SIZE, NUMBER & INTENSITY REDUCED)',
+        '18 YEARS OF RESEARCH',
+        'MULTI-PATENTED ACTIVE'
+      ]
+    },
+    indication: [
+      'Uneven skin tone and dark spots'
+    ],
+    action: [
+      'Intercepts excess melanin before it marks the skin',
+      '[ Melasyl™ ] NEW MULTI-PATENTED ACTIVE',
+      'Anti-inflammatory [ 10% Niacinamide + K2G ]',
+      'Exfoliates and activates cell renewal [ LHA + Retinyl Palmitate ]',
+      'Antioxidant [ Carnosine ]'
+    ],
+    usage: [
+      'Apply morning and evening to the face, neck and hands (if needed)',
+      'In the daytime, use in combination with Anthelios Fluid SPF50+'
+    ],
+    color: '#5C2D91',
+    image: '/product-pack/Mela PP.png'
+  },
+  {
+    id: 'effaclar',
+    issue: 'ACNE',
+    shortName: 'EFFACLAR',
+    name: 'EFFACLAR',
+    subtitle: 'PURIFYING FOAMING GEL',
+    indication: [
+      'Oily and sensitive skin',
+      'Acne-prone skin',
+      'Skin with severe imperfections'
+    ],
+    action: [
+      'Targets IA1 phylotypes of the bacteria C. acnes to correct imperfections [ Phylobioma ] NEW ACTIVE',
+      'Gently cleanses [ Syndet ]',
+      'Removes impurities and excess sebum [ Zinc pidolate ]',
+      'Rebalances pH of acne-prone skin [ Physiological pH : 5 & Soap-free ]'
+    ],
+    usage: [
+      'Lather in the hands with a small amount of water and apply to the face in gentle massaging motions',
+      'Rinse thoroughly and pat dry'
+    ],
+    color: '#0085C7',
+    image: '/product-pack/Effaclar PP.png'
+  },
+  {
+    id: 'lipikar',
+    issue: 'ATOPY',
+    shortName: 'LIPIKAR',
+    name: 'LIPIKAR BALM AP+Max',
+    subtitle: 'TRIPLE-ACTION BALM 72H',
+    indication: [
+      'Xerosis, senile xerosis, itching, atopic eczema-prone skin'
+    ],
+    action: [
+      'To mute itch signals on skin [ Neurobioma ] NEW ACTIVE',
+      'Strengthens skin barrier [ Shea Butter + Glycerin ]',
+      'Soothes skin & reduces irritation [ Neurobioma + Niacinamide ]',
+      'Rebalances skin microbiome & inhibits biofilm formation [ Aqua Posae Filiformis + Microresyl ]'
+    ],
+    usage: [
+      '1 application per day',
+      'On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+'
+    ],
+    color: '#0099CC',
+    image: '/product-pack/Lipikar PP.png'
+  },
+  {
+    id: 'cicaplast',
+    issue: 'HEALING',
+    shortName: 'CICAPLAST',
+    name: 'CICAPLAST B5+ BALM',
+    subtitle: 'ULTRA-REPAIRING SOOTHING BALM',
+    indication: [
+      'Weakened and irritated skin in babies, children and adults',
+      'Sensitive skin following epidermal damage: eczema, diaper rash in babies, perioral irritation, dry patches, chapping, intense dryness, superficial burns, skin irritation, superficial post-laser damage, post-epilation irritation'
+    ],
+    action: [
+      'Boosts tissue healing [ Tribioma ]',
+      'Soothes [ 5% Panthenol ]',
+      'Repairs [ Madecassoside ]',
+      'Purifies [ Copper ] + [ Zinc ]',
+      'Nourishes and protects [ Shea butter ] + [ Glycerin ]'
+    ],
+    usage: [
+      'Apply twice a day to the irritated or weakened area after cleansing and drying',
+      'Non-greasy texture that does not leave white marks and is suitable for massaging scars'
+    ],
+    color: '#0055A4',
+    image: '/product-pack/Cicaplast PP.png'
+  }
 ];
 
 const LabRoutes: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <>
-      <SEO 
-        title="What To Expect" 
-        description="Dive deep into the five specialized modules of the Living Lab Nigeria." 
-        canonicalUrl="/lab-routes"
-      />
+    <div className="page-wrapper">
+      <Helmet>
+        <title>What To Expect | Living Lab Nigeria 2026</title>
+      </Helmet>
+
       <Header />
       
-      <main className="lab-routes-page">
-        <section className="lab-hero">
-          <div className="lab-hero-content">
-            <h1 className="lab-title">WHAT TO EXPECT<br />IN THE LAB</h1>
-            <p className="lab-subtitle">
-              Dive deep into the five specialized modules of the Living Lab. Each route is a hands-on exploration of the science that powers La Roche-Posay.
-            </p>
-          </div>
-        </section>
+      <main className="about-page">
 
-        <section className="modules-section">
-          <div className="modules-container">
-            {LAB_MODULES.map((module) => (
-              <div key={module.id} className="module-row">
-                <div className="module-visual">
-                  <div className="module-number">{module.id}</div>
-                  <div className="module-placeholder">
-                    [ VISUAL FOR {module.title} ]
+      <div className="about-hero">
+        <div className="container">
+          <div className="about-hero-content">
+            <h1>WHAT TO EXPECT</h1>
+            <p>Explore our targeted solutions and what awaits you in the lab.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="container about-products-list alternating-layout">
+          {productDetails.map((p, index) => {
+            const isReversed = index % 2 !== 0;
+            return (
+              <div key={p.id} className={`about-product-row ${isReversed ? 'reversed' : ''}`} style={{borderColor: p.color}}>
+                <div className="about-product-img-col" style={{ backgroundColor: p.color + '15' }}>
+                  <img src={p.image} alt={p.name} />
+                </div>
+                <div className="about-product-text-col">
+                  <h2 className="about-issue-title" style={{ color: p.color }}>{p.issue}</h2>
+                  <h3 className="about-product-name" style={{ color: p.color }}>{p.name}</h3>
+                  <p className="about-product-subtitle">{p.subtitle}</p>
+
+                  {p.innovation && (
+                    <div className="about-section">
+                      <h4 style={{ color: p.color, borderBottomColor: p.color + '40' }}>{p.innovation.title}</h4>
+                      {p.innovation.subtitle && <h5 className="about-inn-subtitle">{p.innovation.subtitle}</h5>}
+                      <ul className="about-bullets">
+                        {p.innovation.bullets.map((b, i) => <li key={i} style={{'--bullet-color': p.color} as any}>{b}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  <div className="about-section">
+                    <h4 style={{ color: p.color, borderBottomColor: p.color + '40' }}>INDICATION</h4>
+                    <ul className="about-bullets">
+                      {p.indication.map((b, i) => <li key={i} style={{'--bullet-color': p.color} as any}>{b}</li>)}
+                    </ul>
+                  </div>
+                  
+                  <div className="about-section">
+                    <h4 style={{ color: p.color, borderBottomColor: p.color + '40' }}>ACTION</h4>
+                    <ul className="about-bullets">
+                      {p.action.map((b, i) => <li key={i} style={{'--bullet-color': p.color} as any}>{b}</li>)}
+                    </ul>
+                  </div>
+                  
+                  <div className="about-section">
+                    <h4 style={{ color: p.color, borderBottomColor: p.color + '40' }}>USAGE</h4>
+                    <ul className="about-bullets">
+                      {p.usage.map((b, i) => <li key={i} style={{'--bullet-color': p.color} as any}>{b}</li>)}
+                    </ul>
                   </div>
                 </div>
-                <div className="module-content">
-                  <h2>{module.title}</h2>
-                  <h4 className="module-short-desc">{module.desc}</h4>
-                  <p className="module-full-desc">{module.fullDesc}</p>
-                </div>
               </div>
-            ))}
-          </div>
-        </section>
+            );
+          })}
+        </div>
 
-        <PageCTA 
-          title="EXPERIENCE THE SCIENCE"
-          description="Don't just read about it. Register now to experience these modules live at the Living Lab Nigeria 2026."
-        />
+      {/* Core Values Section from AboutLRP */}
+      <div className="container">
+        <div className="scientific-grid-container" style={{ marginTop: '0', paddingTop: '80px', paddingBottom: '120px' }}>
+          <div className="scientific-header">
+            <h3>AT THE CORE OF OUR BRAND</h3>
+            <p>LA ROCHE-POSAY</p>
+          </div>
+          
+          <div className="scientific-grid">
+            <div className="sg-item">
+              <h4>FACTORY</h4>
+              <div className="sg-reveal">
+                <p>CO2 neutral since 2018.</p>
+                <p>100% renewable energy.</p>
+              </div>
+            </div>
+            <div className="sg-item">
+              <h4>INGREDIENTS</h4>
+              <div className="sg-reveal">
+                <p>75% from nature or recycled materials.</p>
+                <p>50% recycled or biobased packaging.</p>
+              </div>
+            </div>
+            <div className="sg-item">
+              <h4>THERMAL SPRING WATER</h4>
+              <div className="sg-reveal">
+                <p>A unique thermal spring water with therapeutic properties.</p>
+              </div>
+            </div>
+            <div className="sg-item">
+              <h4>COMPLEMENTARY THERAPY</h4>
+              <div className="sg-reveal">
+                <p>For all common dermatology consultations.</p>
+              </div>
+            </div>
+            <div className="sg-item">
+              <h4>PROVEN EFFICACY</h4>
+              <div className="sg-reveal">
+                <p>Clinically proven tolerance and efficacy on all skin types.</p>
+              </div>
+            </div>
+            <div className="sg-item">
+              <h4>SCIENTIFIC RESEARCH</h4>
+              <div className="sg-reveal">
+                <p>At the cutting-edge of scientific research on skin.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
