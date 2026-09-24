@@ -5,7 +5,7 @@
 }
 
 .science-hero {
-  padding: 80px 20px 40px;
+  padding: 40px 20px 20px;
   text-align: center;
   background-color: #F9FAFB;
   border-bottom: 1px solid #E5E7EB;
@@ -40,7 +40,7 @@
 }
 
 .science-features-section {
-  padding: 80px 20px;
+  padding: 40px 20px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -126,6 +126,6 @@
     font-size: 2rem;
   }
   .science-feature-row {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
   }
 }

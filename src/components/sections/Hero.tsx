@@ -3,19 +3,10 @@ import { motion } from 'framer-motion';
 import './Hero.css';
 
 interface HeroProps {
-  activeReelId: number;
   isVideoMoved: boolean;
 }
 
-const reelColors: Record<number, string> = {
-  1: '#F87171',
-  2: '#60A5FA',
-  3: '#4B5563',
-  4: '#34D399',
-  5: '#A78BFA',
-};
-
-const Hero: React.FC<HeroProps> = ({ activeReelId, isVideoMoved }) => {
+const Hero: React.FC<HeroProps> = ({ isVideoMoved }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

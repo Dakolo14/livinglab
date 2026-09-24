@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import HomeV1 from './pages/HomeV1';
 import Home from './pages/Home';
+import About from './pages/About';
 import Experts from './pages/Experts';
 import LabRoutes from './pages/LabRoutes';
 import SciencePage from './pages/SciencePage';
@@ -33,6 +34,7 @@ function App() {
         <OfflineNotification />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/test" element={<HomeV1 />} />
           <Route path="/experts" element={<Experts />} />
           <Route path="/lab-routes" element={<LabRoutes />} />
