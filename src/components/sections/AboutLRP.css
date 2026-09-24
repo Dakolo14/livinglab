@@ -654,7 +654,7 @@
     padding: 10px;
   }
   .opt3-pack-img {
-    max-height: 200px;
+    max-height: 300px;
   }
 }
 @media (max-width: 768px) {
