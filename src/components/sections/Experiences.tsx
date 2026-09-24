@@ -47,51 +47,22 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
         </h3>
       </div>
         
-      <div className="experience-cards">
+      <div className="experience-cards" style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', position: 'relative', justifyContent: 'center' }}>
         {reels.map((reel) => {
-          let indexDiff = reel.id - activeReelId;
-          
-          if (indexDiff > 2) indexDiff -= 5;
-          else if (indexDiff < -2) indexDiff += 5;
-          
-          let position = indexDiff;
-          let x = position === 0 ? 0 
-                : position === -1 ? (isMobile ? -105 : -110) 
-                : position === 1 ? (isMobile ? 105 : 110) 
-                : position === -2 ? (isMobile ? -210 : -200) 
-                : (isMobile ? 210 : 200);
-          
-          let scale = position === 0 ? 1 
-                    : position === 1 || position === -1 ? (isMobile ? 0.9 : 0.8) 
-                    : (isMobile ? 0.8 : 0.6);
-          let zIndex = position === 0 ? 5 : position === 1 || position === -1 ? 4 : 3;
-          let isActive = position === 0;
+          let isActive = reel.id === activeReelId;
 
           return (
             <motion.div 
               key={reel.id}
               className={`exp-card ${isActive ? 'active' : 'inactive'}`}
-              style={{ touchAction: 'pan-y' }}
+              style={{ position: 'relative', width: '22%', minWidth: '220px', touchAction: 'pan-y', zIndex: isActive ? 5 : 1 }}
               animate={{ 
-                x: `${x}%`, 
-                scale: scale, 
-                zIndex: zIndex,
-                opacity: isActive ? 1 : 0.7 
+                scale: isActive ? 1.05 : 0.95,
+                opacity: isActive ? 1 : 0.6
               }}
-              transition={{ type: "tween", ease: "easeInOut", duration: 0.6 }}
-              onClick={() => handleReelClick(reel.id)}
-              whileHover={!isActive ? { opacity: 0.9 } : {}}
-              drag={isMobile && isActive ? "x" : false}
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragEnd={(_, { offset }) => {
-                const swipe = offset.x;
-                if (swipe < -40) {
-                  setActiveReelId(activeReelId === 5 ? 1 : activeReelId + 1);
-                } else if (swipe > 40) {
-                  setActiveReelId(activeReelId === 1 ? 5 : activeReelId - 1);
-                }
-              }}
+              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+              onClick={() => setActiveReelId(reel.id)}
+              whileHover={!isActive ? { opacity: 0.8 } : {}}
             >
               <div className="video-frame">
                 {isActive && isVideoMoved ? (
