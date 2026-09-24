@@ -649,6 +649,13 @@
   .opt3-slice-content {
     padding: 30px 20px;
   }
+  .opt3-img-col {
+    height: 250px;
+    padding: 10px;
+  }
+  .opt3-pack-img {
+    max-height: 200px;
+  }
 }
 @media (max-width: 768px) {
   .opt2-grid {
