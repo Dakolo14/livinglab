@@ -230,7 +230,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       </div>
 
       <div class="content">
-        <div class="greeting">Dear Dr. \${name.split(' ')[0]},</div>
+        <div class="greeting">Dear Dr. ${name.split(' ')[0]},</div>
         
         <div class="message">
           Your registration is confirmed. We are absolutely thrilled to welcome you to the exclusive Living Lab Nigeria 2026 experience by La Roche-Posay.
@@ -238,14 +238,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         <div class="session-details">
           <div class="session-label">Your Reserved Session:</div>
-          <div class="session-date">\${formattedSession}</div>
+          <div class="session-date">${formattedSession}</div>
         </div>
 
         <div class="ticket-section">
           <div class="ticket-label">DIGITAL TICKET ID</div>
-          <div class="ticket-id">\${ticketId}</div>
+          <div class="ticket-id">${ticketId}</div>
           
-          <img src="\${qrCodeUrl}" alt="Your QR Code" class="qr-code" />
+          <img src="${qrCodeUrl}" alt="Your QR Code" class="qr-code" />
           
           <div class="footer-instruction">
             Please present this QR code at the entrance for fast-track check-in.
