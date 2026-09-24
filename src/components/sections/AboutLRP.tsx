@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './AboutLRP.css';
 
@@ -141,6 +141,14 @@ const productDetails = [
 
 const AboutLRP: React.FC = () => {
   const [activeProduct, setActiveProduct] = useState(productDetails[0]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 992);
+    handleResize(); // set initially
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <section className="about-lrp" id="about-lrp">
@@ -159,7 +167,7 @@ const AboutLRP: React.FC = () => {
         <div className="opt3-accordion-container">
           <div className="opt3-accordion">
             {productDetails.map(p => {
-              const isActive = activeProduct.id === p.id;
+              const isActive = isMobile || activeProduct.id === p.id;
               return (
                 <div 
                   key={p.id} 
