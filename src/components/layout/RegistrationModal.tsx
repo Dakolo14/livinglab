@@ -239,12 +239,12 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                   {isDropdownOpen && (
                     <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 10, marginTop: '4px', padding: '12px', background: '#ffffff', border: '1px solid #D1D5DB', borderRadius: '4px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', maxHeight: '220px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                       {[
-                        { value: "Thursday Morning", label: "Thursday 5 November (morning session 9am - 11:30am)" },
-                        { value: "Thursday Afternoon", label: "Thursday 5 November (afternoon session 12:30 pm - 3:30 pm)" },
-                        { value: "Thursday Late", label: "Thursday 5 November (late afternoon session 4pm - 7pm)" },
-                        { value: "Friday Morning", label: "Friday 6 November (morning session 9am - 11:30am)" },
-                        { value: "Friday Afternoon", label: "Friday 6 November (afternoon session 12:30 pm - 3:30 pm)" },
-                        { value: "Friday Late", label: "Friday 6 November (late afternoon session 4pm - 7pm)" }
+                        { value: "Thursday Morning", label: "Thursday 5 November (Morning)" },
+                        { value: "Thursday Afternoon", label: "Thursday 5 November (Early afternoon)" },
+                        { value: "Thursday Late", label: "Thursday 5 November (Late afternoon)" },
+                        { value: "Friday Morning", label: "Friday 6 November (Morning)" },
+                        { value: "Friday Afternoon", label: "Friday 6 November (Early afternoon)" },
+                        { value: "Friday Late", label: "Friday 6 November (Late afternoon)" }
                       ].map((session) => {
                         const isDisabled = existingSessions.length > 0;
                         return (
