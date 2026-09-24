@@ -36,11 +36,14 @@
 .header-logo img {
   height: 80px;
   width: auto;
-  transition: height 0.3s ease;
+  transition: all 0.3s ease;
+  transform: scale(1.6); /* Make it visually much bigger without pushing navbar padding */
+  transform-origin: left center;
 }
 
 .site-header.shrunk .header-logo img {
   height: 48px;
+  transform: scale(1.2); /* Keep it slightly bigger even when shrunk */
 }
 
 .header-nav {
@@ -168,8 +171,8 @@
     position: relative;
     z-index: 101;
   }
-  .header-logo img { height: 170px; }
-  .site-header.shrunk .header-logo img { height: 70px; }
+  .header-logo img { height: 170px; transform: none; }
+  .site-header.shrunk .header-logo img { height: 70px; transform: none; }
   
   .hamburger-menu { display: flex; }
   
