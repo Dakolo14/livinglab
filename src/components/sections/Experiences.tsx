@@ -9,11 +9,11 @@ interface ExperiencesProps {
 }
 
 const reels = [
-  { id: 1, title: 'Sun Science', videoSrc: '/reducedplaceholder/ANTHELIOS UV MUNE 400 REEL VIDEO.mov' },
-  { id: 2, title: 'Acne Lab', videoSrc: '/reducedplaceholder/EFFACLAR REEL VIDEO.mov' },
-  { id: 3, title: 'Baby Skin Lab', videoSrc: '/reducedplaceholder/LIPIKAR REEL VIDEO.mov' },
-  { id: 4, title: 'Scars of Life', videoSrc: '/reducedplaceholder/CICAPLAST REEL VIDEO.mp4' },
-  { id: 5, title: 'Pigmentation Lab', videoSrc: '/reducedplaceholder/MELA B3 REEL VIDEO.mp4' }
+  { id: 1, title: 'Sun Science', videoSrc: '/reducedplaceholder/ANTHELIOS UV MUNE 400 REEL VIDEO.MOV' },
+  { id: 2, title: 'Acne Lab', videoSrc: '/reducedplaceholder/EFFACLAR REEL VIDEO.MOV' },
+  { id: 3, title: 'Baby Skin Lab', videoSrc: '/reducedplaceholder/LIPIKAR REEL VIDEO.MOV' },
+  { id: 4, title: 'Scars of Life', videoSrc: '/reducedplaceholder/CICAPLAST REEL VIDEO.MP4' },
+  { id: 5, title: 'Pigmentation Lab', videoSrc: '/reducedplaceholder/MELA B3 REEL VIDEO.MP4' }
 ];
 
 const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId, isVideoMoved }) => {
