@@ -53,7 +53,7 @@ const ProgrammeSection: React.FC<ProgrammeSectionProps> = ({ hideHeader = false,
               className={`prog-tab-btn ${activeDay === tab.id ? 'active' : ''}`}
               onClick={() => setActiveDay(tab.id)}
             >
-              <span className="tab-title" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{tab.title}</span>
+              <span className="tab-title">{tab.title}</span>
             </button>
           ))}
         </div>
