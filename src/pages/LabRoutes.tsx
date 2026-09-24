@@ -214,56 +214,7 @@ const LabRoutes: React.FC = () => {
           })}
         </div>
 
-      {/* Core Values Section from AboutLRP */}
-      <div className="container">
-        <div className="scientific-grid-container" style={{ marginTop: '0', paddingTop: '80px', paddingBottom: '120px' }}>
-          <div className="scientific-header">
-            <h3>AT THE CORE OF OUR BRAND</h3>
-            <p>LA ROCHE-POSAY</p>
-          </div>
-          
-          <div className="scientific-grid">
-            <div className="sg-item">
-              <h4>FACTORY</h4>
-              <div className="sg-reveal">
-                <p>CO2 neutral since 2018.</p>
-                <p>100% renewable energy.</p>
-              </div>
-            </div>
-            <div className="sg-item">
-              <h4>INGREDIENTS</h4>
-              <div className="sg-reveal">
-                <p>75% from nature or recycled materials.</p>
-                <p>50% recycled or biobased packaging.</p>
-              </div>
-            </div>
-            <div className="sg-item">
-              <h4>THERMAL SPRING WATER</h4>
-              <div className="sg-reveal">
-                <p>A unique thermal spring water with therapeutic properties.</p>
-              </div>
-            </div>
-            <div className="sg-item">
-              <h4>COMPLEMENTARY THERAPY</h4>
-              <div className="sg-reveal">
-                <p>For all common dermatology consultations.</p>
-              </div>
-            </div>
-            <div className="sg-item">
-              <h4>PROVEN EFFICACY</h4>
-              <div className="sg-reveal">
-                <p>Clinically proven tolerance and efficacy on all skin types.</p>
-              </div>
-            </div>
-            <div className="sg-item">
-              <h4>SCIENTIFIC RESEARCH</h4>
-              <div className="sg-reveal">
-                <p>At the cutting-edge of scientific research on skin.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
       </main>
 
       <Footer />
