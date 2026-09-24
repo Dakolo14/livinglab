@@ -96,57 +96,189 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(email)}`;
       
       const emailHtml = `
-        <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; line-height: 1.6;">
-          
-          <!-- Header -->
-          <div style="text-align: center; margin-bottom: 32px;">
-            <h1 style="color: #000; font-weight: 800; letter-spacing: 2px; margin: 0;">LIVING LAB</h1>
-            <p style="color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin: 4px 0 0 0;">NIGERIA 2026</p>
-          </div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Living Lab Registration Successful</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-family: 'Locator Regular', Helvetica, Arial, sans-serif;
+    color: #111827;
+  }
+  .email-wrapper {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 40px 0;
+  }
+  .email-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .header-banner {
+    background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 100%);
+    text-align: center;
+    padding: 60px 20px 30px;
+  }
+  .logo {
+    max-width: 140px;
+    margin-bottom: 40px;
+  }
+  .success-title {
+    color: #0ea5e9;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -1.5px;
+  }
+  .content {
+    padding: 40px 50px;
+  }
+  .greeting {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .message {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 30px;
+  }
+  .session-details {
+    margin-bottom: 40px;
+  }
+  .session-label {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 5px;
+  }
+  .session-date {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000000;
+  }
+  .session-time {
+    font-size: 14px;
+    color: #4b5563;
+  }
+  .ticket-section {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid #e5e7eb;
+  }
+  .ticket-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #6b7280;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .ticket-id {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 30px;
+  }
+  .qr-code {
+    max-width: 220px;
+    margin: 0 auto 20px;
+    display: block;
+  }
+  .footer-instruction {
+    font-size: 13px;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .footer {
+    background-color: #00aeef;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 12px;
+  }
+  @media only screen and (max-width: 600px) {
+    .content {
+      padding: 30px 20px;
+    }
+    .success-title {
+      font-size: 28px;
+    }
+    .email-wrapper {
+      padding: 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+      
+      <div class="header-banner">
+        <img src="https://www.livinglabnigeria.com/BLUE%20LOGO.png" alt="Living Lab" class="logo" />
+        <h1 class="success-title">REGISTRATION<br/>SUCCESSFUL</h1>
+      </div>
 
-          <!-- Greeting -->
-          <p style="font-size: 1.1rem;">Dear Dr. ${name.split(' ')[0]},</p>
-          <p style="font-size: 1.1rem;">Your registration is confirmed. We are absolutely thrilled to welcome you to the exclusive Living Lab Nigeria 2026 experience by La Roche-Posay.</p>
-          
-          <!-- Event Details Box -->
-          <div style="background-color: #f8f9fa; border-left: 4px solid #000; padding: 20px; margin: 32px 0;">
-            <p style="margin: 0; font-size: 0.85rem; color: #666; text-transform: uppercase; font-weight: bold;">Your Reserved Session</p>
-            <p style="margin: 8px 0 0 0; font-size: 1.3rem; font-weight: bold; color: #000;">
-              ${formattedSession}
-            </p>
-          </div>
-          
-          <!-- Ticket & QR Code -->
-          <div style="background-color: #00AEEF; color: white; padding: 32px 20px; border-radius: 12px; text-align: center; margin: 32px 0;">
-            <p style="margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">Digital Ticket ID</p>
-            <p style="margin: 8px 0 24px 0; font-size: 2rem; font-family: monospace; font-weight: bold; letter-spacing: 2px;">
-              ${ticketId}
-            </p>
-            
-            <div style="background: white; padding: 16px; border-radius: 8px; display: inline-block;">
-              <img src="${qrCodeUrl}" alt="Your Ticket QR Code" style="width: 200px; height: 200px; display: block;" />
-            </div>
-            <p style="margin: 16px 0 0 0; font-size: 0.9rem; opacity: 0.9;">Please present this QR code at the entrance for fast-track check-in.</p>
-          </div>
+      <div class="content">
+        <div class="greeting">Dear Dr. \${name.split(' ')[0]},</div>
+        
+        <div class="message">
+          Your registration is confirmed. We are absolutely thrilled to welcome you to the exclusive Living Lab Nigeria 2026 experience by La Roche-Posay.
+        </div>
 
-          <!-- Perks -->
-          <div style="border: 1px solid #E5E7EB; padding: 24px; border-radius: 12px; text-align: center; margin-bottom: 32px;">
-            <h3 style="margin: 0 0 12px 0; color: #000;">Exclusive Attendee Perk</h3>
-            <p style="margin: 0; color: #555;">Enjoy a <strong>15% discount</strong> on all purchases made at the La Roche-Posay stand during the event.</p>
-            <p style="margin: 16px 0 0 0; font-size: 1rem;">Discount Code: <span style="background: #f1f5f9; padding: 6px 12px; border-radius: 6px; font-weight: bold; color: #00AEEF; border: 1px dashed #cbd5e1;">LRP15</span></p>
-          </div>
-          
-          <p style="font-size: 1.1rem;">We look forward to an inspiring session with you!</p>
-          <p style="font-size: 1.1rem; margin-top: 32px;">Warm regards,<br/><strong>The Living Lab Team</strong></p>
+        <div class="session-details">
+          <div class="session-label">Your Reserved Session:</div>
+          <div class="session-date">\${formattedSession}</div>
+        </div>
 
-          <!-- Footer -->
-          <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 40px 0 24px 0;" />
-          <p style="font-size: 0.75rem; color: #9CA3AF; text-align: center; line-height: 1.5;">
-            This email was sent to ${email}. If you need to make changes to your registration or can no longer attend, please contact us.<br/><br/>
-            &copy; 2026 La Roche-Posay. All rights reserved.
+        <div class="ticket-section">
+          <div class="ticket-label">DIGITAL TICKET ID</div>
+          <div class="ticket-id">\${ticketId}</div>
+          
+          <img src="\${qrCodeUrl}" alt="Your QR Code" class="qr-code" />
+          
+          <div class="footer-instruction">
+            Please present this QR code at the entrance for fast-track check-in.
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+          <h3 style="margin-top: 0; color: #00aeef; font-size: 13px; text-transform: uppercase; letter-spacing: 2px;">Exclusive Attendee Perk</h3>
+          <p style="font-size: 15px; color: #4b5563; line-height: 1.6; max-width: 400px; margin: 15px auto 20px;">
+            Enjoy a 15% discount on all purchases made at the La Roche-Posay stand during the event.
+          </p>
+          <p style="margin: 0; font-weight: bold; font-size: 18px; color: #111827;">
+            Discount Code: <span style="color: #00aeef;">LRP15</span>
           </p>
         </div>
-      `;
+
+        <div class="message" style="margin-top: 40px; margin-bottom: 0;">
+          We look forward to an inspiring session with you!<br><br>
+          Warm regards,<br>
+          <strong>The Living Lab Team</strong>
+        </div>
+      </div>
+
+      <div class="footer">
+        © 2026 La Roche-Posay. All rights reserved.<br/>
+        Living Lab Nigeria
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
+`;
 
       try {
         const response = await fetch('https://api.resend.com/emails', {
