@@ -37,13 +37,14 @@
   height: 80px;
   width: auto;
   transition: all 0.3s ease;
-  transform: scale(1.6); /* Make it visually much bigger without pushing navbar padding */
-  transform-origin: left center;
+  transform: scale(2.0); /* Make it visually much bigger without pushing navbar padding */
+  transform-origin: left top; /* Set to left top so it scales down, not up past the screen */
 }
 
 .site-header.shrunk .header-logo img {
   height: 48px;
-  transform: scale(1.2); /* Keep it slightly bigger even when shrunk */
+  transform: scale(1.4); /* Keep it slightly bigger even when shrunk */
+  transform-origin: left center; /* When shrunk, center it again */
 }
 
 .header-nav {
