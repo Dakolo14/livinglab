@@ -67,7 +67,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
               <div className="video-frame">
                 {isActive && isVideoMoved ? (
                   <motion.div
-                    style={{ width: '100%', height: '100%', backgroundColor: '#4B5563', position: 'relative' }}
+                    style={{ width: '100%', height: '100%', backgroundColor: '#4B5563', position: 'relative', borderRadius: '16px', overflow: 'hidden' }}
                     transition={{ type: "tween", ease: "easeInOut", duration: 0.8 }}
                   >
                     <video 
@@ -87,7 +87,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
                     </div>
                   </motion.div>
                 ) : (
-                  <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                  <div style={{ width: '100%', height: '100%', position: 'relative', borderRadius: '16px', overflow: 'hidden' }}>
                     <video 
                       src={reel.videoSrc} 
                       autoPlay
