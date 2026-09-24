@@ -37,7 +37,7 @@
   height: 80px;
   width: auto;
   transition: all 0.3s ease;
-  transform: scale(2.0); /* Make it visually much bigger without pushing navbar padding */
+  transform: scale(2.2); /* Make it visually much bigger without pushing navbar padding */
   transform-origin: left top; /* Set to left top so it scales down, not up past the screen */
 }
 
