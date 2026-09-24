@@ -4,21 +4,21 @@ import './ProgrammeSection.css';
 
 const scheduleData: Record<number, Array<{time: string, experience: string}>> = {
   1: [
-    { time: '9am - 11am', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '12pm - 2pm', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '3pm - 5pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+    { time: 'Morning', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Early afternoon', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Late afternoon', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
   ],
   2: [
-    { time: '9am - 11am', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '12pm - 2pm', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '3pm - 5pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '6pm - 8pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+    { time: 'Morning', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Early afternoon', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Late afternoon', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Evening', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
   ],
   3: [
-    { time: '9am - 11am', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '12pm - 2pm', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '3pm - 5pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: '6pm - 8pm', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+    { time: 'Morning', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Early afternoon', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Late afternoon', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
+    { time: 'Evening', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
   ]
 };
 
