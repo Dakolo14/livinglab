@@ -29,7 +29,7 @@ const ProgrammePage: React.FC = () => {
         <ProgrammeSection hideHeader={true} hideCTA={true} />
 
         <PageCTA 
-          title="SECURE YOUR ITINERARY"
+          title="BOOK FOR A SLOT"
           description="Spaces for the Living Lab Nigeria 2026 are highly limited. Register now to confirm your attendance."
         />
       </main>
