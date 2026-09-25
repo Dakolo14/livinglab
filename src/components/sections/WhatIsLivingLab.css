@@ -18,21 +18,21 @@
 }
 
 .will-container {
-  max-width: 1000px;
+  max-width: 1100px;
   width: 100%;
   margin: 0 auto;
   position: relative;
-  border-radius: 20px;
-  overflow: hidden;
   display: flex;
-  background-color: #ffffff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  align-items: center;
+  gap: 60px;
 }
 
 .will-image-wrapper {
   position: relative;
   flex: 1;
   background-color: #000;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .will-image {
@@ -48,7 +48,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 60px 50px;
+  padding: 0;
   text-align: left;
   background: none;
   color: #111827;
@@ -94,13 +94,15 @@
   .will-container {
     max-width: 480px;
     flex-direction: column;
-    box-shadow: none;
-    background-color: transparent;
+    gap: 0;
+    border-radius: 20px;
+    overflow: hidden;
   }
   
   .will-image-wrapper {
     aspect-ratio: 3/4;
     width: 100%;
+    border-radius: 0;
   }
 
   .will-image {
