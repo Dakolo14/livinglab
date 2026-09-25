@@ -153,12 +153,14 @@ const Experiences: React.FC<ExperiencesProps> = ({ activeReelId, setActiveReelId
       <div className="banner">
         <div className="banner-text">
           {/* Duplicated for seamless marquee */}
-          <span>SKIN YOU CAN FEEL.</span>
-          <span>SCIENCE YOU CAN SEE.</span>
-          <span>AN EXPERIENCE YOU WON'T FORGET.</span>
-          <span>SKIN YOU CAN FEEL.</span>
-          <span>SCIENCE YOU CAN SEE.</span>
-          <span>AN EXPERIENCE YOU WON'T FORGET.</span>
+          <span>DRIVING DERMATOLOGY FORWARD BY JOINING FORCES WITH THE MEDICAL COMMUNITY</span>
+          <span>LIFE-CHANGING SKINCARE RECOMMENDED BY DERMATOLOGISTS</span>
+          <span>N°1 SUNCARE BRAND RECOMMENDED BY DERMATOLOGISTS IN THE WORLD</span>
+          <span>RECOMMENDED BY OVER 100,000 DERMATOLOGISTS WORLDWIDE</span>
+          <span>DRIVING DERMATOLOGY FORWARD BY JOINING FORCES WITH THE MEDICAL COMMUNITY</span>
+          <span>LIFE-CHANGING SKINCARE RECOMMENDED BY DERMATOLOGISTS</span>
+          <span>N°1 SUNCARE BRAND RECOMMENDED BY DERMATOLOGISTS IN THE WORLD</span>
+          <span>RECOMMENDED BY OVER 100,000 DERMATOLOGISTS WORLDWIDE</span>
         </div>
       </div>
 
