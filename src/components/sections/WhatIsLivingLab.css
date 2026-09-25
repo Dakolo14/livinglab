@@ -1,0 +1,105 @@
+.what-is-living-lab {
+  padding: 60px 20px;
+  background-color: #F9FAFB;
+  display: flex;
+  justify-content: center;
+}
+
+.will-container {
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.will-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9/16;
+  background-color: #000;
+}
+
+.will-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.will-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  color: #FFFFFF;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+.will-heading {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.will-text-content {
+  max-width: 600px;
+}
+
+.will-text-content h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.will-text-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.will-tagline {
+  font-size: 1.4rem !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 30px;
+  color: #00A3E0;
+}
+
+@media (max-width: 768px) {
+  .what-is-living-lab {
+    padding: 40px 15px;
+  }
+  
+  .will-heading {
+    font-size: 2.2rem;
+  }
+  
+  .will-text-content h3 {
+    font-size: 1.4rem;
+  }
+  
+  .will-text-content p {
+    font-size: 1rem;
+  }
+  
+  .will-tagline {
+    font-size: 1.2rem !important;
+  }
+  
+  .will-overlay {
+    padding: 20px;
+  }
+}
