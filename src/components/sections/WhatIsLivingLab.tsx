@@ -4,7 +4,7 @@ import './WhatIsLivingLab.css';
 const WhatIsLivingLab: React.FC = () => {
   return (
     <section className="what-is-living-lab">
-      <h3 style={{ textAlign: 'center', fontSize: '2.5rem', fontWeight: 700, marginBottom: '40px', color: '#111827', letterSpacing: '-0.5px', textTransform: 'uppercase' }}>
+      <h3 className="will-section-title">
         WHAT IS LIVING LAB
       </h3>
       <div className="will-container">
