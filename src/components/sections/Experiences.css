@@ -150,7 +150,7 @@
 
 .banner-text {
   display: inline-block;
-  animation: marquee 15s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 .banner-text span {
