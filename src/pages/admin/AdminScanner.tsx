@@ -52,6 +52,17 @@ export const AdminScanner: React.FC = () => {
               await updateDoc(doc(db, 'registrations', docSnap.id), { status: 'attended' });
               checkedInCount++;
               ticketIds.push(data.ticketId);
+
+              // Send CheckInSuccess Email
+              try {
+                await fetch('/api/send-checkin', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ name: data.name, email: data.email })
+                });
+              } catch (e) {
+                console.error("Failed to send checkin email", e);
+              }
             } else if (data.status === 'attended') {
               alreadyCheckedInCount++;
               ticketIds.push(data.ticketId);

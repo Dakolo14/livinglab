@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/**/*": {
+      "includeFiles": "src/emails/*.html"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
