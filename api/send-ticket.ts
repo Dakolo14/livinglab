@@ -228,7 +228,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     <div class="email-container">
       
       <div class="header-banner">
-        <img src="https://www.livinglabnigeria.com/livinglablogo.webp" alt="Living Lab" class="logo" />
+        <img src="https://www.livinglabnigeria.com/BLUE%20LOGO.png" alt="Living Lab" width="140" style="display:block; margin: 0 auto; max-width: 140px; margin-bottom: 40px;" class="logo" />
         <h1 class="success-title">REGISTRATION<br/>SUCCESSFUL</h1>
       </div>
 
