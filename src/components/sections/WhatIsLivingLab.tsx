@@ -21,12 +21,6 @@ const WhatIsLivingLab: React.FC = () => {
           </div>
         </div>
       </div>
-      
-      <h2 style={{ marginTop: '40px', fontSize: '1.4rem', lineHeight: '1.6', textAlign: 'center', color: '#4B5563', fontWeight: 500, maxWidth: '800px' }}>
-        Four days inside a working dermatological laboratory built in Nigeria.<br/>
-        Five worlds. Experts, thermal spring water, real dermatologists and<br/>
-        your own skin story to take home.
-      </h2>
     </section>
   );
 };
