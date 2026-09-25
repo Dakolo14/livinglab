@@ -6,8 +6,9 @@
 }
 
 .will-container {
-  max-width: 600px;
+  max-width: 480px;
   width: 100%;
+  margin: 0 auto;
   position: relative;
   border-radius: 20px;
   overflow: hidden;
@@ -38,17 +39,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  padding: 30px;
   text-align: center;
   color: #FFFFFF;
   background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
 }
 
 .will-heading {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   letter-spacing: 2px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
@@ -58,23 +59,23 @@
 }
 
 .will-text-content h3 {
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .will-text-content p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }
 
 .will-tagline {
-  font-size: 1.4rem !important;
+  font-size: 1.1rem !important;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-top: 30px;
+  margin-top: 20px;
   color: #00A3E0;
 }
 
