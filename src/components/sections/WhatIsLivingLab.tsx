@@ -6,7 +6,7 @@ const WhatIsLivingLab: React.FC = () => {
     <section className="what-is-living-lab">
       <div className="will-container">
         <div className="will-image-wrapper">
-          {/* Placeholder for HD visual from Stephen */}
+          <img src="/livinglabexplain.png" alt="What is Living Lab" className="will-image" />
           <div className="will-overlay">
             <h2 className="will-heading">WHAT IS LIVING LAB</h2>
             <div className="will-text-content">
