@@ -4,21 +4,21 @@ import './ProgrammeSection.css';
 
 const scheduleData: Record<number, Array<{time: string, experience: string}>> = {
   1: [
-    { time: 'Morning', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Early afternoon', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Late afternoon', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+    { time: 'Morning', experience: 'Blue House, Plenary discussions, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Early afternoon', experience: 'Blue House, Plenary discussions, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Late afternoon', experience: 'Blue House, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' }
   ],
   2: [
-    { time: 'Morning', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Early afternoon', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Late afternoon', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Evening', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+    { time: 'Morning', experience: 'Blue House, Plenary discussions, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Early afternoon', experience: 'Blue House, Plenary discussions, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Late afternoon', experience: 'Blue House, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Evening', experience: 'Blue House, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' }
   ],
   3: [
-    { time: 'Morning', experience: 'Plenary 1/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Early afternoon', experience: 'Plenary 2/2, Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Late afternoon', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' },
-    { time: 'Evening', experience: 'Blue House, Scar of Life cinema, Innovation Corners, PopUp store, Consultation Corners' }
+    { time: 'Morning', experience: 'Blue House, Plenary discussions, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Early afternoon', experience: 'Blue House, Plenary discussions, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Late afternoon', experience: 'Blue House, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' },
+    { time: 'Evening', experience: 'Blue House, Product Innovation Corners, Scar of Life cinema, PopUp store, Consultation stations' }
   ]
 };
 
