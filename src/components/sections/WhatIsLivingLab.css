@@ -18,6 +18,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 9/16;
+  max-height: 600px;
   background-color: #000;
 }
 
