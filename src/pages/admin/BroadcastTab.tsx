@@ -5,11 +5,14 @@ export const BroadcastTab: React.FC = () => {
   const [template, setTemplate] = useState<string>('3-weeks');
   const [isSending, setIsSending] = useState(false);
   const [result, setResult] = useState<any>(null);
+  const [showConfirm, setShowConfirm] = useState(false);
 
-  const handleSend = async () => {
-    const confirmSend = window.confirm(`Are you sure you want to send the '${template}' reminder to '${audience}'?`);
-    if (!confirmSend) return;
+  const handleSendClick = () => {
+    setShowConfirm(true);
+  };
 
+  const handleConfirmSend = async () => {
+    setShowConfirm(false);
     setIsSending(true);
     setResult(null);
 
@@ -66,7 +69,7 @@ export const BroadcastTab: React.FC = () => {
         </div>
 
         <button 
-          onClick={handleSend} 
+          onClick={handleSendClick} 
           disabled={isSending}
           style={{ 
             backgroundColor: '#00AEEF', color: '#fff', padding: '14px', 
@@ -92,6 +95,47 @@ export const BroadcastTab: React.FC = () => {
           </div>
         )}
       </div>
+
+      {showConfirm && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>
+          <div style={{
+            backgroundColor: '#fff', borderRadius: '12px', padding: '32px',
+            maxWidth: '450px', width: '90%', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+            textAlign: 'center'
+          }}>
+            <h2 style={{ margin: '0 0 16px 0', color: '#1E293B', fontSize: '24px' }}>Confirm Broadcast</h2>
+            <p style={{ margin: '0 0 32px 0', color: '#475569', fontSize: '16px', lineHeight: '1.5' }}>
+              Are you sure you want to send the <strong>{template}</strong> reminder to <strong>{audience}</strong>? This action cannot be undone and emails will be dispatched immediately.
+            </p>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+              <button 
+                onClick={() => setShowConfirm(false)}
+                style={{
+                  padding: '12px 24px', borderRadius: '8px', border: '1px solid #CBD5E1',
+                  backgroundColor: '#fff', color: '#475569', fontWeight: 'bold', cursor: 'pointer',
+                  flex: 1
+                }}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleConfirmSend}
+                style={{
+                  padding: '12px 24px', borderRadius: '8px', border: 'none',
+                  backgroundColor: '#00AEEF', color: '#fff', fontWeight: 'bold', cursor: 'pointer',
+                  flex: 1
+                }}
+              >
+                Yes, Send Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
