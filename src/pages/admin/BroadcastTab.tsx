@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { db } from '../../config/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export const BroadcastTab: React.FC = () => {
   const [audience, setAudience] = useState<string>('all');
@@ -17,10 +19,31 @@ export const BroadcastTab: React.FC = () => {
     setResult(null);
 
     try {
+      const regsRef = collection(db, 'registrations');
+      let q;
+      if (audience === 'all') {
+        q = query(regsRef);
+      } else {
+        q = query(regsRef, where('dayTime', '==', audience));
+      }
+
+      const snapshot = await getDocs(q);
+      const users: any[] = [];
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.email) users.push(data);
+      });
+
+      if (users.length === 0) {
+        setResult({ error: 'No users found for this audience' });
+        setIsSending(false);
+        return;
+      }
+
       const response = await fetch('/api/send-broadcast', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ audience, template })
+        body: JSON.stringify({ template, users })
       });
       const data = await response.json();
       setResult(data);

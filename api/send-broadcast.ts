@@ -1,26 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore/lite";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCztmPvbg25lLmsQNtH0Ki2larDkfgRNV8",
-  authDomain: "livinglabnigeria.firebaseapp.com",
-  projectId: "livinglabnigeria",
-  storageBucket: "livinglabnigeria.firebasestorage.app",
-  messagingSenderId: "559075983447",
-  appId: "1:559075983447:web:542945a6930d66124fa312",
-  measurementId: "G-QX0EG4MSZ6"
-};
-
-let app;
-let db;
-try {
-  app = initializeApp(firebaseConfig, "broadcast-app");
-  db = getFirestore(app);
-} catch (e) {
-  console.error("Firebase init error", e);
-}
 import fs from 'fs';
 import path from 'path';
 
@@ -29,10 +8,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { audience, template } = req.body;
+  const { template, users } = req.body;
   
-  if (!audience || !template) {
-    return res.status(400).json({ error: 'Missing audience or template' });
+  if (!template || !users || !Array.isArray(users)) {
+    return res.status(400).json({ error: 'Missing template or users array' });
   }
 
   const smtpHost = process.env.SMTP_HOST;
@@ -43,24 +22,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const regsRef = collection(db, 'registrations');
-    let q;
-    
-    if (audience === 'all') {
-      q = query(regsRef);
-    } else {
-      q = query(regsRef, where('dayTime', '==', audience));
-    }
-
-    const snapshot = await getDocs(q);
-    const users: any[] = [];
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      if (data.email) users.push(data);
-    });
-
     if (users.length === 0) {
-      return res.status(404).json({ error: 'No users found for this audience' });
+      return res.status(404).json({ error: 'No users provided' });
     }
 
     let rawHtmlTemplate = '';
