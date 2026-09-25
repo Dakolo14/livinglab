@@ -18,67 +18,58 @@
 }
 
 .will-container {
-  max-width: 480px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
   position: relative;
   border-radius: 20px;
   overflow: hidden;
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 .will-image-wrapper {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4/5;
-  background-color: #9ca3af; /* Grey placeholder background */
+  flex: 1;
+  background-color: #000;
 }
 
 .will-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.6;
+  opacity: 1;
 }
 
 .will-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 30px;
-  text-align: center;
-  color: #FFFFFF;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
-}
-
-.will-heading {
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  align-items: flex-start;
+  padding: 60px 50px;
+  text-align: left;
+  background: none;
+  color: #111827;
 }
 
 .will-text-content {
-  max-width: 600px;
+  max-width: 100%;
 }
 
 .will-text-content h3 {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  color: #111827;
 }
 
 .will-text-content p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #4b5563;
 }
 
 .will-tagline {
@@ -86,8 +77,8 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-top: 20px;
-  color: #00A3E0;
+  margin-top: 25px;
+  color: #00A3E0 !important;
 }
 
 @media (max-width: 768px) {
@@ -99,33 +90,48 @@
     font-size: 1.8rem;
     margin-bottom: 30px;
   }
-  
-  .will-image-wrapper {
-    aspect-ratio: 3/4; /* Give a bit more vertical height on mobile */
+
+  .will-container {
+    max-width: 480px;
+    flex-direction: column;
+    box-shadow: none;
+    background-color: transparent;
   }
   
-  .will-heading {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+  .will-image-wrapper {
+    aspect-ratio: 3/4;
+    width: 100%;
+  }
+
+  .will-image {
+    opacity: 0.6;
+  }
+  
+  .will-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   
   .will-text-content h3 {
     font-size: 1.15rem;
     margin-bottom: 12px;
+    color: #FFFFFF;
   }
   
   .will-text-content p {
     font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 12px;
+    color: #FFFFFF;
   }
   
   .will-tagline {
     font-size: 1.1rem !important;
     margin-top: 20px;
-  }
-  
-  .will-overlay {
-    padding: 20px;
   }
 }
