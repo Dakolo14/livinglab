@@ -94,19 +94,19 @@
   }
   
   .will-text-content h3 {
-    font-size: 1rem;
-    margin-bottom: 8px;
+    font-size: 1.15rem;
+    margin-bottom: 12px;
   }
   
   .will-text-content p {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
   }
   
   .will-tagline {
-    font-size: 0.95rem !important;
-    margin-top: 15px;
+    font-size: 1.1rem !important;
+    margin-top: 20px;
   }
   
   .will-overlay {
