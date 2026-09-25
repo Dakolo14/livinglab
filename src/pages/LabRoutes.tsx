@@ -34,6 +34,11 @@ const productDetails = [
       'Apply generously before exposure',
       'Reapply frequently to maintain the level of protection'
     ],
+    otherProducts: [
+      'ANTHELIOS OIL CORRECT SPF50+',
+      'ANTHELIOS HYDRATING CREAM SPF50+',
+      'ANTHELIOS INVISIBLE SPRAY SPF50+'
+    ],
     color: '#E06B27',
     image: '/product-pack/Ant PP.png'
   },
@@ -66,6 +71,10 @@ const productDetails = [
       'Apply morning and evening to the face, neck and hands (if needed)',
       'In the daytime, use in combination with Anthelios Fluid SPF50+'
     ],
+    otherProducts: [
+      'MELA B3 SPF30',
+      'MELA B3 CLARIFYING MICRO-PEELING GEL'
+    ],
     color: '#5C2D91',
     image: '/product-pack/Mela PP.png'
   },
@@ -90,6 +99,11 @@ const productDetails = [
       'Lather in the hands with a small amount of water and apply to the face in gentle massaging motions',
       'Rinse thoroughly and pat dry'
     ],
+    otherProducts: [
+      'EFFACLAR DUO+M',
+      'EFFACLAR MAT',
+      'EFFACLAR MICRO-PEELING PURIFYING GEL'
+    ],
     color: '#0085C7',
     image: '/product-pack/Effaclar PP.png'
   },
@@ -111,6 +125,11 @@ const productDetails = [
     usage: [
       '1 application per day',
       'On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+'
+    ],
+    otherProducts: [
+      'LIPIKAR SYNDET AP+',
+      'LIPIKAR CLEANSING OIL AP+',
+      'LIPIKAR LAIT'
     ],
     color: '#0099CC',
     image: '/product-pack/Lipikar PP.png'
@@ -136,6 +155,11 @@ const productDetails = [
       'Apply twice a day to the irritated or weakened area after cleansing and drying',
       'Non-greasy texture that does not leave white marks and is suitable for massaging scars'
     ],
+    otherProducts: [
+      'CICAPLAST SPRAY B5',
+      'CICAPLAST GEL B5',
+      'CICAPLAST LIPS'
+    ],
     color: '#0055A4',
     image: '/product-pack/Cicaplast PP.png'
   }
@@ -149,7 +173,7 @@ const LabRoutes: React.FC = () => {
   return (
     <div className="page-wrapper">
       <Helmet>
-        <title>What To Expect | Living Lab Nigeria 2026</title>
+        <title>Franchise | Living Lab Nigeria 2026</title>
       </Helmet>
 
       <Header />
@@ -159,7 +183,7 @@ const LabRoutes: React.FC = () => {
       <div className="about-hero">
         <div className="container">
           <div className="about-hero-content">
-            <h1>WHAT TO EXPECT</h1>
+            <h1>KEY FRANCHISE FOCUSES</h1>
             <p>Explore our targeted solutions and what awaits you in the lab.</p>
           </div>
         </div>
@@ -208,6 +232,15 @@ const LabRoutes: React.FC = () => {
                       {p.usage.map((b, i) => <li key={i} style={{'--bullet-color': p.color} as any}>{b}</li>)}
                     </ul>
                   </div>
+
+                  {p.otherProducts && (
+                    <div className="about-section">
+                      <h4 style={{ color: p.color, borderBottomColor: p.color + '40' }}>OTHER PRODUCTS IN FRANCHISE</h4>
+                      <ul className="about-bullets">
+                        {p.otherProducts.map((b, i) => <li key={i} style={{'--bullet-color': p.color} as any}>{b}</li>)}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             );
