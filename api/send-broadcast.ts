@@ -154,8 +154,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const successful = results.filter(r => r.status === 'fulfilled').length;
     return res.status(200).json({ success: true, sentCount: successful, totalCount: emailsToProcess.length });
     
-  } catch (err) {
+  } catch (err: any) {
     console.error("Broadcast error:", err);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error', details: err.message, stack: err.stack, dbState: !!db });
   }
 }
