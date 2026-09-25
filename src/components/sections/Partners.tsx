@@ -7,6 +7,9 @@ const Partners: React.FC = () => {
       <div className="container">
         <p className="partners-label">IN PARTNERSHIP WITH</p>
         <div className="partners-grid">
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            <img src="/partner-logo/redricklogo.png" alt="Redrick" className="partner-logo-img" />
+          </a>
           <a href="https://www.konga.com/content/Health" target="_blank" rel="noopener noreferrer">
             <img src="/partner-logo/kongahealthlogo.png" alt="Konga Health" className="partner-logo-img" />
           </a>
@@ -24,9 +27,6 @@ const Partners: React.FC = () => {
           </a>
           <a href="https://www.zikoko.com/" target="_blank" rel="noopener noreferrer">
             <img src="/partner-logo/zikokologo.png" alt="Zikoko" className="partner-logo-img" />
-          </a>
-          <a href="#" target="_blank" rel="noopener noreferrer">
-            <img src="/partner-logo/redricklogo.png" alt="Redrick" className="partner-logo-img" />
           </a>
         </div>
       </div>
