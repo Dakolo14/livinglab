@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
 
@@ -28,10 +29,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Missing name or email' });
     }
 
-    const resendApiKey = process.env.RESEND_API_KEY;
-    if (!resendApiKey) {
-      console.warn('RESEND_API_KEY is not set');
-      return res.status(500).json({ error: 'API key configuration missing' });
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
+    if (!smtpHost || !smtpUser || !smtpPass) {
+      console.warn('SMTP config missing');
+      return res.status(500).json({ error: 'Email configuration missing' });
     }
 
     // Read the CheckInSuccess template
@@ -47,26 +50,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const firstName = name.split(' ')[0];
     emailHtml = emailHtml.replace('{{FirstName}}', firstName);
 
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${resendApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: "La Roche-Posay <lrp@livinglabnigeria.com>",
-        to: [email],
+    try {
+      const transporter = nodemailer.createTransport({
+        host: smtpHost,
+        port: parseInt(process.env.SMTP_PORT || '465'),
+        secure: true,
+        auth: {
+          user: smtpUser,
+          pass: smtpPass,
+        },
+      });
+
+      const info = await transporter.sendMail({
+        from: `"La Roche-Posay" <${smtpUser}>`,
+        to: email,
         subject: "Welcome to Living Lab Nigeria 2026",
         html: emailHtml,
-      }),
-    });
-    
-    const data = await response.json();
-    
-    if (response.ok) {
-      return res.status(200).json({ success: true, resendResponse: data });
-    } else {
-      console.error('Resend API Error:', data);
+      });
+
+      return res.status(200).json({ success: true, emailResponse: info });
+    } catch (emailError) {
+      console.error('Nodemailer API Error:', emailError);
       return res.status(500).json({ error: 'Failed to send email' });
     }
   } catch (error) {

@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import nodemailer from 'nodemailer';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS configuration
@@ -75,11 +76,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.warn('TERMII_API_KEY is not set in environment variables');
     }
 
-    const resendApiKey = process.env.RESEND_API_KEY;
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
     let emailSuccess = false;
     let resendResponse = null;
 
-    if (resendApiKey && email) {
+    if (smtpHost && smtpUser && smtpPass && email) {
       // Map the simple session string to a beautiful date/time format
       const sessionMap: Record<string, string> = {
         "Thursday Morning": "Thursday 5th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>9:00 AM - 11:30 AM</span>",
@@ -281,33 +284,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 `;
 
       try {
-        const response = await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${resendApiKey}`,
-            'Content-Type': 'application/json',
+        const transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: parseInt(process.env.SMTP_PORT || '465'),
+          secure: true,
+          auth: {
+            user: smtpUser,
+            pass: smtpPass,
           },
-          body: JSON.stringify({
-            from: "La Roche-Posay <lrp@livinglabnigeria.com>",
-            to: [email],
-            subject: "Your Ticket for Living Lab Nigeria 2026",
-            html: emailHtml,
-          }),
+        });
+
+        const info = await transporter.sendMail({
+          from: `"La Roche-Posay" <${smtpUser}>`,
+          to: email,
+          subject: "Your Ticket for Living Lab Nigeria 2026",
+          html: emailHtml,
         });
         
-        const data = await response.json();
-        resendResponse = data;
-        
-        if (response.ok) {
-          emailSuccess = true;
-        } else {
-          console.error('Resend API Error:', data);
-        }
+        resendResponse = info;
+        emailSuccess = true;
       } catch (emailError) {
-        console.error('Resend Fetch Error:', emailError);
+        console.error('Nodemailer Error:', emailError);
       }
     } else {
-      console.warn('RESEND_API_KEY is not set or email is missing');
+      console.warn('SMTP credentials are not set or email is missing');
     }
     
     return res.status(200).json({ 
