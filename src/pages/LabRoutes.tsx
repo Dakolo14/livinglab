@@ -173,7 +173,7 @@ const LabRoutes: React.FC = () => {
   return (
     <div className="page-wrapper">
       <Helmet>
-        <title>Franchise | Living Lab Nigeria 2026</title>
+        <title>Products | Living Lab Nigeria 2026</title>
       </Helmet>
 
       <Header />
@@ -183,7 +183,7 @@ const LabRoutes: React.FC = () => {
       <div className="about-hero">
         <div className="container">
           <div className="about-hero-content">
-            <h1>KEY FRANCHISE FOCUSES</h1>
+            <h1>PRODUCTS</h1>
             <p>Explore our targeted solutions and what awaits you in the lab.</p>
           </div>
         </div>
