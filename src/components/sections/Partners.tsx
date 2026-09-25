@@ -7,10 +7,10 @@ const Partners: React.FC = () => {
       <div className="container">
         <p className="partners-label">IN PARTNERSHIP WITH</p>
         <div className="partners-grid">
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.redrickpr.com/" target="_blank" rel="noopener noreferrer">
             <img src="/partner-logo/redricklogo.png" alt="Redrick" className="partner-logo-img" />
           </a>
-          <a href="https://www.konga.com/content/Health" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.konga.com/content/la-roche-posay" target="_blank" rel="noopener noreferrer">
             <img src="/partner-logo/kongahealthlogo.png" alt="Konga Health" className="partner-logo-img" />
           </a>
           <a href="https://www.instagram.com/lostinlagos12/?hl=en" target="_blank" rel="noopener noreferrer">
