@@ -7,6 +7,7 @@ import './Admin.css';
 
 interface TicketData {
   name: string;
+  email: string;
   ticketId: string;
   status: string;
 }
@@ -72,6 +73,7 @@ export const AdminScanner: React.FC = () => {
           if (checkedInCount > 0) {
             setScanResult({ 
               name: attendeeName, 
+              email: decodedText,
               ticketId: ticketIds.join(', '), 
               status: 'attended' 
             });
