@@ -1,7 +1,26 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
-import { db } from '../src/config/firebase'; 
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCztmPvbg25lLmsQNtH0Ki2larDkfgRNV8",
+  authDomain: "livinglabnigeria.firebaseapp.com",
+  projectId: "livinglabnigeria",
+  storageBucket: "livinglabnigeria.firebasestorage.app",
+  messagingSenderId: "559075983447",
+  appId: "1:559075983447:web:542945a6930d66124fa312",
+  measurementId: "G-QX0EG4MSZ6"
+};
+
+let app;
+let db;
+try {
+  app = initializeApp(firebaseConfig, "broadcast-app");
+  db = getFirestore(app);
+} catch (e) {
+  console.error("Firebase init error", e);
+}
 import fs from 'fs';
 import path from 'path';
 
