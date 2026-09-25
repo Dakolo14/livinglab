@@ -25,6 +25,9 @@ const Partners: React.FC = () => {
           <a href="https://www.zikoko.com/" target="_blank" rel="noopener noreferrer">
             <img src="/partner-logo/zikokologo.png" alt="Zikoko" className="partner-logo-img" />
           </a>
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            <img src="/partner-logo/redricklogo.png" alt="Redrick" className="partner-logo-img" />
+          </a>
         </div>
       </div>
     </section>
