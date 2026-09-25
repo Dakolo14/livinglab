@@ -61,6 +61,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const emailsToProcess = users.slice(0, 100); 
     
     const transporter = nodemailer.createTransport({
+      pool: true,
+      maxConnections: 5,
+      maxMessages: 100,
       host: smtpHost,
       port: parseInt(process.env.SMTP_PORT || '465'),
       secure: true,
