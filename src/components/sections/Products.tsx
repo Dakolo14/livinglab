@@ -501,7 +501,7 @@ const Products: React.FC = () => {
                         <summary className="spec-title">ACTION <span className="accordion-icon">+</span></summary>
                         <ul className="spec-list">
                           {product.action.map((item, i) => (
-                            <li key={i}><Check size={16} className="bullet" /> {item}</li>
+                            <li key={i}><ChevronRight size={16} className="bullet" /> {item}</li>
                           ))}
                         </ul>
                       </details>
@@ -510,7 +510,7 @@ const Products: React.FC = () => {
                         <summary className="spec-title">USAGE <span className="accordion-icon">+</span></summary>
                         <ul className="spec-list">
                           {product.usage.map((item, i) => (
-                            <li key={i}><ArrowRight size={16} className="bullet" /> {item}</li>
+                            <li key={i}><ChevronRight size={16} className="bullet" /> {item}</li>
                           ))}
                         </ul>
                       </details>
