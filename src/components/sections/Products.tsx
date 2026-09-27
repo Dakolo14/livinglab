@@ -29,7 +29,7 @@ const productCategories: CategoryData[] = [
     ],
     products: [
       {
-        title: "ANTHELIOS UVMUNE400",
+        title: <>ANTHELIOS UV<span className="font-light">MUNE</span>400</>,
         subtitle: "INVISIBLE FLUID SPF50+",
         image: "/product-pack/ANTHELIOS UVMUNE400 .png",
         indication: [
@@ -132,7 +132,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "ANTHELIOS UVMUNE 400",
+        title: <>ANTHELIOS UV<span className="font-light">MUNE</span> 400</>,
         subtitle: "ANTI-DARK SPOTS SPF50+",
         image: "/product-pack/ANTHELIOS UVMUNE 400 - Anti Dark Spots.png",
         indication: [
