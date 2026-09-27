@@ -201,7 +201,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: <>EFFACLAR <span className="font-light">H ISO-BIOME</span></>,
+        title: <>EFFACLAR <span className="font-light">H ISO-<span className="text-effaclar-blue">BIOME</span></span></>,
         subtitle: "DERMA-SOOTHING HYDRATING CLEANSING CREAM",
         image: "/product-pack/EFFACLAR H ISO-BIOME .png",
         indication: [
@@ -262,7 +262,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: <>EFFACLAR <span className="font-light">H ISO-BIOME</span></>,
+        title: <>EFFACLAR <span className="font-light">H ISO-<span className="text-effaclar-blue">BIOME</span></span></>,
         subtitle: "HYDRATING CARE ANTI-IMPERFECTIONS",
         image: "/product-pack/EFFACLAR H ISO-BIOME HYDRATING CARE ANTI-IMPERFECTIONS.png",
         indication: [

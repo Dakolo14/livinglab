@@ -178,6 +178,10 @@
   color: #553E77; /* Deep muted purple for Mela B3 */
 }
 
+.text-effaclar-blue {
+  color: #00AEEF; /* Classic Effaclar blue */
+}
+
 .product-specs {
   display: flex;
   flex-direction: column;
