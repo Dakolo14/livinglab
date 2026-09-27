@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Experts from './pages/Experts';
 import LabRoutes from './pages/LabRoutes';
+import ProductsPage from './pages/ProductsPage';
 import SciencePage from './pages/SciencePage';
 import ProgrammePage from './pages/ProgrammePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -38,6 +39,7 @@ function App() {
           <Route path="/test" element={<HomeV1 />} />
           <Route path="/experts" element={<Experts />} />
           <Route path="/lab-routes" element={<LabRoutes />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/science" element={<SciencePage />} />
           <Route path="/programme" element={<ProgrammePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
