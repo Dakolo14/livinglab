@@ -293,7 +293,7 @@ const productCategories: CategoryData[] = [
     ],
     products: [
       {
-        title: "LIPIKAR SURGRAS BAR",
+        title: <>LIPIKAR <span className="font-light">SURGRAS BAR</span></>,
         subtitle: "ANTI-DRYNESS CLEANSING BAR LIPID-ENRICHED",
         image: "/product-pack/LIPIKAR SURGRAS BAR .png",
         indication: ["Sensitive, dry and uncomfortable skin"],
@@ -301,31 +301,31 @@ const productCategories: CategoryData[] = [
         usage: ["Apply to damp skin", "Massage gently, then rinse"]
       },
       {
-        title: "LIPIKAR SYNDET AP+",
-        subtitle: "LIPID-REPLENISHING WASH CREAM\nANTI-IRRITATION ANTI-SCRATCHING",
+        title: <>LIPIKAR <span className="font-light">SYNDET AP+</span></>,
+        subtitle: <>LIPID-REPLENISHING WASH CREAM<br/>ANTI-IRRITATION ANTI-SCRATCHING</>,
         image: "/product-pack/LIPIKAR SYNDET AP+ .png",
         indication: ["Dry to very dry or atopic eczema-prone skin"],
         action: ["Soothes [ Niacinamide ]", "Repairs, nourishes and protects [ Shea Butter + Glycerin ]", "Restores balance to the microbiome [ Aqua Posae Filiformis ]"],
         usage: ["Apply to moist skin", "Massage gently, then rinse"]
       },
       {
-        title: "LIPIKAR CLEANSING OIL AP+",
-        subtitle: "LIPID-REPLENISHING CLEANSING OIL\nANTI-IRRITATION ANTI-SCRATCHING",
+        title: <>LIPIKAR <span className="font-light">CLEANSING OIL AP+</span></>,
+        subtitle: <>LIPID-REPLENISHING CLEANSING OIL<br/>ANTI-IRRITATION ANTI-SCRATCHING</>,
         image: "/product-pack/LIPIKAR CLEANSING OIL AP+ .png",
         indication: ["Dry to very dry or atopic eczema-prone skin"],
         action: ["Soothes [ Niacinamide ]", "Repairs, nourishes and protects [ Shea Butter + Glycerin ]", "Restores balance to the microbiome [ Aqua Posae Filiformis ]"],
         usage: ["Place a few drops into the palm of the hand and work into a lather", "Apply to moist skin", "Massage gently, then rinse"]
       },
       {
-        title: "LIPIKAR MILK",
-        subtitle: "48HR LIPID-REPLENISHING\nANTI-DRYNESS BODY MILK",
+        title: <>LIPIKAR <span className="font-light">MILK</span></>,
+        subtitle: <>48HR LIPID-REPLENISHING<br/>ANTI-DRYNESS BODY MILK</>,
         image: "/product-pack/LIPIKAR MILK .png",
         indication: ["Sensitive and dry skin", "Weakened skin barrier, tightness, discomfort and lack of suppleness"],
         action: ["Repairs, nourishes and protects [ 10% Shea Butter ]", "Repairs & protects [ 60% La Roche-Posay Thermal Spring Water ]", "Comforts dry skin [ Niacinamide ]"],
         usage: ["1 application per day", "On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+"]
       },
       {
-        title: "LIPIKAR BALM AP+Max",
+        title: <>LIPIKAR <span className="font-light">BALM AP+</span>M<span className="font-light">AX</span></>,
         subtitle: "TRIPLE-ACTION BALM 72H",
         image: "/product-pack/LIPIKAR BALM AP+MAX .png",
         indication: ["Xerosis, senile xerosis, itching, atopic eczema-prone skin"],
@@ -333,7 +333,7 @@ const productCategories: CategoryData[] = [
         usage: ["1 application per day", "On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+"]
       },
       {
-        title: "LIPIKAR MILK UREA 10%",
+        title: <>LIPIKAR <span className="font-light">MILK UREA 10%</span></>,
         subtitle: "SMOOTHING MOISTURIZING BODY LOTION ANTI-FLAKING",
         image: "/product-pack/LIPIKAR MILK UREA TEN PERCENT.png",
         indication: ["Roughness, flaking, keratosis pilaris, psoriasis-prone skin"],
