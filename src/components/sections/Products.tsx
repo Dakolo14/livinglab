@@ -31,6 +31,7 @@ const productCategories: CategoryData[] = [
       {
         title: "ANTHELIOS UVMUNE400",
         subtitle: "INVISIBLE FLUID SPF50+",
+        image: "/product-pack/ANTHELIOS UVMUNE400 .png",
         indication: [
           "For people looking for effective daily UV protection",
           "For all sensitive skin types"
@@ -48,6 +49,7 @@ const productCategories: CategoryData[] = [
       {
         title: "ANTHELIOS INVISIBLE SPRAY",
         subtitle: "SPF50+",
+        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY.png",
         indication: [
           "Sensitive skin"
         ],
@@ -62,6 +64,7 @@ const productCategories: CategoryData[] = [
       {
         title: "ANTHELIOS INVISIBLE SPRAY",
         subtitle: "DERMO-PEDIATRICS SPF50+",
+        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY - DERMO-PEDIATRICS SPF50+ .png",
         indication: [
           "Sensitive skin",
           "Face and body for children"
@@ -92,6 +95,7 @@ const productCategories: CategoryData[] = [
       {
         title: "MELA B3 SERUM",
         subtitle: "INTENSIVE ANTI-DARK SPOTS SERUM\nANTI-RELAPSE EFFICACY",
+        image: "/product-pack/MELA B3 SERUM .png",
         indication: [
           "Uneven skin tone and dark spots"
         ],
@@ -110,6 +114,7 @@ const productCategories: CategoryData[] = [
       {
         title: "MELA B3 CLEANSER",
         subtitle: "CLARIFYING MICRO-PEELING GEL",
+        image: "/product-pack/MELA B3 CLEANSER .png",
         indication: [
           "Uneven skin tone and dark spots"
         ],
@@ -129,6 +134,7 @@ const productCategories: CategoryData[] = [
       {
         title: "ANTHELIOS UVMUNE 400",
         subtitle: "ANTI-DARK SPOTS SPF50+",
+        image: "/product-pack/ANTHELIOS UVMUNE 400 - Anti Dark Spots.png",
         indication: [
           "Uneven skin tone and dark spots",
           "For people looking for effective daily UV protection"
@@ -159,6 +165,7 @@ const productCategories: CategoryData[] = [
       {
         title: "EFFACLAR MICELLAR WATER ULTRA",
         subtitle: "CLEANSING, MAKE-UP REMOVING AND PURIFYING",
+        image: "/product-pack/EFFACLAR MICELLAR WATER ULTRA.png",
         indication: [
           "Oily and sensitive skin",
           "Acne-prone skin",
@@ -176,6 +183,7 @@ const productCategories: CategoryData[] = [
       {
         title: "EFFACLAR PURIFYING FOAMING GEL",
         subtitle: "OILY AND SENSITIVE SKIN",
+        image: "/product-pack/EFFACLAR PURIFYING FOAMING GEL.png",
         indication: [
           "Oily and sensitive skin",
           "Acne-prone skin",
@@ -195,6 +203,7 @@ const productCategories: CategoryData[] = [
       {
         title: "EFFACLAR H ISO-BIOME",
         subtitle: "DERMA-SOOTHING HYDRATING CLEANSING CREAM",
+        image: "/product-pack/EFFACLAR H ISO-BIOME .png",
         indication: [
           "Skin dried out by acne treatments"
         ],
@@ -217,6 +226,7 @@ const productCategories: CategoryData[] = [
       {
         title: "EFFACLAR ULTRA-CONCENTRATED SERUM",
         subtitle: "SALICYLIC ACID SERUM",
+        image: "/product-pack/EFFACLAR ULTRA-CONCENTRATED SERUM.png",
         indication: [
           "Oily and sensitive skin",
           "Acne-prone skin",
@@ -234,6 +244,7 @@ const productCategories: CategoryData[] = [
       {
         title: "EFFACLAR DUO+M",
         subtitle: "ANTI-IMPERFECTIONS TRIPLE CORRECTION CARE",
+        image: "/product-pack/EFFACLAR DUO+M .png",
         indication: [
           "Oily skin and acne-prone skin",
           "Skin with severe imperfections",
@@ -253,6 +264,7 @@ const productCategories: CategoryData[] = [
       {
         title: "EFFACLAR H ISO-BIOME",
         subtitle: "HYDRATING CARE ANTI-IMPERFECTIONS",
+        image: "/product-pack/EFFACLAR H ISO-BIOME HYDRATING CARE ANTI-IMPERFECTIONS.png",
         indication: [
           "Skin dried out by acne treatments"
         ],
@@ -283,6 +295,7 @@ const productCategories: CategoryData[] = [
       {
         title: "LIPIKAR SURGRAS BAR",
         subtitle: "ANTI-DRYNESS CLEANSING BAR LIPID-ENRICHED",
+        image: "/product-pack/LIPIKAR SURGRAS BAR .png",
         indication: ["Sensitive, dry and uncomfortable skin"],
         action: ["Soothes [ Niacinamide ]", "Repairs and nourishes [ Shea Butter ]", "Cleanse the skin while maintaining the hydrolipidic film"],
         usage: ["Apply to damp skin", "Massage gently, then rinse"]
@@ -440,10 +453,15 @@ const Products: React.FC = () => {
                 <div key={idx} className="product-card">
                   
                   <div className="product-packshot">
-                    <div className="packshot-placeholder">
-                      {/* Image placeholder */}
-                      <span className="packshot-text">PACKSHOT<br/>{product.title}</span>
-                    </div>
+                    {product.image ? (
+                      <div className="packshot-image-wrapper">
+                        <img src={product.image} alt={product.title} className="packshot-image" />
+                      </div>
+                    ) : (
+                      <div className="packshot-placeholder">
+                        <span className="packshot-text">PACKSHOT<br/>{product.title}</span>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="product-details">
