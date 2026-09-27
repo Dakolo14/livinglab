@@ -157,28 +157,65 @@
 }
 
 .product-specs {
-  display: grid;
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .spec-block {
   margin-bottom: 0;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.spec-block:first-child {
+  border-top: 1px solid #E2E8F0;
 }
 
 .spec-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.85rem;
   font-weight: 700;
   color: #000;
   letter-spacing: 1.5px;
-  margin: 0 0 12px 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #E2E8F0;
+  margin: 0;
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none; /* Hide default triangle */
+}
+
+.spec-title::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-icon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #00AEEF;
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+
+details[open] .accordion-icon {
+  transform: rotate(45deg); /* Turns + into x */
 }
 
 .spec-list {
   list-style: none;
-  padding: 0;
+  padding: 0 0 24px 0;
   margin: 0;
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .spec-list li {

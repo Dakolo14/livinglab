@@ -151,32 +151,32 @@ const Products: React.FC = () => {
                     <p className="product-subtitle">{product.subtitle.split('\n').map((str, k) => <React.Fragment key={k}>{str}<br/></React.Fragment>)}</p>
                     
                     <div className="product-specs">
-                      <div className="spec-block">
-                        <h5 className="spec-title">INDICATION</h5>
+                      <details className="spec-block" open>
+                        <summary className="spec-title">INDICATION <span className="accordion-icon">+</span></summary>
                         <ul className="spec-list">
                           {product.indication.map((item, i) => (
                             <li key={i}><span className="bullet">{'>'}</span> {item}</li>
                           ))}
                         </ul>
-                      </div>
+                      </details>
                       
-                      <div className="spec-block">
-                        <h5 className="spec-title">ACTION</h5>
+                      <details className="spec-block">
+                        <summary className="spec-title">ACTION <span className="accordion-icon">+</span></summary>
                         <ul className="spec-list">
                           {product.action.map((item, i) => (
                             <li key={i}><span className="bullet">{'>'}</span> {item}</li>
                           ))}
                         </ul>
-                      </div>
+                      </details>
                       
-                      <div className="spec-block">
-                        <h5 className="spec-title">USAGE</h5>
+                      <details className="spec-block">
+                        <summary className="spec-title">USAGE <span className="accordion-icon">+</span></summary>
                         <ul className="spec-list">
                           {product.usage.map((item, i) => (
                             <li key={i}><span className="bullet">{'>'}</span> {item}</li>
                           ))}
                         </ul>
-                      </div>
+                      </details>
                     </div>
                   </div>
                   
