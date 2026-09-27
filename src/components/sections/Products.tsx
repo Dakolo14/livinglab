@@ -2,8 +2,8 @@ import React from 'react';
 import './Products.css';
 
 interface ProductData {
-  title: string;
-  subtitle: string;
+  title: React.ReactNode;
+  subtitle: React.ReactNode;
   image?: string;
   indication: string[];
   action: string[];
@@ -47,7 +47,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "ANTHELIOS INVISIBLE SPRAY",
+        title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
         subtitle: "SPF50+",
         image: "/product-pack/ANTHELIOS INVISIBLE SPRAY.png",
         indication: [
@@ -62,7 +62,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "ANTHELIOS INVISIBLE SPRAY",
+        title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
         subtitle: "DERMO-PEDIATRICS SPF50+",
         image: "/product-pack/ANTHELIOS INVISIBLE SPRAY - DERMO-PEDIATRICS SPF50+ .png",
         indication: [
@@ -93,8 +93,8 @@ const productCategories: CategoryData[] = [
     ],
     products: [
       {
-        title: "MELA B3 SERUM",
-        subtitle: "INTENSIVE ANTI-DARK SPOTS SERUM\nANTI-RELAPSE EFFICACY",
+        title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">SERUM</span></>,
+        subtitle: <>INTENSIVE ANTI-DARK SPOTS SERUM<br/>ANTI-RELAPSE EFFICACY</>,
         image: "/product-pack/MELA B3 SERUM .png",
         indication: [
           "Uneven skin tone and dark spots"
@@ -112,7 +112,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "MELA B3 CLEANSER",
+        title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">CLEANSER</span></>,
         subtitle: "CLARIFYING MICRO-PEELING GEL",
         image: "/product-pack/MELA B3 CLEANSER .png",
         indication: [
@@ -480,7 +480,11 @@ const Products: React.FC = () => {
                   
                   <div className="product-details">
                     <h4 className="product-title">{product.title}</h4>
-                    <p className="product-subtitle">{product.subtitle.split('\n').map((str, k) => <React.Fragment key={k}>{str}<br/></React.Fragment>)}</p>
+                    <p className="product-subtitle">
+                      {typeof product.subtitle === 'string' 
+                        ? product.subtitle.split('\n').map((str, k) => <React.Fragment key={k}>{str}<br/></React.Fragment>)
+                        : product.subtitle}
+                    </p>
                     
                     <div className="product-specs">
                       <details className="spec-block" open>

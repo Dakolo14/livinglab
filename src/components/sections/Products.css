@@ -164,10 +164,18 @@
 
 .product-subtitle {
   font-size: 1.1rem;
-  font-weight: 400;
-  color: #00AEEF;
+  font-weight: 300;
+  color: #1E293B;
   margin: 0 0 32px 0;
   line-height: 1.4;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.text-mela-purple {
+  color: #553E77; /* Deep muted purple for Mela B3 */
 }
 
 .product-specs {
