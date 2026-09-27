@@ -352,7 +352,7 @@ const productCategories: CategoryData[] = [
     ],
     products: [
       {
-        title: "CICAPLAST B5 CLEANSER",
+        title: <>CICAPLAST <span className="font-light text-effaclar-blue">B5</span> <span className="font-light">CLEANSER</span></>,
         subtitle: "PURIFYING SOOTHING FOAMING GEL",
         image: "/product-pack/CICAPLAST B5 CLEANSER.png",
         indication: ["Irritated and weakened skin"],
@@ -360,7 +360,7 @@ const productCategories: CategoryData[] = [
         usage: ["Apply the foaming gel once or twice a day, work into a lather in the palm of the hand with some water and gently apply to the weakened or irritated area to cleanse it", "Rinse thoroughly and pat dry", "Does not sting the eyes"]
       },
       {
-        title: "CICAPLAST B5+ BALM",
+        title: <>CICAPLAST <span className="font-light text-effaclar-blue">B5+</span> <span className="font-light">BALM</span></>,
         subtitle: "ULTRA-REPAIRING SOOTHING BALM",
         image: "/product-pack/CICAPLAST B5+ BALM .png",
         indication: ["Weakened and irritated skin in babies, children and adults", "Sensitive skin following epidermal damage: eczema, diaper rash in babies, perioral irritation, dry patches, chapping, intense dryness, superficial burns, skin irritation, superficial post-laser damage, post-epilation irritation"],
@@ -368,15 +368,15 @@ const productCategories: CategoryData[] = [
         usage: ["Apply twice a day to the irritated or weakened area after cleansing and drying", "Non-greasy texture that does not leave white marks and is suitable for massaging scars"]
       },
       {
-        title: "CICAPLAST B5 SPRAY",
-        subtitle: "SOOTHING REPAIRING CONCENTRATE ANTI-ITCHING",
+        title: <>CICAPLAST <span className="font-light text-effaclar-blue">B5</span> <span className="font-light">SPRAY</span></>,
+        subtitle: <>SOOTHING REPAIRING CONCENTRATE<br/>ANTI-ITCHING</>,
         image: "/product-pack/CICAPLAST B5 SPRAY .png",
         indication: ["Irritated and weakened skin (redness, intense dryness, chapping, etc.)", "Superficial burning sensations"],
         action: ["Soothes and calms itching [ 5% Panthenol ]", "Accelerates epidermal repair [ Madecassoside ]", "Restores balance to the microbiome [ Mannose ] + [ Aqua-Posæ Filiformis ]", "Purifies [ Copper ] + [ Manganese of natural origin ]"],
         usage: ["Spray 15 cm away from skin as often as necessary", "Optimal tolerance tested under dermatological and ophthalmological control", "Invisible texture", "Contact-free use"]
       },
       {
-        title: "CICAPLAST B5 GEL",
+        title: <>CICAPLAST <span className="font-light text-effaclar-blue">B5 GEL</span></>,
         subtitle: "PRO-RECOVERY SKINCARE",
         image: "/product-pack/CICAPLAST B5 GEL .png",
         indication: ["Irritated and weakened skin", "Post sutures", "Post peel", "Post laser"],
@@ -384,7 +384,7 @@ const productCategories: CategoryData[] = [
         usage: ["Apply twice a day to the irritated or weakened area after cleansing and drying", "Invisible, non-sticky bandage texture suitable for massaging scars"]
       },
       {
-        title: "CICAPLAST LIPS",
+        title: <>CICAPLAST <span className="font-light text-effaclar-blue">LIPS</span></>,
         subtitle: "PRO-RECOVERY SKINCARE",
         image: "/product-pack/CICAPLAST LIPS .png",
         indication: ["Irritated and weakened skin"],
@@ -392,7 +392,7 @@ const productCategories: CategoryData[] = [
         usage: ["Apply as often as necessary"]
       },
       {
-        title: "CICAPLAST HANDS",
+        title: <>CICAPLAST <span className="font-light text-effaclar-blue">HANDS</span></>,
         subtitle: "BARRIER REPAIRING CREAM",
         image: "/product-pack/CICAPLAST HANDS.png",
         indication: ["Damaged and overworked hands", "Domestic and professional use"],
