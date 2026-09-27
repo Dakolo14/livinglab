@@ -411,7 +411,7 @@ const productCategories: CategoryData[] = [
     ],
     products: [
       {
-        title: "PURE VITAMIN C12 SERUM",
+        title: <>PURE <span className="font-light text-c12-orange">VITAMIN C12</span> <span className="font-light">SERUM</span></>,
         subtitle: "ANTI-WRINKLE VITAMIN C SERUM",
         image: "/product-pack/PURE VITAMIN C12 SERUM .png",
         indication: ["Wrinkles, lack of radiance, uneven skin texture"],
@@ -419,7 +419,7 @@ const productCategories: CategoryData[] = [
         usage: ["Apply 3 or 4 drops in the morning to the entire face"]
       },
       {
-        title: "HYALU B5 SURACTIVATED SERUM",
+        title: <>HYALU <span className="font-light text-effaclar-blue">B5</span> <span className="font-light">SURACTIVATED SERUM</span></>,
         subtitle: "3D CONCENTRATE ANTI-WRINKLE REPAIRING REPLUPING",
         image: "/product-pack/HYALU B5 SURACTIVATED .png",
         indication: ["Young to mature sensitive skin", "Dull and tired skin"],
@@ -427,7 +427,7 @@ const productCategories: CategoryData[] = [
         usage: ["Apply morning and evening to the face, neck and neckline"]
       },
       {
-        title: "RETINOL B3 SERUM",
+        title: <>RETINOL <span className="font-light text-b3-red">B3</span> <span className="font-light">SERUM</span></>,
         subtitle: "ANTI-WRINKLE SERUM REGENERATING RESURFACING",
         image: "/product-pack/RETINOL B3 SERUM .png",
         indication: ["Uneven skin tone, photoaging and wrinkles"],

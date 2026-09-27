@@ -182,6 +182,14 @@
   color: #00AEEF; /* Classic Effaclar blue */
 }
 
+.text-c12-orange {
+  color: #E07628; /* Vitamin C12 orange */
+}
+
+.text-b3-red {
+  color: #AF232D; /* Retinol B3 red */
+}
+
 .product-specs {
   display: flex;
   flex-direction: column;
