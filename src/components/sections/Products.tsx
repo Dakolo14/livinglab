@@ -335,7 +335,7 @@ const productCategories: CategoryData[] = [
       {
         title: "LIPIKAR MILK UREA 10%",
         subtitle: "SMOOTHING MOISTURIZING BODY LOTION ANTI-FLAKING",
-        image: "/product-pack/LIPIKAR MILK UREA 10% .png",
+        image: "/product-pack/LIPIKAR MILK UREA TEN PERCENT.png",
         indication: ["Roughness, flaking, keratosis pilaris, psoriasis-prone skin"],
         action: ["Smoothes skin [ 10% Urea ]", "Lastingly nourishes skin [ Shea Butter + Glycerin ]", "Soothes [ Allantoin + Mannose ]"],
         usage: ["Apply once or twice a day and gently massage in, preferably after washing", "Quickly absorbs and does not leave a greasy film"]
