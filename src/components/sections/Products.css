@@ -71,6 +71,7 @@
   background-color: #F8FAFC;
   padding: 32px;
   border-left: 4px solid #00AEEF;
+  border-radius: 0 16px 16px 0;
 }
 
 .category-audience h4 {
@@ -103,12 +104,13 @@
   gap: 40px;
   background: #ffffff;
   border: 1px solid #E2E8F0;
+  border-radius: 16px;
   padding: 40px;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .product-card:hover {
-  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   transform: translateY(-2px);
 }
 
@@ -122,7 +124,7 @@
 .packshot-placeholder {
   width: 100%;
   aspect-ratio: 1;
-  background-color: #F1F5F9;
+  background-color: #F8FAFC;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,6 +134,7 @@
   font-weight: 600;
   letter-spacing: 1px;
   border: 1px dashed #CBD5E1;
+  border-radius: 12px;
 }
 
 .product-details {

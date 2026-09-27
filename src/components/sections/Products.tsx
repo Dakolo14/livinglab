@@ -116,10 +116,7 @@ const Products: React.FC = () => {
     <section className="products-section" id="products">
       <div className="products-container">
         
-        <div className="products-header-intro">
-          <h4 className="products-eyebrow">OUR INNOVATIONS</h4>
-          <h2 className="products-headline">CLINICAL EFFICACY & EXPERTISE</h2>
-        </div>
+
 
         {productCategories.map((category) => (
           <div key={category.id} className="category-block">
