@@ -303,6 +303,7 @@ const productCategories: CategoryData[] = [
       {
         title: "LIPIKAR SYNDET AP+",
         subtitle: "LIPID-REPLENISHING WASH CREAM\nANTI-IRRITATION ANTI-SCRATCHING",
+        image: "/product-pack/LIPIKAR SYNDET AP+ .png",
         indication: ["Dry to very dry or atopic eczema-prone skin"],
         action: ["Soothes [ Niacinamide ]", "Repairs, nourishes and protects [ Shea Butter + Glycerin ]", "Restores balance to the microbiome [ Aqua Posae Filiformis ]"],
         usage: ["Apply to moist skin", "Massage gently, then rinse"]
@@ -310,6 +311,7 @@ const productCategories: CategoryData[] = [
       {
         title: "LIPIKAR CLEANSING OIL AP+",
         subtitle: "LIPID-REPLENISHING CLEANSING OIL\nANTI-IRRITATION ANTI-SCRATCHING",
+        image: "/product-pack/LIPIKAR CLEANSING OIL AP+ .png",
         indication: ["Dry to very dry or atopic eczema-prone skin"],
         action: ["Soothes [ Niacinamide ]", "Repairs, nourishes and protects [ Shea Butter + Glycerin ]", "Restores balance to the microbiome [ Aqua Posae Filiformis ]"],
         usage: ["Place a few drops into the palm of the hand and work into a lather", "Apply to moist skin", "Massage gently, then rinse"]
@@ -317,6 +319,7 @@ const productCategories: CategoryData[] = [
       {
         title: "LIPIKAR MILK",
         subtitle: "48HR LIPID-REPLENISHING\nANTI-DRYNESS BODY MILK",
+        image: "/product-pack/LIPIKAR MILK .png",
         indication: ["Sensitive and dry skin", "Weakened skin barrier, tightness, discomfort and lack of suppleness"],
         action: ["Repairs, nourishes and protects [ 10% Shea Butter ]", "Repairs & protects [ 60% La Roche-Posay Thermal Spring Water ]", "Comforts dry skin [ Niacinamide ]"],
         usage: ["1 application per day", "On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+"]
@@ -324,6 +327,7 @@ const productCategories: CategoryData[] = [
       {
         title: "LIPIKAR BALM AP+Max",
         subtitle: "TRIPLE-ACTION BALM 72H",
+        image: "/product-pack/LIPIKAR BALM AP+MAX .png",
         indication: ["Xerosis, senile xerosis, itching, atopic eczema-prone skin"],
         action: ["To mute itch signals on skin [ Neurobioma ]", "Strenghtens skin barrier [ Shea Butter + Glycerin ]", "Soothes skin & reduces irritation [ Neurobioma + Niacinamide ]", "Rebalances skin microbiome & inhibits biofilm formation [ Aqua Posae Filiformis + Microresyl ]"],
         usage: ["1 application per day", "On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+"]
@@ -331,6 +335,7 @@ const productCategories: CategoryData[] = [
       {
         title: "LIPIKAR MILK UREA 10%",
         subtitle: "SMOOTHING MOISTURIZING BODY LOTION ANTI-FLAKING",
+        image: "/product-pack/LIPIKAR MILK UREA 10% .png",
         indication: ["Roughness, flaking, keratosis pilaris, psoriasis-prone skin"],
         action: ["Smoothes skin [ 10% Urea ]", "Lastingly nourishes skin [ Shea Butter + Glycerin ]", "Soothes [ Allantoin + Mannose ]"],
         usage: ["Apply once or twice a day and gently massage in, preferably after washing", "Quickly absorbs and does not leave a greasy film"]
@@ -349,6 +354,7 @@ const productCategories: CategoryData[] = [
       {
         title: "CICAPLAST B5 CLEANSER",
         subtitle: "PURIFYING SOOTHING FOAMING GEL",
+        image: "/product-pack/CICAPLAST B5 CLEANSER.png",
         indication: ["Irritated and weakened skin"],
         action: ["Soothes [ 5% Panthenol ]", "Purifies [ Copper ] + [ Zinc ] + [ Manganese ]", "Gentle cleansing base, physiological pH 5.5"],
         usage: ["Apply the foaming gel once or twice a day, work into a lather in the palm of the hand with some water and gently apply to the weakened or irritated area to cleanse it", "Rinse thoroughly and pat dry", "Does not sting the eyes"]
@@ -356,6 +362,7 @@ const productCategories: CategoryData[] = [
       {
         title: "CICAPLAST B5+ BALM",
         subtitle: "ULTRA-REPAIRING SOOTHING BALM",
+        image: "/product-pack/CICAPLAST B5+ BALM .png",
         indication: ["Weakened and irritated skin in babies, children and adults", "Sensitive skin following epidermal damage: eczema, diaper rash in babies, perioral irritation, dry patches, chapping, intense dryness, superficial burns, skin irritation, superficial post-laser damage, post-epilation irritation"],
         action: ["Boosts tissue healing [ Tribioma ]", "Soothes [ 5% Panthenol ]", "Repairs [ Madecassoside ]", "Purifies [ Copper ] + [ Zinc ]", "Nourishes and protects [ Shea butter ] + [ Glycerin ]"],
         usage: ["Apply twice a day to the irritated or weakened area after cleansing and drying", "Non-greasy texture that does not leave white marks and is suitable for massaging scars"]
@@ -363,6 +370,7 @@ const productCategories: CategoryData[] = [
       {
         title: "CICAPLAST B5 SPRAY",
         subtitle: "SOOTHING REPAIRING CONCENTRATE ANTI-ITCHING",
+        image: "/product-pack/CICAPLAST B5 SPRAY .png",
         indication: ["Irritated and weakened skin (redness, intense dryness, chapping, etc.)", "Superficial burning sensations"],
         action: ["Soothes and calms itching [ 5% Panthenol ]", "Accelerates epidermal repair [ Madecassoside ]", "Restores balance to the microbiome [ Mannose ] + [ Aqua-Posæ Filiformis ]", "Purifies [ Copper ] + [ Manganese of natural origin ]"],
         usage: ["Spray 15 cm away from skin as often as necessary", "Optimal tolerance tested under dermatological and ophthalmological control", "Invisible texture", "Contact-free use"]
@@ -370,6 +378,7 @@ const productCategories: CategoryData[] = [
       {
         title: "CICAPLAST B5 GEL",
         subtitle: "PRO-RECOVERY SKINCARE",
+        image: "/product-pack/CICAPLAST B5 GEL .png",
         indication: ["Irritated and weakened skin", "Post sutures", "Post peel", "Post laser"],
         action: ["Soothes [ 5% Panthenol ]", "Repairs [ Madecassoside ]", "Purifies [ Copper ] + [ Zinc ] + [ Manganese ]", "Moisturizing insulating bandage [ Hyaluronic Acid ] [ Silicone ]"],
         usage: ["Apply twice a day to the irritated or weakened area after cleansing and drying", "Invisible, non-sticky bandage texture suitable for massaging scars"]
@@ -377,6 +386,7 @@ const productCategories: CategoryData[] = [
       {
         title: "CICAPLAST LIPS",
         subtitle: "PRO-RECOVERY SKINCARE",
+        image: "/product-pack/CICAPLAST LIPS .png",
         indication: ["Irritated and weakened skin"],
         action: ["Soothes [ 5% Panthenol ]", "Repairs and protects [ MP lipids ] + [ Shea Butter ]"],
         usage: ["Apply as often as necessary"]
@@ -384,6 +394,7 @@ const productCategories: CategoryData[] = [
       {
         title: "CICAPLAST HANDS",
         subtitle: "BARRIER REPAIRING CREAM",
+        image: "/product-pack/CICAPLAST HANDS.png",
         indication: ["Damaged and overworked hands", "Domestic and professional use"],
         action: ["Soothes [ 4% Niacinamide ]", "Repairs and protects [ Shea Butter ] + [ 30% Glycerin ]"],
         usage: ["Apply as often as necessary", "Absorbs quickly", "Non-greasy, non-sticky texture"]
@@ -402,6 +413,7 @@ const productCategories: CategoryData[] = [
       {
         title: "PURE VITAMIN C12 SERUM",
         subtitle: "ANTI-WRINKLE VITAMIN C SERUM",
+        image: "/product-pack/PURE VITAMIN C12 SERUM .png",
         indication: ["Wrinkles, lack of radiance, uneven skin texture"],
         action: ["Improves skin radiance and protects against oxidative stress [ 12% pure Vitamin C ]", "Promotes epidermal renewal [ Salicylic acid ]", "Soothes and softens the skin [ La Roche-Posay Thermal Spring Water ]"],
         usage: ["Apply 3 or 4 drops in the morning to the entire face"]
@@ -409,6 +421,7 @@ const productCategories: CategoryData[] = [
       {
         title: "HYALU B5 SURACTIVATED SERUM",
         subtitle: "3D CONCENTRATE ANTI-WRINKLE REPAIRING REPLUPING",
+        image: "/product-pack/HYALU B5 SURACTIVATED .png",
         indication: ["Young to mature sensitive skin", "Dull and tired skin"],
         action: ["Protect skin barrier and retain skin moisture [ High-weighte HA ]", "Repair skin Encapsulated [ HA + Vitamin B5 ]", "Replump skin and correct wrinkles [ Low and micro weight HA ]"],
         usage: ["Apply morning and evening to the face, neck and neckline"]
@@ -416,6 +429,7 @@ const productCategories: CategoryData[] = [
       {
         title: "RETINOL B3 SERUM",
         subtitle: "ANTI-WRINKLE SERUM REGENERATING RESURFACING",
+        image: "/product-pack/RETINOL B3 SERUM .png",
         indication: ["Uneven skin tone, photoaging and wrinkles"],
         action: ["Corrects the signs of skin photoaging [ Gradual-release pure retinol ]", "Helps to repair the skin barrier [ Vitamin B3 ]", "Repairs and intensely moisturizes [ Glycerin ]", "High-tolerance formula"],
         usage: ["Apply in the evening to the entire face", "Follow with a moisturizer", "During the daytime, use sun protection"]
