@@ -61,7 +61,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const users: any[] = [];
     snapshot.forEach(doc => {
       const data = doc.data();
-      if (data.email && data.dayTime) users.push(data);
+      if (data.email && data.session) users.push(data);
     });
 
     if (users.length === 0) {
@@ -88,7 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const emailsToSend = [];
 
     for (const user of users) {
-      const sessionDate = SESSION_DATES[user.dayTime];
+      const sessionDate = SESSION_DATES[user.session];
       if (!sessionDate) continue;
 
       const daysUntilEvent = getDaysDifference(sessionDate, today);
@@ -114,7 +114,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         "Friday Late": "Friday 6th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>Late Afternoon Session</span>"
       };
       
-      const formattedSession = sessionMap[user.dayTime] || user.dayTime;
+      const formattedSession = sessionMap[user.session] || user.session;
 
       let subject = "Living Lab Nigeria 2026";
       let html = reminderHtmlRaw;

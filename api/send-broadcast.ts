@@ -74,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           "Friday Late": "Friday 6th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>Late Afternoon Session</span>"
         };
         
-        const formattedSession = user.dayTime && sessionMap[user.dayTime] ? sessionMap[user.dayTime] : user.dayTime || "TBD";
+        const formattedSession = user.session && sessionMap[user.session] ? sessionMap[user.session] : user.session || "TBD";
 
         if (isReminder) {
           let reminderTitle = "UPCOMING EVENT REMINDER";

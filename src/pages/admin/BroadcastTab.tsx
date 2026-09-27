@@ -24,7 +24,7 @@ export const BroadcastTab: React.FC = () => {
       if (audience === 'all') {
         q = query(regsRef);
       } else {
-        q = query(regsRef, where('dayTime', '==', audience));
+        q = query(regsRef, where('session', '==', audience));
       }
 
       const snapshot = await getDocs(q);
