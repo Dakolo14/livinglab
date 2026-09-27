@@ -106,6 +106,166 @@ const productCategories: CategoryData[] = [
           "Apply morning and evening to the face, neck and hands (if needed)",
           "In the daytime, use in combination with Anthelios Fluid SPF50+ sun protection, depending on your skin type"
         ]
+      },
+      {
+        title: "MELA B3 CLEANSER",
+        subtitle: "CLARIFYING MICRO-PEELING GEL",
+        indication: [
+          "Uneven skin tone and dark spots"
+        ],
+        action: [
+          "Intercepts excess melanin at a different stage of its production before it marks the skin",
+          "[ Melasyl™ ] NEW MULTI-PATENTED ACTIVE",
+          "Anti-inflammatory [ Niacinamide ]",
+          "Boosts skin's surface cell renewall [ PHA ]"
+        ],
+        usage: [
+          "Apply morning and evening to wet skin on face, neck & neckline and gently massage in circular motions.",
+          "Rinse and dry gently.",
+          "Suitable for all skin types, even oily.",
+          "Suitable for sensitive skin."
+        ]
+      },
+      {
+        title: "ANTHELIOS UVMUNE 400",
+        subtitle: "ANTI-DARK SPOTS SPF50+",
+        indication: [
+          "Uneven skin tone and dark spots",
+          "For people looking for effective daily UV protection"
+        ],
+        action: [
+          "Intercepts excess melanin at a different stage of its production before it marks the skin",
+          "[ Melasyl™ ] NEW MULTI-PATENTED ACTIVE",
+          "Protects from the most insidious UV rays (380-400nm)",
+          "[ Mexoryl 400 ] EXCLUSIVE & PATENTED"
+        ],
+        usage: [
+          "Apply generously before exposure",
+          "Reapply frequently to maintain the level of protection"
+        ]
+      }
+    ]
+  },
+  {
+    id: "effaclar",
+    name: "EFFACLAR",
+    tagline: "ACNE-PRONE SKIN",
+    audience: [
+      "EFFACLAR is formulated for patients suffering from acne or oily skin with imperfections.",
+      "As a monotherapy for mild or moderate acne or an adjunctive treatment (in combination with drugs) for moderate to severe acne.",
+      "Teenagers - Adults"
+    ],
+    products: [
+      {
+        title: "EFFACLAR MICELLAR WATER ULTRA",
+        subtitle: "CLEANSING, MAKE-UP REMOVING AND PURIFYING",
+        indication: [
+          "Oily and sensitive skin",
+          "Acne-prone skin",
+          "Skin with severe imperfections"
+        ],
+        action: [
+          "Removes make-up & moisturizes [ Glycerin micelles + physiological pH ]",
+          "Purifies the skin, regulates sebum [ Zinc pidolate ]",
+          "Physiological pH: 5.5"
+        ],
+        usage: [
+          "Use the micellar water to cleanse the face once or twice a day"
+        ]
+      },
+      {
+        title: "EFFACLAR PURIFYING FOAMING GEL",
+        subtitle: "OILY AND SENSITIVE SKIN",
+        indication: [
+          "Oily and sensitive skin",
+          "Acne-prone skin",
+          "Skin with severe imperfections"
+        ],
+        action: [
+          "Targets IA1 phylotypes of the bacteria C. acnes to correct imperfections [ Phylobioma ] NEW ACTIVE",
+          "Gently cleanses [ Syndet ]",
+          "Removes impurities and excess sebum [ Zinc pidolate ]",
+          "Rebalances pH of acne-prone skin [ Physiological pH : 5 & Soap-free ]"
+        ],
+        usage: [
+          "Lather in the hands with a small amount of water and apply to the face in gentle massaging motions",
+          "Rinse thoroughly and pat dry"
+        ]
+      },
+      {
+        title: "EFFACLAR H ISO-BIOME",
+        subtitle: "DERMA-SOOTHING HYDRATING CLEANSING CREAM",
+        indication: [
+          "Skin dried out by acne treatments"
+        ],
+        action: [
+          "Gently cleanses",
+          "Soothes [ Niacinamide + La Roche-Posay Thermal Spring Water ]",
+          "Moisturizes [ Glycerin + Shea Butter ]",
+          "Restores skin balance [ Aqua Posae Filiformis ]",
+          "Reduces imperfections [ Orellana + Procerad™ ]",
+          "Physiological pH: 5.5"
+        ],
+        usage: [
+          "Use morning and evening",
+          "Lather a small amount of product with some water in the palms of the hands",
+          "Apply to a damp face, moving from the middle outward in a single sweep",
+          "Rinse thoroughly and pat dry",
+          "Avoid the eye contour"
+        ]
+      },
+      {
+        title: "EFFACLAR ULTRA-CONCENTRATED SERUM",
+        subtitle: "SALICYLIC ACID SERUM",
+        indication: [
+          "Oily and sensitive skin",
+          "Acne-prone skin",
+          "Skin with severe imperfections"
+        ],
+        action: [
+          "Corrects imperfections [ 0.45% Lipohydroxy Acid + Niacinamide ]",
+          "Smoothes skin texture [ 1.5% Salicylic acid ]",
+          "Reduces fine lines [ 3.5% Glycolic acid ]"
+        ],
+        usage: [
+          "Apply once a day before bed"
+        ]
+      },
+      {
+        title: "EFFACLAR DUO+M",
+        subtitle: "ANTI-IMPERFECTIONS TRIPLE CORRECTION CARE",
+        indication: [
+          "Oily skin and acne-prone skin",
+          "Skin with severe imperfections",
+          "Blocked pores",
+          "Colored marks"
+        ],
+        action: [
+          "Targets C.acnes phylotype IA1 to correct blemishes [ Phylobioma ] NEW ACTIVE",
+          "Prevents marks and soothes [ Procerad™ + Niacinamide ]",
+          "Gently exfoliates and unclogs pores [ LHA+ Salicylic Acid ]",
+          "Controls sebum production [ Zinc PCA ]"
+        ],
+        usage: [
+          "Apply morning and/or evening to the entire face"
+        ]
+      },
+      {
+        title: "EFFACLAR H ISO-BIOME",
+        subtitle: "HYDRATING CARE ANTI-IMPERFECTIONS",
+        indication: [
+          "Skin dried out by acne treatments"
+        ],
+        action: [
+          "Soothes [ Niacinamide + La Roche-Posay Thermal Spring Water ]",
+          "Moisturizes and replenishes lipids [ B5 + Squalane + Glycerin ]",
+          "Restores balance to the microbiome [ Aqua Posae Filiformis ]",
+          "Limits imperfections & marks [ Orellana + Procerad ™]"
+        ],
+        usage: [
+          "Apply morning and evening to clean and dry skin",
+          "TIP: Use CICAPLAST LÈVRES in addition to drying treatments"
+        ]
       }
     ]
   }
