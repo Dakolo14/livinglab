@@ -242,7 +242,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: <>EFFACLAR <span className="font-light">DUO+M</span></>,
+        title: <>EFFACLAR <span className="font-light">DUO+</span>M</>,
         subtitle: "ANTI-IMPERFECTIONS TRIPLE CORRECTION CARE",
         image: "/product-pack/EFFACLAR DUO+M .png",
         indication: [
