@@ -163,7 +163,7 @@ const productCategories: CategoryData[] = [
     ],
     products: [
       {
-        title: "EFFACLAR MICELLAR WATER ULTRA",
+        title: <>EFFACLAR <span className="font-light">MICELLAR WATER ULTRA</span></>,
         subtitle: "CLEANSING, MAKE-UP REMOVING AND PURIFYING",
         image: "/product-pack/EFFACLAR MICELLAR WATER ULTRA.png",
         indication: [
@@ -181,7 +181,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "EFFACLAR PURIFYING FOAMING GEL",
+        title: <>EFFACLAR <span className="font-light">PURIFYING FOAMING GEL</span></>,
         subtitle: "OILY AND SENSITIVE SKIN",
         image: "/product-pack/EFFACLAR PURIFYING FOAMING GEL.png",
         indication: [
@@ -201,7 +201,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "EFFACLAR H ISO-BIOME",
+        title: <>EFFACLAR <span className="font-light">H ISO-BIOME</span></>,
         subtitle: "DERMA-SOOTHING HYDRATING CLEANSING CREAM",
         image: "/product-pack/EFFACLAR H ISO-BIOME .png",
         indication: [
@@ -224,7 +224,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "EFFACLAR ULTRA-CONCENTRATED SERUM",
+        title: <>EFFACLAR <span className="font-light">ULTRA-CONCENTRATED SERUM</span></>,
         subtitle: "SALICYLIC ACID SERUM",
         image: "/product-pack/EFFACLAR ULTRA-CONCENTRATED SERUM.png",
         indication: [
@@ -242,7 +242,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "EFFACLAR DUO+M",
+        title: <>EFFACLAR <span className="font-light">DUO+M</span></>,
         subtitle: "ANTI-IMPERFECTIONS TRIPLE CORRECTION CARE",
         image: "/product-pack/EFFACLAR DUO+M .png",
         indication: [
@@ -262,7 +262,7 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: "EFFACLAR H ISO-BIOME",
+        title: <>EFFACLAR <span className="font-light">H ISO-BIOME</span></>,
         subtitle: "HYDRATING CARE ANTI-IMPERFECTIONS",
         image: "/product-pack/EFFACLAR H ISO-BIOME HYDRATING CARE ANTI-IMPERFECTIONS.png",
         indication: [
