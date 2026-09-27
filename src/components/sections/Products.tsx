@@ -65,7 +65,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
         subtitle: "DERMO-PEDIATRICS SPF50+",
-        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY - DERMO-PEDIATRICS SPF50+ .png",
+        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY - DERMO-PEDIATRICS SPF50 PLUS  .png",
         indication: [
           "Sensitive skin",
           "Face and body for children"
@@ -245,7 +245,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>EFFACLAR <span className="font-light">DUO+</span>M</>,
         subtitle: "ANTI-IMPERFECTIONS TRIPLE CORRECTION CARE",
-        image: "/product-pack/EFFACLAR DUO+M .png",
+        image: "/product-pack/EFFACLAR DUO PLUS M .png",
         indication: [
           "Oily skin and acne-prone skin",
           "Skin with severe imperfections",
@@ -304,7 +304,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>LIPIKAR <span className="font-light">SYNDET AP+</span></>,
         subtitle: <>LIPID-REPLENISHING WASH CREAM<br/>ANTI-IRRITATION ANTI-SCRATCHING</>,
-        image: "/product-pack/LIPIKAR SYNDET AP+ .png",
+        image: "/product-pack/LIPIKAR SYNDET AP PLUS  .png",
         indication: ["Dry to very dry or atopic eczema-prone skin"],
         action: ["Soothes [ Niacinamide ]", "Repairs, nourishes and protects [ Shea Butter + Glycerin ]", "Restores balance to the microbiome [ Aqua Posae Filiformis ]"],
         usage: ["Apply to moist skin", "Massage gently, then rinse"]
@@ -312,7 +312,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>LIPIKAR <span className="font-light">CLEANSING OIL AP+</span></>,
         subtitle: <>LIPID-REPLENISHING CLEANSING OIL<br/>ANTI-IRRITATION ANTI-SCRATCHING</>,
-        image: "/product-pack/LIPIKAR CLEANSING OIL AP+ .png",
+        image: "/product-pack/LIPIKAR CLEANSING OIL AP PLUS  .png",
         indication: ["Dry to very dry or atopic eczema-prone skin"],
         action: ["Soothes [ Niacinamide ]", "Repairs, nourishes and protects [ Shea Butter + Glycerin ]", "Restores balance to the microbiome [ Aqua Posae Filiformis ]"],
         usage: ["Place a few drops into the palm of the hand and work into a lather", "Apply to moist skin", "Massage gently, then rinse"]
@@ -328,7 +328,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>LIPIKAR <span className="font-light">BALM AP+</span>M<span className="font-light">AX</span></>,
         subtitle: "TRIPLE-ACTION BALM 72H",
-        image: "/product-pack/LIPIKAR BALM AP+MAX .png",
+        image: "/product-pack/LIPIKAR BALM AP PLUS MAX .png",
         indication: ["Xerosis, senile xerosis, itching, atopic eczema-prone skin"],
         action: ["To mute itch signals on skin [ Neurobioma ]", "Strenghtens skin barrier [ Shea Butter + Glycerin ]", "Soothes skin & reduces irritation [ Neurobioma + Niacinamide ]", "Rebalances skin microbiome & inhibits biofilm formation [ Aqua Posae Filiformis + Microresyl ]"],
         usage: ["1 application per day", "On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+"]
@@ -363,7 +363,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>CICAPLAST <span className="font-light text-effaclar-blue">B5+</span> <span className="font-light">BALM</span></>,
         subtitle: "ULTRA-REPAIRING SOOTHING BALM",
-        image: "/product-pack/CICAPLAST B5+ BALM .png",
+        image: "/product-pack/CICAPLAST B5 PLUS  BALM .png",
         indication: ["Weakened and irritated skin in babies, children and adults", "Sensitive skin following epidermal damage: eczema, diaper rash in babies, perioral irritation, dry patches, chapping, intense dryness, superficial burns, skin irritation, superficial post-laser damage, post-epilation irritation"],
         action: ["Boosts tissue healing [ Tribioma ]", "Soothes [ 5% Panthenol ]", "Repairs [ Madecassoside ]", "Purifies [ Copper ] + [ Zinc ]", "Nourishes and protects [ Shea butter ] + [ Glycerin ]"],
         usage: ["Apply twice a day to the irritated or weakened area after cleansing and drying", "Non-greasy texture that does not leave white marks and is suitable for massaging scars"]
