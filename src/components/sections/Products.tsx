@@ -333,8 +333,8 @@ const productCategories: CategoryData[] = [
         usage: ["1 application per day", "On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+"]
       },
       {
-        title: <>LIPIKAR <span className="font-light">MILK UREA 10%</span></>,
-        subtitle: "SMOOTHING MOISTURIZING BODY LOTION ANTI-FLAKING",
+        title: <>LIPIKAR <span className="font-light">MILK <span className="text-effaclar-blue">UREA 10%</span></span></>,
+        subtitle: "SMOOTHING MOISTURIZING\nBODY LOTION ANTI-FLAKING",
         image: "/product-pack/LIPIKAR MILK UREA TEN PERCENT.png",
         indication: ["Roughness, flaking, keratosis pilaris, psoriasis-prone skin"],
         action: ["Smoothes skin [ 10% Urea ]", "Lastingly nourishes skin [ Shea Butter + Glycerin ]", "Soothes [ Allantoin + Mannose ]"],
