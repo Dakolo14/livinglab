@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, Check, ArrowRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import './Products.css';
 
 interface ProductData {
@@ -470,7 +470,7 @@ const Products: React.FC = () => {
                   <div className="product-packshot">
                     {product.image ? (
                       <div className="packshot-image-wrapper">
-                        <img src={product.image} alt={product.title} className="packshot-image" />
+                        <img src={product.image} alt="Product image" className="packshot-image" />
                       </div>
                     ) : (
                       <div className="packshot-placeholder">
