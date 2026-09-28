@@ -80,7 +80,8 @@
 .step-visual-placeholder {
   grid-area: visual;
   width: 100%;
-  height: 300px;
+  height: auto;
+  aspect-ratio: 16/9;
   background-color: #F3F4F6;
   border-radius: 12px;
   position: relative;
