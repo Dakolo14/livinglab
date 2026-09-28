@@ -36,17 +36,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let isReminder = true;
     try {
       if (template === 'thank-you') {
-        rawHtmlTemplate = fs.readFileSync(path.join(process.cwd(), 'src/emails/ThankYou.html'), 'utf-8');
+        try {
+          rawHtmlTemplate = fs.readFileSync(path.join(process.cwd(), 'src/emails/ThankYou.html'), 'utf-8');
+        } catch(e) {
+          rawHtmlTemplate = fs.readFileSync(path.join(__dirname, '../src/emails/ThankYou.html'), 'utf-8');
+        }
         isReminder = false;
       } else if (template === 'custom') {
         rawHtmlTemplate = customMessage || '';
         isReminder = false;
       } else {
-        rawHtmlTemplate = fs.readFileSync(path.join(process.cwd(), 'src/emails/ReminderTemplate.html'), 'utf-8');
+        try {
+          rawHtmlTemplate = fs.readFileSync(path.join(process.cwd(), 'src/emails/ReminderTemplate.html'), 'utf-8');
+        } catch(e) {
+          rawHtmlTemplate = fs.readFileSync(path.join(__dirname, '../src/emails/ReminderTemplate.html'), 'utf-8');
+        }
       }
     } catch (e) {
       console.error('Error reading template file', e);
-      return res.status(500).json({ error: 'Template file missing' });
+      return res.status(500).json({ error: 'Template file missing', details: String(e) });
     }
 
     const emailsToProcess = users.slice(0, 100); 

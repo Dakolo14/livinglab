@@ -110,8 +110,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       try {
         emailHtml = fs.readFileSync(path.join(process.cwd(), 'src/emails/RegistrationSuccess.html'), 'utf-8');
       } catch (e) {
-        console.error('Error reading RegistrationSuccess template file', e);
-        return res.status(500).json({ error: 'Template file missing' });
+        try {
+          emailHtml = fs.readFileSync(path.join(__dirname, '../src/emails/RegistrationSuccess.html'), 'utf-8');
+        } catch (err2) {
+          console.error('Error reading RegistrationSuccess template file', err2);
+          return res.status(500).json({ error: 'Template file missing', details: String(e) });
+        }
       }
 
       emailHtml = emailHtml.replace('{{FirstName}}', name.split(' ')[0]);
