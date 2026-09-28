@@ -5,7 +5,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
 
 export const AdminBroadcasts: React.FC = () => {
-  const [audience, setAudience] = useState<string>('all');
+  const [audiences, setAudiences] = useState<string[]>(['all']);
   const [customEmails, setCustomEmails] = useState<string>('');
   const [template, setTemplate] = useState<string>('3-weeks');
   const [customSubject, setCustomSubject] = useState<string>('');
@@ -15,7 +15,7 @@ export const AdminBroadcasts: React.FC = () => {
   const [showConfirm, setShowConfirm] = useState(false);
 
   const handleSendClick = () => {
-    if (audience === 'custom' && !customEmails.trim()) {
+    if (audiences.includes('custom') && !customEmails.trim()) {
       toast.error("Please enter at least one email address");
       return;
     }
@@ -36,7 +36,7 @@ export const AdminBroadcasts: React.FC = () => {
     try {
       const users: any[] = [];
       
-      if (audience === 'custom') {
+      if (audiences.includes('custom')) {
         const emails = customEmails.split(',').map(e => e.trim().toLowerCase()).filter(e => e);
         emails.forEach(email => {
           users.push({ email, name: 'Guest', session: 'Custom' });
@@ -44,10 +44,10 @@ export const AdminBroadcasts: React.FC = () => {
       } else {
         const regsRef = collection(db, 'registrations');
         let q;
-        if (audience === 'all') {
+        if (audiences.includes('all')) {
           q = query(regsRef);
         } else {
-          q = query(regsRef, where('session', '==', audience));
+          q = query(regsRef, where('session', 'in', audiences));
         }
 
         const snapshot = await getDocs(q);
@@ -98,24 +98,41 @@ export const AdminBroadcasts: React.FC = () => {
         
         <div style={{ display: 'grid', gap: '24px' }}>
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500', color: '#1E293B' }}>Target Audience</label>
-            <select 
-              value={audience} 
-              onChange={(e) => setAudience(e.target.value)}
-              className="admin-form-select"
-            >
-              <option value="all">All Registered Attendees</option>
-              <option value="Thursday Morning">Thursday Morning Session Only</option>
-              <option value="Thursday Afternoon">Thursday Afternoon Session Only</option>
-              <option value="Thursday Late">Thursday Late Session Only</option>
-              <option value="Friday Morning">Friday Morning Session Only</option>
-              <option value="Friday Afternoon">Friday Afternoon Session Only</option>
-              <option value="Friday Late">Friday Late Session Only</option>
-              <option value="custom">Specific Emails (Custom)</option>
-            </select>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500', color: '#1E293B' }}>Target Audience (Select multiple)</label>
+            <div style={{ display: 'grid', gap: '8px', background: '#F8FAFC', padding: '16px', borderRadius: '8px', border: '1px solid #CBD5E1' }}>
+              {[
+                { val: 'all', label: 'All Registered Attendees' },
+                { val: 'Thursday Morning', label: 'Thursday Morning Session' },
+                { val: 'Thursday Afternoon', label: 'Thursday Afternoon Session' },
+                { val: 'Thursday Late', label: 'Thursday Late Session' },
+                { val: 'Friday Morning', label: 'Friday Morning Session' },
+                { val: 'Friday Afternoon', label: 'Friday Afternoon Session' },
+                { val: 'Friday Late', label: 'Friday Late Session' },
+                { val: 'custom', label: 'Specific Emails (Custom)' },
+              ].map(opt => (
+                <label key={opt.val} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                  <input 
+                    type="checkbox" 
+                    checked={audiences.includes(opt.val)} 
+                    onChange={(e) => {
+                      if (opt.val === 'all' || opt.val === 'custom') {
+                        setAudiences([opt.val]);
+                      } else {
+                        let next = audiences.filter(a => a !== 'all' && a !== 'custom');
+                        if (e.target.checked) next.push(opt.val);
+                        else next = next.filter(a => a !== opt.val);
+                        setAudiences(next.length ? next : ['all']);
+                      }
+                    }}
+                    style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                  /> 
+                  {opt.label}
+                </label>
+              ))}
+            </div>
           </div>
 
-          {audience === 'custom' && (
+          {audiences.includes('custom') && (
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500', color: '#1E293B' }}>Emails to Notify</label>
               <textarea 
