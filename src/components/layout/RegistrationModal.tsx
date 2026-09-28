@@ -184,7 +184,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
 
             <p>Thank you for registering. Here is your digital ticket. Present this QR Code at the event entrance.</p>
             <div style={{marginTop: '16px', display: 'flex', justifyContent: 'center'}}>
-              <QRCodeSVG value={docId} size={200} level="H" includeMargin={true} />
+              <QRCodeSVG value={emailValue} size={200} level="H" includeMargin={true} />
             </div>
             <p style={{fontSize: '0.8rem', color: '#64748b', margin: '16px 0 0 0'}}>Scan at entrance</p>
             

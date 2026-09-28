@@ -9,13 +9,21 @@ interface TicketData {
   name: string;
   email: string;
   ticketId: string;
+  session?: string;
   status: string;
+}
+
+interface PendingUser {
+  id: string;
+  data: TicketData;
 }
 
 export const AdminScanner: React.FC = () => {
   const [scanResult, setScanResult] = useState<TicketData | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isScanning, setIsScanning] = useState(true);
+  const [pendingUser, setPendingUser] = useState<PendingUser[] | null>(null);
+  const [isConfirming, setIsConfirming] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
 
   useEffect(() => {
@@ -40,46 +48,23 @@ export const AdminScanner: React.FC = () => {
         const querySnapshot = await getDocs(q);
         
         if (!querySnapshot.empty) {
-          let checkedInCount = 0;
+          let rsvpDocs: PendingUser[] = [];
           let alreadyCheckedInCount = 0;
           let attendeeName = '';
-          let ticketIds: string[] = [];
           
           for (const docSnap of querySnapshot.docs) {
             const data = docSnap.data() as TicketData;
             attendeeName = data.name || attendeeName;
             
             if (data.status === 'rsvped') {
-              await updateDoc(doc(db, 'registrations', docSnap.id), { status: 'attended' });
-              checkedInCount++;
-              ticketIds.push(data.ticketId);
-
-              // Send CheckInSuccess Email
-              try {
-                await fetch('/api/send-checkin', {
-                  method: 'POST',
-                  headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${import.meta.env.VITE_API_SECRET_KEY || 'livinglab-secret-2026'}`
-                  },
-                  body: JSON.stringify({ name: data.name, email: data.email })
-                });
-              } catch (e) {
-                console.error("Failed to send checkin email", e);
-              }
+              rsvpDocs.push({ id: docSnap.id, data });
             } else if (data.status === 'attended') {
               alreadyCheckedInCount++;
-              ticketIds.push(data.ticketId);
             }
           }
           
-          if (checkedInCount > 0) {
-            setScanResult({ 
-              name: attendeeName, 
-              email: decodedText,
-              ticketId: ticketIds.join(', '), 
-              status: 'attended' 
-            });
+          if (rsvpDocs.length > 0) {
+            setPendingUser(rsvpDocs);
           } else if (alreadyCheckedInCount > 0) {
             setErrorMsg(`All tickets for ${decodedText} have already been checked in!`);
           } else {
@@ -118,7 +103,49 @@ export const AdminScanner: React.FC = () => {
   const resetScanner = () => {
     setScanResult(null);
     setErrorMsg(null);
+    setPendingUser(null);
     setIsScanning(true);
+  };
+
+  const handleConfirmCheckIn = async (users: PendingUser[]) => {
+    setIsConfirming(true);
+    let ticketIds: string[] = [];
+    const firstUser = users[0].data;
+
+    try {
+      for (const user of users) {
+        await updateDoc(doc(db, 'registrations', user.id), { status: 'attended' });
+        ticketIds.push(user.data.ticketId);
+      }
+
+      // Send CheckInSuccess Email
+      try {
+        await fetch('/api/send-checkin', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_API_SECRET_KEY || 'livinglab-secret-2026'}`
+          },
+          body: JSON.stringify({ name: firstUser.name, email: firstUser.email })
+        });
+      } catch (e) {
+        console.error("Failed to send checkin email", e);
+      }
+
+      setPendingUser(null);
+      setScanResult({ 
+        name: firstUser.name, 
+        email: firstUser.email,
+        ticketId: ticketIds.join(', '), 
+        status: 'attended' 
+      });
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Failed to check in. Please try again.");
+      setPendingUser(null);
+    } finally {
+      setIsConfirming(false);
+    }
   };
 
   return (
@@ -128,12 +155,28 @@ export const AdminScanner: React.FC = () => {
       </div>
       
       <div className="scanner-container">
-        {!scanResult && !errorMsg ? (
+        {!scanResult && !errorMsg && !pendingUser ? (
           <>
             <p style={{marginBottom: '16px', color: '#4B5563'}}>Point camera at attendee's digital ticket.</p>
             <div id="reader" style={{ width: '100%', maxWidth: '400px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}></div>
             {isScanning && <p style={{marginTop: '16px', color: '#00AEEF', fontWeight: 500}}>Scanning...</p>}
           </>
+        ) : pendingUser ? (
+          <div className="scan-result pending">
+            <h3 style={{fontSize: '1.25rem', marginBottom: '16px', color: '#111827', fontWeight: 600}}>Confirm Check-In</h3>
+            <div style={{textAlign: 'left', background: '#F8FAFC', border: '1px solid #E2E8F0', padding: '20px', borderRadius: '12px', marginBottom: '24px'}}>
+              <p style={{marginBottom: '12px'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Name</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500}}>{pendingUser[0].data.name}</span></p>
+              <p style={{marginBottom: '12px'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Email</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500}}>{pendingUser[0].data.email}</span></p>
+              <p style={{marginBottom: '12px'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Session</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500}}>{pendingUser[0].data.session || 'TBD'}</span></p>
+              <p style={{marginBottom: '0'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Ticket ID(s)</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500, fontFamily: 'monospace'}}>{pendingUser.map(p => p.data.ticketId).join(', ')}</span></p>
+            </div>
+            <button className="btn-primary" style={{width: '100%', marginBottom: '12px', padding: '14px', fontSize: '1rem'}} onClick={() => handleConfirmCheckIn(pendingUser)} disabled={isConfirming}>
+              {isConfirming ? 'CHECKING IN...' : 'CONFIRM CHECK-IN'}
+            </button>
+            <button className="btn-secondary" style={{width: '100%', border: '1px solid #CBD5E1', padding: '14px', background: 'white', color: '#0F172A', fontSize: '1rem'}} onClick={resetScanner} disabled={isConfirming}>
+              CANCEL
+            </button>
+          </div>
         ) : errorMsg ? (
           <div className="scan-result error">
             <h3 style={{fontSize: '1.1rem', marginBottom: '8px', fontWeight: 600}}>⚠ Scan Error</h3>
