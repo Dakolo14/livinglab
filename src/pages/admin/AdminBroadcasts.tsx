@@ -3,6 +3,8 @@ import AdminLayout from '../../components/layout/AdminLayout';
 import { db } from '../../config/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export const AdminBroadcasts: React.FC = () => {
   const [audiences, setAudiences] = useState<string[]>(['all']);
@@ -26,6 +28,19 @@ export const AdminBroadcasts: React.FC = () => {
       }
     }
     setShowConfirm(true);
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      setCustomMessage(content);
+      toast.success("HTML template loaded successfully!");
+    };
+    reader.readAsText(file);
   };
 
   const handleConfirmSend = async () => {
@@ -175,13 +190,33 @@ export const AdminBroadcasts: React.FC = () => {
                 />
               </div>
               <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '500', color: '#1E293B' }}>Custom Message (HTML allowed)</label>
-                <textarea 
-                  value={customMessage}
-                  onChange={(e) => setCustomMessage(e.target.value)}
-                  placeholder="Dear Attendee,\n\nWe wanted to let you know..."
-                  style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.95rem', minHeight: '150px', resize: 'vertical' }}
-                />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '8px' }}>
+                  <label style={{ display: 'block', fontWeight: '500', color: '#1E293B' }}>Custom Message</label>
+                  <label style={{ cursor: 'pointer', fontSize: '0.85rem', color: '#00AEEF', fontWeight: 500 }}>
+                    <input type="file" accept=".html" onChange={handleFileUpload} style={{ display: 'none' }} />
+                    📄 Upload HTML File
+                  </label>
+                </div>
+                <div style={{ background: 'white', borderRadius: '8px', overflow: 'hidden', border: '1px solid #CBD5E1' }}>
+                  <ReactQuill 
+                    theme="snow" 
+                    value={customMessage} 
+                    onChange={setCustomMessage} 
+                    style={{ minHeight: '200px' }}
+                    modules={{
+                      toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['link', 'image'],
+                        ['clean']
+                      ],
+                    }}
+                  />
+                </div>
+                <p style={{ marginTop: '8px', fontSize: '0.85rem', color: '#64748B' }}>
+                  You can use the editor above, or upload an HTML file designed in Mailchimp/Stripo.
+                </p>
               </div>
             </>
           )}
@@ -213,8 +248,8 @@ export const AdminBroadcasts: React.FC = () => {
             ) : (
               <div>
                 <p style={{ margin: '0 0 8px 0' }}><strong>Success!</strong> Broadcast completed.</p>
-                <p style={{ margin: 0, fontSize: '0.9rem' }}>Successfully sent to {result.successfulSends || 0} users.</p>
-                {result.failedSends > 0 && <p style={{ margin: '8px 0 0 0', fontSize: '0.9rem' }}>Failed sends: {result.failedSends}</p>}
+                <p style={{ margin: 0, fontSize: '0.9rem' }}>Successfully sent to {result.sentCount || 0} users.</p>
+                {(result.totalCount - (result.sentCount || 0)) > 0 && <p style={{ margin: '8px 0 0 0', fontSize: '0.9rem' }}>Failed sends: {result.totalCount - (result.sentCount || 0)}</p>}
               </div>
             )}
           </div>
