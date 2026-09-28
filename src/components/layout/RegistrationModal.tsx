@@ -31,7 +31,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [isSuccess, setIsSuccess] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
   const [ticketId, setTicketId] = useState('');
-  const [docId, setDocId] = useState('');
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [policyModal, setPolicyModal] = useState<'terms' | 'privacy' | null>(null);
   const [existingSessions, setExistingSessions] = useState<string[]>([]);
@@ -138,7 +138,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
       
       setExistingSessions([...existingSessions, data.dayTime]);
       setTicketId(generatedTicketId);
-      setDocId(data.email.toLowerCase().trim());
       setIsSuccess(true);
       
       fetch('/api/send-ticket', {

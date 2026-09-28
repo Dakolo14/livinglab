@@ -226,7 +226,7 @@ export const AdminBroadcasts: React.FC = () => {
               <h3 style={{ fontSize: '1.25rem', color: '#0F172A', marginBottom: '16px' }}>Confirm Broadcast</h3>
               <p style={{ color: '#475569', marginBottom: '24px', lineHeight: 1.5 }}>
                 You are about to send the <strong>{template}</strong> template to 
-                <strong> {audience === 'custom' ? customEmails.split(',').length + ' specific email(s)' : audience === 'all' ? 'ALL registered attendees' : audience}</strong>.
+                <strong> {audiences.includes('custom') ? customEmails.split(',').length + ' specific email(s)' : audiences.includes('all') ? 'ALL registered attendees' : audiences.join(', ')}</strong>.
                 <br/><br/>
                 This action cannot be undone. Do you want to proceed?
               </p>
