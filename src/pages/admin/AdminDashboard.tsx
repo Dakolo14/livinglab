@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/layout/AdminLayout';
 import { collection, onSnapshot, doc, updateDoc, query, orderBy } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import { toast } from 'sonner';
 import './Admin.css';
 import './Admin.css';
 
@@ -32,6 +33,8 @@ export const AdminDashboard: React.FC = () => {
   const [confirmCheckInId, setConfirmCheckInId] = useState<string | null>(null);
   const [confirmUndoId, setConfirmUndoId] = useState<string | null>(null);
   const [confirmResetId, setConfirmResetId] = useState<string | null>(null);
+  const [confirmInviteId, setConfirmInviteId] = useState<string | null>(null);
+  const [confirmRejectId, setConfirmRejectId] = useState<string | null>(null);
   const [manageModalUser, setManageModalUser] = useState<GroupedAttendee | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [tourStep, setTourStep] = useState(1);
@@ -70,7 +73,7 @@ export const AdminDashboard: React.FC = () => {
       setConfirmCheckInId(null);
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Failed to check-in attendee.");
+      toast.error("Failed to check-in attendee.");
       setConfirmCheckInId(null);
     }
   };
@@ -88,30 +91,42 @@ export const AdminDashboard: React.FC = () => {
       setConfirmUndoId(null);
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Failed to undo check-in.");
+      toast.error("Failed to undo check-in.");
       setConfirmUndoId(null);
     }
   };
 
-  const handleInvite = async (docId: string) => {
-    const isSure = window.confirm("Send an invitation to this applicant?");
-    if (!isSure) return;
+  const handleInvite = (docId: string) => {
+    setConfirmInviteId(docId);
+  };
+
+  const confirmInvite = async () => {
+    if (!confirmInviteId) return;
     try {
-      await updateDoc(doc(db, 'registrations', docId), { status: 'invited' });
+      await updateDoc(doc(db, 'registrations', confirmInviteId), { status: 'invited' });
+      setConfirmInviteId(null);
+      toast.success("Applicant invited successfully");
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Failed to invite applicant.");
+      toast.error("Failed to invite applicant.");
+      setConfirmInviteId(null);
     }
   };
 
-  const handleReject = async (docId: string) => {
-    const isSure = window.confirm("Reject this application?");
-    if (!isSure) return;
+  const handleReject = (docId: string) => {
+    setConfirmRejectId(docId);
+  };
+
+  const confirmReject = async () => {
+    if (!confirmRejectId) return;
     try {
-      await updateDoc(doc(db, 'registrations', docId), { status: 'rejected' });
+      await updateDoc(doc(db, 'registrations', confirmRejectId), { status: 'rejected' });
+      setConfirmRejectId(null);
+      toast.success("Applicant rejected");
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Failed to reject applicant.");
+      toast.error("Failed to reject applicant.");
+      setConfirmRejectId(null);
     }
   };
 
@@ -126,7 +141,7 @@ export const AdminDashboard: React.FC = () => {
       setConfirmResetId(null);
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Failed to reset application.");
+      toast.error("Failed to reset application.");
       setConfirmResetId(null);
     }
   };
@@ -237,7 +252,7 @@ export const AdminDashboard: React.FC = () => {
           <p className="admin-subtitle">Here is the latest data for Living Lab Nigeria 2026.</p>
         </div>
         <div style={{display: 'flex', gap: '12px'}}>
-          <button className="btn-secondary" style={{padding: '10px 20px', backgroundColor: '#F8FAFC', color: '#0F172A', border: '1px solid #CBD5E1'}} onClick={() => alert("Excel export requires a premium plugin or library like xlsx. Use CSV for now!")}>Export Excel</button>
+          <button className="btn-secondary" style={{padding: '10px 20px', backgroundColor: '#F8FAFC', color: '#0F172A', border: '1px solid #CBD5E1'}} onClick={() => toast.info("Excel export requires a premium plugin or library like xlsx. Use CSV for now!")}>Export Excel</button>
           <button className="btn-primary" style={{padding: '10px 20px'}} onClick={handleExportCSV}>Export CSV</button>
         </div>
       </div>
@@ -386,6 +401,34 @@ export const AdminDashboard: React.FC = () => {
             <div className="admin-modal-actions">
               <button className="btn-secondary" onClick={() => setConfirmResetId(null)}>Cancel</button>
               <button className="btn-primary" style={{ backgroundColor: '#EF4444' }} onClick={confirmReset}>Reset</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Invite Modal */}
+      {confirmInviteId && (
+        <div className="admin-modal-overlay" style={{ zIndex: 1100 }}>
+          <div className="admin-modal">
+            <h3>Send Invitation</h3>
+            <p>Send an invitation to this applicant?</p>
+            <div className="admin-modal-actions">
+              <button className="btn-secondary" onClick={() => setConfirmInviteId(null)}>Cancel</button>
+              <button className="btn-primary" onClick={confirmInvite}>Send Invite</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reject Modal */}
+      {confirmRejectId && (
+        <div className="admin-modal-overlay" style={{ zIndex: 1100 }}>
+          <div className="admin-modal">
+            <h3>Reject Application</h3>
+            <p>Are you sure you want to reject this application?</p>
+            <div className="admin-modal-actions">
+              <button className="btn-secondary" onClick={() => setConfirmRejectId(null)}>Cancel</button>
+              <button className="btn-primary" style={{ backgroundColor: '#EF4444' }} onClick={confirmReject}>Reject</button>
             </div>
           </div>
         </div>

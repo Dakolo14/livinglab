@@ -22,6 +22,7 @@ import CookieBanner from './components/layout/CookieBanner';
 import OfflineNotification from './components/layout/OfflineNotification';
 import ScrollToTop from './components/layout/ScrollToTop';
 import usePageTracking from './hooks/usePageTracking';
+import { Toaster } from 'sonner';
 import './App.css';
 
 const PageTracker = () => {
@@ -59,6 +60,7 @@ function App() {
         </Routes>
         <RegistrationModal />
         <CookieBanner />
+        <Toaster position="top-right" richColors />
       </Router>
       </AuthProvider>
     </HelmetProvider>

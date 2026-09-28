@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AdminLayout from '../../components/layout/AdminLayout';
 import { db } from '../../config/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import { toast } from 'sonner';
 
 export const AdminBroadcasts: React.FC = () => {
   const [audience, setAudience] = useState<string>('all');
@@ -15,12 +16,12 @@ export const AdminBroadcasts: React.FC = () => {
 
   const handleSendClick = () => {
     if (audience === 'custom' && !customEmails.trim()) {
-      alert("Please enter at least one email address");
+      toast.error("Please enter at least one email address");
       return;
     }
     if (template === 'custom') {
       if (!customSubject.trim() || !customMessage.trim()) {
-        alert("Please enter a subject and message for the custom broadcast");
+        toast.error("Please enter a subject and message for the custom broadcast");
         return;
       }
     }
