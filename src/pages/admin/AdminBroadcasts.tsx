@@ -94,7 +94,7 @@ export const AdminBroadcasts: React.FC = () => {
         </div>
       </div>
       
-      <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '32px', border: '1px solid #E2E8F0', maxWidth: '800px' }}>
+      <div className="admin-card" style={{ maxWidth: '800px' }}>
         
         <div style={{ display: 'grid', gap: '24px' }}>
           <div>
