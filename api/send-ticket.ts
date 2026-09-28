@@ -239,7 +239,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       </div>
 
       <div class="content">
-        <div class="greeting">Dear Dr. ${name.split(' ')[0]},</div>
+        <div class="greeting">Dear ${name.split(' ')[0]},</div>
         
         <div class="message">
           Your registration is confirmed. We are absolutely thrilled to welcome you to the exclusive Living Lab Nigeria 2026 experience by La Roche-Posay.
