@@ -24,6 +24,7 @@ export const AdminScanner: React.FC = () => {
   const [isScanning, setIsScanning] = useState(true);
   const [pendingUser, setPendingUser] = useState<PendingUser[] | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
+  const [manualInput, setManualInput] = useState('');
   const scannerRef = useRef<Html5Qrcode | null>(null);
 
   useEffect(() => {
@@ -110,7 +111,54 @@ export const AdminScanner: React.FC = () => {
     setScanResult(null);
     setErrorMsg(null);
     setPendingUser(null);
+    setManualInput('');
     setIsScanning(true);
+  };
+
+  const handleManualSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!manualInput.trim()) return;
+    
+    if (scannerRef.current?.isScanning) {
+      await scannerRef.current.stop().catch(() => {});
+    }
+    setIsScanning(false);
+    setErrorMsg(null);
+    
+    try {
+      const q = query(
+        collection(db, 'registrations'),
+        where('ticketId', '==', manualInput.trim().toUpperCase())
+      );
+      const querySnapshot = await getDocs(q);
+      
+      if (!querySnapshot.empty) {
+        let rsvpDocs: PendingUser[] = [];
+        let alreadyCheckedInCount = 0;
+        
+        for (const docSnap of querySnapshot.docs) {
+          const data = docSnap.data() as TicketData;
+          if (data.status === 'registered' || data.status === 'rsvped') {
+            rsvpDocs.push({ id: docSnap.id, data });
+          } else if (data.status === 'attended') {
+            alreadyCheckedInCount++;
+          }
+        }
+        
+        if (rsvpDocs.length > 0) {
+          setPendingUser(rsvpDocs);
+        } else if (alreadyCheckedInCount > 0) {
+          setErrorMsg(`Ticket ${manualInput} has already been checked in!`);
+        } else {
+          setErrorMsg(`No valid registration found for Ticket ${manualInput}.`);
+        }
+      } else {
+        setErrorMsg(`Invalid Ticket ID. No registration found for "${manualInput}".`);
+      }
+    } catch (err: any) {
+      console.error("Error fetching/updating document: ", err);
+      setErrorMsg(`Database Error: ${err.message || 'Unknown network error'}`);
+    }
   };
 
   const handleConfirmCheckIn = async (users: PendingUser[]) => {
@@ -166,6 +214,21 @@ export const AdminScanner: React.FC = () => {
             <p style={{marginBottom: '16px', color: '#4B5563'}}>Point camera at attendee's digital ticket.</p>
             <div id="reader" style={{ width: '100%', maxWidth: '400px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}></div>
             {isScanning && <p style={{marginTop: '16px', color: '#00AEEF', fontWeight: 500}}>Scanning...</p>}
+
+            <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #E5E7EB' }}>
+              <p style={{marginBottom: '12px', color: '#4B5563', fontSize: '0.95rem', fontWeight: 500}}>Scanner not working? Enter Ticket ID manually:</p>
+              <form onSubmit={handleManualSearch} style={{display: 'flex', gap: '8px', maxWidth: '400px', margin: '0 auto'}}>
+                <input 
+                  type="text" 
+                  placeholder="e.g. TKT-1234"
+                  value={manualInput}
+                  onChange={(e) => setManualInput(e.target.value)}
+                  style={{flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '1rem', textTransform: 'uppercase'}}
+                  required
+                />
+                <button type="submit" className="btn-primary" style={{padding: '12px 24px'}}>Search</button>
+              </form>
+            </div>
           </>
         ) : pendingUser ? (
           <div className="scan-result pending">
