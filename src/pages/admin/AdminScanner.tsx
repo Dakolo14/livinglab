@@ -56,7 +56,7 @@ export const AdminScanner: React.FC = () => {
             const data = docSnap.data() as TicketData;
             attendeeName = data.name || attendeeName;
             
-            if (data.status === 'rsvped') {
+            if (data.status === 'registered' || data.status === 'rsvped') {
               rsvpDocs.push({ id: docSnap.id, data });
             } else if (data.status === 'attended') {
               alreadyCheckedInCount++;
@@ -68,7 +68,7 @@ export const AdminScanner: React.FC = () => {
           } else if (alreadyCheckedInCount > 0) {
             setErrorMsg(`All tickets for ${decodedText} have already been checked in!`);
           } else {
-            setErrorMsg(`No valid RSVP found for ${decodedText}.`);
+            setErrorMsg(`No valid registration found for ${decodedText}.`);
           }
         } else {
           setErrorMsg("Invalid QR Code. No such registration found.");
