@@ -55,7 +55,7 @@ const Home: React.FC = () => {
         <WhatIsLivingLab />
         <Experiences activeReelId={activeReelId} setActiveReelId={setActiveReelId} isVideoMoved={isVideoMoved} />
         <AboutLRP />
-        <LabJourney />
+        {/* <LabJourney /> */}
         <ProgrammeSection />
         <FAQ />
         <Partners />
