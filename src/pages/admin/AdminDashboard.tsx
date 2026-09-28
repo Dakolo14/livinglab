@@ -30,6 +30,8 @@ export const AdminDashboard: React.FC = () => {
   const [attendees, setAttendees] = useState<Attendee[]>([]);
   const [loading, setLoading] = useState(true);
   const [confirmCheckInId, setConfirmCheckInId] = useState<string | null>(null);
+  const [confirmUndoId, setConfirmUndoId] = useState<string | null>(null);
+  const [confirmResetId, setConfirmResetId] = useState<string | null>(null);
   const [manageModalUser, setManageModalUser] = useState<GroupedAttendee | null>(null);
   const [showTour, setShowTour] = useState(false);
   const [tourStep, setTourStep] = useState(1);
@@ -73,17 +75,21 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
-  const handleUndoCheckIn = async (docId: string) => {
-    const isSure = window.confirm("Are you sure you want to undo this check-in? Their ticket will become valid again.");
-    if (!isSure) return;
+  const handleUndoCheckIn = (docId: string) => {
+    setConfirmUndoId(docId);
+  };
 
+  const confirmUndo = async () => {
+    if (!confirmUndoId) return;
     try {
-      await updateDoc(doc(db, 'registrations', docId), {
+      await updateDoc(doc(db, 'registrations', confirmUndoId), {
         status: 'registered' // Revert to registered so they still have a valid ticket
       });
+      setConfirmUndoId(null);
     } catch (error) {
       console.error("Error updating status:", error);
       alert("Failed to undo check-in.");
+      setConfirmUndoId(null);
     }
   };
 
@@ -109,14 +115,19 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
-  const handleReset = async (docId: string) => {
-    const isSure = window.confirm("Reset this application back to 'applied'?");
-    if (!isSure) return;
+  const handleReset = (docId: string) => {
+    setConfirmResetId(docId);
+  };
+
+  const confirmReset = async () => {
+    if (!confirmResetId) return;
     try {
-      await updateDoc(doc(db, 'registrations', docId), { status: 'applied', ticketId: '' });
+      await updateDoc(doc(db, 'registrations', confirmResetId), { status: 'applied', ticketId: '' });
+      setConfirmResetId(null);
     } catch (error) {
       console.error("Error updating status:", error);
       alert("Failed to reset application.");
+      setConfirmResetId(null);
     }
   };
 
@@ -339,7 +350,6 @@ export const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Confirmation Modal */}
       {confirmCheckInId && (
         <div className="admin-modal-overlay" style={{ zIndex: 1100 }}>
           <div className="admin-modal">
@@ -348,6 +358,34 @@ export const AdminDashboard: React.FC = () => {
             <div className="admin-modal-actions">
               <button className="btn-secondary" onClick={() => setConfirmCheckInId(null)}>Cancel</button>
               <button className="btn-primary" onClick={confirmCheckIn}>Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Undo Check-In Modal */}
+      {confirmUndoId && (
+        <div className="admin-modal-overlay" style={{ zIndex: 1100 }}>
+          <div className="admin-modal">
+            <h3>Undo Check-In</h3>
+            <p>Are you sure you want to undo this check-in? Their ticket will become valid again.</p>
+            <div className="admin-modal-actions">
+              <button className="btn-secondary" onClick={() => setConfirmUndoId(null)}>Cancel</button>
+              <button className="btn-primary" style={{ backgroundColor: '#EF4444' }} onClick={confirmUndo}>Undo</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reset Modal */}
+      {confirmResetId && (
+        <div className="admin-modal-overlay" style={{ zIndex: 1100 }}>
+          <div className="admin-modal">
+            <h3>Reset Application</h3>
+            <p>Reset this application back to 'applied'?</p>
+            <div className="admin-modal-actions">
+              <button className="btn-secondary" onClick={() => setConfirmResetId(null)}>Cancel</button>
+              <button className="btn-primary" style={{ backgroundColor: '#EF4444' }} onClick={confirmReset}>Reset</button>
             </div>
           </div>
         </div>
