@@ -132,6 +132,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     
   } catch (err: any) {
     console.error("Broadcast error:", err);
-    return res.status(500).json({ error: 'Internal server error', details: err.message, stack: err.stack, dbState: !!db });
+    return res.status(500).json({ error: 'Internal server error', details: err.message, stack: err.stack });
   }
 }
