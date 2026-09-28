@@ -3,6 +3,7 @@ import AdminLayout from '../../components/layout/AdminLayout';
 import { collection, onSnapshot, doc, updateDoc, query, orderBy } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { toast } from 'sonner';
+import * as XLSX from 'xlsx';
 import './Admin.css';
 import './Admin.css';
 
@@ -181,6 +182,27 @@ export const AdminDashboard: React.FC = () => {
     document.body.removeChild(a);
   };
 
+  const handleExportExcel = () => {
+    if (attendees.length === 0) return;
+    
+    const formattedData = attendees.map(a => ({
+      'Ticket ID': a.ticketId,
+      'Name': a.name,
+      'Email': a.email,
+      'Phone': a.phone || '',
+      'Session': a.session,
+      'Status': a.status,
+      'Marketing Consent': a.marketingConsent ? 'Yes' : 'No'
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Registrations");
+    
+    XLSX.writeFile(workbook, "livinglab_registrations.xlsx");
+    toast.success("Excel file downloaded successfully!");
+  };
+
 
   const groupedAttendees = React.useMemo(() => {
     const map = new Map<string, GroupedAttendee>();
@@ -252,7 +274,7 @@ export const AdminDashboard: React.FC = () => {
           <p className="admin-subtitle">Here is the latest data for Living Lab Nigeria 2026.</p>
         </div>
         <div style={{display: 'flex', gap: '12px'}}>
-          <button className="btn-secondary" style={{padding: '10px 20px', backgroundColor: '#F8FAFC', color: '#0F172A', border: '1px solid #CBD5E1'}} onClick={() => toast.info("Excel export requires a premium plugin or library like xlsx. Use CSV for now!")}>Export Excel</button>
+          <button className="btn-secondary" style={{padding: '10px 20px', backgroundColor: '#F8FAFC', color: '#0F172A', border: '1px solid #CBD5E1'}} onClick={handleExportExcel}>Export Excel</button>
           <button className="btn-primary" style={{padding: '10px 20px'}} onClick={handleExportCSV}>Export CSV</button>
         </div>
       </div>
