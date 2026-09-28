@@ -3,11 +3,11 @@ import React, { useRef } from 'react';
 import './LabJourney.css';
 
 const journeySteps = [
-  { id: '01', title: 'DISCOVER', description: 'Enter the world of La Roche-Posay. Understand the science behind the brand.' },
-  { id: '02', title: 'TEST', description: 'Interactive stations to test your skin’s resilience and needs.' },
-  { id: '03', title: 'EXPERIENCE', description: 'Immerse yourself in our sensory thermal spring water room.' },
-  { id: '04', title: 'LEARN', description: 'Uncover breakthrough ingredients like Melasyl and Mexoryl.' },
-  { id: '05', title: 'CONSULT', description: '1-on-1 time with top dermatologists to discuss your skin concerns.' },
+  { id: '01', title: 'DISCOVER', description: 'Enter the world of La Roche-Posay. Understand the science behind the brand.', image: '/what-to-expect/Discover.png' },
+  { id: '02', title: 'TEST', description: 'Interactive stations to test your skin’s resilience and needs.', image: '/what-to-expect/Test.png' },
+  { id: '03', title: 'EXPERIENCE', description: 'Immerse yourself in our sensory thermal spring water room.', image: '/what-to-expect/Experience.png' },
+  { id: '04', title: 'LEARN', description: 'Uncover breakthrough ingredients like Melasyl and Mexoryl.', image: '/what-to-expect/Learn.png' },
+  { id: '05', title: 'CONSULT', description: '1-on-1 time with top dermatologists to discuss your skin concerns.', image: '/what-to-expect/Consult.png' },
 ];
 
 const LabJourney: React.FC = () => {
@@ -31,9 +31,9 @@ const LabJourney: React.FC = () => {
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
               </div>
-              <div className="step-visual-placeholder">
+              <div className="step-visual-placeholder" style={{ padding: 0 }}>
                 <div className="visual-scan-line"></div>
-                <span className="placeholder-text">Experience {step.id} Visual Hook</span>
+                <img src={step.image} alt={step.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             </div>
           ))}
