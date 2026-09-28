@@ -371,7 +371,7 @@ export const AdminDashboard: React.FC = () => {
 
       {/* Confirmation Modal */}
       {confirmCheckInId && (
-        <div className="admin-modal-overlay">
+        <div className="admin-modal-overlay" style={{ zIndex: 1100 }}>
           <div className="admin-modal">
             <h3>Confirm Check-In</h3>
             <p>Are you sure you want to manually check-in this attendee? This action will mark their ticket as ATTENDED.</p>
