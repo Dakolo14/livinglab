@@ -3,11 +3,11 @@ import React, { useRef } from 'react';
 import './LabJourney.css';
 
 const journeySteps = [
-  { id: '01', title: 'DISCOVER', description: 'Enter the world of La Roche-Posay. Understand the science behind the brand.', image: '/what-to-expect/Discover.png' },
-  { id: '02', title: 'TEST', description: 'Interactive stations to test your skin’s resilience and needs.', image: '/what-to-expect/Test.png' },
-  { id: '03', title: 'EXPERIENCE', description: 'Immerse yourself in our sensory thermal spring water room.', image: '/what-to-expect/Experience.png' },
-  { id: '04', title: 'LEARN', description: 'Uncover breakthrough ingredients like Melasyl and Mexoryl.', image: '/what-to-expect/Learn.png' },
-  { id: '05', title: 'CONSULT', description: '1-on-1 time with top dermatologists to discuss your skin concerns.', image: '/what-to-expect/Consult.png' },
+  { id: '01', title: 'DISCOVER', description: 'Enter the world of La Roche-Posay. Understand the science behind the brand.', image: '/what-to-expect/Discover.jpg' },
+  { id: '02', title: 'TEST', description: 'Interactive stations to test your skin’s resilience and needs.', image: '/what-to-expect/Test.jpg' },
+  { id: '03', title: 'EXPERIENCE', description: 'Immerse yourself in our sensory thermal spring water room.', image: '/what-to-expect/Experience.jpg' },
+  { id: '04', title: 'LEARN', description: 'Uncover breakthrough ingredients like Melasyl and Mexoryl.', image: '/what-to-expect/Learn.jpg' },
+  { id: '05', title: 'CONSULT', description: '1-on-1 time with top dermatologists to discuss your skin concerns.', image: '/what-to-expect/Consult.jpg' },
 ];
 
 const LabJourney: React.FC = () => {
