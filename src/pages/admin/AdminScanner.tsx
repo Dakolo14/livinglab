@@ -40,10 +40,16 @@ export const AdminScanner: React.FC = () => {
       setErrorMsg(null);
       
       try {
-        // The decodedText is now the email address
+        let cleanEmail = decodedText;
+        try {
+          cleanEmail = decodeURIComponent(cleanEmail);
+        } catch(e) {}
+        
+        cleanEmail = cleanEmail.replace(/^mailto:/i, '').toLowerCase().trim();
+
         const q = query(
           collection(db, 'registrations'),
-          where('email', '==', decodedText.toLowerCase().trim())
+          where('email', '==', cleanEmail)
         );
         const querySnapshot = await getDocs(q);
         
@@ -71,11 +77,11 @@ export const AdminScanner: React.FC = () => {
             setErrorMsg(`No valid registration found for ${decodedText}.`);
           }
         } else {
-          setErrorMsg("Invalid QR Code. No such registration found.");
+          setErrorMsg(`Invalid QR Code. No registration found for "${cleanEmail}".`);
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Error fetching/updating document: ", err);
-        setErrorMsg("Network error verifying ticket. Please try again.");
+        setErrorMsg(`Database Error: ${err.message || 'Unknown network error'}`);
       }
     };
 
