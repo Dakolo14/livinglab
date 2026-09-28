@@ -13,7 +13,7 @@ const regSchema = z.object({
   email: z.string().email("Please enter a valid professional email"),
   phone: z.string().min(10, "Phone number is required").regex(/^\+234/, "Phone must start with +234"),
   dayTime: z.string().min(1, "Please select a preferred session"),
-  marketingConsent: z.boolean().default(false),
+  marketingConsent: z.boolean(),
   termsConsent: z.boolean().refine(val => val === true, {
     message: "You must agree to the Terms & Privacy Policy"
   })
@@ -44,7 +44,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     setValue,
     reset,
     formState: { errors, isSubmitting }
-  } = useForm<RegFormData>({
+  } = useForm<z.infer<typeof regSchema>>({
     resolver: zodResolver(regSchema),
     defaultValues: {
       phone: '+234 ',
