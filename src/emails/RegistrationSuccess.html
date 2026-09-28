@@ -128,8 +128,7 @@
       
       <!-- Header with Gradient and Logo -->
       <div class="header-banner">
-        <!-- Using a placeholder logo URL for now, replace with Cloudinary -->
-        <img src="https://www.livinglabnigeria.com/livinglablogo.webp" alt="Living Lab" class="logo" />
+        <img src="https://www.livinglabnigeria.com/BLUE%20LOGO.png" alt="Living Lab" style="display:block; margin: 0 auto; max-width: 140px; margin-bottom: 40px;" class="logo" />
         <h1 class="success-title">REGISTRATION<br/>SUCCESSFUL</h1>
       </div>
 
@@ -152,8 +151,7 @@
           <div class="ticket-label">DIGITAL TICKET ID</div>
           <div class="ticket-id">{{TicketID}}</div>
           
-          <!-- Replace with actual dynamic QR Code URL -->
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data={{TicketID}}" alt="Your QR Code" class="qr-code" />
+          <img src="{{QRCodeUrl}}" alt="Your QR Code" class="qr-code" />
           
           <div class="footer-instruction">
             Please present this QR code at the entrance for fast-track check-in.
