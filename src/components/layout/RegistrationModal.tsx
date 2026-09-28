@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { CheckCircle } from 'lucide-react';
 import { collection, addDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
@@ -35,6 +35,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [policyModal, setPolicyModal] = useState<'terms' | 'privacy' | null>(null);
   const [existingSessions, setExistingSessions] = useState<string[]>([]);
+  const modalContentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isSuccess && modalContentRef.current) {
+      modalContentRef.current.scrollTop = 0;
+    }
+  }, [isSuccess]);
 
   const {
     register,
@@ -158,7 +165,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
 
   return (
     <div className="reg-modal-backdrop" onClick={handleClose}>
-      <div className="reg-modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="reg-modal-content" ref={modalContentRef} onClick={(e) => e.stopPropagation()}>
         <button className="reg-modal-close" onClick={handleClose}>✕</button>
         
         {isSuccess ? (
