@@ -3,8 +3,6 @@ import AdminLayout from '../../components/layout/AdminLayout';
 import { db } from '../../config/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { toast } from 'sonner';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 export const AdminBroadcasts: React.FC = () => {
   const [audiences, setAudiences] = useState<string[]>(['all']);
@@ -191,31 +189,21 @@ export const AdminBroadcasts: React.FC = () => {
               </div>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '8px' }}>
-                  <label style={{ display: 'block', fontWeight: '500', color: '#1E293B' }}>Custom Message</label>
-                  <label style={{ cursor: 'pointer', fontSize: '0.85rem', color: '#00AEEF', fontWeight: 500 }}>
+                  <label style={{ display: 'block', fontWeight: '500', color: '#1E293B' }}>Custom Message (HTML Code)</label>
+                  <label style={{ cursor: 'pointer', fontSize: '0.85rem', color: '#00AEEF', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <input type="file" accept=".html" onChange={handleFileUpload} style={{ display: 'none' }} />
-                    📄 Upload HTML File
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    Upload HTML File
                   </label>
                 </div>
-                <div style={{ background: 'white', borderRadius: '8px', overflow: 'hidden', border: '1px solid #CBD5E1' }}>
-                  <ReactQuill 
-                    theme="snow" 
-                    value={customMessage} 
-                    onChange={setCustomMessage} 
-                    style={{ minHeight: '200px' }}
-                    modules={{
-                      toolbar: [
-                        [{ 'header': [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        ['link', 'image'],
-                        ['clean']
-                      ],
-                    }}
-                  />
-                </div>
+                <textarea 
+                  value={customMessage}
+                  onChange={(e) => setCustomMessage(e.target.value)}
+                  placeholder="<h1>Welcome to the event!</h1>\n\n<p>Dear Attendee,</p>"
+                  style={{ width: '100%', padding: '16px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', minHeight: '300px', resize: 'vertical', fontFamily: 'monospace', backgroundColor: '#F8FAFC' }}
+                />
                 <p style={{ marginTop: '8px', fontSize: '0.85rem', color: '#64748B' }}>
-                  You can use the editor above, or upload an HTML file designed in Mailchimp/Stripo.
+                  You can paste custom HTML code here, or upload an `.html` file designed in Mailchimp/Stripo.
                 </p>
               </div>
             </>
