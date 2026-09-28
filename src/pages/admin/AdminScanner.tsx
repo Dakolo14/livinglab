@@ -217,7 +217,7 @@ export const AdminScanner: React.FC = () => {
 
             <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #E5E7EB' }}>
               <p style={{marginBottom: '12px', color: '#4B5563', fontSize: '0.95rem', fontWeight: 500}}>Scanner not working? Enter Ticket ID manually:</p>
-              <form onSubmit={handleManualSearch} style={{display: 'flex', gap: '8px', maxWidth: '400px', margin: '0 auto'}}>
+              <form onSubmit={handleManualSearch} className="manual-ticket-form">
                 <input 
                   type="text" 
                   placeholder="e.g. TKT-1234"

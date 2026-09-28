@@ -528,6 +528,13 @@
   margin-bottom: 24px;
 }
 
+.manual-ticket-form {
+  display: flex;
+  gap: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 .scan-result {
   margin-top: 24px;
   padding: 32px 24px;
@@ -662,6 +669,9 @@
   .admin-table-pagination {
     width: 100%;
     justify-content: space-between;
+  }
+  .manual-ticket-form {
+    flex-direction: column;
   }
 }
 
