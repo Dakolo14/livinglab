@@ -132,27 +132,27 @@
 
 @media (max-width: 768px) {
   .lab-journey { padding: 60px 20px; }
-  .journey-header h2 { font-size: 2.5rem; }
+  .journey-header h2 { font-size: 2.2rem; }
   .journey-header p { padding: 0 20px; }
   .journey-timeline { gap: 40px; }
   .journey-step {
     grid-template-columns: 40px 1fr;
     grid-template-areas: 
       "number content"
-      "visual visual"; /* Spans both columns on mobile */
-    gap: 20px 20px;
+      "visual visual";
+    gap: 8px 16px;
   }
   .step-number {
     font-size: 2rem;
     width: 40px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
   }
-  .step-content h3 { font-size: 1.5rem; }
-  .step-content p { font-size: 1rem; }
+  .step-content h3 { font-size: 1.3rem; margin-bottom: 4px; }
+  .step-content p { font-size: 0.95rem; margin-bottom: 12px; }
   .step-visual-placeholder { 
     height: auto;
     aspect-ratio: 16/9;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     position: relative;
     z-index: 5;
   }
