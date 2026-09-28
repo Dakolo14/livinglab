@@ -7,7 +7,7 @@ import AboutLRP from '../components/sections/AboutLRP';
 
 import Partners from '../components/sections/Partners';
 import Experiences from '../components/sections/Experiences';
-import LabJourney from '../components/sections/LabJourney';
+// import LabJourney from '../components/sections/LabJourney';
 import ProgrammeSection from '../components/sections/ProgrammeSection';
 import FAQ from '../components/sections/FAQ';
 import Footer from '../components/layout/Footer';
