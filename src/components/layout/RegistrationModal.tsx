@@ -3,7 +3,23 @@ import { QRCodeSVG } from 'qrcode.react';
 import { CheckCircle } from 'lucide-react';
 import { collection, addDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import './RegistrationModal.css';
+
+const regSchema = z.object({
+  name: z.string().min(2, "Full Name is required"),
+  email: z.string().email("Please enter a valid professional email"),
+  phone: z.string().min(10, "Phone number is required").regex(/^\+234/, "Phone must start with +234"),
+  dayTime: z.string().min(1, "Please select a preferred session"),
+  marketingConsent: z.boolean().default(false),
+  termsConsent: z.boolean().refine(val => val === true, {
+    message: "You must agree to the Terms & Privacy Policy"
+  })
+});
+
+type RegFormData = z.infer<typeof regSchema>;
 
 interface RegistrationModalProps {
   isOpen?: boolean;
@@ -15,18 +31,30 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   const [isSuccess, setIsSuccess] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
   const [ticketId, setTicketId] = useState('');
-  const [docId, setDocId] = useState(''); // We'll use email as docId for the QR code now
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [docId, setDocId] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [policyModal, setPolicyModal] = useState<'terms' | 'privacy' | null>(null);
   const [existingSessions, setExistingSessions] = useState<string[]>([]);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '+234 ',
-    dayTime: '',
-    marketingConsent: false,
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    setValue,
+    reset,
+    formState: { errors, isSubmitting }
+  } = useForm<RegFormData>({
+    resolver: zodResolver(regSchema),
+    defaultValues: {
+      phone: '+234 ',
+      marketingConsent: false,
+      termsConsent: false
+    }
   });
+
+  const emailValue = watch('email');
+  const dayTimeValue = watch('dayTime');
 
   useEffect(() => {
     const handleOpen = () => setInternalIsOpen(true);
@@ -36,23 +64,22 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
 
   useEffect(() => {
     const fetchExisting = async () => {
-      if (!formData.email || !formData.email.includes('@')) {
+      if (!emailValue || !emailValue.includes('@')) {
         setExistingSessions([]);
         return;
       }
       try {
         const q = query(
           collection(db, 'registrations'), 
-          where('email', '==', formData.email.toLowerCase().trim())
+          where('email', '==', emailValue.toLowerCase().trim())
         );
         const snap = await getDocs(q);
         if (!snap.empty) {
           const sessions = snap.docs.map(doc => doc.data().session);
           setExistingSessions(sessions);
-          // Auto-fill name if available
           const existingName = snap.docs[0].data().name;
-          if (existingName && !formData.name) {
-            setFormData(prev => ({ ...prev, name: existingName }));
+          if (existingName) {
+            setValue('name', existingName, { shouldValidate: true });
           }
         } else {
           setExistingSessions([]);
@@ -63,7 +90,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     };
     const timeoutId = setTimeout(fetchExisting, 500);
     return () => clearTimeout(timeoutId);
-  }, [formData.email]);
+  }, [emailValue, setValue]);
 
   const isOpen = propIsOpen !== undefined ? propIsOpen : internalIsOpen;
   
@@ -73,67 +100,58 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     setTimeout(() => {
       setIsSuccess(false);
       setRegistrationError('');
-      setFormData({ name: '', email: '', phone: '', dayTime: '', marketingConsent: false });
+      reset();
       setExistingSessions([]);
     }, 300);
   };
 
   if (!isOpen) return null;
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.dayTime) {
-      setRegistrationError('Please select a session.');
-      return;
-    }
-    
+  const onSubmit = async (data: RegFormData) => {
     if (existingSessions.length > 0) {
       setRegistrationError('This email has already been registered for a session. You can only register once.');
       return;
     }
     
-    setIsSubmitting(true);
     setRegistrationError('');
     
     try {
       const generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
       
       await addDoc(collection(db, 'registrations'), {
-        name: formData.name,
-        email: formData.email.toLowerCase().trim(),
-        phone: formData.phone,
-        session: formData.dayTime,
+        name: data.name,
+        email: data.email.toLowerCase().trim(),
+        phone: data.phone,
+        session: data.dayTime,
         ticketId: generatedTicketId,
         status: 'registered',
-        marketingConsent: formData.marketingConsent,
+        marketingConsent: data.marketingConsent,
         timestamp: serverTimestamp(),
       });
       
-      setExistingSessions([...existingSessions, formData.dayTime]);
+      setExistingSessions([...existingSessions, data.dayTime]);
       setTicketId(generatedTicketId);
-      setDocId(formData.email.toLowerCase().trim());
+      setDocId(data.email.toLowerCase().trim());
       setIsSuccess(true);
       
-      // Trigger the backend API to send the SMS (and email later)
       fetch('/api/send-ticket', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_API_SECRET_KEY || 'livinglab-secret-2026'}`
         },
         body: JSON.stringify({
-          phone: formData.phone,
+          phone: data.phone,
           ticketId: generatedTicketId,
-          name: formData.name,
-          email: formData.email.toLowerCase().trim(),
-          session: formData.dayTime
+          name: data.name,
+          email: data.email.toLowerCase().trim(),
+          session: data.dayTime
         })
       }).catch(err => console.error('Failed to trigger notifications:', err));
       
     } catch (error) {
       console.error("Error adding document: ", error);
-      alert("There was an error submitting your registration. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      setRegistrationError("There was an error submitting your registration. Please try again.");
     }
   };
 
@@ -171,25 +189,24 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
             <h2>LIMITED SLOTS FOR THE EXPERIENCE</h2>
             <p>Please select your preferred session to apply for an invitation to the event.</p>
             
-            <form className="reg-modal-form" onSubmit={handleRegister}>
+            <form className="reg-modal-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="input-group">
                 <label>Professional Email <span style={{color: '#EF4444'}}>*</span></label>
                 <div style={{ position: 'relative' }}>
                   <input 
                     type="email" 
-                    required 
                     placeholder="name@clinic.com" 
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    style={formData.email.includes('@') ? { paddingRight: '40px' } : undefined}
+                    {...register('email')}
+                    style={emailValue && emailValue.includes('@') ? { paddingRight: '40px' } : undefined}
                   />
-                  {formData.email && formData.email.includes('@') && (
+                  {emailValue && emailValue.includes('@') && !errors.email && (
                     <div style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center' }}>
                       <CheckCircle color="#10B981" size={20} />
                     </div>
                   )}
                 </div>
-                {formData.email && formData.email.includes('@') && existingSessions.length > 0 && (
+                {errors.email && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.email.message}</div>}
+                {emailValue && emailValue.includes('@') && existingSessions.length > 0 && (
                   <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>
                     This email is already registered. You can only register for one session.
                   </div>
@@ -199,27 +216,32 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 <label>Full Name <span style={{color: '#EF4444'}}>*</span></label>
                 <input 
                   type="text" 
-                  required 
                   placeholder="Dr. Jane Doe" 
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  {...register('name')}
                 />
+                {errors.name && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.name.message}</div>}
               </div>
               <div className="input-group">
                 <label>Phone Number <span style={{color: '#EF4444'}}>*</span></label>
-                <input 
-                  type="tel" 
-                  required 
-                  placeholder="+234 800 000 0000" 
-                  value={formData.phone}
-                  onChange={(e) => {
-                    let val = e.target.value;
-                    if (!val.startsWith('+234 ')) {
-                      val = '+234 ' + val.replace('+234', '').trim();
-                    }
-                    setFormData({ ...formData, phone: val })
-                  }}
+                <Controller
+                  control={control}
+                  name="phone"
+                  render={({ field }) => (
+                    <input 
+                      type="tel" 
+                      placeholder="+234 800 000 0000" 
+                      {...field}
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        if (!val.startsWith('+234 ')) {
+                          val = '+234 ' + val.replace('+234', '').trim();
+                        }
+                        field.onChange(val);
+                      }}
+                    />
+                  )}
                 />
+                {errors.phone && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.phone.message}</div>}
               </div>
               <div className="input-group">
                 <label>Preferred Sessions <span style={{color: '#EF4444'}}>*</span></label>
@@ -228,13 +250,14 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     style={{ padding: '16px', background: '#F9FAFB', border: '1px solid #D1D5DB', borderRadius: '4px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                   >
-                    <span style={{ color: !formData.dayTime ? '#9CA3AF' : '#111827' }}>
-                      {!formData.dayTime 
+                    <span style={{ color: !dayTimeValue ? '#9CA3AF' : '#111827' }}>
+                      {!dayTimeValue 
                         ? 'Select a preferred session...' 
-                        : formData.dayTime}
+                        : dayTimeValue}
                     </span>
                     <span style={{ fontSize: '0.8rem', color: '#6B7280', transform: isDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>▼</span>
                   </div>
+                  {errors.dayTime && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.dayTime.message}</div>}
                   
                   {isDropdownOpen && (
                     <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 10, marginTop: '4px', padding: '12px', background: '#ffffff', border: '1px solid #D1D5DB', borderRadius: '4px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', maxHeight: '220px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -251,12 +274,11 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                           <label key={session.value} className="checkbox-label" style={{ margin: 0, opacity: isDisabled ? 0.5 : 1 }}>
                             <input 
                               type="radio" 
-                              name="dayTime"
                               disabled={isDisabled}
-                              checked={formData.dayTime === session.value}
+                              checked={dayTimeValue === session.value}
                               onChange={() => {
-                                setFormData({ ...formData, dayTime: session.value });
-                                setIsDropdownOpen(false); // auto-close on selection
+                                setValue('dayTime', session.value, { shouldValidate: true });
+                                setIsDropdownOpen(false);
                               }}
                             />
                             <span>{session.label} {isDisabled && '(Already registered)'}</span>
@@ -270,7 +292,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
               
               <div className="compliance-group">
                 <label className="checkbox-label">
-                  <input type="checkbox" required />
+                  <input type="checkbox" {...register('termsConsent')} />
                   <span>
                     I agree to the{' '}
                     <a 
@@ -288,12 +310,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                     </a>. <span style={{color: '#EF4444'}}>*</span>
                   </span>
                 </label>
+                {errors.termsConsent && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '-10px', marginBottom: '10px' }}>{errors.termsConsent.message}</div>}
+
                 <label className="checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    checked={formData.marketingConsent}
-                    onChange={(e) => setFormData({ ...formData, marketingConsent: e.target.checked })}
-                  />
+                  <input type="checkbox" {...register('marketingConsent')} />
                   <span>I consent to receive event updates, post-event materials, and marketing communications from La Roche-Posay.</span>
                 </label>
               </div>

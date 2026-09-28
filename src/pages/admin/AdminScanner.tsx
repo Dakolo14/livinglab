@@ -58,7 +58,10 @@ export const AdminScanner: React.FC = () => {
               try {
                 await fetch('/api/send-checkin', {
                   method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
+                  headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${import.meta.env.VITE_API_SECRET_KEY || 'livinglab-secret-2026'}`
+                  },
                   body: JSON.stringify({ name: data.name, email: data.email })
                 });
               } catch (e) {

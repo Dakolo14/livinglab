@@ -22,6 +22,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
+  const apiSecret = process.env.API_SECRET_KEY || 'livinglab-secret-2026';
+  const authHeader = req.headers.authorization;
+  if (!authHeader || authHeader !== `Bearer ${apiSecret}`) {
+    return res.status(401).json({ error: 'Unauthorized: Invalid API Key' });
+  }
+
   try {
     const { name, email } = req.body;
 

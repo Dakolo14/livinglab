@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { AuthProvider } from './contexts/AuthContext';
 import HomeV1 from './pages/HomeV1';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -13,6 +14,7 @@ import TermsOfService from './pages/TermsOfService';
 import AdminLogin from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminScanner } from './pages/admin/AdminScanner';
+import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import RegistrationModal from './components/layout/RegistrationModal';
 import CookieBanner from './components/layout/CookieBanner';
@@ -29,7 +31,8 @@ const PageTracker = () => {
 function App() {
   return (
     <HelmetProvider>
-      <Router>
+      <AuthProvider>
+        <Router>
         <ScrollToTop />
         <PageTracker />
         <OfflineNotification />
@@ -47,14 +50,15 @@ function App() {
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/scanner" element={<AdminScanner />} />
+          <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+          <Route path="/admin/scanner" element={<ProtectedRoute><AdminScanner /></ProtectedRoute>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
         <RegistrationModal />
         <CookieBanner />
       </Router>
+      </AuthProvider>
     </HelmetProvider>
   );
 }
