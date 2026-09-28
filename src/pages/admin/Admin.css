@@ -537,14 +537,21 @@
     white-space: nowrap;
   }
   
+  .admin-header-row > div:first-child {
+    text-align: left;
+    width: 100%;
+  }
+
   .admin-header-row > div:first-child h2 {
     font-size: 1.25rem;
     margin-bottom: 4px;
+    text-align: left;
   }
   
   .admin-header-row > div:first-child p {
     font-size: 0.85rem;
     margin-bottom: 0;
+    text-align: left;
   }
   
   .admin-header-row > div:last-child {
