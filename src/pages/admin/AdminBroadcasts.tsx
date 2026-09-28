@@ -102,7 +102,7 @@ export const AdminBroadcasts: React.FC = () => {
             <select 
               value={audience} 
               onChange={(e) => setAudience(e.target.value)}
-              style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.95rem' }}
+              className="admin-form-select"
             >
               <option value="all">All Registered Attendees</option>
               <option value="Thursday Morning">Thursday Morning Session Only</option>
@@ -133,7 +133,7 @@ export const AdminBroadcasts: React.FC = () => {
             <select 
               value={template} 
               onChange={(e) => setTemplate(e.target.value)}
-              style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.95rem' }}
+              className="admin-form-select"
             >
               <option value="3-weeks">3 Weeks Before Event (Reminder)</option>
               <option value="2-weeks">2 Weeks Before Event (Reminder)</option>
