@@ -32,7 +32,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>ANTHELIOS UV<span className="font-light">MUNE</span>400</>,
         subtitle: "INVISIBLE FLUID SPF50+",
-        image: "/product-pack/ANTHELIOS UVMUNE400 .webp",
+        image: "/product-pack/ANTHELIOS UVMUNE400 .png",
         indication: [
           "For people looking for effective daily UV protection",
           "For all sensitive skin types"
@@ -50,7 +50,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
         subtitle: "SPF50+",
-        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY.webp",
+        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY.png",
         indication: [
           "Sensitive skin"
         ],
@@ -65,7 +65,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
         subtitle: "DERMO-PEDIATRICS SPF50+",
-        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY - DERMO-PEDIATRICS SPF50 PLUS  .webp",
+        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY - DERMO-PEDIATRICS SPF50 PLUS  .png",
         indication: [
           "Sensitive skin",
           "Face and body for children"
@@ -96,7 +96,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">SERUM</span></>,
         subtitle: <>INTENSIVE ANTI-DARK SPOTS SERUM<br/>ANTI-RELAPSE EFFICACY</>,
-        image: "/product-pack/MELA B3 SERUM .webp",
+        image: "/product-pack/MELA B3 SERUM .png",
         indication: [
           "Uneven skin tone and dark spots"
         ],
@@ -115,7 +115,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">CLEANSER</span></>,
         subtitle: "CLARIFYING MICRO-PEELING GEL",
-        image: "/product-pack/MELA B3 CLEANSER .webp",
+        image: "/product-pack/MELA B3 CLEANSER .png",
         indication: [
           "Uneven skin tone and dark spots"
         ],
@@ -135,7 +135,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>ANTHELIOS UV<span className="font-light">MUNE</span> 400</>,
         subtitle: "ANTI-DARK SPOTS SPF50+",
-        image: "/product-pack/ANTHELIOS UVMUNE 400 - Anti Dark Spots.webp",
+        image: "/product-pack/ANTHELIOS UVMUNE 400 - Anti Dark Spots.png",
         indication: [
           "Uneven skin tone and dark spots",
           "For people looking for effective daily UV protection"
@@ -166,7 +166,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>EFFACLAR <span className="font-light">MICELLAR WATER ULTRA</span></>,
         subtitle: "CLEANSING, MAKE-UP REMOVING AND PURIFYING",
-        image: "/product-pack/EFFACLAR MICELLAR WATER ULTRA.webp",
+        image: "/product-pack/EFFACLAR MICELLAR WATER ULTRA.png",
         indication: [
           "Oily and sensitive skin",
           "Acne-prone skin",
@@ -184,7 +184,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>EFFACLAR <span className="font-light">PURIFYING FOAMING GEL</span></>,
         subtitle: "OILY AND SENSITIVE SKIN",
-        image: "/product-pack/EFFACLAR PURIFYING FOAMING GEL.webp",
+        image: "/product-pack/EFFACLAR PURIFYING FOAMING GEL.png",
         indication: [
           "Oily and sensitive skin",
           "Acne-prone skin",
@@ -204,7 +204,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>EFFACLAR <span className="font-light">H ISO-<span className="text-effaclar-blue">BIOME</span></span></>,
         subtitle: "DERMA-SOOTHING HYDRATING CLEANSING CREAM",
-        image: "/product-pack/EFFACLAR H ISO-BIOME .webp",
+        image: "/product-pack/EFFACLAR H ISO-BIOME .png",
         indication: [
           "Skin dried out by acne treatments"
         ],
@@ -227,7 +227,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>EFFACLAR <span className="font-light">ULTRA-CONCENTRATED SERUM</span></>,
         subtitle: "SALICYLIC ACID SERUM",
-        image: "/product-pack/EFFACLAR ULTRA-CONCENTRATED SERUM.webp",
+        image: "/product-pack/EFFACLAR ULTRA-CONCENTRATED SERUM.png",
         indication: [
           "Oily and sensitive skin",
           "Acne-prone skin",
@@ -245,7 +245,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>EFFACLAR <span className="font-light">DUO+</span>M</>,
         subtitle: "ANTI-IMPERFECTIONS TRIPLE CORRECTION CARE",
-        image: "/product-pack/EFFACLAR DUO PLUS M .webp",
+        image: "/product-pack/EFFACLAR DUO PLUS M .png",
         indication: [
           "Oily skin and acne-prone skin",
           "Skin with severe imperfections",
