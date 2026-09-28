@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, ScanLine, Globe, LogOut, Search, Menu, X, HelpCircle } from 'lucide-react';
+import { LayoutDashboard, ScanLine, Megaphone, Globe, LogOut, Search, Menu, X, HelpCircle } from 'lucide-react';
 import SEO from './SEO';
 import '../../pages/admin/Admin.css';
 
@@ -59,6 +59,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, searchTerm, setSear
               onClick={closeMobileMenu}
             >
               <ScanLine className="nav-icon" size={20} /> QR Scanner
+            </Link>
+            <Link 
+              to="/admin/broadcasts" 
+              className={`admin-nav-item ${location.pathname === '/admin/broadcasts' ? 'active' : ''}`}
+              onClick={closeMobileMenu}
+            >
+              <Megaphone className="nav-icon" size={20} /> Communications
             </Link>
           </nav>
         </div>

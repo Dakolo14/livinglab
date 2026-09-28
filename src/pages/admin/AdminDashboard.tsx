@@ -3,7 +3,7 @@ import AdminLayout from '../../components/layout/AdminLayout';
 import { collection, onSnapshot, doc, updateDoc, query, orderBy } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import './Admin.css';
-import { BroadcastTab } from './BroadcastTab';
+import './Admin.css';
 
 interface Attendee {
   docId: string;
@@ -25,7 +25,6 @@ interface GroupedAttendee {
 }
 
 export const AdminDashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'attendees' | 'broadcasts'>('attendees');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBy, setFilterBy] = useState('all');
   const [attendees, setAttendees] = useState<Attendee[]>([]);
@@ -232,34 +231,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
       </div>
       
-      <div style={{ borderBottom: '1px solid #E2E8F0', marginBottom: '24px', display: 'flex', gap: '32px' }}>
-        <button 
-          onClick={() => setActiveTab('attendees')}
-          style={{ 
-            background: 'none', border: 'none', padding: '12px 0', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer',
-            borderBottom: activeTab === 'attendees' ? '3px solid #00AEEF' : '3px solid transparent',
-            color: activeTab === 'attendees' ? '#000' : '#64748B'
-          }}
-        >
-          Attendees Overview
-        </button>
-        <button 
-          onClick={() => setActiveTab('broadcasts')}
-          style={{ 
-            background: 'none', border: 'none', padding: '12px 0', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer',
-            borderBottom: activeTab === 'broadcasts' ? '3px solid #00AEEF' : '3px solid transparent',
-            color: activeTab === 'broadcasts' ? '#000' : '#64748B'
-          }}
-        >
-          Communications
-        </button>
-      </div>
-
-      {activeTab === 'broadcasts' && <BroadcastTab />}
-      
-      {activeTab === 'attendees' && (
-        <>
-          <div className="admin-stats-grid">
+      <div className="admin-stats-grid">
         <div className="stat-card">
           <h3>Total Registrations</h3>
           <div className="stat-value">{loading ? '...' : totalRegistrations}</div>
@@ -366,8 +338,6 @@ export const AdminDashboard: React.FC = () => {
           </div>
         </div>
       </div>
-      </>
-      )}
 
       {/* Confirmation Modal */}
       {confirmCheckInId && (

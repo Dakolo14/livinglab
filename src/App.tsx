@@ -14,6 +14,7 @@ import TermsOfService from './pages/TermsOfService';
 import AdminLogin from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminScanner } from './pages/admin/AdminScanner';
+import AdminBroadcasts from './pages/admin/AdminBroadcasts';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import RegistrationModal from './components/layout/RegistrationModal';
@@ -52,6 +53,7 @@ function App() {
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin/scanner" element={<ProtectedRoute><AdminScanner /></ProtectedRoute>} />
+          <Route path="/admin/broadcasts" element={<ProtectedRoute><AdminBroadcasts /></ProtectedRoute>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

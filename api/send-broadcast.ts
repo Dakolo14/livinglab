@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(401).json({ error: 'Unauthorized: Invalid API Key' });
   }
 
-  const { template, users } = req.body;
+  const { template, users, customSubject, customMessage } = req.body;
   
   if (!template || !users || !Array.isArray(users)) {
     return res.status(400).json({ error: 'Missing template or users array' });
@@ -37,6 +37,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
       if (template === 'thank-you') {
         rawHtmlTemplate = fs.readFileSync(path.join(process.cwd(), 'src/emails/ThankYou.html'), 'utf-8');
+        isReminder = false;
+      } else if (template === 'custom') {
+        rawHtmlTemplate = customMessage || '';
         isReminder = false;
       } else {
         rawHtmlTemplate = fs.readFileSync(path.join(process.cwd(), 'src/emails/ReminderTemplate.html'), 'utf-8');
@@ -67,6 +70,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const results = await Promise.allSettled(
       emailsToProcess.map(user => {
         let subject = "Living Lab Nigeria 2026";
+        if (template === 'custom' && customSubject) {
+          subject = customSubject;
+        }
+
         let html = rawHtmlTemplate;
 
         const firstName = user.name ? user.name.split(' ')[0] : 'Guest';
