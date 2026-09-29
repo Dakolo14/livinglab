@@ -40,6 +40,8 @@ const CancelRegistration: React.FC = () => {
           const data = docSnap.data();
           if (data.status === 'cancelled') {
             setError('This registration has already been cancelled.');
+          } else if (data.status === 'attended' || data.status === 'checked-in') {
+            setError('This registration has already been checked in and cannot be cancelled.');
           } else {
             setRegDoc({ id: docSnap.id, ...data });
           }

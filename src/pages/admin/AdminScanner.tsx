@@ -57,6 +57,7 @@ export const AdminScanner: React.FC = () => {
         if (!querySnapshot.empty) {
           let rsvpDocs: PendingUser[] = [];
           let alreadyCheckedInCount = 0;
+          let cancelledCount = 0;
           let attendeeName = '';
           
           for (const docSnap of querySnapshot.docs) {
@@ -67,6 +68,8 @@ export const AdminScanner: React.FC = () => {
               rsvpDocs.push({ id: docSnap.id, data });
             } else if (data.status === 'attended') {
               alreadyCheckedInCount++;
+            } else if (data.status === 'cancelled') {
+              cancelledCount++;
             }
           }
           
@@ -74,6 +77,8 @@ export const AdminScanner: React.FC = () => {
             setPendingUser(rsvpDocs);
           } else if (alreadyCheckedInCount > 0) {
             setErrorMsg(`All tickets for ${decodedText} have already been checked in!`);
+          } else if (cancelledCount > 0) {
+            setErrorMsg(`This ticket has been cancelled and is no longer valid.`);
           } else {
             setErrorMsg(`No valid registration found for ${decodedText}.`);
           }

@@ -82,11 +82,11 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
         );
         const snap = await getDocs(q);
         if (!snap.empty) {
-          const sessions = snap.docs.map(doc => doc.data().session);
+          const activeDocs = snap.docs.filter(doc => doc.data().status !== 'cancelled');
+          const sessions = activeDocs.map(doc => doc.data().session);
           setExistingSessions(sessions);
-          const existingName = snap.docs[0].data().name;
-          if (existingName) {
-            setValue('name', existingName, { shouldValidate: true });
+          if (activeDocs.length > 0 && activeDocs[0].data().name) {
+            setValue('name', activeDocs[0].data().name, { shouldValidate: true });
           }
         } else {
           setExistingSessions([]);
