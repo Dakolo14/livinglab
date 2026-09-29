@@ -50,8 +50,8 @@ const productCategories: CategoryData[] = [
         ]
       },
       {
-        title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
-        subtitle: "BODY SPF50+",
+        title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY SPF50+ BODY</span></>,
+        subtitle: "",
         image: "/product-pack/ANTHELIOS INVISIBLE SPRAY.png",
         indication: [
           "Sensitive skin"
