@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
-import { CancellationSuccessHtml } from './templates/CancellationSuccessTemplate';
+import fs from 'fs';
+import path from 'path';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS configuration
@@ -41,7 +42,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let resendResponse = null;
 
     if (smtpHost && smtpUser && smtpPass) {
-      let emailHtml = CancellationSuccessHtml;
+      let emailHtml = '';
+      try {
+        emailHtml = fs.readFileSync(path.join(process.cwd(), 'src/emails/CancellationSuccess.html'), 'utf-8');
+      } catch (e) {
+        try {
+          emailHtml = fs.readFileSync(path.join(__dirname, '../src/emails/CancellationSuccess.html'), 'utf-8');
+        } catch (err2) {
+          console.error('Error reading CancellationSuccess.html', err2);
+          return res.status(500).json({ error: 'Template file missing' });
+        }
+      }
       emailHtml = emailHtml.replace('{{FirstName}}', name.split(' ')[0]);
       emailHtml = emailHtml.replace(/\{\{TicketID\}\}/g, ticketId);
 

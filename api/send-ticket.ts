@@ -2,7 +2,6 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
-import { RegistrationSuccessHtml } from './templates/RegistrationSuccessTemplate';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS configuration
@@ -56,7 +55,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const formattedSession = session && sessionMap[session] ? sessionMap[session] : session || "TBD";
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(email)}`;
       
-      let emailHtml = RegistrationSuccessHtml;
+      let emailHtml = '';
+      try {
+        emailHtml = fs.readFileSync(path.join(process.cwd(), 'src/emails/RegistrationSuccess.html'), 'utf-8');
+      } catch (e) {
+        try {
+          emailHtml = fs.readFileSync(path.join(__dirname, '../src/emails/RegistrationSuccess.html'), 'utf-8');
+        } catch (err2) {
+          console.error('Error reading RegistrationSuccess.html', err2);
+          return res.status(500).json({ error: 'Template file missing' });
+        }
+      }
+
       emailHtml = emailHtml.replace('{{UserEmail}}', encodeURIComponent(email));
       emailHtml = emailHtml.replace('{{FirstName}}', name.split(' ')[0]);
       emailHtml = emailHtml.replace('{{SessionDate}}', formattedSession);
