@@ -43,7 +43,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
         isReminder = false;
       } else if (template === 'custom') {
-        rawHtmlTemplate = customMessage || '';
+        let msg = customMessage || '';
+        
+        // If the user didn't write any HTML tags at all, we format it nicely for them:
+        if (!msg.includes('<') && !msg.includes('>')) {
+          // Convert URLs to clickable links
+          msg = msg.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" style="color: #00AEEF; text-decoration: underline;">$1</a>');
+          // Preserve line breaks
+          msg = msg.replace(/\n/g, '<br/>');
+          // Wrap in a simple styled container
+          msg = `<div style="font-family: Arial, sans-serif; font-size: 15px; color: #333; line-height: 1.6;">${msg}</div>`;
+        }
+        
+        rawHtmlTemplate = msg;
         isReminder = false;
       } else {
         try {

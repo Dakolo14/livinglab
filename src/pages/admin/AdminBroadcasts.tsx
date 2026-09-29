@@ -59,6 +59,8 @@ export const AdminBroadcasts: React.FC = () => {
         let q;
         if (audiences.includes('all')) {
           q = query(regsRef);
+        } else if (audiences.includes('checked-in')) {
+          q = query(regsRef, where('status', '==', 'checked-in'));
         } else {
           q = query(regsRef, where('session', 'in', audiences));
         }
@@ -115,6 +117,7 @@ export const AdminBroadcasts: React.FC = () => {
             <div style={{ display: 'grid', gap: '8px', background: '#F8FAFC', padding: '16px', borderRadius: '8px', border: '1px solid #CBD5E1' }}>
               {[
                 { val: 'all', label: 'All Registered Attendees' },
+                { val: 'checked-in', label: 'Only Attended People (Checked-in)' },
                 { val: 'Thursday Morning', label: 'Thursday Morning Session' },
                 { val: 'Thursday Afternoon', label: 'Thursday Afternoon Session' },
                 { val: 'Thursday Late', label: 'Thursday Late Session' },
@@ -128,10 +131,10 @@ export const AdminBroadcasts: React.FC = () => {
                     type="checkbox" 
                     checked={audiences.includes(opt.val)} 
                     onChange={(e) => {
-                      if (opt.val === 'all' || opt.val === 'custom') {
+                      if (opt.val === 'all' || opt.val === 'custom' || opt.val === 'checked-in') {
                         setAudiences([opt.val]);
                       } else {
-                        let next = audiences.filter(a => a !== 'all' && a !== 'custom');
+                        let next = audiences.filter(a => a !== 'all' && a !== 'custom' && a !== 'checked-in');
                         if (e.target.checked) next.push(opt.val);
                         else next = next.filter(a => a !== opt.val);
                         setAudiences(next.length ? next : ['all']);
@@ -249,7 +252,7 @@ export const AdminBroadcasts: React.FC = () => {
               <h3 style={{ fontSize: '1.25rem', color: '#0F172A', marginBottom: '16px' }}>Confirm Broadcast</h3>
               <p style={{ color: '#475569', marginBottom: '24px', lineHeight: 1.5 }}>
                 You are about to send the <strong>{template}</strong> template to 
-                <strong> {audiences.includes('custom') ? customEmails.split(',').length + ' specific email(s)' : audiences.includes('all') ? 'ALL registered attendees' : audiences.join(', ')}</strong>.
+                <strong> {audiences.includes('custom') ? customEmails.split(',').length + ' specific email(s)' : audiences.includes('all') ? 'ALL registered attendees' : audiences.includes('checked-in') ? 'Only Checked-in Attendees' : audiences.join(', ')}</strong>.
                 <br/><br/>
                 This action cannot be undone. Do you want to proceed?
               </p>
