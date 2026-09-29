@@ -220,7 +220,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>EFFACLAR <span className="font-light">PURIFYING FOAMING GEL</span></>,
         subtitle: "OILY AND SENSITIVE SKIN",
-        image: "/product-pack/EFFACLAR PURIFYING FOAMING GEL.png",
+        image: "https://www-konga-com-res.cloudinary.com/image/upload/f_auto,q_auto,w_1280,c_limit/media/catalog/product/F/B/_1765361054.jpg",
         indication: [
           "Oily and sensitive skin",
           "Acne-prone skin",
@@ -356,7 +356,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>LIPIKAR <span className="font-light">MILK</span></>,
         subtitle: <>48HR LIPID-REPLENISHING<br/>ANTI-DRYNESS BODY MILK</>,
-        image: "/product-pack/LIPIKAR MILK .png",
+        image: "https://www-konga-com-res.cloudinary.com/image/upload/f_auto,q_auto,w_1280,c_limit/media/catalog/product/F/Y/_1762273466.jpg",
         indication: ["Sensitive and dry skin", "Weakened skin barrier, tightness, discomfort and lack of suppleness"],
         action: ["Repairs, nourishes and protects [ 10% Shea Butter ]", "Repairs & protects [ 60% La Roche-Posay Thermal Spring Water ]", "Comforts dry skin [ Niacinamide ]"],
         usage: ["1 application per day", "On skin cleansed with a gentle soap-free product like LIPIKAR SYNDET AP+ or LIPIKAR CLEANSING OIL AP+"]
