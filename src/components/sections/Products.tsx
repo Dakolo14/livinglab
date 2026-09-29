@@ -63,25 +63,6 @@ const productCategories: CategoryData[] = [
           "Apply generously before exposure",
           "Reapply frequently to maintain protection"
         ]
-      },
-      {
-        title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
-        subtitle: "DERMO-PEDIATRICS SPF50+",
-        image: "/product-pack/ANTHELIOS INVISIBLE SPRAY - DERMO-PEDIATRICS SPF50 PLUS  .png",
-        indication: [
-          "Sensitive skin",
-          "Face and body for children"
-        ],
-        action: [
-          "Very high UVA/UVB protection",
-          "Water, sand and sweat-resistant",
-          "Ultra-high protection: UVB, UVA and ultra-long UVA, the most insidious kind",
-          "No white casts"
-        ],
-        usage: [
-          "Apply generously before exposure",
-          "Reapply frequently to maintain protection"
-        ]
       }
     ]
   },
@@ -199,24 +180,6 @@ const productCategories: CategoryData[] = [
       "Teenagers - Adults"
     ],
     products: [
-      {
-        title: <>EFFACLAR <span className="font-light">MICELLAR WATER ULTRA</span></>,
-        subtitle: "CLEANSING, MAKE-UP REMOVING AND PURIFYING",
-        image: "/product-pack/EFFACLAR MICELLAR WATER ULTRA.png",
-        indication: [
-          "Oily and sensitive skin",
-          "Acne-prone skin",
-          "Skin with severe imperfections"
-        ],
-        action: [
-          "Removes make-up & moisturizes [ Glycerin micelles + physiological pH ]",
-          "Purifies the skin, regulates sebum [ Zinc pidolate ]",
-          "Physiological pH: 5.5"
-        ],
-        usage: [
-          "Use the micellar water to cleanse the face once or twice a day"
-        ]
-      },
       {
         title: <>EFFACLAR <span className="font-light">PURIFYING FOAMING GEL</span></>,
         subtitle: "OILY AND SENSITIVE SKIN",
@@ -449,22 +412,6 @@ const productCategories: CategoryData[] = [
         indication: ["Irritated and weakened skin", "Post sutures", "Post peel", "Post laser"],
         action: ["Soothes [ 5% Panthenol ]", "Repairs [ Madecassoside ]", "Purifies [ Copper ] + [ Zinc ] + [ Manganese ]", "Moisturizing insulating bandage [ Hyaluronic Acid ] [ Silicone ]"],
         usage: ["Apply twice a day to the irritated or weakened area after cleansing and drying", "Invisible, non-sticky bandage texture suitable for massaging scars"]
-      },
-      {
-        title: <>CICAPLAST <span className="font-light text-effaclar-blue">LIPS</span></>,
-        subtitle: "PRO-RECOVERY SKINCARE",
-        image: "/product-pack/CICAPLAST LIPS .png",
-        indication: ["Irritated and weakened skin"],
-        action: ["Soothes [ 5% Panthenol ]", "Repairs and protects [ MP lipids ] + [ Shea Butter ]"],
-        usage: ["Apply as often as necessary"]
-      },
-      {
-        title: <>CICAPLAST <span className="font-light text-effaclar-blue">HANDS</span></>,
-        subtitle: "BARRIER REPAIRING CREAM",
-        image: "/product-pack/CICAPLAST HANDS.png",
-        indication: ["Damaged and overworked hands", "Domestic and professional use"],
-        action: ["Soothes [ 4% Niacinamide ]", "Repairs and protects [ Shea Butter ] + [ 30% Glycerin ]"],
-        usage: ["Apply as often as necessary", "Absorbs quickly", "Non-greasy, non-sticky texture"]
       }
     ]
   },
