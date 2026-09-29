@@ -153,7 +153,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">DOUBLE DOSE</span></>,
         subtitle: "INTENSIVE DAY & NIGHT CARE",
-        image: "",
+        image: "https://www-konga-com-res.cloudinary.com/image/upload/f_auto,q_auto,w_1280,c_limit/media/catalog/product/W/H/214895_1785321159.jpg",
         indication: [
           "Persistent dark spots, including sun and age spots",
           "Loss of skin firmness",
