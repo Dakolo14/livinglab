@@ -22,16 +22,18 @@ interface CategoryData {
 const productCategories: CategoryData[] = [
   {
     id: "sun-protection",
-    name: "SUN PROTECTION",
+    name: "ANTHELIOS",
+    tagline: "SUN PROTECTION",
     audience: [
       "For all skin types.",
       "Daily use.",
-      "Adults, children"
+      "Adults",
+      "No white casts"
     ],
     products: [
       {
         title: <>ANTHELIOS UV<span className="font-light">MUNE</span>400</>,
-        subtitle: "INVISIBLE FLUID SPF50+",
+        subtitle: <>INVISIBLE FLUID SPF50+<br/>OIL CONTROL SPF50+<br/>ANTI-DARK SPOTS SPF50+</>,
         image: "/product-pack/ANTHELIOS UVMUNE400 .png",
         indication: [
           "For people looking for effective daily UV protection",
