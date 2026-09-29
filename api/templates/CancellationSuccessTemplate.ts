@@ -1,0 +1,140 @@
+export const CancellationSuccessHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Cancelled</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-family: 'Locator Regular', Helvetica, Arial, sans-serif;
+    color: #111827;
+  }
+  .email-wrapper {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 40px 0;
+  }
+  .email-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .header-banner {
+    background: linear-gradient(180deg, #f3f4f6 0%, #ffffff 100%);
+    text-align: center;
+    padding: 60px 20px 30px;
+  }
+  .logo {
+    max-width: 140px;
+    margin-bottom: 40px;
+  }
+  .success-title {
+    color: #4b5563;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -1px;
+  }
+  .content {
+    padding: 40px 50px;
+  }
+  .greeting {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .message {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 30px;
+  }
+  .ticket-section {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+  }
+  .ticket-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #6b7280;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .ticket-id {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: line-through;
+  }
+  .footer {
+    background-color: #4b5563;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 12px;
+  }
+  @media only screen and (max-width: 600px) {
+    .content {
+      padding: 30px 20px;
+    }
+    .success-title {
+      font-size: 26px;
+    }
+    .email-wrapper {
+      padding: 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-container">
+      
+      <div class="header-banner">
+        <img src="https://www.livinglabnigeria.com/BLUE%20LOGO.png" alt="Living Lab" style="display:block; margin: 0 auto; max-width: 140px; margin-bottom: 40px;" class="logo" />
+        <h1 class="success-title">REGISTRATION<br/>CANCELLED</h1>
+      </div>
+
+      <div class="content">
+        <div class="greeting">Dear {{FirstName}},</div>
+        
+        <div class="message">
+          This email is to confirm that your registration for Living Lab Nigeria 2026 has been successfully cancelled as requested.
+        </div>
+
+        <div class="ticket-section">
+          <div class="ticket-label">TICKET ID</div>
+          <div class="ticket-id">{{TicketID}}</div>
+        </div>
+
+        <div class="message">
+          If you cancelled by mistake, or if your plans change and you'd like to join us again, you can register for a new ticket at any time on our website (subject to availability).
+        </div>
+
+        <div class="message" style="margin-top: 40px; margin-bottom: 0;">
+          Warm regards,<br>
+          <strong>The Living Lab Team</strong>
+        </div>
+      </div>
+
+      <div class="footer">
+        © 2026 La Roche-Posay. All rights reserved.<br/>
+        Living Lab Nigeria
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
+\`;

@@ -174,6 +174,10 @@ export const RegistrationSuccessHtml = `
           Warm regards,<br>
           <strong>The Living Lab Team</strong>
         </div>
+
+        <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #9ca3af;">
+          If you can no longer attend, please <a href="https://www.livinglabnigeria.com/cancel?ticketId={{TicketID}}&email={{UserEmail}}" style="color: #00aeef; text-decoration: underline;">cancel your registration here</a> to free up your spot for someone else.
+        </div>
       </div>
 
       <!-- Footer -->

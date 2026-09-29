@@ -11,6 +11,7 @@ import SciencePage from './pages/SciencePage';
 import ProgrammePage from './pages/ProgrammePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import CancelRegistration from './pages/CancelRegistration';
 import AdminLogin from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminScanner } from './pages/admin/AdminScanner';
@@ -49,6 +50,7 @@ function App() {
           <Route path="/programme" element={<ProgrammePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/cancel" element={<CancelRegistration />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLogin />} />
