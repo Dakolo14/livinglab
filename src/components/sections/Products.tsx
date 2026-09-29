@@ -330,6 +330,21 @@ const productCategories: CategoryData[] = [
         usage: [
           "Apply daily to the face and neck."
         ]
+      },
+      {
+        title: <>EFFACLAR <span className="font-light">SUPRAMOLECULAR CLEANSER</span></>,
+        subtitle: "JELLY CLEANSER",
+        image: "https://main.thgimages.com/?url=https://static.thcdn.com/productimg/original/17886922-1345342966889858.jpg&format=webp&width=1500&height=1500&fit=cover",
+        indication: [
+          "Oily, combination and sensitive skin prone to excess oil, shine and visible pores"
+        ],
+        action: [
+          "Cleanses the skin and removes excess oil, makeup, SPF and impurities",
+          "Helps reduce the appearance of pores without drying the skin"
+        ],
+        usage: [
+          "Apply to wet skin, massage into a lather, then rinse thoroughly."
+        ]
       }
     ]
   },
