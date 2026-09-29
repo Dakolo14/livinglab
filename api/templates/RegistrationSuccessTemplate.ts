@@ -190,4 +190,4 @@ export const RegistrationSuccessHtml = `
   </div>
 </body>
 </html>
-\`;
+`;

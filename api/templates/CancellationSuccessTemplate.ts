@@ -137,4 +137,4 @@ export const CancellationSuccessHtml = `
   </div>
 </body>
 </html>
-\`;
+`;
