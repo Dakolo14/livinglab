@@ -95,6 +95,50 @@ const CancelRegistration: React.FC = () => {
 
   return (
     <>
+      <style>{`
+        .btn-cancel {
+          background-color: #EF4444;
+          color: #ffffff;
+          border: 2px solid #EF4444;
+          padding: 14px 28px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+        }
+        .btn-cancel:hover {
+          background-color: #ffffff;
+          color: #EF4444;
+          border-color: #EF4444;
+        }
+        .btn-keep {
+          background-color: #E2E8F0;
+          color: #475569;
+          border: 2px solid #E2E8F0;
+          padding: 14px 28px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+        }
+        .btn-keep:hover {
+          background-color: #CBD5E1;
+          color: #334155;
+          border-color: #CBD5E1;
+        }
+      `}</style>
       <Header />
       <main style={{ minHeight: '60vh', paddingTop: '120px', paddingBottom: '60px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="container" style={{ maxWidth: '600px', margin: '0 auto' }}>
@@ -138,16 +182,14 @@ const CancelRegistration: React.FC = () => {
                 <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
                   <button 
                     onClick={() => navigate('/')} 
-                    className="btn-primary" 
-                    style={{ backgroundColor: '#E2E8F0', color: '#475569', borderColor: '#E2E8F0', flex: 1 }}
+                    className="btn-keep" 
                     disabled={cancelling}
                   >
                     Keep My Ticket
                   </button>
                   <button 
                     onClick={handleCancel} 
-                    className="btn-primary" 
-                    style={{ backgroundColor: '#EF4444', borderColor: '#EF4444', flex: 1 }}
+                    className="btn-cancel" 
                     disabled={cancelling}
                   >
                     {cancelling ? 'Cancelling...' : 'Cancel Registration'}
