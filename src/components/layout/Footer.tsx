@@ -14,9 +14,10 @@ const Footer: React.FC = () => {
         </div>
         <div className="footer-col">
           <h4>Explore</h4>
-          <a href="#lab-journey">The Lab</a>
-          <a href="#science">Science</a>
-          <a href="#programme">Agenda</a>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/programme">Agenda</Link>
         </div>
         <div className="footer-col">
           <h4>Legal</h4>
