@@ -137,7 +137,7 @@ const productCategories: CategoryData[] = [
       {
         title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">DUAL BODY TREATMENT</span></>,
         subtitle: "BODY",
-        image: "",
+        image: "https://www-konga-com-res.cloudinary.com/image/upload/f_auto,q_auto,w_1280,c_limit/media/catalog/product/Q/D/214895_1778511553.jpg",
         indication: [
           "Uneven skin tone, dark spots, dullness and rough texture on the body"
         ],
