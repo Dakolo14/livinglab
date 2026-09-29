@@ -34,43 +34,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Optional SMS via Termii
-    const termiiApiKey = process.env.TERMII_API_KEY;
-    let smsSuccess = false;
-    let termiiResponse = null;
-
-    if (termiiApiKey && phone) {
-      let formattedPhone = phone.replace(/[^0-9]/g, '');
-      if (formattedPhone.startsWith('0')) {
-        formattedPhone = '234' + formattedPhone.slice(1);
-      } else if (!formattedPhone.startsWith('234') && formattedPhone.length === 10) {
-        formattedPhone = '234' + formattedPhone;
-      }
-
-      const payload = {
-        to: formattedPhone,
-        from: 'N-Alert',
-        sms: `Hi ${name.split(' ')[0]}, your registration for Living Lab Nigeria (Ticket ${ticketId}) has been successfully cancelled.`,
-        type: 'plain',
-        channel: 'generic',
-        api_key: termiiApiKey,
-      };
-
-      try {
-        const response = await fetch('https://v4.api.termii.com/api/sms/send', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const data = await response.json();
-        termiiResponse = data;
-        if (response.ok && data.message_id) smsSuccess = true;
-      } catch (smsError) {
-        console.error('Termii Fetch Error:', smsError);
-      }
-    }
-
-    // Email sending
     const smtpHost = process.env.SMTP_HOST;
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
@@ -109,8 +72,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     
     return res.status(200).json({ 
       success: true, 
-      smsSent: smsSuccess,
-      termiiResponse,
       emailSent: emailSuccess,
       resendResponse
     });
