@@ -51,7 +51,7 @@ const productCategories: CategoryData[] = [
       },
       {
         title: <>ANTHELIOS <span className="font-light">INVISIBLE SPRAY</span></>,
-        subtitle: "SPF50+",
+        subtitle: "BODY SPF50+",
         image: "/product-pack/ANTHELIOS INVISIBLE SPRAY.png",
         indication: [
           "Sensitive skin"
@@ -132,6 +132,40 @@ const productCategories: CategoryData[] = [
           "Rinse and dry gently.",
           "Suitable for all skin types, even oily.",
           "Suitable for sensitive skin."
+        ]
+      },
+      {
+        title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">DUAL BODY TREATMENT</span></>,
+        subtitle: "BODY",
+        image: "",
+        indication: [
+          "Uneven skin tone, dark spots, dullness and rough texture on the body"
+        ],
+        action: [
+          "Helps improve the appearance of dark spots and uneven skin tone",
+          "Smooths skin texture",
+          "Provides 24-hour hydration with a non-sticky finish"
+        ],
+        usage: [
+          "Apply twice daily to areas of the body with discolouration, dullness or rough texture."
+        ]
+      },
+      {
+        title: <>MELA <span className="font-light text-mela-purple">B3</span> <span className="font-light">DOUBLE DOSE</span></>,
+        subtitle: "INTENSIVE DAY & NIGHT CARE",
+        image: "",
+        indication: [
+          "Persistent dark spots, including sun and age spots",
+          "Loss of skin firmness",
+          "Suitable for sensitive skin"
+        ],
+        action: [
+          "Helps visibly reduce the appearance of discoloration",
+          "Improves the look of skin firmness and smoothness",
+          "Provides 24-hour hydration"
+        ],
+        usage: [
+          "Apply 3–4 pumps to clean skin on the face, neck, décolleté and hands, morning and evening."
         ]
       },
       {
