@@ -315,6 +315,21 @@ const productCategories: CategoryData[] = [
           "Apply morning and evening to clean and dry skin",
           "TIP: Use CICAPLAST LÈVRES in addition to drying treatments"
         ]
+      },
+      {
+        title: <>EFFACLAR <span className="font-light">SUPRAMOLECULAR</span></>,
+        subtitle: "OIL & PORES CORRECT",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRrPNwbzJ4tFU_VRbBKIK8Af9rJ0grr3ilYW0a2kOhRFtbf4DhXI06tzc&s=10",
+        indication: [
+          "Oily and combination skin prone to excess shine, visible pores and blemishes"
+        ],
+        action: [
+          "Helps control shine for 24 hours and provides 48-hour hydration",
+          "Helps refine skin texture and improve the appearance of pores"
+        ],
+        usage: [
+          "Apply daily to the face and neck."
+        ]
       }
     ]
   },
