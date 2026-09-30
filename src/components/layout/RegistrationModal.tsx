@@ -133,6 +133,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
          generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
       }
       
+      const newSessionsAdded: string[] = [];
       const uniqueDayTimes = Array.from(new Set(data.dayTimes));
       for (const session of uniqueDayTimes) {
         if (!existingSessions.includes(session)) {
