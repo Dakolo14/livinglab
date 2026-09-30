@@ -134,7 +134,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           html = html.replace('{{SessionDate}}', formattedSession);
           html = html.replace('{{SessionTime}}', '');
         } else {
-          subject = "Thank you for attending Living Lab Nigeria 2026";
+          if (template === 'thank-you') {
+            subject = "Thank you for attending Living Lab Nigeria 2026";
+          }
           html = html.replace('{{FirstName}}', firstName);
         }
 
