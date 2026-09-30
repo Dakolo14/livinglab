@@ -73,7 +73,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
 
       emailHtml = emailHtml.replace('{{UserEmail}}', encodeURIComponent(email));
-      emailHtml = emailHtml.replace('{{FirstName}}', name.split(' ')[0]);
+      let firstName = name.split(' ')[0];
+      const nameParts = name.trim().split(/\s+/);
+      if (nameParts.length > 1 && ['dr.', 'dr', 'mr.', 'mr', 'mrs.', 'mrs', 'ms.', 'ms', 'prof.', 'prof'].includes(nameParts[0].toLowerCase())) {
+        firstName = nameParts[1];
+      } else {
+        firstName = nameParts[0];
+      }
+      emailHtml = emailHtml.replace('{{FirstName}}', firstName);
       emailHtml = emailHtml.replace('{{SessionDate}}', formattedSession);
       emailHtml = emailHtml.replace('{{SessionTime}}', '');
       emailHtml = emailHtml.replace(/\{\{TicketID\}\}/g, ticketId);
