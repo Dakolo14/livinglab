@@ -133,8 +133,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
          generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
       }
       
-      const newSessionsAdded: string[] = [];
-      for (const session of data.dayTimes) {
+      const uniqueDayTimes = Array.from(new Set(data.dayTimes));
+      for (const session of uniqueDayTimes) {
         if (!existingSessions.includes(session)) {
           await addDoc(collection(db, 'registrations'), {
             name: data.name,
@@ -150,7 +150,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
         }
       }
       
-      setExistingSessions([...existingSessions, ...newSessionsAdded]);
+      const allSessionsToEmail = Array.from(new Set([...existingSessions, ...newSessionsAdded]));
+      
+      setExistingSessions(allSessionsToEmail);
       setTicketId(generatedTicketId);
       setIsSuccess(true);
       
@@ -165,7 +167,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
           ticketId: generatedTicketId,
           name: data.name,
           email: data.email.toLowerCase().trim(),
-          sessions: [...existingSessions, ...newSessionsAdded] // send all sessions for the email
+          sessions: allSessionsToEmail
         })
       }).catch(err => console.error('Failed to trigger notifications:', err));
       
