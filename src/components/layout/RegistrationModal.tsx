@@ -12,7 +12,7 @@ const regSchema = z.object({
   name: z.string().min(2, "Full Name is required"),
   email: z.string().email("Please enter a valid professional email"),
   phone: z.string().min(10, "Phone number is required").regex(/^\+234/, "Phone must start with +234"),
-  dayTime: z.string().min(1, "Please select a preferred session"),
+  dayTimes: z.array(z.string()).min(1, "Please select at least one session").max(3, "You can select up to 3 sessions"),
   marketingConsent: z.boolean(),
   termsConsent: z.boolean().refine(val => val === true, {
     message: "You must agree to the Terms & Privacy Policy"
@@ -56,12 +56,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
     defaultValues: {
       phone: '+234 ',
       marketingConsent: false,
-      termsConsent: false
+      termsConsent: false,
+      dayTimes: []
     }
   });
 
   const emailValue = watch('email');
-  const dayTimeValue = watch('dayTime');
+  const dayTimesValue = watch('dayTimes') || [];
 
   useEffect(() => {
     const handleOpen = () => setInternalIsOpen(true);
@@ -115,28 +116,41 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   if (!isOpen) return null;
 
   const onSubmit = async (data: RegFormData) => {
-    if (existingSessions.length > 0) {
-      setRegistrationError('This email has already been registered for a session. You can only register once.');
+    if (existingSessions.length >= 3) {
+      setRegistrationError('This email has already reached the maximum of 3 sessions.');
       return;
     }
     
     setRegistrationError('');
     
     try {
-      const generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
+      let generatedTicketId = '';
+      const q = query(collection(db, 'registrations'), where('email', '==', data.email.toLowerCase().trim()));
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+         generatedTicketId = snap.docs[0].data().ticketId;
+      } else {
+         generatedTicketId = `TKT-${Math.floor(1000 + Math.random() * 9000)}`;
+      }
       
-      await addDoc(collection(db, 'registrations'), {
-        name: data.name,
-        email: data.email.toLowerCase().trim(),
-        phone: data.phone,
-        session: data.dayTime,
-        ticketId: generatedTicketId,
-        status: 'registered',
-        marketingConsent: data.marketingConsent,
-        timestamp: serverTimestamp(),
-      });
+      const newSessionsAdded: string[] = [];
+      for (const session of data.dayTimes) {
+        if (!existingSessions.includes(session)) {
+          await addDoc(collection(db, 'registrations'), {
+            name: data.name,
+            email: data.email.toLowerCase().trim(),
+            phone: data.phone,
+            session: session,
+            ticketId: generatedTicketId,
+            status: 'registered',
+            marketingConsent: data.marketingConsent,
+            timestamp: serverTimestamp(),
+          });
+          newSessionsAdded.push(session);
+        }
+      }
       
-      setExistingSessions([...existingSessions, data.dayTime]);
+      setExistingSessions([...existingSessions, ...newSessionsAdded]);
       setTicketId(generatedTicketId);
       setIsSuccess(true);
       
@@ -151,7 +165,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
           ticketId: generatedTicketId,
           name: data.name,
           email: data.email.toLowerCase().trim(),
-          session: data.dayTime
+          sessions: [...existingSessions, ...newSessionsAdded] // send all sessions for the email
         })
       }).catch(err => console.error('Failed to trigger notifications:', err));
       
@@ -212,9 +226,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                   )}
                 </div>
                 {errors.email && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.email.message}</div>}
-                {emailValue && emailValue.includes('@') && existingSessions.length > 0 && (
+                {emailValue && emailValue.includes('@') && existingSessions.length >= 3 && (
                   <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>
-                    This email is already registered. You can only register for one session.
+                    This email is already registered for the maximum of 3 sessions.
                   </div>
                 )}
               </div>
@@ -250,20 +264,20 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 {errors.phone && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.phone.message}</div>}
               </div>
               <div className="input-group">
-                <label>Preferred Sessions <span style={{color: '#EF4444'}}>*</span></label>
+                <label>Preferred Sessions (Select up to 3) <span style={{color: '#EF4444'}}>*</span></label>
                 <div style={{ position: 'relative' }}>
                   <div 
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     style={{ padding: '16px', background: '#F9FAFB', border: '1px solid #D1D5DB', borderRadius: '4px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
                   >
-                    <span style={{ color: !dayTimeValue ? '#9CA3AF' : '#111827' }}>
-                      {!dayTimeValue 
-                        ? 'Select a preferred session...' 
-                        : dayTimeValue}
+                    <span style={{ color: dayTimesValue.length === 0 ? '#9CA3AF' : '#111827' }}>
+                      {dayTimesValue.length === 0 
+                        ? 'Select up to 3 sessions...' 
+                        : `${dayTimesValue.length} session(s) selected`}
                     </span>
                     <span style={{ fontSize: '0.8rem', color: '#6B7280', transform: isDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>▼</span>
                   </div>
-                  {errors.dayTime && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.dayTime.message}</div>}
+                  {errors.dayTimes && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.dayTimes.message}</div>}
                   
                   {isDropdownOpen && (
                     <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 10, marginTop: '4px', padding: '12px', background: '#ffffff', border: '1px solid #D1D5DB', borderRadius: '4px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', maxHeight: '220px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -275,19 +289,26 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                         { value: "Friday Afternoon", label: "Friday 6 November (afternoon session 12:30 pm - 3:30 pm)" },
                         { value: "Friday Late", label: "Friday 6 November (late afternoon session 4pm - 7pm)" }
                       ].map((session) => {
-                        const isDisabled = existingSessions.length > 0;
+                        const isExisting = existingSessions.includes(session.value);
+                        const isChecked = dayTimesValue.includes(session.value);
+                        const isMaxReached = !isChecked && dayTimesValue.length >= 3;
+                        const isDisabled = isExisting || isMaxReached;
+                        
                         return (
-                          <label key={session.value} className="checkbox-label" style={{ margin: 0, opacity: isDisabled ? 0.5 : 1 }}>
+                          <label key={session.value} className="checkbox-label" style={{ margin: 0, opacity: isDisabled ? 0.5 : 1, cursor: isDisabled ? 'not-allowed' : 'pointer' }}>
                             <input 
-                              type="radio" 
+                              type="checkbox" 
                               disabled={isDisabled}
-                              checked={dayTimeValue === session.value}
-                              onChange={() => {
-                                setValue('dayTime', session.value, { shouldValidate: true });
-                                setIsDropdownOpen(false);
+                              checked={isChecked || isExisting}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setValue('dayTimes', [...dayTimesValue, session.value], { shouldValidate: true });
+                                } else {
+                                  setValue('dayTimes', dayTimesValue.filter((val: string) => val !== session.value), { shouldValidate: true });
+                                }
                               }}
                             />
-                            <span>{session.label} {isDisabled && '(Already registered)'}</span>
+                            <span>{session.label} {isExisting && '(Already registered)'}</span>
                           </label>
                         );
                       })}
@@ -330,7 +351,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 </div>
               )}
 
-              <button type="submit" className="btn-primary w-100" disabled={isSubmitting || existingSessions.length > 0}>
+              <button type="submit" className="btn-primary w-100" disabled={isSubmitting || existingSessions.length >= 3}>
                 {isSubmitting ? 'SUBMITTING...' : 'REGISTER & GET TICKET'}
               </button>
             </form>

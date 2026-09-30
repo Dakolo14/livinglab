@@ -15,7 +15,7 @@ const CancelRegistration: React.FC = () => {
   const [cancelling, setCancelling] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [regDoc, setRegDoc] = useState<any>(null);
+  const [regDocs, setRegDocs] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchRegistration = async () => {
@@ -36,14 +36,12 @@ const CancelRegistration: React.FC = () => {
         if (querySnapshot.empty) {
           setError('No registration found with the provided details.');
         } else {
-          const docSnap = querySnapshot.docs[0];
-          const data = docSnap.data();
-          if (data.status === 'cancelled') {
-            setError('This registration has already been cancelled.');
-          } else if (data.status === 'attended' || data.status === 'checked-in') {
-            setError('This registration has already been checked in and cannot be cancelled.');
+          const docs = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          const activeDocs = docs.filter((d: any) => d.status === 'registered' || d.status === 'rsvped');
+          if (activeDocs.length === 0) {
+            setError('No active registrations found. They may have already been cancelled or checked in.');
           } else {
-            setRegDoc({ id: docSnap.id, ...data });
+            setRegDocs(activeDocs);
           }
         }
       } catch (err) {
@@ -57,36 +55,25 @@ const CancelRegistration: React.FC = () => {
     fetchRegistration();
   }, [ticketId, email]);
 
-  const handleCancel = async () => {
-    if (!regDoc) return;
-    
+  const handleCancel = async (docId: string) => {
     setCancelling(true);
     setError(null);
 
     try {
       // 1. Update Firestore
-      const docRef = doc(db, 'registrations', regDoc.id);
+      const docRef = doc(db, 'registrations', docId);
       await updateDoc(docRef, {
         status: 'cancelled',
         cancelledAt: new Date()
       });
 
-      // 2. Trigger cancellation email
-      await fetch('/api/send-cancellation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_API_SECRET_KEY || 'livinglab-secret-2026'}`
-        },
-        body: JSON.stringify({
-          ticketId: regDoc.ticketId,
-          email: regDoc.email,
-          name: regDoc.name,
-          phone: regDoc.phone || ''
-        })
-      });
-
-      setSuccess(true);
+      // 2. Remove from UI
+      const remainingDocs = regDocs.filter(d => d.id !== docId);
+      setRegDocs(remainingDocs);
+      
+      if (remainingDocs.length === 0) {
+        setSuccess(true);
+      }
     } catch (err) {
       console.error('Error cancelling registration:', err);
       setError('An error occurred while cancelling. Please contact support.');
@@ -175,26 +162,35 @@ const CancelRegistration: React.FC = () => {
             ) : (
               <div>
                 <p style={{ color: '#4B5563', marginBottom: '24px', fontSize: '16px', lineHeight: '1.6' }}>
-                  Hi <strong>{regDoc?.name.split(' ')[0]}</strong>, you are about to cancel your registration for Living Lab Nigeria. 
-                  This action cannot be undone, and your ticket (<strong>{regDoc?.ticketId}</strong>) will no longer be valid for entry.
+                  Hi <strong>{regDocs[0]?.name?.split(' ')[0]}</strong>, you are currently registered for the following sessions.
+                  Click "Cancel" next to any session you can no longer attend.
                 </p>
-                <p style={{ color: '#4B5563', marginBottom: '32px', fontSize: '15px' }}>
-                  Are you sure you want to proceed?
-                </p>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
+                  {regDocs.map(doc => (
+                    <div key={doc.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px', background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', textAlign: 'left' }}>
+                      <div>
+                        <div style={{ fontWeight: '600', color: '#0F172A', marginBottom: '4px' }}>{doc.session}</div>
+                        <div style={{ fontSize: '0.85rem', color: '#64748B' }}>Ticket: {doc.ticketId}</div>
+                      </div>
+                      <button 
+                        onClick={() => handleCancel(doc.id)} 
+                        className="btn-cancel" 
+                        disabled={cancelling}
+                        style={{ padding: '8px 16px', flex: 'none', marginLeft: '16px' }}
+                      >
+                        {cancelling ? '...' : 'Cancel'}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
                 <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
                   <button 
                     onClick={() => navigate('/')} 
                     className="btn-keep" 
-                    disabled={cancelling}
                   >
-                    Keep My Ticket
-                  </button>
-                  <button 
-                    onClick={handleCancel} 
-                    className="btn-cancel" 
-                    disabled={cancelling}
-                  >
-                    {cancelling ? 'Cancelling...' : 'Cancel Registration'}
+                    Done
                   </button>
                 </div>
               </div>

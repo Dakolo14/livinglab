@@ -29,7 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { phone, ticketId, name, email, session } = req.body;
+    const { phone, ticketId, name, email, session, sessions } = req.body;
 
     if (!phone || !ticketId || !name) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -52,7 +52,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         "Friday Late": "Friday 6th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>4:00 PM - 7:00 PM</span>"
       };
       
-      const formattedSession = session && sessionMap[session] ? sessionMap[session] : session || "TBD";
+      let formattedSession = "";
+      if (Array.isArray(sessions) && sessions.length > 0) {
+        formattedSession = sessions.map(s => sessionMap[s] ? `<div style="margin-bottom: 12px; padding: 12px; background: #f8fafc; border-left: 4px solid #0ea5e9; border-radius: 4px;">${sessionMap[s]}</div>` : "").join("");
+      } else {
+        formattedSession = session && sessionMap[session] ? `<div style="margin-bottom: 12px; padding: 12px; background: #f8fafc; border-left: 4px solid #0ea5e9; border-radius: 4px;">${sessionMap[session]}</div>` : "TBD";
+      }
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(email)}`;
       
       let emailHtml = '';
