@@ -116,8 +116,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
   if (!isOpen) return null;
 
   const onSubmit = async (data: RegFormData) => {
-    if (existingSessions.length >= 3) {
-      setRegistrationError('This email has already reached the maximum of 3 sessions.');
+    if ((data.dayTimes.length + existingSessions.length) > 3) {
+      setRegistrationError('You can only register for a maximum of 3 sessions total across all your bookings.');
       return;
     }
     
@@ -291,7 +291,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                       ].map((session) => {
                         const isExisting = existingSessions.includes(session.value);
                         const isChecked = dayTimesValue.includes(session.value);
-                        const isMaxReached = !isChecked && dayTimesValue.length >= 3;
+                        const isMaxReached = !isChecked && (dayTimesValue.length + existingSessions.length) >= 3;
                         const isDisabled = isExisting || isMaxReached;
                         
                         return (
@@ -351,7 +351,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 </div>
               )}
 
-              <button type="submit" className="btn-primary w-100" disabled={isSubmitting || existingSessions.length >= 3}>
+              <button type="submit" className="btn-primary w-100" disabled={isSubmitting || (dayTimesValue.length + existingSessions.length) > 3}>
                 {isSubmitting ? 'SUBMITTING...' : 'REGISTER & GET TICKET'}
               </button>
             </form>

@@ -54,7 +54,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       
       let formattedSession = "";
       if (Array.isArray(sessions) && sessions.length > 0) {
-        formattedSession = sessions.map(s => sessionMap[s] ? `<div style="margin-bottom: 12px; padding: 14px; background-color: #f8fafc; border-radius: 8px;">${sessionMap[s]}</div>` : "").join("");
+        const order = ["Thursday Morning", "Thursday Afternoon", "Thursday Late", "Friday Morning", "Friday Afternoon", "Friday Late"];
+        const sortedSessions = [...sessions].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+        formattedSession = sortedSessions.map(s => sessionMap[s] ? `<div style="margin-bottom: 12px; padding: 14px; background-color: #f8fafc; border-radius: 8px;">${sessionMap[s]}</div>` : "").join("");
       } else {
         formattedSession = session && sessionMap[session] ? `<div style="margin-bottom: 12px; padding: 14px; background-color: #f8fafc; border-radius: 8px;">${sessionMap[session]}</div>` : "TBD";
       }
