@@ -9,9 +9,11 @@ service cloud.firestore {
       // Allow public read so users can verify their own registrations by email
       allow read: if true;
       
-      // Allow public update ONLY for cancellations
-      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'cancelledAt'])
-                    && request.resource.data.status == 'cancelled';
+      // Allow admins full update access. Allow public update ONLY for cancellations.
+      allow update: if request.auth != null || (
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'cancelledAt'])
+          && request.resource.data.status == 'cancelled'
+      );
                     
       // Only authenticated admins can delete
       allow delete: if request.auth != null;
