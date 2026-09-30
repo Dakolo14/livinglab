@@ -21,7 +21,8 @@ interface PendingUser {
 export const AdminScanner: React.FC = () => {
   const [scanResult, setScanResult] = useState<TicketData | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [isScanning, setIsScanning] = useState(true);
+  const [isScanning, setIsScanning] = useState(false);
+  const [hasStartedOnce, setHasStartedOnce] = useState(false);
   const [pendingUser, setPendingUser] = useState<PendingUser[] | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
   const [manualInput, setManualInput] = useState('');
@@ -254,9 +255,25 @@ export const AdminScanner: React.FC = () => {
       <div className="scanner-container">
         {!scanResult && !errorMsg && !pendingUser ? (
           <>
-            <p style={{marginBottom: '16px', color: '#4B5563'}}>Point camera at attendee's digital ticket.</p>
-            <div id="reader" style={{ width: '100%', maxWidth: '400px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}></div>
-            {isScanning && <p style={{marginTop: '16px', color: '#00AEEF', fontWeight: 500}}>Scanning...</p>}
+            <p style={{marginBottom: '16px', color: '#4B5563'}}>
+              {!hasStartedOnce ? "Select a session above, then start the scanner." : "Point camera at attendee's digital ticket."}
+            </p>
+            
+            {!hasStartedOnce ? (
+              <div style={{ padding: '24px 0' }}>
+                <button 
+                  className="btn-primary" 
+                  style={{width: '100%', padding: '16px', fontSize: '1.1rem'}} 
+                  onClick={() => { setHasStartedOnce(true); setIsScanning(true); }}
+                >
+                  START CAMERA
+                </button>
+              </div>
+            ) : (
+              <div id="reader" style={{ width: '100%', maxWidth: '400px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}></div>
+            )}
+            
+            {isScanning && hasStartedOnce && <p style={{marginTop: '16px', color: '#00AEEF', fontWeight: 500}}>Scanning...</p>}
 
             <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #E5E7EB' }}>
               <p style={{marginBottom: '12px', color: '#4B5563', fontSize: '0.95rem', fontWeight: 500}}>Scanner not working? Enter Ticket ID manually:</p>
