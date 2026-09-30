@@ -25,6 +25,7 @@ export const AdminScanner: React.FC = () => {
   const [pendingUser, setPendingUser] = useState<PendingUser[] | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
   const [manualInput, setManualInput] = useState('');
+  const [activeSession, setActiveSession] = useState('All Sessions');
   const scannerRef = useRef<Html5Qrcode | null>(null);
 
   useEffect(() => {
@@ -60,9 +61,19 @@ export const AdminScanner: React.FC = () => {
           let cancelledCount = 0;
           let attendeeName = '';
           
+          let hasAnyRegistration = false;
+          let hasSpecificSession = false;
+          
           for (const docSnap of querySnapshot.docs) {
             const data = docSnap.data() as TicketData;
             attendeeName = data.name || attendeeName;
+            hasAnyRegistration = true;
+            
+            if (activeSession !== 'All Sessions' && data.session !== activeSession) {
+              continue;
+            }
+            
+            hasSpecificSession = true;
             
             if (data.status === 'registered' || data.status === 'rsvped') {
               rsvpDocs.push({ id: docSnap.id, data });
@@ -73,10 +84,12 @@ export const AdminScanner: React.FC = () => {
             }
           }
           
-          if (rsvpDocs.length > 0) {
+          if (activeSession !== 'All Sessions' && !hasSpecificSession && hasAnyRegistration) {
+            setErrorMsg(`Client is registered on the platform, but NOT for the selected session (${activeSession}).`);
+          } else if (rsvpDocs.length > 0) {
             setPendingUser(rsvpDocs);
           } else if (alreadyCheckedInCount > 0) {
-            setErrorMsg(`All tickets for ${decodedText} have already been checked in!`);
+            setErrorMsg(activeSession !== 'All Sessions' ? `This ticket has already been checked in for ${activeSession}!` : `All tickets for ${decodedText} have already been checked in!`);
           } else if (cancelledCount > 0) {
             setErrorMsg(`This ticket has been cancelled and is no longer valid.`);
           } else {
@@ -140,9 +153,19 @@ export const AdminScanner: React.FC = () => {
       if (!querySnapshot.empty) {
         let rsvpDocs: PendingUser[] = [];
         let alreadyCheckedInCount = 0;
+        let hasAnyRegistration = false;
+        let hasSpecificSession = false;
         
         for (const docSnap of querySnapshot.docs) {
           const data = docSnap.data() as TicketData;
+          hasAnyRegistration = true;
+          
+          if (activeSession !== 'All Sessions' && data.session !== activeSession) {
+            continue;
+          }
+          
+          hasSpecificSession = true;
+          
           if (data.status === 'registered' || data.status === 'rsvped') {
             rsvpDocs.push({ id: docSnap.id, data });
           } else if (data.status === 'attended') {
@@ -150,10 +173,12 @@ export const AdminScanner: React.FC = () => {
           }
         }
         
-        if (rsvpDocs.length > 0) {
+        if (activeSession !== 'All Sessions' && !hasSpecificSession && hasAnyRegistration) {
+          setErrorMsg(`Client is registered on the platform, but NOT for the selected session (${activeSession}).`);
+        } else if (rsvpDocs.length > 0) {
           setPendingUser(rsvpDocs);
         } else if (alreadyCheckedInCount > 0) {
-          setErrorMsg(`Ticket ${manualInput} has already been checked in!`);
+          setErrorMsg(activeSession !== 'All Sessions' ? `Ticket ${manualInput} has already been checked in for ${activeSession}!` : `Ticket ${manualInput} has already been checked in!`);
         } else {
           setErrorMsg(`No valid registration found for Ticket ${manualInput}.`);
         }
@@ -209,8 +234,21 @@ export const AdminScanner: React.FC = () => {
 
   return (
     <AdminLayout>
-      <div className="admin-header-row">
-        <h2>QR Ticket Scanner</h2>
+      <div className="admin-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        <h2 style={{ margin: 0 }}>QR Ticket Scanner</h2>
+        <select 
+          value={activeSession} 
+          onChange={(e) => setActiveSession(e.target.value)}
+          style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '1rem', outline: 'none', background: '#fff' }}
+        >
+          <option value="All Sessions">All Sessions (Scan Any)</option>
+          <option value="Thursday Morning">Thursday Morning</option>
+          <option value="Thursday Afternoon">Thursday Afternoon</option>
+          <option value="Thursday Late">Thursday Late</option>
+          <option value="Friday Morning">Friday Morning</option>
+          <option value="Friday Afternoon">Friday Afternoon</option>
+          <option value="Friday Late">Friday Late</option>
+        </select>
       </div>
       
       <div className="scanner-container">
@@ -241,7 +279,7 @@ export const AdminScanner: React.FC = () => {
             <div style={{textAlign: 'left', background: '#F8FAFC', border: '1px solid #E2E8F0', padding: '20px', borderRadius: '12px', marginBottom: '24px'}}>
               <p style={{marginBottom: '12px'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Name</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500}}>{pendingUser[0].data.name}</span></p>
               <p style={{marginBottom: '12px'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Email</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500}}>{pendingUser[0].data.email}</span></p>
-              <p style={{marginBottom: '12px'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Session</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500}}>{pendingUser[0].data.session || 'TBD'}</span></p>
+              <p style={{marginBottom: '12px'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Session(s)</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500}}>{pendingUser.map(p => p.data.session).join(', ') || 'TBD'}</span></p>
               <p style={{marginBottom: '0'}}><strong style={{color: '#64748B', display: 'block', fontSize: '0.85rem', textTransform: 'uppercase', marginBottom: '4px'}}>Ticket ID(s)</strong> <span style={{fontSize: '1.1rem', color: '#0F172A', fontWeight: 500, fontFamily: 'monospace'}}>{pendingUser.map(p => p.data.ticketId).join(', ')}</span></p>
             </div>
             <button className="btn-primary" style={{width: '100%', marginBottom: '12px', padding: '14px', fontSize: '1rem'}} onClick={() => handleConfirmCheckIn(pendingUser)} disabled={isConfirming}>
