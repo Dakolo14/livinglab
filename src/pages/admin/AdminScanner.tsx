@@ -26,7 +26,7 @@ export const AdminScanner: React.FC = () => {
   const [pendingUser, setPendingUser] = useState<PendingUser[] | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
   const [manualInput, setManualInput] = useState('');
-  const [activeSession, setActiveSession] = useState('All Sessions');
+  const [activeSession, setActiveSession] = useState('');
   const scannerRef = useRef<Html5Qrcode | null>(null);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export const AdminScanner: React.FC = () => {
             attendeeName = data.name || attendeeName;
             hasAnyRegistration = true;
             
-            if (activeSession !== 'All Sessions' && data.session !== activeSession) {
+            if (data.session !== activeSession) {
               continue;
             }
             
@@ -85,12 +85,12 @@ export const AdminScanner: React.FC = () => {
             }
           }
           
-          if (activeSession !== 'All Sessions' && !hasSpecificSession && hasAnyRegistration) {
+          if (!hasSpecificSession && hasAnyRegistration) {
             setErrorMsg(`Client is registered on the platform, but NOT for the selected session (${activeSession}).`);
           } else if (rsvpDocs.length > 0) {
             setPendingUser(rsvpDocs);
           } else if (alreadyCheckedInCount > 0) {
-            setErrorMsg(activeSession !== 'All Sessions' ? `This ticket has already been checked in for ${activeSession}!` : `All tickets for ${decodedText} have already been checked in!`);
+            setErrorMsg(`This ticket has already been checked in for ${activeSession}!`);
           } else if (cancelledCount > 0) {
             setErrorMsg(`This ticket has been cancelled and is no longer valid.`);
           } else {
@@ -138,6 +138,11 @@ export const AdminScanner: React.FC = () => {
     e.preventDefault();
     if (!manualInput.trim()) return;
     
+    if (!activeSession) {
+      setErrorMsg("Please select an active session from the dropdown above first.");
+      return;
+    }
+    
     if (scannerRef.current?.isScanning) {
       await scannerRef.current.stop().catch(() => {});
     }
@@ -161,7 +166,7 @@ export const AdminScanner: React.FC = () => {
           const data = docSnap.data() as TicketData;
           hasAnyRegistration = true;
           
-          if (activeSession !== 'All Sessions' && data.session !== activeSession) {
+          if (data.session !== activeSession) {
             continue;
           }
           
@@ -174,12 +179,12 @@ export const AdminScanner: React.FC = () => {
           }
         }
         
-        if (activeSession !== 'All Sessions' && !hasSpecificSession && hasAnyRegistration) {
+        if (!hasSpecificSession && hasAnyRegistration) {
           setErrorMsg(`Client is registered on the platform, but NOT for the selected session (${activeSession}).`);
         } else if (rsvpDocs.length > 0) {
           setPendingUser(rsvpDocs);
         } else if (alreadyCheckedInCount > 0) {
-          setErrorMsg(activeSession !== 'All Sessions' ? `Ticket ${manualInput} has already been checked in for ${activeSession}!` : `Ticket ${manualInput} has already been checked in!`);
+          setErrorMsg(`Ticket ${manualInput} has already been checked in for ${activeSession}!`);
         } else {
           setErrorMsg(`No valid registration found for Ticket ${manualInput}.`);
         }
@@ -242,7 +247,7 @@ export const AdminScanner: React.FC = () => {
           onChange={(e) => setActiveSession(e.target.value)}
           style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '1rem', outline: 'none', background: '#fff' }}
         >
-          <option value="All Sessions">All Sessions (Scan Any)</option>
+          <option value="" disabled>Select active session...</option>
           <option value="Thursday Morning">Thursday Morning</option>
           <option value="Thursday Afternoon">Thursday Afternoon</option>
           <option value="Thursday Late">Thursday Late</option>
@@ -263,7 +268,8 @@ export const AdminScanner: React.FC = () => {
               <div style={{ padding: '24px 0' }}>
                 <button 
                   className="btn-primary" 
-                  style={{width: '100%', padding: '16px', fontSize: '1.1rem'}} 
+                  disabled={!activeSession}
+                  style={{width: '100%', padding: '16px', fontSize: '1.1rem', opacity: !activeSession ? 0.5 : 1, cursor: !activeSession ? 'not-allowed' : 'pointer'}} 
                   onClick={() => { setHasStartedOnce(true); setIsScanning(true); }}
                 >
                   START CAMERA
