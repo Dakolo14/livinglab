@@ -66,10 +66,24 @@ export const AdminBroadcasts: React.FC = () => {
         }
 
         const snapshot = await getDocs(q);
+        const uniqueUsers = new Map<string, any>();
         snapshot.forEach(doc => {
           const data = doc.data();
-          if (data.email) users.push(data);
+          if (data.email) {
+            const emailKey = data.email.toLowerCase().trim();
+            if (uniqueUsers.has(emailKey)) {
+               const existing = uniqueUsers.get(emailKey);
+               if (!existing.sessions) existing.sessions = [existing.session];
+               if (data.session && !existing.sessions.includes(data.session)) {
+                 existing.sessions.push(data.session);
+               }
+            } else {
+               data.sessions = data.session ? [data.session] : [];
+               uniqueUsers.set(emailKey, data);
+            }
+          }
         });
+        users.push(...Array.from(uniqueUsers.values()));
       }
 
       if (users.length === 0) {

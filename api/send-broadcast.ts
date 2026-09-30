@@ -96,7 +96,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         let html = rawHtmlTemplate;
 
-        const firstName = user.name ? user.name.split(' ')[0] : 'Guest';
+        let firstName = 'Guest';
+        if (user.name) {
+          const nameParts = user.name.trim().split(/\s+/);
+          if (nameParts.length > 1 && ['dr.', 'dr', 'mr.', 'mr', 'mrs.', 'mrs', 'ms.', 'ms', 'prof.', 'prof'].includes(nameParts[0].toLowerCase())) {
+            firstName = nameParts[1];
+          } else {
+            firstName = nameParts[0];
+          }
+        }
         
         const sessionMap: Record<string, string> = {
           "Thursday Morning": "Thursday 5th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>9:00 AM - 11:30 AM</span>",
@@ -107,7 +115,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           "Friday Late": "Friday 6th November, 2026<br/><span style='font-size:1.1rem;font-weight:normal;'>4:00 PM - 7:00 PM</span>"
         };
         
-        const formattedSession = user.session && sessionMap[user.session] ? sessionMap[user.session] : user.session || "TBD";
+        let formattedSession = "TBD";
+        if (user.sessions && Array.isArray(user.sessions) && user.sessions.length > 0) {
+          const order = ["Thursday Morning", "Thursday Afternoon", "Thursday Late", "Friday Morning", "Friday Afternoon", "Friday Late"];
+          const sortedSessions = [...user.sessions].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+          formattedSession = sortedSessions.map(s => sessionMap[s] || s).join("<br/><br/>");
+        } else if (user.session) {
+          formattedSession = sessionMap[user.session] || user.session;
+        }
 
         if (isReminder) {
           let reminderTitle = "UPCOMING EVENT REMINDER";
