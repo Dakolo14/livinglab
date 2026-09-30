@@ -54,9 +54,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       
       let formattedSession = "";
       if (Array.isArray(sessions) && sessions.length > 0) {
-        formattedSession = sessions.map(s => sessionMap[s] ? `<div style="margin-bottom: 12px; padding: 14px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">${sessionMap[s]}</div>` : "").join("");
+        formattedSession = sessions.map(s => sessionMap[s] ? `<div style="margin-bottom: 12px; padding: 14px; background-color: #f8fafc; border-radius: 8px;">${sessionMap[s]}</div>` : "").join("");
       } else {
-        formattedSession = session && sessionMap[session] ? `<div style="margin-bottom: 12px; padding: 14px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">${sessionMap[session]}</div>` : "TBD";
+        formattedSession = session && sessionMap[session] ? `<div style="margin-bottom: 12px; padding: 14px; background-color: #f8fafc; border-radius: 8px;">${sessionMap[session]}</div>` : "TBD";
       }
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(email)}`;
       
