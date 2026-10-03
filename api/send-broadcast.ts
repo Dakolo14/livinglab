@@ -137,10 +137,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             subject = "3 Days to go! Living Lab Nigeria 2026";
             reminderTitle = "3 DAYS TO GO";
             reminderMessage = "We are just 3 days away! Please ensure you have your Ticket QR Code ready for check-in on the day of your session.";
+          } else if (template === '48-hours') {
+            subject = "48 Hours to go! Living Lab Nigeria 2026";
+            reminderTitle = "48 HOURS TO GO";
+            reminderMessage = "We are just 48 hours away! Please ensure you have your Ticket QR Code ready for check-in on the day of your session.";
           } else if (template === '24-hours') {
-            subject = "Tomorrow! Living Lab Nigeria 2026";
-            reminderTitle = "IT HAPPENS TOMORROW";
-            reminderMessage = "The wait is almost over. We can't wait to welcome you tomorrow for the exclusive Living Lab Nigeria experience.";
+            subject = "24 Hours to go! Living Lab Nigeria 2026";
+            reminderTitle = "24 HOURS TO GO";
+            reminderMessage = "We are just 24 hours away! Please ensure you have your Ticket QR Code ready for check-in on the day of your session.";
           }
 
           html = html.replace('{{ReminderTitle}}', reminderTitle);
