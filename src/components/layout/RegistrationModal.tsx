@@ -10,7 +10,7 @@ import './RegistrationModal.css';
 
 const regSchema = z.object({
   name: z.string().min(2, "Full Name is required"),
-  email: z.string().email("Please enter a valid professional email"),
+  email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(10, "Phone number is required").regex(/^\+234/, "Phone must start with +234"),
   dayTimes: z.array(z.string()).min(1, "Please select at least one session").max(3, "You can select up to 3 sessions"),
   marketingConsent: z.boolean(),
@@ -214,11 +214,11 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
             
             <form className="reg-modal-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="input-group">
-                <label>Professional Email <span style={{color: '#EF4444'}}>*</span></label>
+                <label>Email Address <span style={{color: '#EF4444'}}>*</span></label>
                 <div style={{ position: 'relative' }}>
                   <input 
                     type="email" 
-                    placeholder="name@clinic.com" 
+                    placeholder="janedoe@gmail.com" 
                     {...register('email')}
                     style={emailValue && emailValue.includes('@') ? { paddingRight: '40px' } : undefined}
                   />
@@ -239,7 +239,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen: pr
                 <label>Full Name <span style={{color: '#EF4444'}}>*</span></label>
                 <input 
                   type="text" 
-                  placeholder="Dr. Jane Doe" 
+                  placeholder="Jane Doe" 
                   {...register('name')}
                 />
                 {errors.name && <div style={{ fontSize: '0.8rem', color: '#EF4444', marginTop: '6px' }}>{errors.name.message}</div>}
